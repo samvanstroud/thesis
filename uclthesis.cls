@@ -3,12 +3,14 @@
 %%   high energy physics (HEP)
 %% Author: James Robinson <james.robinson@cern.ch>
 %%   based on hepthesis by Andy Buckley <andy@insectnation.org>
+%% (not just based on, it's a wrapper around that class)
+%% hepthesis documentation https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/contrib/hepthesis/hepthesis.pdf
 
 %% -------------------------------------
 %% Admin
 %% -------------------------------------
-\def\fileversion{1.0}
-\def\filedate{2011/09/28}
+\def\fileversion{1.1}
+\def\filedate{2020/01/01}
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{uclthesis}[\filedate\space UCL Thesis class by James Robinson (v\fileversion)]
 
@@ -35,14 +37,17 @@
   \PassOptionsToClass{\CurrentOption}{hepthesis}%
 }
 
+%\PassOptionsToPackage{colorlinks=false}{hyperref}
+
 %% Process the options (no package requirement allowed above here)
 \ProcessOptions
 
 %% For a normal draft build we want linenumbers and no images
 \ifx\@makeDraft\@empty\else%
-  \PassOptionsToClass{hyperpdf,bind,oneside,draft}{hepthesis}
+  \PassOptionsToClass{bind,oneside,draft}{hepthesis} % removed hyperpdf,
   %% Prefer running line numbers rather than per-page ones
   \PassOptionsToPackage{running}{lineno}%
+  %\PassOptionsToPackage{labelsep=period}{caption}%
 \fi
 
 %% For final UCL build we want bind, oneside
@@ -54,13 +59,17 @@
 
 %% For websafe build we want hyperref and centred
 \ifx\@makeWeb\@empty\else%
-  \PassOptionsToClass{hyperpdf,oneside}{hepthesis}%
+  \PassOptionsToClass{oneside}{hepthesis}%
 \fi
 
 %% Load base class (options already passed)
 \LoadClass{hepthesis}
 
-
+%% hac to make sure we only have a single colon after figure labels.
+%% https://tex.stackexchange.com/questions/29181/figure-and-table-numbers-in-caption-are-terminated-by-a-period-and-semicolon
+\captionsetup{labelsep=colon}
+\renewcommand*{\figureformat}{\figurename~\thefigure}
+\renewcommand*{\tableformat}{\tablename~\thetable}
 %% -------------------------------------
 %% Standard packages
 %% -------------------------------------
@@ -79,7 +88,8 @@
 \selectlanguage{english}
 
 %% Subfigures - note subfig is incompatible with ccaption
-\RequirePackage[lofdepth,lotdepth]{subfig}
+%\RequirePackage[lofdepth,lotdepth]{subfig} % svs: use newer subcaption package
+\RequirePackage{subcaption}
 
 %% To allow eps with pdflatex
 \RequirePackage[verbose]{epspdfconversion}
@@ -105,6 +115,13 @@
 \ifx\@makeFinal\@empty\else%
   \RequirePackage{url}
 \fi
+
+% because I removed the "hyperpdf" option being passed to hepthesis, we manually
+% load the package here.
+\usepackage[colorlinks=false,pdfpagemode=FullScreen,bookmarks=true,draft=false]{hyperref}
+
+%% better referencing
+\usepackage{cleveref} % has to be loaded after hyperref
 
 %% -------------------------------------
 %% Overrides for standard hepthesis styles

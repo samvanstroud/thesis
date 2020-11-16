@@ -1,0 +1,45 @@
+\ProvidesPackage{preamble/commands}
+
+% formatting
+\newcommand{\sep}{~,~~~}
+
+% in general it would be a good idea to use these 
+% so style conventions can be easily changed
+\newcommand{\fvec}[1]{\mathrm{#1}}
+\newcommand{\tvec}[1]{\vec{#1}}
+
+% Math General
+\newtheorem{conjecture}{Conjecture}[section]
+\newcommand{\pd}[2]{\frac{\partial {#1}}{\partial #2}}
+\newcommand{\pdd}[2]{\frac{\partial^2 {#1}}{\partial #2^2}}
+\newcommand{\dd}[2]{\frac{\mathrm{d}^2 {#1}}{\mathrm{d} #2^2}}
+\newcommand{\der}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2} }
+\renewcommand\vec[1]{\bm{#1}}
+\newcommand{\del}{\bm{\nabla}}
+\newcommand{\defeq}{\vcentcolon=}
+
+
+% Matrix operations
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\ad}{ad}
+
+% ATLAS
+
+
+
+% Quantum General
+\newcommand{\schr}{Schr{\"o}dinger }
+\newcommand{\bra}[1]{\left\langle #1 \right|}
+\newcommand{\ket}[1]{\left| #1 \right\rangle}
+\newcommand{\inner}[2]{\langle #1 | #2 \rangle}
+\newcommand{\com}[2]{[\; #1,\,#2\,]}
+\newcommand{\norm}[1]{|#1|}
+\newcommand{\acom}[2]{\{\, #1, \, #2 \}}
+
+
+%% QFT 
+\newcommand{\create}{a_{\vec{p}}^\dagger}
+\newcommand{\ann}{a_{\vec{p}}}
+\newcommand{\screate}[1]{{#1^s_{\vec{p}}}^\dagger}
+\newcommand{\sann}[1]{{#1^s_{\vec{p}}}}
+\newcommand{\invamp}{|\overline{\mathcal{M}}|^2}

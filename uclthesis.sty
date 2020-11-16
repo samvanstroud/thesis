@@ -1,5 +1,8 @@
-\ProvidesPackage{uclthesis}[2010/09/28]
+\ProvidesPackage{uclthesis}[2020/01/01]
 \RequirePackage{hepnicenames,hepunits,maybemath,fontenc}
+
+\RequirePackage{preamble/commands}
+\RequirePackage{preamble/imports}
 
 %% Units
 \let\@OldTeV\TeV\renewcommand{\TeV}{\@OldTeV\xspace}
@@ -38,6 +41,9 @@
 \DeclareRobustCommand{\dif}[2]{\frac{\operatorname{d}\!{#1}}{\operatorname{d}\!{#2}}}
 \DeclareRobustCommand{\difDouble}[3]{\frac{\operatorname{d}^2\!{#1}}{\operatorname{d}\!{#2}\operatorname{d}\!{#3}}}
 %% Physics terminology
+%% Particles
+\DeclareRobustCommand{\bhadron}{B hadron\xspace}
+\DeclareRobustCommand{\bhadrons}{B hadrons\xspace}
 %% Theory
 \DeclareRobustCommand{\QED}{QED\xspace}
 \DeclareRobustCommand{\QCD}{QCD\xspace}
@@ -96,7 +102,12 @@
 \DeclareRobustCommand{\dijet}{dijet\xspace}
 \DeclareRobustCommand{\Dijet}{Dijet\xspace}
 \DeclareRobustCommand{\mDijet}{\thesismath{m_{12}}\xspace}
+\DeclareRobustCommand{\bjet}{$b$-jet\xspace}
+\DeclareRobustCommand{\bjets}{$b$-jets\xspace}
+\DeclareRobustCommand{\btagging}{$b$-tagging\xspace}
 %% Transverse quantities - Subscript roman not italic (EE)
+%\newcommand{\pTV}{$p_\text{T}^V$ }
+%\newcommand{\pT}{$p_\text{T}$ }
 \DeclareRobustCommand{\pT}{\thesismath{p_{\mathrm{T}}}\xspace} 
 \DeclareRobustCommand{\ET}{\thesismath{E_{\mathrm{T}}}\xspace} 
 \DeclareRobustCommand{\ETEM}{\thesismath{E_{\mathrm{T}}^{\mathrm{EM}}}\xspace} 
@@ -134,6 +145,7 @@
 \DeclareRobustCommand{\ep}{$e^{\pm}$\Pproton\xspace}
 \DeclareRobustCommand{\emu}{\HepProcess{ \Pelectron \, \Pmuon \to \Pelectron \, \Pmuon }\xspace}
 \DeclareRobustCommand{\yqgq}{\HepProcess{ \Pphoton \, \Pquark \to \Pgluon \, \Pquark }\xspace}
+\DeclareRobustCommand{\hbb}{$\text{H} \rightarrow b\bar{b}$ }
 %% General utility defns
 \DeclareRobustCommand{\arXivCode}[1]{arXiv:#1}
 %% Allow invpicobarn to be used in captions

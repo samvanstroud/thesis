@@ -1,20 +1,24 @@
-\documentclass[final]{uclthesis} % Options here are: final draft web
+\documentclass[draft]{uclthesis} % Options here are: final draft web
 \RequirePackage{uclthesis}
+% hepthesis documentation https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/contrib/hepthesis/hepthesis.pdf
+
+% load it here otherwise cleveref package import breaks.... can't figure out where it is actually loaded
+%\usepackage[colorlinks=false,bookmarks=true,plainpages=false]{hyperref}
 
 % PDF metadata - not essential, but nice
 \makeatletter
 \@ifpackageloaded{hyperref}{%
   \hypersetup{%
     pdftitle = {A UCL-compatible thesis},
-    pdfsubject = {James Robinson's PhD thesis},
-    pdfkeywords = {add, some, words, that, are, relevant, to, you},
-    pdfauthor = {\textcopyright\ James Robinson}
+    pdfsubject = {Samuel Van Stroud PhD thesis},
+    pdfkeywords = {Sam, Van, Stroud, PhD, Thesis, ATLAS, Hbb, Higgs, Tracking, high pT},
+    pdfauthor = {\textcopyright\ Samuel Van Stroud}
   }
 }{}
 \makeatother
 
 %% Define the thesis title and author
-\title{A UCL-compatible thesis using the \texttt{hepthesis} class}
+\title{Learning to Ignore Uncertainties with Adversaries at the LHC}
 \author{Samuel John Van Stroud\xspace}
 \DeclareRobustCommand{\shortAuthor}{Samuel Van Stroud\xspace}
 \date{\today}
@@ -29,8 +33,13 @@
 
 %% Start the content body of the thesis
 \begin{mainmatter}
-  \include{chapters/bg-theory/bg-theory}
-  \include{chapters/detector/detector}
+  \include{chapters/1.theory/theory}
+  \include{chapters/2.detector/detector}
+  \include{chapters/3.tracking/tracking}
+  \include{chapters/4.btagging/btagging}
+  \include{chapters/5.vhbb_preamble/vhbb_preamble}
+  \include{chapters/6.vhbb_boosted/vhbb_boosted}
+  \include{chapters/7.vhbb_legacy/vhbb_legacy}
   \include{chapters/conclusions/conclusions}
 \end{mainmatter}
 
