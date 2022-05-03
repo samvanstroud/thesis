@@ -1,5 +1,5 @@
 \ProvidesPackage{uclthesis}[2020/01/01]
-\RequirePackage{hepnicenames,maybemath,fontenc}
+\RequirePackage{hepnicenames,maybemath,fontenc,hepunits}
 
 \RequirePackage{preamble/commands}
 \RequirePackage{preamble/imports}
@@ -73,12 +73,12 @@
 \DeclareRobustCommand{\NLOjetpp}{\textsc{nlojet++}\xspace}
 %% Experimental definitions
 \DeclareRobustCommand{\rootS}{\thesismath{\sqrt{s}}\xspace}
-\DeclareRobustCommand{\intlumipb}[1]{\qty{\thesismath{#1}}{\invpicobarn}\xspace}
-\DeclareRobustCommand{\instlumi}[1]{\qty{\thesismath{10^{#1}}}{\lumiunits}\xspace}
+\DeclareRobustCommand{\intlumipb}[1]{\SI{\thesismath{#1}}{\invpicobarn}\xspace}
+\DeclareRobustCommand{\instlumi}[1]{ \SI[print-unity-mantissa = false]{#1} { \invcmsqpersec }\xspace} %\thesismath{10^{#1}}
 \DeclareRobustCommand{\begL}{\instlumi{31}}
 \DeclareRobustCommand{\lowL}{\instlumi{33}}
 \DeclareRobustCommand{\highL}{\instlumi{34}}
-\DeclareRobustCommand{\peakLumi}{\thesismath{2.1\times\instlumi{32}}\xspace}   %3.65\times\instlumi{34}}\xspace}
+\DeclareRobustCommand{\peakLumi}{\instlumi{2.1e32}\xspace}   %3.65\times\instlumi{34}}\xspace}
 \DeclareRobustCommand{\twentytenlumi}{\intlumipb{37.3\pm1.2}\xspace}
 \DeclareRobustCommand{\xs}{cross-section\xspace}
 \DeclareRobustCommand{\Xs}{Cross-section\xspace}
