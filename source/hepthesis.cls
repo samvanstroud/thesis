@@ -235,6 +235,9 @@
 %% Used to center the variable width page quote (must be version >= 0.9a)
 \RequirePackage{varwidth}[2003/03/10]
 
+% Units
+\RequirePackage{siunitx}
+\RequirePackage{hepunits}
 
 %% AMS math package (optional)
 \ifx\@requireamsmath\@empty\else%
