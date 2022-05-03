@@ -215,7 +215,7 @@
 %% ========================================================================
 
 %% Base class
-\LoadClass[chapterprefix]{scrbook}
+\LoadClass[chapterprefix,numbers=noenddot]{scrbook}
 
 %% Use wide format if using A4 paper
 \ifx\@requireAFourWide\@empty\else\RequirePackage{a4wide}\fi
