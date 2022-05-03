@@ -92,6 +92,10 @@
 %\RequirePackage[lofdepth,lotdepth]{subfig} % svs: use newer subcaption package
 \RequirePackage{subcaption}
 
+% Units
+\RequirePackage{siunitx}
+\RequirePackage{hepunits}
+
 %% To allow eps with pdflatex
 \RequirePackage[verbose]{epspdfconversion}
 

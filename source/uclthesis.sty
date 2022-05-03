@@ -1,15 +1,15 @@
 \ProvidesPackage{uclthesis}[2020/01/01]
-\RequirePackage{hepnicenames,hepunits,maybemath,fontenc}
+\RequirePackage{hepnicenames,maybemath,fontenc}
 
 \RequirePackage{preamble/commands}
 \RequirePackage{preamble/imports}
 
 %% Units
-\let\@OldTeV\TeV\renewcommand{\TeV}{\@OldTeV\xspace}
-\let\@OldGeV\GeV\renewcommand{\GeV}{\@OldGeV\xspace}
-\let\@OldMeV\MeV\renewcommand{\MeV}{\@OldMeV\xspace}
-\let\@OldkeV\keV\renewcommand{\keV}{\@OldkeV\xspace}
-\let\@OldeV\eV\renewcommand{\eV}{\@OldeV\xspace}
+%\let\@OldTeV\TeV\renewcommand{\TeV}{\@OldTeV\xspace}
+%\let\@OldGeV\GeV\renewcommand{\GeV}{\@OldGeV\xspace}
+%\let\@OldMeV\MeV\renewcommand{\MeV}{\@OldMeV\xspace}
+%\let\@OldkeV\keV\renewcommand{\keV}{\@OldkeV\xspace}
+%\let\@OldeV\eV\renewcommand{\eV}{\@OldeV\xspace}
 %% Acroynms
 \DeclareRobustCommand{\PhD}{\textbf{Doctor of Philosophy}}
 \DeclareRobustCommand{\UCL}{University College London\xspace}
@@ -73,8 +73,8 @@
 \DeclareRobustCommand{\NLOjetpp}{\textsc{nlojet++}\xspace}
 %% Experimental definitions
 \DeclareRobustCommand{\rootS}{\thesismath{\sqrt{s}}\xspace}
-\DeclareRobustCommand{\intlumipb}[1]{\unit{\thesismath{#1}}{\invpicobarn}\xspace}
-\DeclareRobustCommand{\instlumi}[1]{\unit{\thesismath{10^{#1}}}{\lumiunits}\xspace}
+\DeclareRobustCommand{\intlumipb}[1]{\qty{\thesismath{#1}}{\invpicobarn}\xspace}
+\DeclareRobustCommand{\instlumi}[1]{\qty{\thesismath{10^{#1}}}{\lumiunits}\xspace}
 \DeclareRobustCommand{\begL}{\instlumi{31}}
 \DeclareRobustCommand{\lowL}{\instlumi{33}}
 \DeclareRobustCommand{\highL}{\instlumi{34}}
