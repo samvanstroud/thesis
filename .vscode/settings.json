@@ -1,0 +1,16 @@
+// Workspace settings
+{
+    // The following will hide files in the editor
+    "files.exclude": {
+        "**/*.log"  : true,
+        "**/*.aux"  : true,
+        "**/*.make" : true,
+        "**/*.bbl"  : true,
+        "**/*.blg"  : true,
+        "**/*.d"    : true,
+        "**/*.out"  : true,
+        "**/*.cut"  : true,
+        "**/*.fls"  : true,
+        "**/*.toc"  : true
+    }
+}
