@@ -1,0 +1,10 @@
+*.log
+*.aux
+*.make
+*.bbl
+*.blg
+*.d
+*.out
+*.cut
+*.fls
+*.toc
