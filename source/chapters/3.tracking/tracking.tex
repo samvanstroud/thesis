@@ -127,13 +127,13 @@ The modified ROI was used to re-run the refit procedure. A comparison of of ``st
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/Bhad-track-dR-3.png}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/Bhad-track-dR-3.png}
       \caption{}
       \label{fig:B dR match sub1}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/Bhad-CC-dR-3.png}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/Bhad-CC-dR-3.png}
       \caption{}
       \label{fig:B dR match sub2}
     \end{subfigure}
@@ -151,13 +151,13 @@ It is clear from the distributions in \cref{fig:refit chi2 dists} that the fit q
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/ROI-purity.png}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/ROI-purity.png}
       \caption{}
       \label{fig:cluster purity in pt}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/hitdrop-chi2.png}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/hitdrop-chi2.png}
       \caption{}
       \label{fig:refit chi2 dists}
     \end{subfigure}
@@ -173,13 +173,13 @@ The work outlined in the two preceding sections has uncovered issues with both t
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/po_nGoodHitsOnIBL_From_B_DL.pdf}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/po_nGoodHitsOnIBL_From_B_DL.pdf}
       \caption{}
       \label{fig:refit optimisation results sub1}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/po_nWrongHitsOnIBL_From_B_DL.pdf}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/po_nWrongHitsOnIBL_From_B_DL.pdf}
       \caption{}
       \label{fig:refit optimisation results sub2}
     \end{subfigure}
@@ -193,7 +193,7 @@ Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to i
 
 \subsection{Global \texorpdfstring{$\chi^2$}{chi2} Fitter Outlier Removal}\label{sec:gx2f outlier removal}
 
-This section documents ongoing progress into improving hit assignments using the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in \cref{sec:refit}, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are indentified and removed. The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years. During this time, a new tracking sub-detector, the IBL, was installed, and subsequently precise detector alignments have been derived. The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures. Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
+This section documents ongoing progress into improving hit assignments using the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in  cref sec:refit, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are indentified and removed. The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years. During this time, a new tracking sub-detector, the IBL, was installed, and subsequently precise detector alignments have been derived. The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures. Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
 
 \subsubsection{Implementation}
 The outlier removal procedure for the pixel detector is described in this section. The states (also called measurements, or hits) on the track are looped over in order of increasing radial distance to the beam pipe. For each state, errors $\sigma(m_i)$ on the measurement of the transverse and longitudinal coordinates are calculated. These errors are dependent on the sub-detector which recorded the measurement (as some sub-detectors are more precise than others). Additionally, a residual displacement $r_i$ between the predicted position of the track $x_i$ (inclusive of the current measurement), and the position of the measurement itself, $m_i$, is calculated. The pull $p_i$ on the track state due to the current measurement is calculated according to
@@ -214,13 +214,13 @@ A systematic variation of the cut point \texttt{m\_outlcut} has been carried out
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/p_nGoodHitsOnIBL_pT.pdf}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/p_nGoodHitsOnIBL_pT.pdf}
       \caption{}
       \label{fig:outlier cut scan sub1}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{res/figs/results/tracking/p_nWrongHitsOnIBL_pT.pdf}
+      %\includegraphics[width=\textwidth]{res/figs/results/tracking/p_nWrongHitsOnIBL_pT.pdf}
       \caption{}
       \label{fig:outlier cut scan sub2}
     \end{subfigure}

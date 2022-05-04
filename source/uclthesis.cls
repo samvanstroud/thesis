@@ -103,6 +103,8 @@
 \RequirePackage{grffile}
 
 %% Set UCL determined page sizes
+%% Margins at the binding edge must not be less than 40 mm (1.5 inches) 
+%% and other margins not less than 20 mm (.75 inches).
 \ifx\@makeWeb\@empty
   \RequirePackage[includeheadfoot,left=30mm,right=30mm,top=20mm,bottom=20mm]{geometry}
 \else%
