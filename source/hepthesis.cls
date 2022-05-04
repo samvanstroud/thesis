@@ -672,6 +672,24 @@
   \ignorespacesafterend%
 }
 
+%% Environment for impact statement in frontmatter
+%% (argument is the thesis title)
+\newenvironment{impactstatement}[1][Impact Statement]{%
+  \adjustwidth{\@abstractextramargin}{\@abstractextramargin}%
+  \cleardoublepage%
+  \vspace*{\@frontmattertopskip}%
+  \begin{center}%
+    \begingroup
+    \ifx\@sftitles\@empty\else\sffamily\fi
+    {\LARGE\textbf{#1}}%
+    \endgroup
+  \end{center}%
+  \vspace*{1cm}%
+}{%
+  \endadjustwidth%
+  \ignorespacesafterend%
+}
+
 
 %% Deprecated: combined command for defining the title and author in the preamble
 %% TODO Remove in 1.5

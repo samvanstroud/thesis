@@ -177,6 +177,9 @@
 \let\@hepabstract\abstract
 \renewcommand{\abstract}{\@hepabstract\thispagestyle{plain}}
 
+\let\@hepimpactstatement\impactstatement
+\renewcommand{\impactstatement}{\@hepimpactstatement\thispagestyle{plain}}
+
 \let\@hepacknowledgements\acknowledgements
 \renewcommand{\acknowledgements}{\@hepacknowledgements\thispagestyle{plain}}
 
