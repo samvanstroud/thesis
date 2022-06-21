@@ -44,11 +44,11 @@
 
 %% For a normal draft build we want linenumbers and no images
 \ifx\@makeDraft\@empty\else%
-  \PassOptionsToClass{bind,oneside,draft}{hepthesis} % removed hyperpdf,
+  \PassOptionsToClass{bind,oneside,hyperpdf,draft}{hepthesis} % removed hyperpdf,
   %% Prefer running line numbers rather than per-page ones
   \PassOptionsToPackage{running}{lineno}%
   %\PassOptionsToPackage{labelsep=period}{caption}%
-  \PassOptionsToPackage{format=plain}{caption}%
+  %\PassOptionsToPackage{format=plain}{caption}%
 \fi
 
 %% For final UCL build we want bind, oneside
@@ -60,7 +60,7 @@
 
 %% For websafe build we want hyperref and centred
 \ifx\@makeWeb\@empty\else%
-  \PassOptionsToClass{oneside}{hepthesis}%
+  \PassOptionsToClass{oneside,hyperpdf}{hepthesis}%
 \fi
 
 %% Load base class (options already passed)
@@ -88,9 +88,9 @@
 \RequirePackage[T1]{fontenc}
 \selectlanguage{english}
 
-%% Subfigures - note subfig is incompatible with ccaption
+%% Subfigures - note subfig is incompatible with caption package
 %\RequirePackage[lofdepth,lotdepth]{subfig} % svs: use newer subcaption package
-\RequirePackage{subcaption}
+\RequirePackage[labelformat=simple]{subcaption}
 
 % Units
 \RequirePackage{siunitx}
@@ -121,13 +121,9 @@
 %% To allow typesetting of URLs when not using hyperref
 \ifx\@makeFinal\@empty\else%
   \RequirePackage{url}
+  %% TODO: renew href command using \url 
 \fi
-% because I removed the "hyperpdf" option being passed to hepthesis, we manually
-% load the package here. Should be done second last
-\usepackage[colorlinks=false,pdfpagemode=FullScreen,bookmarks=true,draft=false]{hyperref}
 
-%% better referencing
-\usepackage{cleveref} % has to be loaded after hyperref
 
 %% -------------------------------------
 %% Overrides for standard hepthesis styles

@@ -2,9 +2,6 @@
 \RequirePackage{uclthesis}
 % hepthesis documentation https://anorien.csc.warwick.ac.uk/mirrors/CTAN/macros/latex/contrib/hepthesis/hepthesis.pdf
 
-% load it here otherwise cleveref package import breaks.... can't figure out where it is actually loaded
-%\usepackage[colorlinks=false,bookmarks=true,plainpages=false]{hyperref}
-
 % PDF metadata - not essential, but nice
 \makeatletter
 \@ifpackageloaded{hyperref}{%
@@ -33,15 +30,16 @@
 
 %% Start the content body of the thesis
 \begin{mainmatter}
-  \include{chapters/dummy/theory}
-  %\include{chapters/1.theory/theory}
+  \include{chapters/1.theory/theory}
   \include{chapters/2.detector/detector}
   \include{chapters/3.tracking/tracking}
   %\include{chapters/4.btagging/btagging}
-  %\include{chapters/5.vhbb_preamble/vhbb_preamble}
-  %\include{chapters/6.vhbb_boosted/vhbb_boosted}
-  %\include{chapters/7.vhbb_legacy/vhbb_legacy}
-  %\include{chapters/conclusions/conclusions}
+  \include{chapters/track_classifier/track_classifier}
+  \include{chapters/gnn_tagger/gnn_tagger}
+  \include{chapters/5.vhbb_preamble/vhbb_preamble}
+  \include{chapters/6.vhbb_boosted/vhbb_boosted}
+  \include{chapters/7.vhbb_legacy/vhbb_legacy}
+  \include{chapters/conclusions/conclusions}
 \end{mainmatter}
 
 %% Produce the appendices if there are any

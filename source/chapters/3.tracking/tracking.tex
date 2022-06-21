@@ -97,10 +97,8 @@ Pseudotracking and ideal tracking are used as benchmarks of the best tracking po
 When pseudotracking is run alongside standard tracking, those clusters which are shared on the reconstructed tracks run through the cluster splitting machinery. If a cluster is found to be compatible with being split, its definition is changed, and the pseudotracks use this definition too. As a result, pseudotracks can have split clusters.
 
 
-\section{Track Labelling}\label{sec:track labelling}
+\section{Track Truth Origin Labelling}\label{sec:track labelling}
 
-\subsection{B Tracks}\label{sec:B track labelling}
-\subsection{Fake Tracks}\label{sec:fake track labelling}
 
 \section{Investigating Improvements for High \texorpdfstring{\pT}{pT} B Tracking}\label{sec:investigating tracking improvements}
 
@@ -229,3 +227,11 @@ A systematic variation of the cut point \texttt{m\_outlcut} has been carried out
 \end{figure}
 %
 The fact that, as shown in \cref{fig:refit optimisation results sub1}, virtually all correctly assigned hits are retained suggests that it may possible to relax this cut further. Tests are ongoing which will confirm this. The current GX2F treats all layers in the pixel detector in the same way - applying the same cut to each. While \cref{fig:refit optimisation results sub1} shows no adverse affects for hits on the IBL, when relaxing \texttt{m\_outlcut} to a value of 1, some small reduction in good hit assignment efficiency was observed in other layers of the pixel detector, which are less precise. This difference in precision motivates the need to treat different layers in the pixel detector differently. To this end, layer-specific cutting capabilities for the GX2F are under development, which will allow each pixel layer to have their own cut point for outlier removal. Layer specific cuts will then be optimised to see if greater numbers of wrong hits can be successfully identified as outliers and removed, while maintaining high good hit assignment efficiency.
+
+
+\section{Tracking software validation}\label{sec:r22-validation}
+
+\begin{itemize}
+  \item tracking validation
+  \item qspi validation
+\end{itemize}

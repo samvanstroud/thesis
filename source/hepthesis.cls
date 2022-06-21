@@ -320,7 +320,10 @@
 
 %% Re-defines captions of figures and tables
 %% TODO: make configurable / optional?
-\RequirePackage[format=hang,labelfont=bf,labelsep=colon,font=small]{caption}[2004/01/23]
+\RequirePackage[format=plain,labelfont=bf,labelsep=colon,font=small]{caption}%[2004/01/23]
+
+%% Avoid an error by explicity importing here
+\RequirePackage{auxhook}
 
 %% Ability to specify a hook for after a page is completed
 \RequirePackage{afterpage}
@@ -488,9 +491,13 @@
 
   %%   Hyperlinks (optional, has to come late in the package list)
   \ifx\@requirehyper\@empty\else%
-  \RequirePackage[colorlinks=true,bookmarks=true,plainpages=false]{hyperref}%
+  \RequirePackage[colorlinks=true,pdfpagemode=FullScreen,bookmarks=true,draft=false]{hyperref}
+  %\RequirePackage[colorlinks=true,bookmarks=true,plainpages=false]{hyperref}%
   % pdfpagemode=None, FullScreen, UseThumbs, UseOutlines
   \fi
+
+  %% better referencing
+  \RequirePackage{cleveref} % has to be loaded after hyperref
 }
 
 
