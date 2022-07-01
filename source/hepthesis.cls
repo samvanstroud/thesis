@@ -275,6 +275,7 @@
 
 %% Nice tables (optional)
 \ifx\@requirebooktabs\@empty\else%
+  \RequirePackage{multirow}  
   \RequirePackage{booktabs}
   \AtEndOfClass{%
     %% Tabular environment, defined to use the booktabs facilities
