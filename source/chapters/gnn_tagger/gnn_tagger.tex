@@ -826,3 +826,17 @@ Fake tracks, followed by pileup tracks, are the easiest to classify in both samp
 \end{figure}
 
 
+\section{Conclusion}\label{sec:gnn_conclusion}
+
+
+A novel jet tagger, \GNN, with a graph neural network architecture and trained with auxiliary training targets, is presented and now fully implemented in the ATLAS software.
+\GNN is shown to improve flavour tagging performance with respect to \DLr, the current default ATLAS flavour tagging algorithm, when compared in simulated collisions.
+\GNN improves \clrej for \ttbarjets with \ttbarpt by factors of \ttbclo and \ttbllo respectively at a \bjet tagging efficiency of $70\%$ when compared with \DLr.
+For \Zprimejets with \Zprimept, \GNN improves the \crej by a factor of \zpbclo and \lrej by a factor of \zpbllo for a comparative \bjet efficiency of $30\%$.
+Previous multivariate flavour tagging algorithms relied on inputs from low-level tagging algorithms, whereas \GNN needs no such inputs, making it more flexible. It can be easily fully optimised via a retraining for specific flavour tagging use cases, as demonstrated with \ctag and high-\pt \btag, without the need for time-consuming retuning of the low-level tagging algorithms.
+The model is also simpler to maintain and study due to the reduction of constituent components.
+\GNN demonstrates improved track classification performance when compared with a simple per-track MLP and an efficiency of $\sim80\%$ for inclusive vertex finding in \bjets.
+The auxiliary track classification and vertex finding objectives are shown to significantly contribute to the performance in the jet classification objective, and are directly responsible for the improvement over \DLr.
+Further studies need to be undertaken to verify the performance of \GNN on collision data.
+%Due to good performance and relative ease of optimisation, application of a GNN model could lead to improved performance for other use cases extending beyond standard $b$- and \ctag applications.
+%The flexible nature of the \GNN model may make it a good candidate for other tasks, such as $X \rightarrow bb$ and $X \rightarrow cc$ tagging, and vertexing for long lived particle decays. Exporing the application of \GNN to these tasks is left for future work.
