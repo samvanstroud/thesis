@@ -1,5 +1,20 @@
 \ProvidesPackage{preamble/commands}
 
+% import commands from other files here
+\input{preamble/atlashepparticles.sty}
+\input{preamble/atlasmisc.sty}
+
+
+% taggers
+\newcommand\GNN{GN1\xspace}
+\newcommand\GNNLep{\GNN~Lep\xspace}
+\newcommand\DLr{DL1r\xspace}
+
+
+
+
+% other misc/old commands below
+
 % formatting
 \newcommand{\sep}{~,~~~}
 
@@ -18,14 +33,9 @@
 \newcommand{\del}{\bm{\nabla}}
 \newcommand{\defeq}{\vcentcolon=}
 
-
 % Matrix operations
 \DeclareMathOperator{\tr}{Tr}
 \DeclareMathOperator{\ad}{ad}
-
-% ATLAS
-
-
 
 % Quantum General
 \newcommand{\schr}{Schr{\"o}dinger }

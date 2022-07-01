@@ -105,10 +105,13 @@
 \DeclareRobustCommand{\bjet}{$b$-jet\xspace}
 \DeclareRobustCommand{\bjets}{$b$-jets\xspace}
 \DeclareRobustCommand{\btagging}{$b$-tagging\xspace}
+\newcommand*{\ctag}{\ensuremath{c\text{-tagging}}\xspace}
+
 %% Transverse quantities - Subscript roman not italic (EE)
 %\newcommand{\pTV}{$p_\text{T}^V$ }
 %\newcommand{\pT}{$p_\text{T}$ }
 \DeclareRobustCommand{\pT}{\thesismath{p_{\mathrm{T}}}\xspace}
+\DeclareRobustCommand{\pt}{\thesismath{p_{\mathrm{T}}}\xspace}
 \DeclareRobustCommand{\pTV}{\thesismath{p_{\mathrm{T}^V}}\xspace}
 \DeclareRobustCommand{\ET}{\thesismath{E_{\mathrm{T}}}\xspace} 
 \DeclareRobustCommand{\ETEM}{\thesismath{E_{\mathrm{T}}^{\mathrm{EM}}}\xspace} 
@@ -155,7 +158,7 @@
 
 
 
-
+%samples
 
 
 
@@ -170,12 +173,12 @@
 \newcommand*{\minsperepoch}{20\xspace}
 
 % samples
-\newcommand*{\ttbarpt}{\ensuremath{20 < \pt < 250 ~\GeV}\xspace}
+\newcommand*{\ttbarpt}{\ensuremath{20 < \pt < \SI{250}{\GeV}}\xspace}
 \newcommand*{\ttbarjets}{jets in the \ttbar sample\xspace}
 \newcommand*{\ttbarbjets}{\bjets in the \ttbar sample\xspace}
 \newcommand*{\ttbarljets}{\ljets in the \ttbar sample\xspace}
 
-\newcommand*{\Zprimept}{\ensuremath{250 < \pt < 5000 ~\GeV}\xspace}
+\newcommand*{\Zprimept}{\ensuremath{250 < \pt < \SI{5000}{\GeV}}\xspace}
 \newcommand*{\Zprimejets}{jets in the \Zprime sample\xspace}
 \newcommand*{\Zprimebjets}{\bjets in the \Zprime sample\xspace}
 \newcommand*{\Zprimeljets}{\ljets in the \Zprime sample\xspace}
@@ -234,7 +237,7 @@
 \newcommand*{\Dc}{\ensuremath{D_c}\xspace}
 \newcommand*{\fb}{\ensuremath{f_b}\xspace}
 \newcommand*{\fc}{\ensuremath{f_c}\xspace}
-\newcommand\GNN{GN1\xspace}
+%\newcommand\GNN{GN1\xspace}
 
 % btag vars
 \newcommand\dzerouncert{\ensuremath{\sigma(d_0)}\xspace}
@@ -243,3 +246,26 @@
 \newcommand\zzerosig{\ensuremath{s(z_0)}\xspace}
 
 \newcommand{\tofill}[1] {\textbf{\textcolor{red}{#1}}}
+
+% wps
+\newcommand\WP[2]{\pct{#1} \ensuremath{#2\text{-jet}} WP\xspace}
+\newcommand\bWP[1]{\pct{#1} \ensuremath{b\text{-jet}} WP\xspace}
+
+%misc
+\let\oldsim\sim 
+\renewcommand{\sim}{{\oldsim}}
+\newcommand\pct[1]{\ensuremath{#1\%}\xspace}
+\newcommand\pctr[2]{\ensuremath{#1\text{\nobreakdash-}#2\%}\xspace}
+
+\newcommand\ttlo{70\xspace}
+\newcommand\tthi{77\xspace}
+\newcommand\zplo{30\xspace}
+\newcommand\zphi{40\xspace}
+\newcommand\ttbclo{$\sim 2.1$\xspace}
+\newcommand\ttbchi{$\sim 2$\xspace}
+\newcommand\ttbllo{$\sim 1.8$\xspace}
+\newcommand\ttblhi{$\sim 1.6$\xspace}
+\newcommand\zpbclo{$\sim 2.8$\xspace}
+\newcommand\zpbchi{$\sim 2$\xspace}
+\newcommand\zpbllo{$\sim 6$\xspace}
+\newcommand\zpblhi{$\sim 4.5$\xspace}

@@ -328,6 +328,9 @@
 %% Ability to specify a hook for after a page is completed
 \RequirePackage{afterpage}
 
+%% Particle names
+\RequirePackage[italic]{hepnames}
+
 %% Misc tweaks
 \AtEndOfClass{%
   %% Make maths in titles go automatically bold
@@ -341,7 +344,7 @@
 %% Length definitions
 %% ========================================================================
 
-\setlength{\parindent}{0.6cm}          % tweak the initial indent in paras
+\setlength{\parindent}{0.0cm}          % tweak the indent of the first line in a new paragraph
 \setlength{\parskip}{0.3cm}            % tweak the intra-para gap size
 \setlength{\topmargin}{0in}
 \setlength{\textheight}{9in}
