@@ -1,74 +1,101 @@
-\chapter{Theoretical Framework}
-\label{chap:theory}
-
-
-\begin{comment}
-\chapterquote{I am now convinced that theoretical physics is actually philosophy.}
-{Max Born}
-
-\section{Quantum Chromodynamics}
-Quantum chromodynamics (\QCD) is the non-Abelian \SUgroup{3} gauge theory of the strong interaction.
-Initially, it appears similar to \QED, with the single electric charge replaced by three conserved ``colour'' charges; there are, however, important differences between the two.
-
-In the \QED Lagrangian, \EquationRef{eq:bg-theory:qed}, the electron carries one unit of charge, $-e$, the positron carries one unit of anti-charge $+e$ and the force is mediated by a massless photon~\cite{Martin:2009:Nuclear}.
-
-\begin{gather}
-  \Lagrangian_{\QED} = \bar{\psi} \left(i \gamma^{\mu}  \partial_{\mu} -m \right) \psi - e \bar{\psi} \gamma^{\mu} A_{ \mu} \psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu} 
-  \intertext{where for a photon field $A_{\mu}$,}
-  F_{\mu\nu} = \partial_{\mu} A_{\nu} - \partial_{\nu} A_{\mu} \nonumber
-  \label{eq:bg-theory:qed}
-\end{gather}
-
-
-\subsection{QCD Compton Scattering and Boson-Gluon Fusion}
-Here is an example of \texttt{feynmf} to produce Feynman diagrams.
-The Makefile should be able to cope with them, but if not, to build \texttt{feynmf} files
+\chapter{Theoretical Framework}\label{chap:theory}
 
 \begin{itemize}
-  \item run \texttt{make} once
-  \item then run \texttt{mf \symbol{34}\textbackslash{}mode=localfont; input \$name\symbol{34}}
+  \item Introduce sm
+  \item brief history
+  \item current areas of study
+  \item Reference relevenace to rest of thesis (studying hbb)
 \end{itemize}
 
-\begin{figure}[htpb]
-  \centering
-  \parbox{99.9mm}{
-    \vspace*{5mm}
-    \unitlength=1mm
-    \begin{fmffile}{qcdcompton}
-      \begin{fmfgraph*}(100,50)
-         \fmfleft{iq,ip}
-         \fmfright{og,oq}
-         \fmf{photon,label=$\gamma (q)$}{ip,v1}
-         \fmf{fermion,label=$q_1 (yp)$}{iq,v2}
-         \fmf{fermion,label=$q (xp)$}{v2,v1}
-         \fmf{fermion,label=$q_2$}{v1,oq}
-         \fmf{gluon,label=$g$}{v2,og}
-      \end{fmfgraph*}
-    \end{fmffile}
-    \vspace*{5mm}
-  }
-  \caption{\QCD Compton scattering (\yqgq).}
-  \label{fig:bg-theory:qcdcompton}
-\end{figure}
+The Standard Model (SM) of particle physics is the theory describing all known elementary particles and their interactions via three of the four fundamental forces.
+Developed by merging the successful theories of classical quantum mechanics and relativity in the second half of the 20th century, the SM's position today at the centre of our understanding of the nature of the universe is firmly established by an unparalleled level of agreement between the predictions from the model and experimental results \cite{morel2020determination,sailer2022measurement}.
 
-The \QCD Compton process (\FigureRef{fig:bg-theory:qcdcompton}), is not discussed in this section.
+The SM has predicted the discovery of the top and bottom quarks \cite{CDF:1995wbb,D0:1995jca,Herb:1977ek}, the \Wboson and \Zboson bosons \cite{UA1:1983crd}, and the tau neutrino \cite{DONUT:2000fbd}.
+The last missing piece of the SM to be discovered was the Higgs boson, first posited in \tofill{X}.
+After its discovery in 2012 \tofill{citation}, much work has been ongoing on carrying out detailed measurements of its mass and interactions with other particles.
 
-\section{Jet Algorithms}
-\label{sec:bg-theory:jet_algorithms}
-A comparison between different jet algorithms can be seen in \FigureRef{fig:bg-theory:jet_algorithms}.
-This figure uses \texttt{eps} which is auto-converted to \texttt{pdf} when compiling.
-Here the jets produced by \kt, \CA, \akt and SISCone are shown, using the same input distribution of particles and the same $R$-parameter in each case. 
-The two highest \pT jets in the event, here shown in green and red, are essentially identical in each case, although the precise details of which particles are combined are different in each case.
-Additionally, there is some variation in the ordering of the lower \pT jets.
-The circular shapes of the \akt jets and the irregular outline of the \kt jets are particularly notable.
+This thesis looks at understanding Higgs decays\dots
 
-\begin{figure}[htpb]
-  \centering
-  \includegraphics[width=\largefigwidth]{chapters/1.theory/JetAlgComparison.eps}
-  \caption{A sample \Herwig generated parton level event, overlaid with random soft particles, clustered with four different jet algorithms, illustrating the shapes and sizes of the resulting hard jets. For \kt and \CA the detailed shapes are partially determined by the specific set of soft particles used, and would change if these were to be modified~\cite{Cacciari:2005:fastjet,Cacciari:2012:fastjet}.}
-  \label{fig:bg-theory:jet_algorithms}
-\end{figure}
-\end{comment}
 
-\section{The Standard Model}\label{sec:standard-model}
-\section{The Higgs Mechanism}\label{sec:sm-higgs}
+\section{The Standard Model}\label{sec:standard_model}
+
+\begin{itemize}
+  \item Introduce QFT
+  \item Introduce SM Gauge symmetry
+  \item List Contents of SM (different particles) masses and charges
+  \item Write SM Lagrangian term break up LEW etc
+  \item Walk through (or subsection) for each term
+\end{itemize}
+
+The SM is formulated in the language of Quantum Field Theory (QFT).
+In this framework, particles are localised excitations of corresponding quantum fields, which are operator-valued distribution across spacetime.
+
+Central to QFT is the Lagrangian density which describes the kinematics and dynamics of the fields.
+%Through observation of conserved quantities, we can derive corresponding symmetries which are expressed in the Lagrangian.
+Observations of conserved quantities are linked, via Noether's theorem, to symmetries which are expressed by the Lagrangian.
+Alongside Global Poincar\'e symmetry, the SM Lagrangian observes a local $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ gauge symmetry.
+The presence of gauge symmetries allows certain gauge transformations to be applied to fields, with the result that observable properties of the system are unchanged.
+
+
+
+\subsection{Quantum Electrodynamics}\label{sec:qed}
+
+\begin{itemize}
+  \item Dirac equation, Lagrangian
+  \item U(1) symmetry, transformation
+  \item Follow through and interpretation of fields, conservation of electric charge
+\end{itemize}
+
+Consider a Dirac spinor field $\psi = \psi(x)$ and its adjoint $\overline{\psi} = \psi^\dagger \gamma^0$, where $\psi^\dagger$ is the Hermitian conjugate of $\psi$.
+The Dirac Lagrangian density is
+
+\begin{equation}\label{eq:dirac_lagrangian}
+  \mathcal{L}_{\textnormal{Dirac}} = \overline{\psi} (i \slashed{\partial}  - m )\psi,
+\end{equation}
+
+where $\slashed{\partial} = \gamma^\mu \partial_\mu$ denotes the contraction with the Dirac gamma matrices $\gamma^\mu$, and summation over up-down pairs of indices is assumed.
+Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation
+
+\begin{equation}\label{eq:dirac_eq}
+  (i \slashed{\partial}  - m )\psi = 0.
+\end{equation}
+
+Suppose some fundamental symmetry that requires invariance under a $U(1)$ local gauge transformation
+
+\begin{equation}\label{eq:U(1)_transformation}
+  \psi \rightarrow \psi' = \psi e^{i q \alpha(x)} ,
+\end{equation}
+
+where $\alpha$ varies over every spacetime point $x$.
+Under this transformation, the Dirac equation transforms as 
+
+\begin{equation}\label{eq:dirac_eq_transformed}
+  (i \slashed{\partial} - q\slashed{\partial}\alpha(x) - m )\psi = 0.
+\end{equation}
+
+
+For the Dirac equation to remain invariant under the transformation in \cref{eq:U(1)_transformation}, a new field $A_\mu$, which transforms as $A_\mu \rightarrow A'_\mu - q \partial_\mu \alpha$ must be added to the Dirac equation.
+
+yielding the QED Lagrangain
+\begin{equation}\label{eq:qed_lagrangian}
+  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D}  - m )\psi.
+\end{equation}
+
+
+
+\subsection{Quantum Chromodynamics}\label{sec:qcd}
+
+\subsection{The Electroweak Sector}\label{sec:ew_sector}
+
+The $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ is spontaneously broken to $SU(3)_C \otimes U(1)_\gamma$.
+
+\section{The Higgs Mechanism}\label{sec:sm_higgs}
+
+\begin{itemize}
+  \item Motivation
+  \item Walkthrough
+\end{itemize}
+
+\subsection{Electroweak Symmetry Breaking}\label{sec:ew_symmetry_breaking}
+\subsection{Fermionic Yukawa Coupling}\label{sec:higgs_yukawa_coupling}
+
