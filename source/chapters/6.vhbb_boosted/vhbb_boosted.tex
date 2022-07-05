@@ -1,7 +1,239 @@
-\chapter{VHbb Boosted Analysis}
-\label{chap:vhbb_boosted}
+\chapter{VHbb Boosted Analysis}\label{chap:vhbb_boosted}
 
-\section{Overview}
+Paper abstract :
+
+The associated production of a Higgs boson with a $W$ or $Z$ boson
+decaying into leptons and where the Higgs boson decays to a $\bbbar$
+pair is measured in the high vector-boson transverse momentum regime,
+above \SI{250}{\GeV}, with the ATLAS detector. The analysed data,
+corresponding to an integrated luminosity of \intlumi, were collected
+in proton--proton collisions at the Large Hadron Collider between
+2015 and 2018 at a centre-of-mass energy of \sqsthirt. The measured
+signal strength, defined as the ratio of the measured signal yield to
+that predicted by the Standard Model, is $0.72 ^{+0.39}_{-0.36}$
+corresponding to an observed (expected) significance of 2.1 (2.7)
+standard deviations. Cross-sections of associated production of a
+Higgs boson decaying into $b$ quark pairs with a $W$ or $Z$ gauge
+boson, decaying into leptons, are measured in two exclusive
+vector boson transverse momentum regions, 250--\SI{400}{\GeV} and above \SI{400}{\GeV}, and
+interpreted as constraints on anomalous couplings in the framework of
+a Standard Model effective field theory.
+
+Final states containing zero, one and two charged
+leptons (electrons or muons) are considered. targeting the
+decays \Znn, \Wln\ and \Zll. The \hbb\ decay is reconstructed using a
+jet with transverse momentum $p_{\mathrm{T}} > \SI{250}{\GeV}$, found with
+the \antikt $R = 1.0$ jet algorithm, and groomed to remove soft
+and wide-angle radiation and to mitigate contributions from the
+underlying event and additional proton-proton collisions. Higgs
+bosons are identified using $b$-tagged $R = 0.2$ track-jets matched
+to the groomed \largeR\ calorimeter jets. 
+
+%For a Higgs boson mass of \SI{125}{\GeV}, an excess of events over the expected background from other Standard Model processes is found
+%with an observed significance of $3.5$ standard deviations, compared to an expectation of $3.0$
+%standard deviations. This excess provides evidence for the Higgs boson decay into b-quarks
+%and for its production in association with a vector boson. Assuming the Standard Model production 0.19
+%cross-section, the results are consistent with the value of the Yukawa coupling to b-quarks in the Standard Model.
+
+
+
+\section{Introduction}
+
+Lifted from paper:
+
+Since the discovery of the Higgs boson
+($H$)~\cite{Englert:1964et,Higgs:1964ia,Higgs:1964pj,Guralnik:1964eu}
+with a mass of around \SI{125}{\GeV}\cite{HIGG-2014-14} by the ATLAS
+%with a mass of around 125~\GeV~\cite{Tanabashi:2018oca} by the ATLAS
+and CMS Collaborations~\cite{HIGG-2012-27,CMS-HIG-12-028} in 2012,
+the analysis of proton--proton ($pp$) collision data at centre-of-mass
+energies of \SI{7}{TeV}, \SI{8}{TeV} and \SI{13}{\TeV} delivered by the Large Hadron
+Collider (LHC)~\cite{Evans:2008zzb} has led to precise
+measurements of the main production cross-sections and decay rates of
+the Higgs boson, as well as measurements of its mass and its spin and
+parity properties. In particular, the observation of the decay of the
+Higgs boson into $b$-quark pairs provided direct evidence for the
+Yukawa coupling of the Higgs boson to down-type
+quarks~\cite{HIGG-2018-04,CMS-HIG-18-016}.  Finally, a combination
+of \SI{13}{\TeV} results searching for the Higgs boson produced in
+association with a leptonically decaying \Wboson or \Zboson boson established
+the observation of this production process~\cite{HIGG-2018-04}.
+%These analyses were
+%aiming at vector bosons with transverse momentum in the
+%approximate range [100--300]~\GeV.
+A first cross-section measurement as a
+function of the vector-boson transverse momentum was also carried out
+by the ATLAS Collaboration~\cite{HIGG-2018-50}.
+%, in the framework of ‘simplified template cross sections'
+%(STXS), using
+%the same dataset and jet reconstruction techniques.
+
+
+
+%In particular, the observation of the decay of the
+%Higgs boson to $b$-quark pairs when produced in association with a leptonically decaying $W$ or $Z$ boson provided direct
+%evidence for the Yukawa coupling of the Higgs boson to down-type quarks
+%and also established the observation of this production
+%process
+
+
+%an expected branching fraction of approximately 58\% for a mass of
+%$\mh=125$~\GeV\ was discovered in 2018 when produced in association
+%with a $W$ or $Z$ boson ($VH$) using data collected at Run~2 in 2015,
+%2016 and 2017, and at Run~1
+%precise measurement of its
+%mass (of approximately 125\,\GeV), its  Since then, the analysis of data
+%collected has led to the observation of many of the production modes
+%and decay channels predicted by the Standard Model (SM).
+%As well as probing the dominant decay of
+%the Higgs boson, this measurement allows the overall Higgs boson decay
+%width~\cite{Lafaye:2009vr,Heinemeyer:2013tqa} to be constrained and
+%provides the best sensitivity to the $ZH$ and $WH$ production modes,
+%which are (for instance) important elsements in the interpretation of
+%Higgs boson measurements in effective field
+%theories~\cite{Ellis:2014dva}.
+
+%The previous measurement of this decay allowed to probe the kinematic
+%properties of the Higgs boson in the low transverse momentum regime
+%($\pt<250$ \GeV) ~\cite{HIGG-2018-04,CMS-HIG-18-016}
+
+%however the
+%additional data collected in Run-2 allow us to access a new kinematic
+%regime at high transverse momentum, called the boosted regime.
+
+The previous ATLAS analyses~\cite{HIGG-2018-04,HIGG-2018-50} in this
+channel were mainly sensitive to vector bosons with transverse
+momentum ($\pt$) in the range of approximately 100--\SI{300}{\GeV}. These
+analyses considered a pair of jets with radius parameter of $R= 0.4$,
+referred to as small-radius (\smallR) jets, to reconstruct the Higgs
+boson. For higher Higgs boson transverse momenta, the decay products
+can become close enough that they cannot be reconstructed with
+two \smallR\ jets.  To explore this `boosted' regime, the Higgs boson
+is reconstructed as a single \largeR\ jet with
+$R=1.0$~\cite{Butterworth:2008iy}.
+%that is subsequently
+%decomposed using jet substructure
+%techniques.
+This high-\pt\ regime is particularly interesting due to
+its sensitivity to physics beyond the Standard
+Model~\cite{Mimasu:2015nqa}.
+
+%An
+%interesting regime where additional corrections to the high invariant
+%mass differential cross-section are expected in the presence of new
+%physics beyond SM~\cite{Mimasu:2015nqa}. There are several advantages
+%and challenges in the boosted regime. Even though this region
+%corresponds to only a small fraction of the total $VH$ cross section
+%(about 5\% for $\pT>200$ \GeV), the larger mass of the $VH$ system
+%causes it to be central improving the detector signal acceptance and
+%large backgrounds with intrinsic scales close to the Higgs mass like
+%top-antitop production are largely reduced due to the constrain of
+%producing a high-\pt\ $b\bar{b}$ system and a compensating $W/Z$
+%boson, without there also being significant additional jet
+%activity~\cite{Butterworth:2008iy}. The main challenge is the
+%reconstruction of the Higgs boson candidate, since at high transverse
+%momenta, the decay products start to merge and they need to be
+%reconstructed as a single jet decomposed using jet substructure
+%techniques (see Figure~\ref{fig:FeynmanDiagrams}). This analysis has a
+%non trivial overlap with the analyses described
+%in~\cite{HIGG-2018-04,HIGG-2018-50}, which make use of regular small
+%radius calorimeter jets to reconstruct the Higgs boson candidate, and
+%has therefore a signal acceptance decreasing significantly with
+%increasing vector boson transverse momentum. The overlap in a region
+%between approximately 250~\GeV\ and 600~\GeV\ is of the order of 40\%
+%and decreases thereafter.
+
+This Letter presents a measurement of cross-sections for the
+associated production of a high transverse momentum Higgs boson that
+decays into a \bbbar pair with a leptonically decaying $W$ or $Z$
+boson. The analysis uses \pp\ collision data recorded between 2015 and
+2018 by the ATLAS detector~\cite{PERF-2007-01} during Run~2 at the
+LHC. This dataset corresponds to an integrated luminosity
+of \intlumi. Events are selected in 0-, 1- and 2-lepton channels,
+based on the number of reconstructed charged leptons, $\ell$
+(electrons or muons), in the final state to explore the $ZH \to \nu\nu
+b\bar{b}$, $WH \to \ell \nu b \bar{b}$ and $ZH \to \ell\ell b\bar{b}$
+signatures, respectively. The Higgs boson is reconstructed as a
+single \largeR\ jet and the $b$-quarks from its decay as a pair of
+jets, reconstructed with a \pt-dependent radius parameter, associated
+with the \largeR\ jet and identified as containing a $b$-hadron.
+
+The analysis using \smallR\ jets and focusing on slightly lower Higgs
+boson transverse momentum regions was recently updated with the complete Run~2
+dataset~\cite{HIGG-2018-51}.
+%In the following, $V$ refers to either
+%a $W$ or $Z$ boson. For \ptv\ $>$ 250~\GeV\ and up-to
+%approximately \ptv\ $<$ 600~\GeV\,
+The \largeR\ jet analysis
+significantly overlaps with the \smallR\ jets analysis. The two
+results can therefore not be straightforwardly combined.
+
+
+%Therefore, the results from the two
+%analyses cannot be straightforwardly combined.
+
+
+%The candidate
+%Higgs-jet is reconstructed using a
+%`trimmed’ \antikt~\cite{Cacciari:2008gp} \largeR\
+%jet~\cite{PERF-2012-02, Krohn:2009th}, to which two variable-radius
+%(VR) track-jets tagged as $b$-jets~\cite{ATL-PHYS-PUB-2014-013,
+%PERF-2017-04} are associated.
+
+%(see sketch in
+%Figure~\ref{fig:FeynmanDiagrams}).
+%using a
+%multivariate algorithm based on the tracks impact parameters and the
+%reconstruction of secondary vertices, are associated.
+
+%to determine
+%associated with the \largeR jet are $b$-tagged, i.e.\ if they contain
+%$b$-hadron decay products.
+
+%The approach to tagging presented in this
+%Letter is built upon a foundation of studies from LHC runs at
+%$\sqrt{s} = 7$ and $8$~\TeV, including extensive studies of jet
+%reconstruction and grooming algorithms and detailed investigations of track-jet%-based
+%$b$-tagging in boosted topologies~\cite{ATL-PHYS-PUB-2014-013, PERF-2017-04}.
+%The \HiggsJet\ mass candidate in the different signal
+%regions are used as the discriminant variable and are combined using a
+%binned maximum-likelihood fit, referred to as the global likelihood
+%fit, which allows the signal yield and the background normalisations
+%to be extracted.
+
+The dominant background processes after the event selection correspond
+to the production of \vjets, where $V$ refers to either a $W$ or $Z$
+boson, \ttbar, single-top and dibosons.  The signal is extracted from
+a combined profile likelihood fit to the \largeR jet mass, using
+several signal and control regions. The yield of diboson production
+$VZ$ with $Z \rightarrow b\bar{b}$ is also measured using the same fit
+and provides a validation of the analysis. The cross-section
+measurements are performed within the simplified template
+cross-section (STXS) framework~\cite{deFlorian:2016spz,
+Badger:2016bpw}. These measurements are then used to constrain
+anomalous couplings in a Standard Model effective field theory
+(SMEFT)~\cite{Contino:2013kra}.
+
+%The
+%STXS measurements are designed to proceed in stages of increasing
+%granularity with more recorded data.
+%In ‘stage 0’, cross-sections are
+%measured separately for the four main production modes in a fiducial
+%Higgs boson rapidity region $|y_H|< 2.5$ and in ‘stage 1’, these
+%regions are split into 31 subregions according to the transverse
+%momentum of the weak gauge boson $V$ for $VH$, $V\rightarrow$ leptons
+%production. Stage-1 STXS were measured recently for $VH, H\rightarrow
+%b\bar{b}$ with 80 \ifb of 13 TeV ATLAS data in the following bins:
+%$\ptv<75~\GeV$, $75<\ptv<150~\GeV$ and $\ptv>250~\GeV$, with results in
+%agreement with SM predictions~\cite{HIGG-2018-50}. In this letter
+%‘stage 1’ results are presented in two kinematic fiducial volumes:
+%$250<\ptv>450~\GeV$ and $\ptv>450~\GeV$.
+
+
+
+
+
+
 
 \section{Modelling Work}
 

@@ -839,7 +839,7 @@
 \let\@oldtable\table
 \let\@oldendtable\endtable
 \renewenvironment{table}[1][tbp]{%
-  \vspace{0.2cm}%
+  \vspace{0.4cm}%
   \@oldtable[#1]%
   \begin{center}%
 }{%
