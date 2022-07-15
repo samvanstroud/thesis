@@ -3,6 +3,8 @@
     // The following will hide files in the editor
     "files.exclude": {
         "**/*.log"  : true,
+        "**/*.lot"  : true,
+        "**/*.lof"  : true,
         "**/*.aux"  : true,
         "**/*.make" : true,
         "**/*.bbl"  : true,
@@ -11,6 +13,7 @@
         "**/*.out"  : true,
         "**/*.cut"  : true,
         "**/*.fls"  : true,
-        "**/*.toc"  : true
+        "**/*.toc"  : true,
+        "**/*.temp" : true
     }
 }

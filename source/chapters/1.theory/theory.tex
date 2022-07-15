@@ -30,11 +30,11 @@ This thesis looks at understanding Higgs decays\dots
 The SM is formulated in the language of Quantum Field Theory (QFT).
 In this framework, particles are localised excitations of corresponding quantum fields, which are operator-valued distribution across spacetime.
 
-Central to QFT is the Lagrangian density which describes the kinematics and dynamics of the fields.
+Central to QFT is the Lagrangian density which describes the kinematics and dynamics of a field.
 %Through observation of conserved quantities, we can derive corresponding symmetries which are expressed in the Lagrangian.
 Observations of conserved quantities are linked, via Noether's theorem, to symmetries which are expressed by the Lagrangian.
 Alongside Global Poincar\'e symmetry, the SM Lagrangian observes a local $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ gauge symmetry.
-The presence of gauge symmetries allows certain gauge transformations to be applied to fields, with the result that observable properties of the system are unchanged.
+Gauge symmetries leave observable properties of the system unchanged when certain gauge transformations are applied to the fields.
 
 
 
@@ -46,7 +46,8 @@ The presence of gauge symmetries allows certain gauge transformations to be appl
   \item Follow through and interpretation of fields, conservation of electric charge
 \end{itemize}
 
-Consider a Dirac spinor field $\psi = \psi(x)$ and its adjoint $\overline{\psi} = \psi^\dagger \gamma^0$, where $\psi^\dagger$ is the Hermitian conjugate of $\psi$.
+Consider a Dirac spinor field $\psi = \psi(x)$ and its adjoint $\overline{\psi} = \psi^\dagger \gamma^0$, where $\psi^\dagger$ denotes the Hermitian conjugate of $\psi$.
+The field $\psi$ describes fermionic \spinhalf particle, for example an electron.
 The Dirac Lagrangian density is
 %
 \begin{equation}\label{eq:dirac_lagrangian}
@@ -63,24 +64,35 @@ Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields 
 Suppose some fundamental symmetry that requires invariance under a $U(1)$ local gauge transformation
 %
 \begin{equation}\label{eq:U(1)_transformation}
-  \psi \rightarrow \psi' = \psi e^{i q \alpha(x)} ,
+  \psi \rightarrow \psi' = \psi e^{- i q \alpha(x)} ,
 \end{equation}
 %
 where $\alpha$ varies over every spacetime point $x$.
 Under this transformation, the Dirac equation transforms as 
 %
 \begin{equation}\label{eq:dirac_eq_transformed}
-  (i \slashed{\partial} - q\slashed{\partial}\alpha(x) - m )\psi = 0.
+  (i \slashed{\partial} - m ) \psi e^{- i q \alpha(x)} + q \slashed{\partial}\alpha(x) \psi e^{- i q \alpha(x)} = 0.
 \end{equation}
 %
-
-For the Dirac equation to remain invariant under the transformation in \cref{eq:U(1)_transformation}, a new field $A_\mu$, which transforms as $A_\mu \rightarrow A'_\mu - q \partial_\mu \alpha$ must be added to the Dirac equation.
-
-yielding the QED Lagrangain
-\begin{equation}\label{eq:qed_lagrangian}
-  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D}  - m )\psi.
+For the Dirac equation to remain invariant under the transformation in \cref{eq:U(1)_transformation}, a new field $A_\mu$ which transforms as $A_\mu \rightarrow A'_\mu = A_\mu + \partial_\mu \alpha(x)$ must be added.
+The transformed interaction term
+%
+\begin{equation}
+  - q \slashed{A} \psi \rightarrow - q \slashed{A} \psi e^{- i q \alpha(x)} - q \slashed{\partial} \alpha(x) \psi e^{- i q \alpha(x)}
 \end{equation}
-
+%
+will then cancel the asymmetric term in \cref{eq:dirac_eq_transformed} as required.
+The $U(1)$ invariant Lagrangain can therefore be constructed by adding an interaction between $\psi$ and $A_\mu$ to \cref{eq:dirac_lagrangian}. The kinetic term for the the new field $A_\mu$ is also added in terms of $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$, which is trivially invariant under the transformation in \cref{eq:U(1)_transformation}.
+The interaction term is absorbed into the covariant derivative $D_\mu = \partial_\mu + i q A_\mu$.
+The covariant derivate $D_\mu \psi$ is convenient to work with as it transforms in the same way as the field $\psi$.
+This yields the QED Lagrangain
+%
+\begin{equation}\label{eq:qed_lagrangian}
+  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D} - m )\psi,
+\end{equation}
+%
+A quadratic term $A_\mu A^\mu$ is not invariant and therefore the the field $A_\mu$ must be massless.
+Requiring invariance under local $U(1)$ gauge transformations necessitated the addition of a new field $A_\mu$, corresponding to photons, which interact with charged matter.
 
 
 \subsection{Quantum Chromodynamics}\label{sec:qcd}
