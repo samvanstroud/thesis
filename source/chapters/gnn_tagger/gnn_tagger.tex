@@ -109,48 +109,50 @@ In addition to the baseline \GNN model, the \GNNLep variant includes an addition
 The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the electrons are required to pass the \textit{VeryLoose} likelihood-based identification working point \cite{PERF-2017-01}.
 
 \begin{table}[!htbp]
-    \small
-    \centering
-    \caption{Input features to the \GNN model.
-             Basic jet kinematics, along with information about the reconstructed track parameters and constituent hits are used.
-             Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
-             A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-             The track leptonID is an additional input to the \GNNLep model.}
-    \begin{tabular}{ll}
-        \toprule 
-        \textbf{Jet Input} & \textbf{Description} \\
-        \hline
-        $\pt$ & Jet transverse momentum \\
-        $\eta$ & Signed jet pseudorapidity \\
-        \toprule
-        \textbf{Track Input} & \textbf{Description} \\
-        \hline
-        $q/p$ & Track charge divided by momentum (measure of curvature) \\
-        $\mathrm{d}\eta$ & Pseudorapidity of the track, relative to the jet $\eta$ \\
-        $\mathrm{d}\phi$  & Azimuthal angle of the track, relative to the jet $\phi$ \\
-        $d_0$  & Closest distance from the track to the PV in the longitudinal plane \\
-        $z_0 \sin\theta$  & Closest distance from the track to the PV in the transverse plane \\
-        $\sigma(q/p)$ & Uncertainty on $q/p$ \\
-        $\sigma(\theta)$ & Uncertainty on track polar angle $\theta$ \\
-        $\sigma(\phi)$  & Uncertainty on track azimuthal angle $\phi$ \\
-        $\dzerosig$  & Lifetime signed transverse IP significance \\
-        $\zzerosig$  & Lifetime signed longitudinal IP significance \\
-        nPixHits   & Number of pixel hits \\
-        nSCTHits   & Number of SCT hits \\
-        nIBLHits   & Number of IBL hits \\
-        nBLHits    & Number of B-layer hits \\
-        nIBLShared & Number of shared IBL hits \\
-        nIBLSplit  & Number of split IBL hits \\
-        nPixShared & Number of shared pixel hits \\
-        nPixSplit  & Number of split pixel hits \\
-        nSCTShared & Number of shared SCT hits \\
-        nPixHoles  & Number of pixel holes \\
-        nSCTHoles  & Number of SCT holes \\
-        leptonID   & Indicates if track was used to reconstruct an electron or muon \\
-        \bottomrule
-    \end{tabular}
-    \vspace{4mm}
-    \label{tab:track_inputs}
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{
+    Input features to the \GNN model.
+    Basic jet kinematics, along with information about the reconstructed track parameters and constituent hits are used.
+    Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    The track leptonID is an additional input to the \GNNLep model.
+  }
+  \begin{tabular}{ll}
+    \toprule 
+    \textbf{Jet Input} & \textbf{Description} \\
+    \hline
+    $\pt$ & Jet transverse momentum \\
+    $\eta$ & Signed jet pseudorapidity \\
+    \toprule
+    \textbf{Track Input} & \textbf{Description} \\
+    \hline
+    $q/p$ & Track charge divided by momentum (measure of curvature) \\
+    $\mathrm{d}\eta$ & Pseudorapidity of the track, relative to the jet $\eta$ \\
+    $\mathrm{d}\phi$  & Azimuthal angle of the track, relative to the jet $\phi$ \\
+    $d_0$  & Closest distance from the track to the PV in the longitudinal plane \\
+    $z_0 \sin\theta$  & Closest distance from the track to the PV in the transverse plane \\
+    $\sigma(q/p)$ & Uncertainty on $q/p$ \\
+    $\sigma(\theta)$ & Uncertainty on track polar angle $\theta$ \\
+    $\sigma(\phi)$  & Uncertainty on track azimuthal angle $\phi$ \\
+    $\dzerosig$  & Lifetime signed transverse IP significance \\
+    $\zzerosig$  & Lifetime signed longitudinal IP significance \\
+    nPixHits   & Number of pixel hits \\
+    nSCTHits   & Number of SCT hits \\
+    nIBLHits   & Number of IBL hits \\
+    nBLHits    & Number of B-layer hits \\
+    nIBLShared & Number of shared IBL hits \\
+    nIBLSplit  & Number of split IBL hits \\
+    nPixShared & Number of shared pixel hits \\
+    nPixSplit  & Number of split pixel hits \\
+    nSCTShared & Number of shared SCT hits \\
+    nPixHoles  & Number of pixel holes \\
+    nSCTHoles  & Number of SCT holes \\
+    leptonID   & Indicates if track was used to reconstruct an electron or muon \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+  \label{tab:track_inputs}
 \end{table}
 
 
@@ -166,28 +168,28 @@ Since the presence of different track origins is strongly related to the flavour
 This task may also aid the jet flavour prediction by acting as a form of supervised attention~\cite{arxiv.2007.08294}~-~in detecting tracks from heavy flavour decays the model may learn to pay more attention to these tracks.
 
 \begin{table}[!htbp]
-    \small
-    \centering
-    \caption{Truth origins which are used to categorise the physics process that led to the production of a track.
-             Tracks are matched to charged particles using the truth-matching probability~\cite{PERF-2015-08}.
-             A truth-matching probability of less than $0.5$ indicates that reconstructed track parameters are likely to be mismeasured and may not correspond to the trajectory of a single charged particle.
-             The ``OtherSecondary'' origin includes tracks from photon conversions, \Kshort and $\Lambda^0$ decays, and hadronic interactions.}
-    \begin{tabular}{lll}
-        \toprule 
-        \textbf{Truth Origin} & \textbf{Description} \\
-        \hline
-        Pileup  & From a \pp collision other than the primary interaction \\
-        Fake    & Created from the hits of multiple particles \\
-        Primary & Does not originate from any secondary decay \\
-        fromB   & From the decay of a \bhadron \\
-        fromBC  & From a \chadron decay, which itself is from the decay of a \bhadron \\
-        fromC   & From the decay of a \chadron \\
-        %fromTau & From the decay of a $\tau$ \\
-        OtherSecondary & From other secondary interactions and decays \\
-        \bottomrule
-    \end{tabular}
-    \vspace{4mm}
-    \label{tab:truth_origins}
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{Truth origins which are used to categorise the physics process that led to the production of a track.
+            Tracks are matched to charged particles using the truth-matching probability~\cite{PERF-2015-08}.
+            A truth-matching probability of less than $0.5$ indicates that reconstructed track parameters are likely to be mismeasured and may not correspond to the trajectory of a single charged particle.
+            The ``OtherSecondary'' origin includes tracks from photon conversions, \Kshort and $\Lambda^0$ decays, and hadronic interactions.}
+  \begin{tabular}{lll}
+      \toprule 
+      \textbf{Truth Origin} & \textbf{Description} \\
+      \hline
+      Pileup  & From a \pp collision other than the primary interaction \\
+      Fake    & Created from the hits of multiple particles \\
+      Primary & Does not originate from any secondary decay \\
+      fromB   & From the decay of a \bhadron \\
+      fromBC  & From a \chadron decay, which itself is from the decay of a \bhadron \\
+      fromC   & From the decay of a \chadron \\
+      %fromTau & From the decay of a $\tau$ \\
+      OtherSecondary & From other secondary interactions and decays \\
+      \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+  \label{tab:truth_origins}
 \end{table}
 
 Displaced decays of \bchadrons lead to secondary and tertiary vertices inside the jet.
@@ -283,23 +285,23 @@ Each of the objectives makes use of the global representation of the jet.
 A summary of the different classification networks used for the various training objectives is shown in \cref{tab:architecture}.
 
 \begin{table}[!htbp]
-    \small
-    \centering
-    \caption{
-        A summary of GN1's different classification networks used for the different training objectives.
-        The hidden layers column contains a list specifying the number of neurons in each layer.
-        }
-    \begin{tabular}{lll}
-        \toprule 
-        \textbf{Network} & \textbf{Hidden layers} & \textbf{Output size} \\
-        \hline
-        Node classification network    & 128, 64, 32 & 7 \\
-        Edge classification network    & 128, 64, 32 & 1 \\
-        Graph classification network   & 128, 64, 32, 16 & 3 \\
-        \bottomrule
-    \end{tabular}
-    \vspace{4mm}
-    \label{tab:architecture}
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{
+      A summary of GN1's different classification networks used for the different training objectives.
+      The hidden layers column contains a list specifying the number of neurons in each layer.
+      }
+  \begin{tabular}{lll}
+      \toprule 
+      \textbf{Network} & \textbf{Hidden layers} & \textbf{Output size} \\
+      \hline
+      Node classification network    & 128, 64, 32 & 7 \\
+      Edge classification network    & 128, 64, 32 & 1 \\
+      Graph classification network   & 128, 64, 32, 16 & 3 \\
+      \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+  \label{tab:architecture}
 \end{table}
 
 
@@ -774,27 +776,28 @@ Firstly, the mixing of information between tracks, enabled by the fully connecte
 Secondly, the jet classification and vertexing objectives can be considered auxiliary to the track classification task, and may bring improved track classification performance with respect to the standalone MLP.
 
 \begin{table}[!htbp]
-    \centering
-    \caption{The area under the ROC curves (AUC) for the track classification from \GNN, compared to a standard multilayer perceptron (MLP) trained on a per-track basis. 
-             The unweighted mean AUC over the origin classes and weighted mean AUC (using as a weight the fraction of tracks from the given origin) is provided.
-             \GNN, which uses an architecture that allows track origins to be classified in a conditional manner as discussed in \cref{sec:Architecture}, outperforms the MLP model for both \ttbar and \Zprime jets.}
-    \begin{tabular}{cccccccccc}
-        \toprule 
-        \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{2}{c}{AUC}\\%                               & \multicolumn{2}{c}{Precision}                           & \multicolumn{2}{c}{Recall}                              & \multicolumn{2}{c}{F1}                                  \\
-        \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted}\\% & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} \\
-        \cmidrule(lr){3-4}% \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{The area under the ROC curves (AUC) for the track classification from \GNN, compared to a standard multilayer perceptron (MLP) trained on a per-track basis. 
+            The unweighted mean AUC over the origin classes and weighted mean AUC (using as a weight the fraction of tracks from the given origin) is provided.
+            \GNN, which uses an architecture that allows track origins to be classified in a conditional manner as discussed in \cref{sec:Architecture}, outperforms the MLP model for both \ttbar and \Zprime jets.}
+  \begin{tabular}{cccccccccc}
+      \toprule 
+      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{2}{c}{AUC}\\%                               & \multicolumn{2}{c}{Precision}                           & \multicolumn{2}{c}{Recall}                              & \multicolumn{2}{c}{F1}                                  \\
+      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted}\\% & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} \\
+      \cmidrule(lr){3-4}% \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
 
-        \multirow{2}{*}{\ttbar} & 
-        MLP & 0.87 & 0.89 \\ & %& 0.39 & 0.71 & 0.51 & 0.56 & 0.36 & 0.62 \\ & 
-        GN1 & \textbf{0.92} & \textbf{0.95} \\% & \textbf{0.51} & \textbf{0.82} & \textbf{0.64} & \textbf{0.70} & \textbf{0.51} & \textbf{0.74} 
-        \\
-        \multirow{2}{*}{\Zprime} & 
-        MLP & 0.90 & 0.94 \\ & %& 0.36 & 0.84 & 0.47 & 0.72 & 0.31 & 0.76 \\ &
-        GN1 & \textbf{0.94} & \textbf{0.96} \\% & \textbf{0.48} & \textbf{0.88} & \textbf{0.60} & \textbf{0.79} & \textbf{0.48} & \textbf{0.82} \\             
-        \bottomrule
-    \end{tabular}
-    \vspace{4mm}
-    \label{tab:track_classification_metrics}
+      \multirow{2}{*}{\ttbar} & 
+      MLP & 0.87 & 0.89 \\ & %& 0.39 & 0.71 & 0.51 & 0.56 & 0.36 & 0.62 \\ & 
+      GN1 & \textbf{0.92} & \textbf{0.95} \\% & \textbf{0.51} & \textbf{0.82} & \textbf{0.64} & \textbf{0.70} & \textbf{0.51} & \textbf{0.74} 
+      \\
+      \multirow{2}{*}{\Zprime} & 
+      MLP & 0.90 & 0.94 \\ & %& 0.36 & 0.84 & 0.47 & 0.72 & 0.31 & 0.76 \\ &
+      GN1 & \textbf{0.94} & \textbf{0.96} \\% & \textbf{0.48} & \textbf{0.88} & \textbf{0.60} & \textbf{0.79} & \textbf{0.48} & \textbf{0.82} \\             
+      \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+  \label{tab:track_classification_metrics}
 \end{table}
 
 

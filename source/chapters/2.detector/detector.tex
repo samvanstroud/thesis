@@ -149,6 +149,9 @@ The detector is made up of several specialised subdetectors. In order of increas
 An LHCb trigger table borrowed from \texttt{hepthesis} is shown in \TableRef{tab:bg-theory:trigger_details}:
 
 \begin{table}[bht]
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{Characteristics of the trigger levels and offline analysis.}
   \begin{tabular}{lllll}
                 & L0              & L1              & HLT             \\
     \midrule
@@ -156,7 +159,6 @@ An LHCb trigger table borrowed from \texttt{hepthesis} is shown in \TableRef{tab
     Output rate & \SI{1}{\MHz}  & \SI{40}{\kHz} & \SI{2}{\kHz}  \\
     Location    & On detector     & Counting room   & Counting room   \\
   \end{tabular}
-  \caption{Characteristics of the trigger levels and offline analysis.}
   \label{tab:bg-theory:trigger_details}
 \end{table}
 
@@ -170,30 +172,30 @@ The transverse IP $d_0$ and longitudinal IP $z_0$ are measured with respect to t
 %The reconstructed tracks are required to satisfy the quality requirements in \cref{tab:track_selections}.
 
 \begin{table}[!htbp]
-    \small
-    \centering
-    \caption{
-        Quality selections applied to tracks,
-        where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
-        Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
-        Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
-        A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-        }
-    \begin{tabular}{ll}
-        \toprule 
-        \textbf{Parameter} & \textbf{Selection} \\
-        \hline
-        $\pt$                & $> 500$ MeV \\
-        $|d_0|$              & $< 3.5$ mm \\
-        $|z_0 \sin\theta|$   & $< 5$ mm \\
-        Silicon hits         & $\ge 8$ \\
-        Shared silicon hits  & $< 2$ \\
-        Silicon holes        & $< 3$ \\
-        Pixel holes          & $< 2$ \\
-        \bottomrule
-    \end{tabular}
-    \vspace{4mm}
-    \label{tab:track_selections}
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \caption{
+    Quality selections applied to tracks,
+    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
+    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
+    Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    }
+  \begin{tabular}{ll}
+    \toprule 
+    \textbf{Parameter} & \textbf{Selection} \\
+    \hline
+    $\pt$                & $> 500$ MeV \\
+    $|d_0|$              & $< 3.5$ mm \\
+    $|z_0 \sin\theta|$   & $< 5$ mm \\
+    Silicon hits         & $\ge 8$ \\
+    Shared silicon hits  & $< 2$ \\
+    Silicon holes        & $< 3$ \\
+    Pixel holes          & $< 2$ \\
+    \bottomrule
+  \end{tabular}
+  \vspace{4mm}
+  \label{tab:track_selections}
 \end{table}
 
 \subsection{Old stuff}
