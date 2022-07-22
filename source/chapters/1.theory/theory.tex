@@ -19,30 +19,25 @@ This thesis looks at understanding Higgs decays\dots
 
 \section{The Standard Model}\label{sec:standard_model}
 
-\begin{itemize}
-  \item Introduce QFT
-  \item Introduce SM Gauge symmetry
-  \item List Contents of SM (different particles) masses and charges
-  \item Write SM Lagrangian term break up LEW etc
-  \item Walk through (or subsection) for each term
-\end{itemize}
-
 The SM is formulated in the language of Quantum Field Theory (QFT).
 In this framework, particles are localised excitations of corresponding quantum fields, which are operator-valued distribution across spacetime.
 
 Central to QFT is the Lagrangian density which describes the kinematics and dynamics of a field.
-%Through observation of conserved quantities, we can derive corresponding symmetries which are expressed in the Lagrangian.
 Observations of conserved quantities are linked, via Noether's theorem, to symmetries which are expressed by the Lagrangian.
 Alongside Global Poincar\'e symmetry, the SM Lagrangian observes a local non-Abelian $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ gauge symmetry.
 Gauge symmetries leave observable properties of the system unchanged when certain gauge transformations are applied to the fields.
-
-
+The full Lagrangain of the SM can be broken up into distinct terms corresponding to the different sectors.
+%
+\begin{equation}\label{eq:sm_lagrangian}
+  \mathcal{L}_{\textnormal{SM}} = \mathcal{L}_{\textnormal{EW}} + \mathcal{L}_{\textnormal{QCD}} + \mathcal{L}_{\textnormal{Higgs}} + \mathcal{L}_{\textnormal{Yukawa}}
+\end{equation}
+%
+The SM provides a mathematical description of how the four fundamental forces interact with the matter content of the universe.
+The SM contains $12$ \spinhalf fermions, listed in \cref{tab:sm_fermions}, and $5$ bosons listed in \cref{tab:sm_bosons}.
+%
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{
-      The half-integer spin fermions of the SM \cite{Workman:2022ynf}.
-      }
   \begin{tabular}{c|ccc|ccc}
       \toprule 
       \multicolumn{1}{c|}{} & \multicolumn{3}{c|}{Leptons} & \multicolumn{3}{c}{Quarks} \\
@@ -65,17 +60,19 @@ Gauge symmetries leave observable properties of the system unchanged when certai
       & $\nu_\tau$ & $<18.2$ &  0 & $b$ & $4.18  \times 10^{3} $ & \nicefrac{-1}{3} \\
       \bottomrule
   \end{tabular}
-  %\vspace{4mm}
+  \caption{
+    The half-integer spin fermions of the SM \cite{Workman:2022ynf}.
+    Three generations of particles are present.
+    Also present (unlisted) are the antiparticles, which are identical to the particles up to a reversed charge sign.
+    }
   \label{tab:sm_fermions}
 \end{table}
+%
 
-
+%
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{
-      The integer spin bosons of the SM. The photon, weak bosons and gluons are gauge bosons arising from gauge symmetries \cite{Workman:2022ynf}.
-      }
   \begin{tabular}{lcccc}
       \toprule 
       \textbf{Name} & \textbf{Symbol} & \textbf{Mass} [\unit\GeV] & \textbf{Charge} [\unit\elementarycharge] & \textbf{Spin} \\
@@ -87,9 +84,16 @@ Gauge symmetries leave observable properties of the system unchanged when certai
       Higgs       & \higgs    & $125.25 \pm  0.17$     & 0    & 0    \\
       \bottomrule
   \end{tabular}
-  %\vspace{4mm}
+  \caption{
+    The integer spin bosons of the SM \cite{Workman:2022ynf}.
+    The photon, weak bosons and gluons are gauge bosons arising from gauge symmetries, and carry the four fundamental forces of the SM.
+  }
   \label{tab:sm_bosons}
 \end{table}
+%
+\begin{comment}
+  In quantum physics and chemistry, quantum numbers describe values of conserved quantities in the dynamics of a quantum system. Quantum numbers correspond to eigenvalues of operators that commute with the Hamiltonian—quantities that can be known with precision at the same time as the system's energy[note 1]—and their corresponding eigenspaces. Together, a specification of all of the quantum numbers of a quantum system fully characterize a basis state of the system, and can in principle be measured together.
+\end{comment}
 
 
 \subsection{Quantum Electrodynamics}\label{sec:qed}
@@ -102,7 +106,7 @@ The Dirac Lagrangian density is
   \mathcal{L}_{\textnormal{Dirac}} = \overline{\psi} (i \slashed{\partial}  - m )\psi,
 \end{equation}
 %
-where $\slashed{\partial} = \gamma^\mu \partial_\mu$ denotes the contraction with the Dirac gamma matrices $\gamma^\mu$, and summation over up-down pairs of indices is assumed.
+where $\slashed{\partial} = \gamma^\mu \partial_\mu$ denotes the contraction with the Dirac gamma matrices $\gamma^\mu$ (summation over up-down pairs of indices is assumed).
 Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation
 %
 \begin{equation}\label{eq:dirac_eq}
@@ -131,12 +135,11 @@ The transformed interaction term
 %
 will then cancel the asymmetric term in \cref{eq:dirac_eq_transformed} as required.
 The $U(1)$ invariant Lagrangain can therefore be constructed by adding an interaction between $\psi$ and $A_\mu$ to \cref{eq:dirac_lagrangian}. The kinetic term for the the new field $A_\mu$ is also added in terms of $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$, which is trivially invariant under the transformation in \cref{eq:U(1)_transformation}.
-The interaction term is absorbed into the covariant derivative $D_\mu = \partial_\mu + i q A_\mu$.
-The covariant derivate $D_\mu \psi$ is convenient to work with as it transforms in the same way as the field $\psi$.
+The interaction term is absorbed into the covariant derivative $D_\mu = \partial_\mu + i q A_\mu$, thus named as it transforms in the same way as the field $\psi$.
 This yields the QED Lagrangain
 %
 \begin{equation}\label{eq:qed_lagrangian}
-  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D} - m )\psi,
+  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D} - m )\psi ,
 \end{equation}
 %
 A quadratic term $A_\mu A^\mu$ is not invariant and therefore the the field $A_\mu$ must be massless.
@@ -145,9 +148,65 @@ Requiring invariance under local $U(1)$ gauge transformations necessitated the a
 
 \subsection{Quantum Chromodynamics}\label{sec:qcd}
 
+Quantum Chromodynamics (QCD) is the study of quarks, gluons and their interactions.
+Quarks and gluons carry colour charge, which comes in three kinds, called red, green and blue.
+While the $U(1)$ symmetry group in \cref{sec:qed} was Abelian, the QCD Lagrangian is specified by requiring invariance under transformations from the non-Abelian $SU(3)$ group, making it a Yang\nobreakdash-Mills theory \cite{PhysRev.96.191} which requires the addition of self-interacting gauge fields.
+The infinitesimal $SU(3)$ group generators are given by $T_a = \lambda_a / 2$, where $\lambda_a$ are the eight Gell\nobreakdash-Mann matrices.
+These span the space of infinitesimal group transformations and do not commute with each other, instead satisfying the commutation relation
+%
+\begin{equation}
+  \com{T_a}{T_b} = i f_{abc} T_c ,
+\end{equation}
+%
+where $f_{abc}$ are the group's structure constants.
+Consider the six quark fields $q_k = q_k(x)$.
+Each flavour of quark $q_k$ transforms in the fundamental triplet representation, where each component of the triplet corresponds to a different value of the colour quantum number.
+$G^{a}_{\mu\nu}$ are the eight gluon field strength tensors, one for each generator $T_a$, defined as
+%
+\begin{equation}\label{eq:qcd_field_strength_tensor}
+  G^a_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu - g_s f^{abc} A_\mu^b A_\nu^c ,
+\end{equation}
+%
+where $A_\mu^a$ are the gluon fields and $g_s$ is the strong coupling constant. The covariant derivative is written as
+%
+\begin{equation}\label{eq:qcd_covariant_derivative}
+  D_\mu = \partial_\mu + i g_s T_a A_\mu^a .
+\end{equation}
+%
+The full QCD Lagrangain is then given by
+%
+\begin{equation}\label{eq:qcd_lagrangian}
+  \mathcal{L}_\textnormal{QCD} = 
+  - \frac{1}{4} G^{a}_{\mu\nu} G_{a}^{\mu\nu}
+  + q_k (i \slashed{D} - m_k) q_k .
+\end{equation}
+%
+Cubic and quartic terms of the gauge fields $A^a_\mu$ appear in the Lagrangian, leading to the gluon's self interaction.
+
+The QCD coupling constant $g_s$ varies, or ``runs'', with energy.
+At lower energy scales (and corresponding larger distance scales) the interaction is strong.
+This leads to quark confinement, whereby an attempt to isolate individual colour-charged quarks requires so much energy that additional quark-antiquark are produced.
+At higher energy scales (and corresponding smaller distance scales), asymptotic freedom occurs as the interactions become weaker, allowing perturbative calculations to be performned.
+Hadrons are bound states of quarks.
+They are invariant under $SU(3)$ gauge transformations (i.e. are colour-charge neutral, or colourless).
+
+
 \subsection{The Electroweak Sector}\label{sec:ew_sector}
 
-The $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ is spontaneously broken to $SU(3)_C \otimes U(1)_\gamma$.
+The weak and electromagnetic forces are unified in the Glashow-Weinberg-Salam (GWS) model of electroweak interaction \cite{Glashow:1961tr,Weinberg:1967tq,Salam:1968rm}.
+The Lagrangain is specified by requiring invariance under the symmetry group $SU(2)_L \otimes U(1)_Y$, as motivated by a large amount of experimental data.
+Here, $SU(2)_L$ is referred to as weak isospin and $U(1)_Y$ as weak hypercharge. (the product of the isospin and hypercharge groups.).
+
+The generators of $SU(2)_L$ are $T^a = \sigma_a/2$, where $\sigma_a$ are the three Pauli spin matrices which satisfy the commutation relation 
+%
+\begin{equation}
+\com{T_a}{T_b} = i \varepsilon_{abc} T_c .
+\end{equation}
+%
+
+The generator of $U(1)_Y$ is $Y = 1/2$.
+Each generator corresponds to an gauge field, which, after symmetry breaking (discussed in \cref{sec:ew_symmetry_breaking}), give rise to the massive vector bosons \Wpm and \Zboson and the massless photon.
+
 
 \section{The Higgs Mechanism}\label{sec:sm_higgs}
 
