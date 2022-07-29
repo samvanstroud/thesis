@@ -107,10 +107,10 @@ The Dirac Lagrangian density is
 \end{equation}
 %
 where $\slashed{\partial} = \gamma^\mu \partial_\mu$ denotes the contraction with the Dirac gamma matrices $\gamma^\mu$ (summation over up-down pairs of indices is assumed).
-Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation
+Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation\todo{mention EoMs?}
 %
 \begin{equation}\label{eq:dirac_eq}
-  (i \slashed{\partial}  - m )\psi = 0.
+  (i \slashed{\partial}  - m )\psi = 0 .
 \end{equation}
 %
 Suppose some fundamental symmetry that requires invariance under a $U(1)$ local gauge transformation
@@ -197,24 +197,142 @@ The weak and electromagnetic forces are unified in the Glashow-Weinberg-Salam (G
 The Lagrangain is specified by requiring invariance under the symmetry group $SU(2)_L \otimes U(1)_Y$, as motivated by a large amount of experimental data.
 Here, $SU(2)_L$ is referred to as weak isospin and $U(1)_Y$ as weak hypercharge. (the product of the isospin and hypercharge groups.).
 
-The generators of $SU(2)_L$ are $T^a = \sigma_a/2$, where $\sigma_a$ are the three Pauli spin matrices which satisfy the commutation relation 
+The generators of $SU(2)_L$ are $T_a = \sigma_a/2$, where $\sigma_a$ are the three Pauli spin matrices which satisfy the commutation relation 
 %
 \begin{equation}
 \com{T_a}{T_b} = i \varepsilon_{abc} T_c .
 \end{equation}
 %
-
 The generator of $U(1)_Y$ is $Y = 1/2$.
-Each generator corresponds to an gauge field, which, after symmetry breaking (discussed in \cref{sec:ew_symmetry_breaking}), give rise to the massive vector bosons \Wpm and \Zboson and the massless photon.
+Each generator corresponds to an gauge field, which, after symmetry breaking (discussed in \cref{sec:ew_symmetry_breaking}), give rise to the massive vector bosons, \Wpm and \Zboson, and the massless photon.
+The massive vector bosons are the carriers of the weak force.
+
+The weak force violates parity conservation \cite{PhysRev.104.254,PhysRev.105.1413,PhysRev.105.1415}, i.e. invariance under parity transformations (mirror reflections).
+Only left handed fermions participate in the weak interaction.
+There are no right handed neutrinos in the standard model.
+The Standard Model incorporates parity violation by expressing the weak interaction as a chiral gauge interaction. Only the left-handed components of particles and right-handed components of antiparticles participate in weak interactions in the Standard Model. The weak force couples only to left handed particles in currents of the form $J^\mu = \overline{\nu}_e \gamma^\mu (1 - \gamma^5) e$ or $J^\mu = \overline{u} \gamma^\mu (1 - \gamma^5) \tilde{d}$. The $\tilde{d}$ state is due to the quark mixing: mass eigenstates are not the same as weak eigenstates.
+
+Furthermore, CP violation has been observed from the weak sector.
+CP violation is one of the three necessary Sakharov conditions required to produce baryon asymmetry in the universe.
+Since the SM alone does not appear to have enough CP violation to generate the cosmologically observed matter-antimatter asymmetry, looking for signs of more experimental CP violation is considered to be a promising
+way to discover new physics.
 
 
 \section{The Higgs Mechanism}\label{sec:sm_higgs}
 
-\begin{itemize}
-  \item Motivation
-  \item Walkthrough
-\end{itemize}
+Experimentally it was known that the weak forces contains a charged current and had a weak effective strength, suggestive of a massive mediating gauge particle.
+However, directly adding mass to the gauge bosons in a non-Abelian theory breaks the symmetry.
+Instead, the gauge bosons can gain mass through interaction with a scalar Higgs field, known as the Brout–Englert–Higgs mechanism \cite{Englert:1964et,Higgs:1964pj,Guralnik:1964eu}.
+An overview is given below.
+%
+\begin{figure}[!htbp]
+  \centering
+  \input{chapters/1.theory/figs/higgs_potential.tikz}
+  \caption{
+    The Higgs potential $V(\phi)$ of the complex scalar field $\phi$, with a choice of $\mu^2 < 0$ leading to a continuous degeneracy in the vacuum states.
+  }
+  \label{fig:higgs_potential}
+\end{figure}
+%
+Spontaneous symmetry breaking (SSB) is the transition of a physical system from a state of manifest symmetry to a state of hidden, or ``broken'', symmetry. In particular, this applies to physical systems where the Lagrangian observes some symmetry, but the lowest energy vacuum states do not exhibit that same symmetry. The symmetry is broken for perturbations around the vacuum state.
+
+Consider an $SU(2)$ gauge field \todo{cite weak gauge fields, non-Abelian local} coupled with a complex scalar field $\phi$, which transforms as an $SU(2)$ spinor (a weak isospin doublet).
+Omitting the kinetic term of the gauge fields, and writing $\phi^2 \equiv \phi^\dagger \phi$, the Lagrangain is
+%
+\begin{equation}\label{eq:sm_higgs_lagrangian}
+  \mathcal{L} = (D_\mu \phi)^\dagger (D^\mu \phi) - \left[ \mu^2 \phi^2 + \lambda \phi^4 \right],
+\end{equation}
+%
+where the covariant derivative is given by
+%
+\begin{equation}\label{eq:sm_higgs_cov_derivative}
+  D_\mu = \partial_\mu + i g A^a_\mu T^a ,
+\end{equation}
+%
+and $T^a$ are the generators of $SU(2)$.
+The potential term $V(\phi)$ is made up of a quadratic and quartic term in the scalar field $\phi$, which contain an arbitrary parameter, respectively $\lambda$ and $\mu$.
+The quartic term gives the field self-interaction be negative as the potential must be bounded from below.
+The quadratic term can be positive or negative.
+In the case where the quadratic term is positive, it is interpreted as a mass term for the scalar field
+By choosing $\mu^2 < 0$ the field becomes unphysical due to its negative mass.
+
+In order to obtain a physical interpretation of the Lagrangain in \cref{eq:sm_higgs_lagrangian}, expand around the vacuum state.
+The vacuum expectation value (VEV) is expected value of the field $\phi$ which minimises the potential $V(\phi)$ (equivalently the expected value of the field operator $\phi$ when the system is in a vacuum state, $\langle{\phi}\rangle_0 \equiv \bra{0} \phi \ket{0} \equiv \vev{\phi}$).
+Minimising the potential yields
+%
+\begin{equation}\label{eq:higgs_vev}
+  \vev{\phi} = -\mu^2 / \lambda = v^2 .
+\end{equation}
+%
+
+Due to the shape of the potential in \cref{fig:higgs_potential}, there is degeneracy in the direction that the complex doublet $\phi$ points.
+As all the different VEVs with this norm minimise the potential and therefore yield identical physics, we can arbitrarily choose one to base calculation on.
+Choosing, then, the VEV to lie along the $n$\nobreakdash-th direction of the field, and adding the fluctuations back in yields
+VEV is taken along a single direction to preserve one generator - the $U(1)$ symmetry of QED.
+Now expand the Lagrangian around one component of the field $\phi_0 = v + \sigma$, and take $\phi_i = \pi_i$, $i = 1,2,3$. 
+Written in terms of $\sigma$ and $\pi_i$, the Lagrangian becomes
+The Lagrangian is expanded around one of these minima as $\phi = v + \sigma$, with $\sigma = \frac{1}{\sqrt{2}} (\xi + i \chi)$. 
+%
+\begin{equation}
+  \phi = 
+  \begin{pmatrix}
+    \phi_{RE} \\ f + v
+  \end{pmatrix}
+\end{equation}
+%
+The resulting Lagrangian, neglecting interaction terms which do not play a role in the Higgs mechanism, is
+
+move to the unitary gauge
+
+
+
+Different vacuum states are traversed by moving in flat directions of the potential.
+Particles corresponding to fluctuations of the field along the flat directions in the potential are massless as they don't cost energy to attain. 
+
+Goldstone stuff, dim G - H, residual symmetry, unbroken generators,
+The Goldstone theorem was discussed in the context \textit{global symmetries}, in which the Lagrangian is invariant under a transformation that is independent of the choice of spacetime point. However, the results derived are not the same for \textit{gauge} symmetry transformations. In this case, Goldstone bosons are absorbed by the theory and give mass to the massless gauge bosons associated with each broken generator. This is the \textit{Higgs mechanism}, and is way the vector bosons, and other particles, acquire mass.
+
+
+
+Massive gauge bosons are unique to the weak sector. As a consequence of massive bosons, the weak force has a short range, and so it appears weak even though its intrinsic strength is comparable to that of QED.
 
 \subsection{Electroweak Symmetry Breaking}\label{sec:ew_symmetry_breaking}
+
+The $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ is spontaneously broken to $SU(3)_C \otimes U(1)_\gamma$.
+
+the three $A_\mu^a$ from $SU(2)_L$ and $B_\mu$ from $U(1)_Y$.
+After symmetry breaking 
+
+Spontaneous symmetry breaking (SSB) occurs when a system moves from a symmetrical to an unsymmetrical
+state. In the context of QFT, symmetry means the Lagrangian of a system is invariant under a transformation.
+These symmetry properties are required for the theory to be renormalizable. SSB occurs when the Lagrangian
+for the lowest energy vacuum solution does not exhibit the same symmetry as the excited states. For a field to be
+able to have the standard particle interpretation, it must be linear in creation and annihilation operators. Such
+a field has a vanishing vacuum expectation value. As such, fields with nonvanishing VEV cannot correspond
+to particles. This is the motivation behind the field substitution in equation (4.3), where the newly introduced
+field has a vanishing VEV by construction. Note that the original field remains massless, whereas the newly
+introduced field (corresponding to a physical particle) gains mass.
+
+The Goldstone theorem was discussed in the context global symmetries, in which the Lagrangian is invariant
+under a transformation that is independent of the choice of spacetime point. However, the results derived are
+not the same for gauge symmetry transformations. In this case, Goldstone bosons are absorbed by the theory
+and give mass to the massless gauge bosons associated with each broken generator. This is the Higgs mechanism,
+and is way the vector bosons, and other particles, acquire mass.
+
+
+\begin{comment}
+
+
+\end{comment}
+
+
+
 \subsection{Fermionic Yukawa Coupling}\label{sec:higgs_yukawa_coupling}
 
+\subsection{Higgs Phenomenology}
+
+\begin{itemize}
+  \item Production mechanisms
+  \item Decay modes
+  \item Relevance to analysis Vhbb
+\end{itemize}
