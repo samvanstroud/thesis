@@ -235,6 +235,12 @@
 %% Used to center the variable width page quote (must be version >= 0.9a)
 \RequirePackage{varwidth}[2003/03/10]
 
+%% ``DRAFT'' underprint and line numbering in draft mode (optional)
+\ifx\@requiredraft\@empty\else%
+  \RequirePackage[pagewise]{lineno}
+  \RequirePackage{draftcopy}
+\fi
+
 %% AMS math package (optional)
 \ifx\@requireamsmath\@empty\else%
   \RequirePackage{amsmath}
@@ -296,14 +302,7 @@
 %% Convenience-included HEP packages (optional)
 \ifx\@requirehep\@empty\else\RequirePackage{hep}\fi
 
-%% ``DRAFT'' underprint and line numbering in draft mode (optional)
-\ifx\@requiredraft\@empty\else%
-  \RequirePackage[pagewise]{lineno}
-  \RequirePackage{draftcopy}
-\fi
-
 %% hack for fixing line numbering 
-%% see https://tex.stackexchange.com/questions/436011/linenomath-printing-extra-numbers-on-last-line-of-multline-align-flalign-envir
 %% Patch 'normal' math environments:
 \newcommand*\linenomathpatch[1]{%
   \cspreto{#1}{\linenomath}%
@@ -311,29 +310,12 @@
   \csappto{end#1}{\endlinenomath}%
   \csappto{end#1*}{\endlinenomath}%
 }
-%% Patch AMS math environments:
-\newcommand*\linenomathpatchAMS[1]{%
-  \cspreto{#1}{\linenomathAMS}%
-  \cspreto{#1*}{\linenomathAMS}%
-  \csappto{end#1}{\endlinenomath}%
-  \csappto{end#1*}{\endlinenomath}%
-}
-
-%% Definition of \linenomathAMS depends on whether the mathlines option is provided
-\expandafter\ifx\linenomath\linenomathWithnumbers
-  \let\linenomathAMS\linenomathWithnumbers
-  %% The following line gets rid of an extra line numbers at the bottom:
-  \patchcmd\linenomathAMS{\advance\postdisplaypenalty\linenopenalty}{}{}{}
-\else
-  \let\linenomathAMS\linenomathNonumbers
-\fi
-
 \linenomathpatch{equation}
-%\linenomathpatchAMS{gather}
-%\linenomathpatchAMS{multline}
-%\linenomathpatchAMS{align}
-%\linenomathpatchAMS{alignat}
-%\linenomathpatchAMS{flalign}
+\linenomathpatch{gather}
+\linenomathpatch{multline}
+\linenomathpatch{align}
+\linenomathpatch{alignat}
+\linenomathpatch{flalign}
 
 
 %% The right way to do custom spacing
