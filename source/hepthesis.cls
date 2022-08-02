@@ -255,7 +255,11 @@
       {\expandafter\let\expandafter\@oldoldalignstar \csname align*\endcsname \@oldoldalignstar}%
       {\expandafter\let\expandafter\@oldoldendalignstar \csname endalign*\endcsname \@oldoldendalignstar \ignorespacesafterend}
   }%
+  % change matrix spacing
+  \AtBeginEnvironment{pmatrix}{\renewcommand{\arraystretch}{0.9}}
+  \AtBeginEnvironment{bmatrix}{\renewcommand{\arraystretch}{0.9}}
 \fi
+
 
 %% Index building (optional)
 \ifx\@requiremakeidx\@empty\else\RequirePackage{makeidx}\fi
