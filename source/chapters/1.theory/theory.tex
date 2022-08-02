@@ -8,13 +8,13 @@
 \end{itemize}
 
 The Standard Model (SM) of particle physics is the theory describing all known elementary particles and their interactions via three of the four fundamental forces.
-Developed by merging the successful theories of classical quantum mechanics and relativity in the second half of the 20th century, the SM's position today at the centre of our understanding of the nature of the universe is firmly established by an unparalleled level of agreement between the predictions from the model and experimental results \cite{morel2020determination,sailer2022measurement}.
+Developed by merging the successful theories of quantum mechanics and relativity in the second half of the 20th century, the SM's position today at the centre of our understanding of the nature of the universe is firmly established by an unparalleled level of agreement between the predictions from the model and experimental results \cite{morel2020determination,sailer2022measurement}.
 
 The SM has predicted the discovery of the top and bottom quarks \cite{CDF:1995wbb,D0:1995jca,Herb:1977ek}, the \Wboson and \Zboson bosons \cite{UA1:1983crd}, and the tau neutrino \cite{DONUT:2000fbd}.
-The last missing piece of the SM to be discovered was the Higgs boson, first posited in \tofill{X}.
-After its discovery in 2012 \tofill{citation}, much work has been ongoing on carrying out detailed measurements of its mass and interactions with other particles.
+The last missing piece of the SM to be discovered was the Higgs boson, first theorised in the 1960s \cite{Englert:1964et,Higgs:1964pj,Guralnik:1964eu}, and eventually observed at the LHC in 2012 \cite{HIGG-2012-27,CMS-HIG-12-028}.
+After its discovery, much ongoing work has been carried out performing detailed measurements of its mass and interactions with other particles.
 
-This thesis looks at understanding Higgs decays\dots
+This thesis describes research to improve Higgs analysis to b quarks, by improving algorithm methods\dots
 
 
 \section{The Standard Model}\label{sec:standard_model}
@@ -27,6 +27,7 @@ Observations of conserved quantities are linked, via Noether's theorem, to symme
 Alongside Global Poincar\'e symmetry, the SM Lagrangian observes a local non-Abelian $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ gauge symmetry.
 Gauge symmetries leave observable properties of the system unchanged when certain gauge transformations are applied to the fields.
 The full Lagrangain of the SM can be broken up into distinct terms corresponding to the different sectors.
+An overview of each sector is given in the following chapters.
 %
 \begin{equation}\label{eq:sm_lagrangian}
   \mathcal{L}_{\textnormal{SM}} = \mathcal{L}_{\textnormal{EW}} + \mathcal{L}_{\textnormal{QCD}} + \mathcal{L}_{\textnormal{Higgs}} + \mathcal{L}_{\textnormal{Yukawa}}
@@ -264,7 +265,7 @@ Spontaneous symmetry breaking (SSB) is a key part of the Higgs mechanism. It is 
   \centering
   \input{chapters/1.theory/figs/higgs_potential.tikz}
   \caption{
-    The Higgs potential $V(\phi)$ of the complex scalar field singlet $\phi = \phi_1 + i \phi_2$, with a choice of $\mu^2 < 0$ leading to a continuous degeneracy in the true vacuum states. A false vacuum is present at the origin. The SM Higgs mechanism relies on a complex scalar doublet with a corresponding 5\nobreakdash-dimensional potential.
+    The Higgs potential $V(\phi)$ of the complex scalar field singlet $\phi = \phi_1 + i \phi_2$, with a choice of $\mu^2 < 0$ leading to a continuous degeneracy in the true vacuum states. A false vacuum is present at the origin. The SM Higgs mechanism relies on a complex scalar doublet with a corresponding 5-dimensional potential.
   }
   \label{fig:higgs_potential}
 \end{figure}

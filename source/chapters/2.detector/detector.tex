@@ -3,6 +3,8 @@
 The Large Hadron Collider (\LHC) at \CERN has extended the frontiers of particle physics through its unprecedented energy and luminosity.
 In 2010, the \LHC collided proton bunches, each containing more than $10^{11}$ particles, 20 million times per second, providing \SI{7}{\TeV} proton-proton collisions at instantaneous luminosities of up to \peakLumi.
 In 2015, Run 2 happened.
+2022 marked the beginning of Run 3 with higher peak lumis\dots
+
 
 \section{The ATLAS Detector}\label{sec:atlas_detector}
 %% from https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
@@ -69,87 +71,87 @@ The detector is made up of several specialised subdetectors. In order of increas
 
 \subsection{The Inner Detector}
 
+% overfull hbox!
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{chapters/2.detector/figs/atlas_id.jpg}
+  \caption{The \ATLAS ID. After run 3, the ID will be replaced by the ITk.}
+  \label{fig:atlas_id_run1}
+\end{figure}
+
+
+
 %
-\begin{figure}[ht]
-    \centering
-    %\includegraphics[scale=0.4]{res/ATLAS-id.png}
-    \caption{The Inner Detector (ID). After run 3, the ID will be replaced by the ITk.}
-    \label{fig:ATLAS-id-run1
-    }
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{chapters/2.detector/figs/atlas_id_xs.png}
+  \caption{The \ATLAS ID. After run 3, the ID will be replaced by the ITk.}
+  \label{fig:atlas_id_run2}
 \end{figure}
 %
 
-%
-\begin{figure}[ht]
-    \centering
-    %\includegraphics[scale=1]{res/atlas-id-new.png}
-    \caption{Updated ID, showing the IBL.}
-    \label{fig:ATLAS-id-run2}
-\end{figure}
-%
-
-\textbf{Inner detector (ID)}. High resolution tracking (coverage over $|\eta| < 2.5$) hardware, contained in a superconducting solenoidal magnet with a central field of 2T. Combination of the two systems below yields robust pattern recognition and high precision in both $\phi$ and $z$ coordinates.
+High resolution tracking (coverage over $|\eta| < 2.5$) hardware, contained in a superconducting solenoidal magnet with a central field of 2T. Combination of the two systems below yields robust pattern recognition and high precision in both $\phi$ and $z$ coordinates.
 
 Tracking is useful for: impact parameter measurements, vertexing for heavy-flavour and $\tau$ tagging. Momentum resolution is sufficient to identify the charge sign of particles up to the highest energies expected at LHC. After run 3, the ID will be replaced by the ITk.
+
+
+\subsubsection{Pixel Layers}
+Arranged in three cylindrical barrels at increasing radio ( 4, 11, 14 cm), and four discs on each side. Radiation hardened readout electronics. Full angular coverage. 140 million readout channels. The specification determines the impact parameter resolution and the ability of the ID to find short-lived particles such as b-quarks and $\tau$-leptons. Silicon pixels.The pixel detector dominates measurements of track impact parameters and provides vertex reconstruction capabilities. Table 2.2 summarises the main features of the pixel subsystem. Each pixel module is required to have a high granularity (resolution) to maintain a low occupancy (high sparsity to resolve different tracks). The pixel layers consist of the three original barrels and three disks (end-caps), and a new IBL. In order of increasing radius from the beam-line the pixel detector consists of the following layers
+
+Insertable B-Layer (IBL). The innermost layer of pixel detectors, 3.3cm from beam axis. Added in 2014. It was built to cope with high radiation and occupancy, and is the first large scale application of 3D sensors and CMOS 130nm technology.
+
+Three barrel layers: Layer 0 (also sometime called the b-layer or B-layer), Layer 1 and Layer 2. Additionally there two identical endcap regions, each with three disk layers.
+
+
+\subsubsection{Semi-Conductor Tracker (SCT)}
+Silicon microstrip detectors. Contributes to the measurement of momentum, impact parameter and vertex position. $61 ~\textrm{m}^2$ of silicon detector, 6.2 million readout channels.
+
+\subsubsection{Transition Radiation Tracker (TRT)}
+Continuous tracking using straw detectors. The straws run parallel to the $z$ axis and therefore the TRT only provides $R$\nobreakdash-$\phi$ information. Radial straws on the endcaps. Electron identification capability is added by employing xenon gas to detect transition-radiation photons created in a radiator between the straws. A good pattern recognition performance is assured by the continuous tracking. Within the radial space available, the straw spacing has been optimised for tracking at the expense of electron
+identification, which would be improved by a greater path length through the radiator material and fewer active straws. The TRT contributes to the accuracy of the momentum measurement in the ID. It aids the pattern recognition by the addition of around 36 hits per track, and allows a simple and fast L2 track trigger to be implemented. It allows the ID to reconstruct $V_0$s which are especially interesting in CP-violating $B$ decays. In addition it provides additional discrimination between electrons and hadrons.
+
+
 %
-\begin{enumerate}
-    %
-    \item \textbf{Pixel Detectors}. Arranged in three cylindrical barrels at increasing radio ( 4, 11, 14 cm), and four discs on each side. Radiation hardened readout electronics. Full angular coverage. 140 million readout channels. The specification determines the impact parameter resolution and the ability of the ID to find short-lived particles such as b-quarks and $\tau$-leptons. Silicon pixels.The pixel detector dominates measurements of track impact parameters and provides vertex reconstruction capabilities. Table 2.2 summarises the main features of the pixel subsystem. Each pixel module is required to have a high granularity (resolution) to maintain a low occupancy (high sparsity to resolve different tracks). The pixel layers consist of the three original barrels and three disks (end-caps), and a new IBL. In order of increasing radius from the beam-line the pixel detector consists of the following layers
-    %
-    \begin{enumerate}
-        \item \textbf{Insertable B-Layer (IBL)}. The innermost layer of pixel detectors, 3.3cm from beam axis. Added in 2014. It was built to cope with high radiation and occupancy, and is the first large scale application of 3D sensors and CMOS 130nm technology.
-        %
-        \item Three barrel layers: Layer 0 (also sometime called the b-layer or B-layer), Layer 1 and Layer 2. Additionally there two identical endcap regions, each with three disk layers.
-    \end{enumerate}
-    %
-    \item \textbf{Semi-Conductor Tracker (SCT)}. Silicon microstrip detectors. Contributes to the measurement of momentum, impact parameter and vertex position. $61 ~\textrm{m}^2$ of silicon detector, 6.2 million readout channels.
-    %
-    \item \textbf{Transition Radiation Tracker (TRT)}. Continuous tracking using straw detectors. The straws run parallel to the $z$ axis and therefore the TRT only provides $R$\nobreakdash-$\phi$ information. Radial straws on the endcaps. Electron identification capability is added by employing xenon gas to detect transition-radiation photons created in a radiator between the straws. A good pattern recognition performance is assured by the continuous tracking. Within the radial space available, the straw spacing has been optimised for tracking at the expense of electron
-    identification, which would be improved by a greater path length through the radiator material and fewer active straws. The TRT contributes to the accuracy of the momentum measurement in the ID. It aids the pattern recognition by the addition of around 36 hits per track, and allows a simple and fast L2 track trigger to be implemented. It allows the ID to reconstruct $V_0$s which are especially interesting in CP-violating $B$ decays. In addition it provides additional discrimination between electrons and hadrons.
-\end{enumerate}
-%
-\begin{figure}[ht]
-    \centering
-    %\includegraphics[scale=0.4]{res/ATLAS-cals.png}
-    \caption{The ECal (orange) and HCal (grey, dark orange)}
-    \label{fig:ATLAS-cals}
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{chapters/2.detector/figs/atlas_calos.jpg}
+  \caption{The \ATLAS calorimeters. The ECal (orange) and HCal (grey, dark orange).}
+  \label{fig:atlas_calos}
 \end{figure}
+%
 
 
 
 \subsection{Calorimeters}
 
-\textbf{Calorimeters} measure the energy of particle passing through them. They cover $|\eta| < 4.9$ using a range of different techniques depending on the location in $\eta$. Over the $\eta$ region matched to the inner detector, the fine granularity of the EM calorimeter is ideally suited for precision measurements of electrons and photons. The coarser granularity of the rest of the calorimeter is sufficient to satisfy the physics requirements for jet reconstruction and $E_T^{\textrm{miss}}$ measurements. Particles entering the calorimeter, will cause a particle shower inside the calorimeter. Calorimeters must provide good containment for electromagnetic and hadronic showers, and must also limit punch-through (leakage of non muon particles) into the muon system (dependent on the radial depth of the calorimeter system). The calorimeters measure the energies and positions of electrons, photons and jets. In doing so they stop these particles penetrating into the muon spectrometer. When a relativistic photon or electron is incident on a thick absorber, it initiates an electromagnetic cascade, generating secondary photons by bremsstrahlung ($e \rightarrow e\gamma$) and electrons by pair production ($\gamma \rightarrow e^+ e^- $).
+Calorimeters measure the energy of particle passing through them. They cover $|\eta| < 4.9$ using a range of different techniques depending on the location in $\eta$. Over the $\eta$ region matched to the inner detector, the fine granularity of the EM calorimeter is ideally suited for precision measurements of electrons and photons. The coarser granularity of the rest of the calorimeter is sufficient to satisfy the physics requirements for jet reconstruction and $E_T^{\textrm{miss}}$ measurements. Particles entering the calorimeter, will cause a particle shower inside the calorimeter. Calorimeters must provide good containment for electromagnetic and hadronic showers, and must also limit punch-through (leakage of non muon particles) into the muon system (dependent on the radial depth of the calorimeter system). The calorimeters measure the energies and positions of electrons, photons and jets. In doing so they stop these particles penetrating into the muon spectrometer. When a relativistic photon or electron is incident on a thick absorber, it initiates an electromagnetic cascade, generating secondary photons by bremsstrahlung ($e \rightarrow e\gamma$) and electrons by pair production ($\gamma \rightarrow e^+ e^- $).
     
 A narrow transverse profile is characteristic of an electromagnetic cascade. Hadrons passing through matter also initiate cascades through inelastic hadron-nuclei interactions. The shower produces secondary hadrons and leptons and has a comparatively wide transverse profile. The nuclear interaction length is about an order of magnitude greater than the radiation length of the material. Therefore, like most general purpose experiments, ATLAS uses two different calorimetry systems to measure electrons and photons (the ECal) and hadrons (the HCal). 
 
-%
-\begin{enumerate}
-    \item \textbf{Liquid Argon (LAr) Electromagnetic (EM) Calorimeter (Ecal)}. The EM calorimeter is divided into a barrel part ($|\eta| < 1.475$) and two end-cap components ($1.375 < |\eta| < 3.2$), each housed in their own cryostat. The EM calorimeter is a lead-LAr detector with accordion-shaped kapton electrodes and lead absorber plates over its full coverage. The accordion geometry provides complete $\phi$ symmetry without azimuthal cracks. Showers initiated in the lead produce secondary particles which ionise the liquid argon. The charge is collected on copper electrodes and read out. Additionally, multiple samplings of the shower are used to resolve its pointing vector.
-    %
-    \item \textbf{Hadronic calorimeters (HCal)}. 
-    %
-    \begin{itemize}
-        \item The tile calorimeter is placed directly outside the EM calorimeter envelope. Its barrel covers the region $|\eta| < 1.0$, and its two extended barrels (larger $z$ displacement) the range $0.8 < |\eta| < 1.7$. It is a sampling calorimeter using steel as the absorber and scintillating tiles as the active material. The HCal barrel uses iron absorbers to initiate hadronic cascades and plastic scintillator tiles as the active
-        %
-        \item LAr hadronic end-cap calorimeter (HEC). Located directly behind (in $z$) the end-cap electromagnetic calorimeter and sharing the same LAr cryostats. The high level of radiation in the forward regions would cause severe damage to plastic scintillators. In the end-caps, parallel copper plates are submerged in liquid argon, which is preferred as the active medium because of its inherent radiation hardness.
-        %
-        \item LAr forward calorimeter (FCal).
-    \end{itemize}
-    %
-\end{enumerate}
-    %
+\subsubsection{Liquid Argon (LAr) Electromagnetic (EM) Calorimeter (Ecal)}
+The EM calorimeter is divided into a barrel part ($|\eta| < 1.475$) and two end-cap components ($1.375 < |\eta| < 3.2$), each housed in their own cryostat. The EM calorimeter is a lead-LAr detector with accordion-shaped kapton electrodes and lead absorber plates over its full coverage. The accordion geometry provides complete $\phi$ symmetry without azimuthal cracks. Showers initiated in the lead produce secondary particles which ionise the liquid argon. The charge is collected on copper electrodes and read out. Additionally, multiple samplings of the shower are used to resolve its pointing vector.
+
+\subsubsection{Hadronic calorimeters (HCal)}
+The tile calorimeter is placed directly outside the EM calorimeter envelope. Its barrel covers the region $|\eta| < 1.0$, and its two extended barrels (larger $z$ displacement) the range $0.8 < |\eta| < 1.7$. It is a sampling calorimeter using steel as the absorber and scintillating tiles as the active material. The HCal barrel uses iron absorbers to initiate hadronic cascades and plastic scintillator tiles as the active
+
+LAr hadronic end-cap calorimeter (HEC). Located directly behind (in $z$) the end-cap electromagnetic calorimeter and sharing the same LAr cryostats. The high level of radiation in the forward regions would cause severe damage to plastic scintillators. In the end-caps, parallel copper plates are submerged in liquid argon, which is preferred as the active medium because of its inherent radiation hardness.
+
+LAr forward calorimeter (FCal).
+
 
 \subsection{Muon System}
+
 %
-\begin{figure}[ht]
-    \centering
-    %\includegraphics[scale=0.3]{res/ATLAS-muon.png}
-    \caption{The muon detectors}
-    \label{fig:ATLAS-muon}
+\begin{figure}[!htpb]
+  \centering
+  \includegraphics[width=0.4\linewidth]{chapters/2.detector/figs/atlas_muon_system.jpg}
+  \caption{The \ATLAS muon detectors.}
+  \label{fig:atlas_muon_system}
 \end{figure}
 %
-\item \textbf{Muon system}. Based on the magnetic deflection of muon tracks in the large superconducting air-core toroid magnets, instrumented with separate trigger and high-precision tracking chambers. This magnet configuration provides a field which is mostly orthogonal to the muon trajectories, while minimising the degradation of resolution due to multiple scattering. In the barrel region, tracks are measured in chambers arranged in three cylindrical layers around the beam axis; in the transition and end-cap regions, the chambers are installed in planes perpendicular to the beam, also in three layers.
+
+
+Based on the magnetic deflection of muon tracks in the large superconducting air-core toroid magnets, instrumented with separate trigger and high-precision tracking chambers. This magnet configuration provides a field which is mostly orthogonal to the muon trajectories, while minimising the degradation of resolution due to multiple scattering. In the barrel region, tracks are measured in chambers arranged in three cylindrical layers around the beam axis; in the transition and end-cap regions, the chambers are installed in planes perpendicular to the beam, also in three layers.
 
 
 
