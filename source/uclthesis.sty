@@ -10,6 +10,13 @@
 %\let\@OldMeV\MeV\renewcommand{\MeV}{\@OldMeV\xspace}
 %\let\@OldkeV\keV\renewcommand{\keV}{\@OldkeV\xspace}
 %\let\@OldeV\eV\renewcommand{\eV}{\@OldeV\xspace}
+
+% Deprecated or missing units
+\DeclareSIUnit\barn{b}
+\DeclareSIUnit\invpicobarn{\per\pico\barn}
+\DeclareSIUnit\invfemtobarn{\per\femto\barn}
+\DeclareSIUnit\elementarycharge{\protect \protect \unhbox \voidb@x \hbox {\protect $\relax e$}}
+
 %% Acroynms
 \DeclareRobustCommand{\PhD}{\textbf{Doctor of Philosophy}}
 \DeclareRobustCommand{\UCL}{University College London\xspace}
@@ -73,15 +80,21 @@
 \DeclareRobustCommand{\NLOjetpp}{\textsc{nlojet++}\xspace}
 %% Experimental definitions
 \DeclareRobustCommand{\rootS}{\thesismath{\sqrt{s}}\xspace}
-\DeclareRobustCommand{\intlumipb}[1]{\SI{\thesismath{#1}}{\invpicobarn}\xspace}
-\DeclareRobustCommand{\instlumi}[1]{ \SI[print-unity-mantissa = false]{#1} { \invcmsqpersec }\xspace} %\thesismath{10^{#1}}
+\DeclareRobustCommand{\intlumipb}[1]{\SI{#1}{\invpicobarn}\xspace}
+\DeclareRobustCommand{\intlumifb}[1]{\SI{#1}{\invfemtobarn}\xspace}
+\DeclareRobustCommand{\instlumi}[1]{ \SI[print-unity-mantissa=false]{#1} { \invcmsqpersec }\xspace} %\thesismath{10^{#1}}
 \DeclareRobustCommand{\begL}{\instlumi{31}}
 \DeclareRobustCommand{\lowL}{\instlumi{33}}
 \DeclareRobustCommand{\highL}{\instlumi{34}}
 \DeclareRobustCommand{\peakLumi}{\instlumi{2.1e32}\xspace}   %3.65\times\instlumi{34}}\xspace}
 \DeclareRobustCommand{\twentytenlumi}{\intlumipb{37.3\pm1.2}\xspace}
+\DeclareRobustCommand{\runoneintlumi}{\intlumifb{26.9}\xspace} %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResults#Multiple_Year_Collision_Plots
+\DeclareRobustCommand{\runtwointlumi}{\intlumifb{146.9}\xspace} % maybe juts 147, or 139(which is good for physics) https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResultsRun2#Online_Luminosity_Summary_Plots
 \DeclareRobustCommand{\xs}{cross-section\xspace}
 \DeclareRobustCommand{\Xs}{Cross-section\xspace}
+\DeclareRobustCommand{\runone}{Run~1\xspace}
+\DeclareRobustCommand{\runtwo}{Run~2\xspace}
+\DeclareRobustCommand{\runthree}{Run~3\xspace}
 %% Co-ordinates
 \DeclareRobustCommand{\pseudorap}{\thesismath{\eta}\xspace}
 \DeclareRobustCommand{\rap}{\thesismath{y}\xspace}
