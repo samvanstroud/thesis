@@ -235,12 +235,6 @@
 %% Used to center the variable width page quote (must be version >= 0.9a)
 \RequirePackage{varwidth}[2003/03/10]
 
-%% ``DRAFT'' underprint and line numbering in draft mode (optional)
-\ifx\@requiredraft\@empty\else%
-  \RequirePackage[pagewise]{lineno}
-  \RequirePackage{draftcopy}
-\fi
-
 %% AMS math package (optional)
 \ifx\@requireamsmath\@empty\else%
   \RequirePackage{amsmath}
@@ -260,6 +254,26 @@
   \AtBeginEnvironment{bmatrix}{\renewcommand{\arraystretch}{0.9}}
 \fi
 
+%% ``DRAFT'' underprint and line numbering in draft mode (optional)
+\ifx\@requiredraft\@empty\else%
+  \RequirePackage[pagewise]{lineno}
+  \RequirePackage{draftcopy}
+
+  %% hack for fixing line numbering 
+  %% Patch 'normal' math environments:
+  \newcommand*\linenomathpatch[1]{%
+    \cspreto{#1}{\linenomath}%
+    \cspreto{#1*}{\linenomath}%
+    \csappto{end#1}{\endlinenomath}%
+    \csappto{end#1*}{\endlinenomath}%
+  }
+  \linenomathpatch{equation}
+  %\linenomathpatch{gather}
+  %\linenomathpatch{multline}
+  %\linenomathpatch{align}
+  %\linenomathpatch{alignat}
+  %\linenomathpatch{flalign}
+\fi
 
 %% Index building (optional)
 \ifx\@requiremakeidx\@empty\else\RequirePackage{makeidx}\fi
@@ -305,22 +319,6 @@
 
 %% Convenience-included HEP packages (optional)
 \ifx\@requirehep\@empty\else\RequirePackage{hep}\fi
-
-%% hack for fixing line numbering 
-%% Patch 'normal' math environments:
-\newcommand*\linenomathpatch[1]{%
-  \cspreto{#1}{\linenomath}%
-  \cspreto{#1*}{\linenomath}%
-  \csappto{end#1}{\endlinenomath}%
-  \csappto{end#1*}{\endlinenomath}%
-}
-\linenomathpatch{equation}
-\linenomathpatch{gather}
-\linenomathpatch{multline}
-\linenomathpatch{align}
-\linenomathpatch{alignat}
-\linenomathpatch{flalign}
-
 
 %% The right way to do custom spacing
 \RequirePackage{setspace}
