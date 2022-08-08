@@ -5,7 +5,7 @@
 The Large Hadron Collider (\LHC) at \CERN has extended the frontiers of particle physics through its unprecedented energy and luminosity.
 The \LHC accelerates protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than than the speed of light, at which point they are made to collide.
 The protons travel round the ring 11 thousand times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
-The beams travel in opposite directions and are crossed\todo{say bunch crossing?} at four locations so that collisisons between protons can take place.
+The beams travel in opposite directions and are crossed\todo{say bunch-crossing?} at four locations so that collisisons between protons can take place.
 Around these collision points four specialised detectors, ALICE~\cite{AliceCollaboration_2008}, CMS~\cite{CMS-TDR-08-001}, LHCb~\cite{LHCbCollaboration_2008} and \ATLAS~\cite{PERF-2007-01}, are located to capture information about the products of the collisions.
 
 \begin{comment}
@@ -18,7 +18,7 @@ Around these collision points four specialised detectors, ALICE~\cite{AliceColla
   by 25 ns, with each bunch containing up to 1.1 × 1011 protons.
 \end{comment}
 
-The \LHC is operated in ``runs'' during which beams of protons are actively being circulated and collided. Between runs which there are periods of shutdown while the accelerator and detector machinery is maintained and upgraded.
+The \LHC is operated in \textit{runs} during which beams of protons are actively being circulated and collided. Between runs which there are periods of shutdown while the accelerator and detector machinery is maintained and upgraded.
 In 2010, the \LHC collided proton bunches, each containing more than $10^{11}$ particles, 20 million times per second, providing \SI{7}{\TeV} proton-proton collisions at instantaneous luminosities of up to \peakLumi.
 \runtwo, which began in 2015, increased the the proton-proton collision energy to \SI{13}{\TeV}.
 The bunch spacing was also reduced, leading to a collisison rate of \SI{40}{\mega\hertz}.
@@ -41,14 +41,14 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
   \end{tabular}
   \caption{
     Overview of the different LHC runs.
-    The average number of interactions per bunch crossing is denoted as \angles{\mu}.
+    The average number of interactions per bunch-crossing is denoted as \angles{\mu} (see \cref{sec:collider_defs}).
     Numbers for Run 3 are preliminary and are only provided to give an indication of expected performance.
     Also show integrated luminosity?
     Do I need to cite public plots?
     % run 1 run 2 trigger https://cds.cern.ch/record/2058218/
     %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResults
     %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResultsRun2
-    %  2-3 × 1034 cm−2 s−1 and an average pileup of ~80 collisions/bunch crossing
+    %  2-3 × 1034 cm−2 s−1 and an average pile-up of ~80 collisions/bunch-crossing
     % https://cds.cern.ch/record/2732959/files/LHCP2020_094.pdf
   }
   \label{tab:lhc_runs}
@@ -71,17 +71,27 @@ The transverse plane lies in $x$\nobreakdash-$y$ while the longitudinal plane li
   \label{fig:atlas_coord_system}
 \end{figure}
 
+The polar angle $\theta$ is commonly specified in terms of the pseudorapidity $\eta$, defined as
 %
 \begin{equation}\label{eq:pseudorap}
-  \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right]
+  \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right] .
 \end{equation}
 %
+Differences in $\eta$ are invariant under Lorentz boosts.
+%particle production is constant as a function of rapidity, and because differences in rapidity are Lorentz invariant under boosts along the longitudinal axis: they transform additively, similar to velocities in Galilean relativity. A
 
+The transverse momentum \pt
+%
+\begin{equation}\label{eq:pt}
+  \pt = \sqrt{ {p_x}^2 + {p_y}^2 }.
+\end{equation}
+
+Impact pararameters \dzero and \zzero are defined by
 
 %\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
 
 
-\subsection{Collider Definitions}
+\subsection{Collider Definitions}\label{sec:collider_defs}
 
 \subsubsection{Luminosity}
 The luminosity is defined by\todo{xy full def}
@@ -107,29 +117,24 @@ where $N$ is the number of individual proton-proton collisions and $\sigma$ is t
 \subsubsection{Pile-up}
 
 At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons meet head on.
-Each bunch crossing is called an ``event''.
-There is generally at most one hard scatter per bunch crossing.
-Pileup occurs when more than one proton-proton interaction takes place per bunch crossing.
-
-Pileup complicates event reconstruction as multiple interactions can contribute to the detector signals associated with a single bunch-crossing.
-These interactions, which are mostly soft (as most interactions are soft), have to be separated from the hard interaction that is of interest (implying that there might be more than one hard interaction that is of interest).
-Pileup occurring within the same bunch crossing is properly known as \textit{in-time} pileup.
-Further pileup influences on the signal that come from signal remnants in the calorimeters from the energy deposits in other bunch crossings is known as \textit{out-of-time} pileup. If unqualified, we are talking about in-time pileup.
-
-The number of pileup interactions is denoted $\mu$.
-
-In each bunch crossing, pileup causes several proton-proton pairs to interact. Each of these interactions happens at a vertex. Using tracks, all vertices are reconstructed iteratively. The primary vertex, or \textbf{hard scatter} of an event is chosen as the interaction whose associated tracks have the highest sum of squared $\mathrm{p}_T$.
+Each bunch-crossing is called an \textit{event}.
+There is generally at most one hard proton-proton scatter per event.
+Additional interactions are typically relatively soft and are known as \textit{pile-up}.
+Pile-up complicates the reconstruction of the hard scatter event as results of the interactions of different proton-proton interactions have to be separated.
+Pile-up from interactions within the same bunch-crossing is known as \textit{in-time} pile-up while residual signatures from other bunch-crossings is known as \textit{out-of-time} pile-up.
+The number of pile-up interactions is denoted $\mu$, which is often given as a time-averaged value \angles{\mu}.
+The average number of pile-up interactions for different years during \runtwo is given in \cref{fig:run2_pile-up}.
 %
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/mu_2015_2018.pdf}
   \caption{
-    Average pile-up \cite{atlas-lumi-run2}.
+    Average pile-up profiles measured by ATLAS during \runtwo \cite{atlas-lumi-run2}.
+    During \runthree, even higher levels of pile-up are expected.
   }
-  \label{fig:run2_pileup}
+  \label{fig:run2_pile-up}
 \end{figure}
 %
-
 
 
 \section{The ATLAS Detector}\label{sec:atlas_detector}
@@ -150,7 +155,7 @@ A more complete picture can be found in \rcite{PERF-2007-01}, or in the technica
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.9\linewidth]{chapters/2.detector/figs/atlas_detector.jpg}
-  \caption{The \ATLAS detector. Cutouts are shown}
+  \caption{A 3D model of the entire \ATLAS detector. Cutouts are shown}
   \label{fig:atlas_detector}
 \end{figure}
 %
@@ -304,7 +309,7 @@ The toroidal magnets generate a field which is largely orthogonal to the muon tr
 
 
 \subsection{The Trigger}\label{sec:trigger}
-The \SI{2.5}{\nano\second} bunch spacing used over the course of \runtwo corresponds to a bunch crossing or event rate of \SI{40}{\mega\hertz} (see \cref{tab:lhc_runs}).
+The \SI{2.5}{\nano\second} bunch spacing used over the course of \runtwo corresponds to a bunch-crossing or event rate of \SI{40}{\mega\hertz} (see \cref{tab:lhc_runs}).
 If the full information for the detector was written out for each event, this would correspond to the generation of \SI{60}{\tera\byte} of data each second.
 This is more than can be feasibly processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is potentially interesting and should be kept for further analysis.
 The trigger system is comprised of two levels which search for signs of electrons, muons photons, taus and jets, as well as events with high total or missing transverse energy.
@@ -332,6 +337,7 @@ More information in \cite{TRIG-2016-01}.
 Events passing the trigger selection (described in \cref{sec:trigger}) undergo full offline reconstruction, which makes use of the full information from the detector.
 Reconstruction and analysis of events uses \cite{ATL-SOFT-PUB-2021-001}
 %An extensive software suite~ is used in the reconstruction and analysis of real and simulated data, in detector operations, and in the trigger and data acquisition systems of the experiment.
+
 
 
 \subsection{Tracks}\label{sec:tracks}
@@ -369,13 +375,23 @@ The transverse IP $d_0$ and longitudinal IP $z_0$ are measured with respect to t
 \end{table}
 
 
+\subsection{Vertices}
+
+\subsubsection{Primary Vertices}
+Each proton-proton interaction happens at a \textit{primary vertex}. 
+Using tracks, all vertices are reconstructed iteratively. The primary vertex, or \textbf{hard scatter} of an event is chosen as the interaction whose associated tracks have the highest sum of squared $\mathrm{p}_T$.
+
+\subsubsection{Secondary Vertices}
+SV1 JF
+
+
 \subsection{Jets}\label{sec:jets}
 
 Jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the anti-$k_T$ algorithm \cite{Cacciari:2008gp} with a radius parameter of $0.4$.
 The jet energy scale is calibrated according to Ref.~\cite{PERF-2016-04}.
 Jets are also required not to overlap with a generator-level electron or muon from \Wboson boson decays.
 All jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$. 
-Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pileup contamination \cite{ATLAS-CONF-2014-018}.
+Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
 Tracks are associated to jets using a \DeltaR association cone, the width of which decreases as a function of jet \pt, with a maximum cone size of $\DeltaR \approx 0.45$ for jets with $\pt = \SI{20}{\GeV}$ and minimum cone size of $\DeltaR \approx 0.25$ for jets with $\pt > \SI{200}{\GeV}$. 
 If a track is within the association cones of more than one jet, it is assigned to the jet which has a smaller $\DeltaR(\text{track}, \text{jet})$.
 
