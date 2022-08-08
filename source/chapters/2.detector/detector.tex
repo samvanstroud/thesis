@@ -55,8 +55,27 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
 \end{table}
 
 
-\section{Collider Definitions \& Coordinate Systems}
-The luminosity is defined by
+\section{Coordinate System \& Collider Definitions}
+
+\subsection{ATLAS Coordinate System}
+
+The transverse plane lies in $x$\nobreakdash-$y$ while the longitudinal plane lies along the \axis{z}.
+%
+\begin{figure}[!htbp]
+  \centering
+  \input{chapters/2.detector/figs/atlas_coord_system.tex}
+  \caption{
+    The coordinate system used at the ATLAS detector. Reproduced from \cite{Strong:2020mge}.
+  }
+  \label{fig:atlas_coord_system}
+\end{figure}
+
+\todo{pseudorapidity def}
+%    \item \textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
+\subsection{Collider Definitions}
+
+\subsubsection{Luminosity}
+The luminosity is defined by\todo{xy full def}
 %
 \begin{equation}\label{eq:lumi_def}
 L = \frac{1}{\sigma} \der{N}{t} ,
@@ -64,12 +83,44 @@ L = \frac{1}{\sigma} \der{N}{t} ,
 %
 where $N$ is the number of individual proton-proton collisions and $\sigma$ is the cross-sectional area of the beams as they cross.
 
-\begin{itemize}
-  \item transverse/longitudinal planes
-  \item rapitidy pseudorapidity etc
-  \item pileup
-  \item each bunch crossing is an event
-\end{itemize}
+%
+\begin{figure}[!htbp]
+  \centering
+  \input{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
+  \caption{
+    Integrated luminosity as a function of time during \runtwo \cite{atlas-lumi-run2}.
+  }
+  \label{fig:run2_lumi}
+\end{figure}
+%
+
+
+\subsubsection{Pile-up}
+
+At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons meet head on.
+Each bunch crossing is called an ``event''.
+There is generally at most one hard scatter per bunch crossing.
+Pileup occurs when more than one proton-proton interaction takes place per bunch crossing.
+
+Pileup complicates event reconstruction as multiple interactions can contribute to the detector signals associated with a single bunch-crossing.
+These interactions, which are mostly soft (as most interactions are soft), have to be separated from the hard interaction that is of interest (implying that there might be more than one hard interaction that is of interest).
+Pileup occurring within the same bunch crossing is properly known as \textit{in-time} pileup.
+Further pileup influences on the signal that come from signal remnants in the calorimeters from the energy deposits in other bunch crossings is known as \textit{out-of-time} pileup. If unqualified, we are talking about in-time pileup.
+
+The number of pileup interactions is denoted $\mu$.
+
+In each bunch crossing, pileup causes several proton-proton pairs to interact. Each of these interactions happens at a vertex. Using tracks, all vertices are reconstructed iteratively. The primary vertex, or \textbf{hard scatter} of an event is chosen as the interaction whose associated tracks have the highest sum of squared $\mathrm{p}_T$.
+%
+\begin{figure}[!htbp]
+  \centering
+  \input{chapters/2.detector/figs/mu_2015_2018.pdf}
+  \caption{
+    mu_2015_2018 \cite{atlas-lumi-run2}.
+  }
+  \label{fig:run2_pileup}
+\end{figure}
+%
+
 
 
 \section{The ATLAS Detector}\label{sec:atlas_detector}
@@ -246,7 +297,7 @@ The toroidal magnets generate a field which is largely orthogonal to the muon tr
 \subsection{The Trigger}\label{sec:trigger}
 The \SI{2.5}{\nano\second} bunch spacing used over the course of \runtwo corresponds to a bunch crossing or event rate of \SI{40}{\mega\hertz} (see \cref{tab:lhc_runs}).
 If the full information for the detector was written out for each event, this would correspond to the generation of \SI{60}{\tera\byte} of data each second.
-This is more than can be feasibly processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is interesting and should be kept.
+This is more than can be feasibly processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is potentially interesting and should be kept for further analysis.
 The trigger system is comprised of two levels which search for signs of electrons, muons photons, taus and jets, as well as events with high total or missing transverse energy.
 The hardware-based Level-1 (L1) trigger uses coarse information from the calorimeters and MS to accept events at a rate of \SI{100}{\kilo\hertz} within \SI{2.5}{\micro\second} of the event.
 After the L1 trigger, the software-based High Level Trigger (HLT) makes use of \num{40000} CPU cores to make a final selection on surviving events within a few hundred milliseconds. 
