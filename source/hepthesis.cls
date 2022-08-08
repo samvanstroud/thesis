@@ -519,7 +519,7 @@
   \fi
 
   %% better referencing
-  \RequirePackage{cleveref} % has to be loaded after hyperref
+  \RequirePackage[capitalise]{cleveref} % has to be loaded after hyperref
 }
 
 
