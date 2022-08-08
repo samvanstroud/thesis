@@ -65,13 +65,22 @@ The transverse plane lies in $x$\nobreakdash-$y$ while the longitudinal plane li
   \centering
   \input{chapters/2.detector/figs/atlas_coord_system.tex}
   \caption{
-    The coordinate system used at the ATLAS detector. Reproduced from \cite{Strong:2020mge}.
+    The coordinate system used at the ATLAS detector, showing the locations of the four main experiments located at various points around the LHC.
+    Reproduced from \rcite{Strong:2020mge}.
   }
   \label{fig:atlas_coord_system}
 \end{figure}
 
-\todo{pseudorapidity def}
-%    \item \textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
+%
+\begin{equation}\label{eq:pseudorap}
+  \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right]
+\end{equation}
+%
+
+
+%\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
+
+
 \subsection{Collider Definitions}
 
 \subsubsection{Luminosity}
@@ -86,7 +95,7 @@ where $N$ is the number of individual proton-proton collisions and $\sigma$ is t
 %
 \begin{figure}[!htbp]
   \centering
-  \input{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
+  \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
   \caption{
     Integrated luminosity as a function of time during \runtwo \cite{atlas-lumi-run2}.
   }
@@ -113,9 +122,9 @@ In each bunch crossing, pileup causes several proton-proton pairs to interact. E
 %
 \begin{figure}[!htbp]
   \centering
-  \input{chapters/2.detector/figs/mu_2015_2018.pdf}
+  \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/mu_2015_2018.pdf}
   \caption{
-    mu_2015_2018 \cite{atlas-lumi-run2}.
+    Average pile-up \cite{atlas-lumi-run2}.
   }
   \label{fig:run2_pileup}
 \end{figure}

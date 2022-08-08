@@ -14,8 +14,8 @@
 
 \tikzset{>=latex} % for LaTeX arrow head
 
-\tdplotsetmaincoords{75}{50} % to reset previous setting 75 50
-    \begin{tikzpicture}[scale=2.7,tdplot_main_coords,rotate around x=90]
+\tdplotsetmaincoords{76}{45} % to reset previous setting 75 50
+    \begin{tikzpicture}[scale=3.3,tdplot_main_coords,rotate around x=90]
     
     % variables
     \def\rvec{1.2}
@@ -32,8 +32,8 @@
     \tdplotsetcoord{P}{\rvec}{\thetavec}{\phivec}
     
     % vectors
-    \draw[->,red] (O) -- (P) node[above left] {$\overrightarrow{p}$};
-    \draw[->] (O)  -- (Pxy) node[right] {$p_t$};
+    \draw[->,red] (O) -- (P) node[above left] {$\vec{p}$};
+    \draw[->] (O)  -- (Pxy) node[right] {$p_T$};
     \draw[dashed,red] (P)  -- (Pxy);
     \draw[dashed,red] (Py) -- (Pxy);
     
@@ -41,11 +41,11 @@
     \tdplotdrawarc[thick,rotate around x=90,black!70!blue]{(\R,0,0)}{\R}{0}{360}{}{}
     
     % compass - the line between CMS and ATLAS has a ~12° declination (http://googlecompass.com)
-    \begin{scope}[shift={(1.1*\R,0,1.65*\R)},rotate around y=12]
-        \draw[<->,black!50] (-\w,0,0) -- (\w,0,0);
-        \draw[<->,black!50] (0,0,-\w) -- (0,0,\w);
-        \node[below right,black!50,scale=0.6] at (\w,0,0) {N};
-    \end{scope}
+    %\begin{scope}[shift={(1.1*\R,0,1.65*\R)},rotate around y=12]
+    %    \draw[<->,black!50] (-\w,0,0) -- (\w,0,0);
+    %    \draw[<->,black!50] (0,0,-\w) -- (0,0,\w);
+    %    \node[below right,black!50,scale=0.6] at (\w,0,0) {N};
+    %\end{scope}
     
     % nodes
     \node[right] at (\R,0,0) {LHC};
