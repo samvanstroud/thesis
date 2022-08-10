@@ -241,7 +241,15 @@ FUNCTION {format.url}
 {
   url empty$
   {""}
-  {"\href{" url * "}{" * url * "}" *}
+  {"\url{" url * "}{" * url * "}" *}
+  if$
+}
+
+FUNCTION {format.myurl}
+{
+  url empty$
+  {""}
+  {"\url{" url * "}" * }
   if$
 }
 
@@ -424,7 +432,7 @@ FUNCTION {format.date.paren.nomonth}
 FUNCTION {format.collaboration}
 { collaboration empty$
     { "" }
-    { "{\scshape " collaboration * "} " * "collaboration" * }
+    { "{ " collaboration * "} " * "collaboration" * }
   if$
 }
 
@@ -610,7 +618,7 @@ FUNCTION {format.tr.number}
     'type
   if$
   number empty$
-    { "l" change.case$ }
+    { }
     { number tie.or.space.connect }
   if$
 }
@@ -796,19 +804,23 @@ FUNCTION {book}
 FUNCTION {booklet}
 { output.bibitem
   format.author.or.collaboration
-  title empty$
-    { "empty title in " cite$ * warning$
-      howpublished new.sentence.checka
-    }
-    { howpublished empty$ not
-      address empty$ month empty$ year empty$ and and
-      or
-	{ format.title.p output.nonnull }
-	{ format.title output.nonnull }
-      if$
-      blank.sep
-    }
-  if$
+  format.title "title" output.check
+  blank.sep
+
+  %title empty$
+  %  { "empty title in " cite$ * warning$
+  %    howpublished new.sentence.checka
+  %  }
+  %  { howpublished empty$ not
+  %    address empty$ month empty$ year empty$ and and
+  %    or
+	%{ format.title.p output.nonnull }
+	%{ format.title output.nonnull }
+  %    if$
+  %    blank.sep
+  %  }
+  %if$
+  %format.myurl * "{" howpublished * "}" output
   howpublished output
   address output
   format.date output
@@ -951,8 +963,10 @@ FUNCTION {misc}
       blank.sep
     }
   if$
-  howpublished output
-  format.date output
+  %howpublished output
+  format.date "year" output.check
+  new.block
+  format.myurl output
   new.block
   % note output
   doi output
@@ -1004,7 +1018,7 @@ FUNCTION {techreport}
   format.title "title" output.check
   blank.sep
   format.tr.number output.nonnull
-  institution "institution" output.check
+  %institution "institution" output.check
   address output
   format.date "year" output.check
   new.block
