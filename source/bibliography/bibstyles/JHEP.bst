@@ -741,7 +741,7 @@ FUNCTION {article}
               blank.sep
               format.date.paren.nomonth "year" output.check
               blank.sep
-              format.pages.nopp "}" * output
+              format.pages "}" * output
               blank.sep
             }
           if$
@@ -760,7 +760,7 @@ FUNCTION {article}
 
     {
       format.article.crossref output.nonnull
-      format.pages.nopp output
+      format.pages output
       format.eprint.paren output
     }
   if$
@@ -823,7 +823,7 @@ FUNCTION {booklet}
   %format.myurl * "{" howpublished * "}" output
   howpublished output
   address output
-  format.date output
+  format.date.paren.nomonth output
   new.block
   % note output
   doi output
@@ -964,7 +964,7 @@ FUNCTION {misc}
     }
   if$
   %howpublished output
-  format.date "year" output.check
+  format.date.paren.nomonth output
   new.block
   format.myurl output
   new.block
@@ -1020,7 +1020,8 @@ FUNCTION {techreport}
   format.tr.number output.nonnull
   %institution "institution" output.check
   address output
-  format.date "year" output.check
+  format.date.paren.nomonth output
+  %format.date "year" output.check
   new.block
   % note output
   doi output
