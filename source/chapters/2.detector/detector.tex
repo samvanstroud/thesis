@@ -5,7 +5,7 @@
 The Large Hadron Collider (\LHC) at \CERN has extended the frontiers of particle physics through its unprecedented energy and luminosity.
 The \LHC accelerates protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than than the speed of light, at which point they are made to collide.
 The protons travel round the ring 11 thousand times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
-The beams travel in opposite directions and are crossed\todo{say bunch-crossing?} at four locations so that collisisons between protons can take place.
+The beams travel in opposite directions and are crossed at four locations so that collisisons between protons can take place.
 Around these collision points four specialised detectors, ALICE~\cite{AliceCollaboration_2008}, CMS~\cite{CMS-TDR-08-001}, LHCb~\cite{LHCbCollaboration_2008} and \ATLAS~\cite{PERF-2007-01}, are located to capture information about the products of the collisions.
 
 \begin{comment}
@@ -40,14 +40,10 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
       \bottomrule
   \end{tabular}
   \caption{
-    Overview of the different LHC runs.
+    Overview of the different LHC runs \cite{atlas-lumi-run1,atlas-lumi-run2}.
     The average number of interactions per bunch-crossing is denoted as \angles{\mu} (see \cref{sec:collider_defs}).
     Numbers for Run 3 are preliminary and are only provided to give an indication of expected performance.
-    Also show integrated luminosity?
-    Do I need to cite public plots?
     % run 1 run 2 trigger https://cds.cern.ch/record/2058218/
-    %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResults
-    %https://twiki.cern.ch/twiki/bin/view/AtlasPublic/LuminosityPublicResultsRun2
     %  2-3 × 1034 cm−2 s−1 and an average pile-up of ~80 collisions/bunch-crossing
     % https://cds.cern.ch/record/2732959/files/LHCP2020_094.pdf
   }
@@ -58,6 +54,10 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
 \section{Coordinate System \& Collider Definitions}
 
 \subsection{ATLAS Coordinate System}
+
+%% from https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
+% ATLAS coordinate system
+ATLAS uses a right-handed coordinate system with its origin at the nominal interaction point in the centre of the detector and the \axis{z} along the beam pipe. The \axis{x} points from the interaction point to the centre of the LHC ring, and the \axis{y} points upwards. Cylindrical coordinates \((r,\phi)\) are used in the transverse plane, \(\phi\) being the azimuthal angle around the \axis{z}. The pseudorapidity is defined in terms of the polar angle \(\theta\) as \(\eta = -\ln \tan(\theta/2)\). Angular distance is measured in units of \(\DeltaR \equiv \sqrt{(\Delta\eta)^{2} + (\Delta\phi)^{2}}\).\todo{this is from pubcom}
 
 The transverse plane lies in $x$\nobreakdash-$y$ while the longitudinal plane lies along the \axis{z}.
 %
@@ -107,7 +107,7 @@ where $N$ is the number of individual proton-proton collisions and $\sigma$ is t
   \centering
   \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
   \caption{
-    Integrated luminosity as a function of time during \runtwo \cite{atlas-lumi-run2}.
+    Delivered, recorded, and usable integrated luminosity as a function of time during \runtwo \cite{atlas-lumi-run2}.
   }
   \label{fig:run2_lumi}
 \end{figure}
@@ -139,12 +139,8 @@ The average number of pile-up interactions for different years during \runtwo is
 
 \section{The ATLAS Detector}\label{sec:atlas_detector}
 \todo{suggestion: make the first sentence more of a inutitive understanding, and then go into barel eta encap jargon}
-%% from https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
-% Footnote with ATLAS coordinate system
-\newcommand{\AtlasCoordFootnote}{%
-ATLAS uses a right-handed coordinate system with its origin at the nominal interaction point in the centre of the detector and the \axis{z} along the beam pipe. The \axis{x} points from the interaction point to the centre of the LHC ring, and the \axis{y} points upwards. Cylindrical coordinates \((r,\phi)\) are used in the transverse plane, \(\phi\) being the azimuthal angle around the \axis{z}. The pseudorapidity is defined in terms of the polar angle \(\theta\) as \(\eta = -\ln \tan(\theta/2)\). Angular distance is measured in units of \(\DeltaR \equiv \sqrt{(\Delta\eta)^{2} + (\Delta\phi)^{2}}\).}
 
-The ATLAS\footnote{A Toroidal Lhc ApparatuS.} detector at the LHC covers nearly the entire solid angle around the collision point.\footnote{\AtlasCoordFootnote}
+The ATLAS\footnote{A Toroidal Lhc ApparatuS.} detector at the LHC covers nearly the entire solid angle around the collision point.
 It consists of an inner tracking detector surrounded by a thin superconducting solenoid, electromagnetic and hadronic calorimeters,
 and a muon spectrometer incorporating three large superconducting air-core toroidal magnets.\todo{okay this is the standard pubcom text?}
 
@@ -155,7 +151,9 @@ A more complete picture can be found in \rcite{PERF-2007-01}, or in the technica
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.9\linewidth]{chapters/2.detector/figs/atlas_detector.jpg}
-  \caption{A 3D model of the entire \ATLAS detector. Cutouts are shown}
+  \caption{
+    A 3D model of the entire \ATLAS detector. 
+    Cutouts through the detector }
   \label{fig:atlas_detector}
 \end{figure}
 %
@@ -166,7 +164,7 @@ A more complete picture can be found in \rcite{PERF-2007-01}, or in the technica
 The inner-detector system (ID) provides high-resolution charged-particle trajectory tracking in the range $|\eta| < 2.5$.
 The ID is immersed in a \SI{2}{\tesla} axial magnetic field, produced by a superconducting solenoidal magnet, which enables the measurement of particle transverse momentum and charge\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.}.
 % Momentum resolution is sufficient to identify the charge sign of particles up to the highest energies expected at LHC.
-After \runthree, the ID will be replaced by the ITk \cite{CERN-LHCC-2017-021}.
+After \runthree, the ID will be replaced by the ITk \cite{ATLAS-TDR-30,ATLAS-TDR-25}.
 
 The inner detector is made up of several sub-systems, shown in \cref{fig:atlas_id_run1,fig:atlas_id_run2}.
 The high-granularity silicon pixel detector covers the vertex region and typically provides four spacepoint measurements per track.
@@ -316,7 +314,7 @@ The trigger system is comprised of two levels which search for signs of electron
 The hardware-based Level-1 (L1) trigger uses coarse information from the calorimeters and MS to accept events at a rate of \SI{100}{\kilo\hertz} within \SI{2.5}{\micro\second} of the event.
 After the L1 trigger, the software-based High Level Trigger (HLT) makes use of \num{40000} CPU cores to make a final selection on surviving events within a few hundred milliseconds. 
 The final event read-out rate is approximately \SI{1.2}{\kilo\hertz}, corresponding\SI{1.2}{\giga\byte\per\second} of permenant data storage.
-More information in \cite{TRIG-2016-01}.
+More information is provided in \cite{TRIG-2016-01}.
 %Regions of Interest (ROIs) from the L1 trigger are used.
 
 %The L1 trigger searches for high transverse-momentum muons, electrons, photons, jets, and $\tau$-leptons decaying into hadrons, as well as large missing and total transverse energy. Its selection is based on information from a subset of detectors. High transverse-momentum muons are identified using trigger chambers in the barrel and end-cap regions of the spectrometer. Calorimeter selections are based on reduced-granularity information from all the calorimeters. Results from the L1 muon and calorimeter triggers are processed by the central trigger processor, which implements combinations of different trigger selections. In each event, the L1 trigger also defines one or more Regions-of-Interest (RoI’s), i.e. the geographical coordinates in $\eta$ and $\phi$, of those regions within the detector where its selection process has identified interesting features. The RoI data include information on the type of feature identified and the criteria passed, e.g. a threshold. This information is subsequently used by the high-level trigger.
@@ -335,9 +333,11 @@ More information in \cite{TRIG-2016-01}.
 \section{Reconstructed Physics Objects}\label{sec:physics-objects}
 
 Events passing the trigger selection (described in \cref{sec:trigger}) undergo full offline reconstruction, which makes use of the full information from the detector.
-Reconstruction and analysis of events uses \cite{ATL-SOFT-PUB-2021-001}
-%An extensive software suite~ is used in the reconstruction and analysis of real and simulated data, in detector operations, and in the trigger and data acquisition systems of the experiment.
+Reconstruction and analysis of events relies on the extensive \ATLAS software stack, see \rcite{ATL-SOFT-PUB-2021-001} for more information.
 
+Reconstruction is the process of analysing the raw signals from the detector to determine which particles and their properties.
+
+The reconstructed event provides information about the underlying physics process that led to the observable final state.
 
 
 \subsection{Tracks}\label{sec:tracks}
