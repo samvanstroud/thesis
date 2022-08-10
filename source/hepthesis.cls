@@ -511,11 +511,11 @@
     \renewcommand*{\listtablename}{List of tables}
   }
 
-  %%   Hyperlinks (optional, has to come late in the package list)
-  \ifx\@requirehyper\@empty\else%
+  %% Hyperlinks (optional, has to come late in the package list)
+  \ifx\@requirehyper\@empty%
+  \RequirePackage[hidelinks,pdfpagemode=FullScreen,bookmarks=true,draft=false]{hyperref}
+  \else%
   \RequirePackage[colorlinks=true,pdfpagemode=FullScreen,bookmarks=true,draft=false]{hyperref}
-  %\RequirePackage[colorlinks=true,bookmarks=true,plainpages=false]{hyperref}%
-  % pdfpagemode=None, FullScreen, UseThumbs, UseOutlines
   \fi
 
   %% better referencing
