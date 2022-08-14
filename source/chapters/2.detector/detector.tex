@@ -77,16 +77,17 @@ The polar angle $\theta$ is commonly specified in terms of the pseudorapidity $\
   \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right] .
 \end{equation}
 %
-Differences in $\eta$ are invariant under Lorentz boosts.
+Differences in $\eta$ are invariant under Lorentz boosts. Particle production is constant as a function of $\eta$.
 %particle production is constant as a function of rapidity, and because differences in rapidity are Lorentz invariant under boosts along the longitudinal axis: they transform additively, similar to velocities in Galilean relativity. A
 
-The transverse momentum \pt
+The transverse momentum \pt is the sum in quadrature of the momenta in the transverse plane
 %
 \begin{equation}\label{eq:pt}
-  \pt = \sqrt{ {p_x}^2 + {p_y}^2 }.
+  \pt = \sqrt{ {p_x}^2 + {p_y}^2 } .
 \end{equation}
 
-Impact pararameters \dzero and \zzero are defined by
+Transverse and longitudinal impact pararameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to the origin.
+The transverse IP \dzero and longitudinal IP \zzero are measured with respect to the hard scatter primary vertex (see \cref{sec:vertex_reco}).
 
 %\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
 
@@ -97,10 +98,17 @@ Impact pararameters \dzero and \zzero are defined by
 The luminosity is defined by\todo{xy full def}
 %
 \begin{equation}\label{eq:lumi_def}
-L = \frac{1}{\sigma} \der{N}{t} ,
+L = \frac{1}{\sigma} \der{N}{t} = \frac{f n_b N_1 N_2}{2 \pi \sigma_x \sigma_y},
 \end{equation}
 %
 where $N$ is the number of individual proton-proton collisions and $\sigma$ is the cross-sectional area of the beams as they cross.
+
+Total number of events is related to the total inelastic cross section\todo{define}
+%
+\begin{equation}
+ N = \sigma \int \mathcal{L} ~\mathrm{d}t 
+\end{equation}
+%
 
 %
 \begin{figure}[!htbp]
@@ -161,7 +169,7 @@ A more complete picture can be found in \rcite{PERF-2007-01}, or in the technica
 
 \subsection{The Inner Detector}\label{sec:atlas_id}
 
-The inner-detector system (ID) provides high-resolution charged-particle trajectory tracking in the range $|\eta| < 2.5$.
+The inner-detector system (ID) provides high-resolution charged particle trajectory tracking in the range $|\eta| < 2.5$.
 The ID is immersed in a \SI{2}{\tesla} axial magnetic field, produced by a superconducting solenoidal magnet, which enables the measurement of particle transverse momentum and charge\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.}.
 % Momentum resolution is sufficient to identify the charge sign of particles up to the highest energies expected at LHC.
 After \runthree, the ID will be replaced by the ITk \cite{ATLAS-TDR-30,ATLAS-TDR-25}.
@@ -189,7 +197,7 @@ which enables radially extended track reconstruction up to \(|\eta| = 2.0\).
 
 \subsubsection{Pixel Detector}
 The silicon pixel detector is comprised of four cylindrical barrels at increasing radii from the beamline, and four disks on each side.
-The innermost barrel layer is the insertable B-layer (IBL), which was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001}.
+The innermost barrel layer is the insertable B-layer (IBL), which was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001} and lies just \SI{33}{\milli\meter} from the beam axis.
 %Radiation-hard electronics are used to read out the 140 million channels.
 The specification of the pixel detector determines the impact parameter resolution and the ability to reconstruct primary and secondary vertices.
 The detector is required to have a high granularity (i.e. resolution) to maintain the low occupancy required to resolve nearby particles. %(high sparsity to resolve different tracks).
@@ -212,7 +220,7 @@ The SCT is made up of four concentric barrel layers in the central region, and n
 Each layer is itself made of a pair of silicon microstrip layers, with a small stereo angle (\SI{20}{\milli\radian}) between the two layers enabling the $z$\nobreakdash-coordinate measurement from a pair of strip measurements.
 The SCT typically provides four precision spacepoint measurements (eight strip measurements) per track in the barrel region.
 These have intrinsic uncertainties of \SI{17}{\micro\meter} in the transverse direction $R\phi$, and \SI{580}{\micro\meter} in the longitudinal direction $z$.
-The measurements provide a key contribution to the measurement of charged-particle momentum and impact parameter, along with vertex position.
+The measurements provide a key contribution to the measurement of charged particle momentum and impact parameter, along with vertex position.
 %The high granularity enables good pattern recognition
 Charge-particle tracks can be distinguished if separated by more than $\sim \SI{200}{\micro\meter}$.
 Hits are registered as binary signals if the pulse height in a channel exceeds a certain threshold.
@@ -235,7 +243,7 @@ The spaces between the straws are filled with a polymer which leads to the emiss
 %Within the radial space available, the straw spacing has been optimised for tracking at the expense of electron identification, which would be improved by a greater path length through the radiator material and fewer active straws. 
 
 
-
+% TR is a form of electromagnetic radiation emitted when a charged particle passes through inhomogeneous media, such as a boundary between two different media. The probability that a particle emits radiation is given by it's $\gamma$ (Lorentz) factor (ie particle velocity). Electrons in general have higher Lorentz factors than eg. pions, as they are lighter than pions. In this way, the TRT discriminates between lighter and heavier particles.
 
 \subsection{Calorimeters}\label{sec:calorimeter}
 
@@ -332,63 +340,91 @@ More information is provided in \cite{TRIG-2016-01}.
 
 \section{Reconstructed Physics Objects}\label{sec:physics-objects}
 
+Event reconstruction is the process of analysing the raw signals from the detector to determine the type and properties of particles present in an event. 
+The reconstructed event provides information about the underlying physics process that led to the observable final state. 
 Events passing the trigger selection (described in \cref{sec:trigger}) undergo full offline reconstruction, which makes use of the full information from the detector.
 Reconstruction and analysis of events relies on the extensive \ATLAS software stack, see \rcite{ATL-SOFT-PUB-2021-001} for more information.
 
-Reconstruction is the process of analysing the raw signals from the detector to determine which particles and their properties.
-
-The reconstructed event provides information about the underlying physics process that led to the observable final state.
-
-
-\subsection{Tracks}\label{sec:tracks}
-
-The trajectories of charged particles are reconstructed as tracks from the energy depositions (hits) of the particles as they traverse the sensitive elements of the inner detector.
-Track selection follows the loose selection described in Ref.~\cite{ATL-PHYS-PUB-2020-014} and outlined in~\cref{tab:track_selections}, which was found to improve the flavour tagging performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate~\cite{PERF-2015-08}.
-The transverse IP $d_0$ and longitudinal IP $z_0$ are measured with respect to the hard scatter primary vertex, defined as the reconstructed primary vertex (PV) with the largest sum of the transverse momentum ($\pt$) of the associated tracks squared, $\sum \pt^2$.
-%The reconstructed tracks are required to satisfy the quality requirements in \cref{tab:track_selections}.
-
-\begin{table}[!htbp]
-  \footnotesize\centering
-  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{
-    Quality selections applied to tracks,
-    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
-    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
-    Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
-    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-    }
-  \begin{tabular}{ll}
-    \toprule 
-    \textbf{Parameter} & \textbf{Selection} \\
-    \hline
-    $\pt$                & $> 500$ MeV \\
-    $|d_0|$              & $< 3.5$ mm \\
-    $|z_0 \sin\theta|$   & $< 5$ mm \\
-    Silicon hits         & $\ge 8$ \\
-    Shared silicon hits  & $< 2$ \\
-    Silicon holes        & $< 3$ \\
-    Pixel holes          & $< 2$ \\
-    \bottomrule
-  \end{tabular}
-  \vspace{4mm}
-  \label{tab:track_selections}
-\end{table}
+Several different reconstructed objects are used for physics analyses.
+Objects relevant to the analyses described in this thesis are described below.
 
 
-\subsection{Vertices}
+
+\subsection{Tracks}\label{sec:track_reco}
+The trajectories of charged particles are reconstructed as tracks from the energy depositions (called \textit{hits}) left by the particles as they traverse the sensitive elements of the inner detector.
+Tracks are used for a variety of downstream applications, including vertexing and jet tagging.
+A comprehensive introduction to ATLAS tracking is available in \cite{Cornelissen:2007vba}, while specific optimisations for dense environments are detailed in \cite{ATL-PHYS-PUB-2015-006, PERF-2015-08}.
+An overview of track reconstruction is given below.
+
+%Tracking is useful for: impact parameter measurements, vertexing for heavy-flavour and $\tau$ tagging.
+
+\subsubsection{Space-point Formation (Clustering)}
+When a charged particle traverses a pixel layer, charge is typically collected in more than one pixel. 
+This is due to the incident angle of the particles with respect to the sensor, and also the drift of electrons between sensors caused by the magnetic field.
+Clusters (also called \textit{hits} or \text{space-points}) are formed by clustering neighbouring pixel cells and estimating locations of space-points using the shape and energy distribution of the clusters.
+
+\subsubsection{Track Finding}
+Space-points are used to build track seeds. These are groups of three hits which are geometrically compatible with being part of a track segment.
+A combinatorial Kalman filter (KF) is used to build track candidates by extending track seeds.
+The filter can create multiple track candidates per seed, with bifurcations along the track occurring when more than one compatible space-point exists on a given layer.
+In this way, the KF creates an excessive number of \textit{track candidates}, which are only required to satisfy basic quality requirements. 
+Track candidates are allowed to reuse or \textit{share} hits freely (a single hit may be used by multiple track candidates).
+Typically, the presense of shared hits is a predictor of a bad track due to the high granularity of the ATLAS tracking detectors.
+At this stage, there is a large number of incorrect hits assigned to otherwise good tracks, and additionally large number of \textit{fake} tracks, which are comprised of a majority of wrong hits and do not correspond to the trajectory of any one physical particle (fake tracks are defined as those where the majority of associated hits do not originate from one single truth particle).\todo{TMP def}
+The low quality of tracks at this stage necessitates an ambiguity solving step, in which candidates are cleaned, and the highest quality track are selected.
+
+\subsubsection{Ambiguity Solving}
+Ambiguity solving was introduced as part of the ATLAS New Tracking effort (NEWT) \cite{Cornelissen:2007vba}, and is intended to improve track reconstruction performance in challenging dense environments.
+In the ambiguity solver, track candidates are processed individually in descending order of a track score. The track score quantifies the likelihood of the track corresponding to the trajectory of a real particle. Scoring uses a number of signals, including the number and positions of hits (preferring hits in more precise regions of the detector), the transverse momentum of the track and the track fit quality. The track fit quality describes the quality of the track as the $\chi^2$ divided by the number degrees of freedom on the track. A preference for high transverse momentum tracks promotes the successful reconstruction of the more physically interesting energetic particles, and suppresses the large number of wrong hits assigned to low momentum tracks.
+
+During the processing of a given highest-scoring track candidate, the track is cleaned (whereby problematic hits are removed), and, if the cleaning is successful, a full resolution fit is performed. If the track has reached this stage without rejection by passing various quality regiments, it is re-scored and returned to the list of track candidates. If the same track is then processed again without requiring modification, it is added to the final track collection. Track candidates that fall beyond a certain quality cut are rejected. This cut does allow the possibility of a track passing through the ambiguity solver with a small number of shared hits.\todo{list shared hit cut }
+
+\subsubsection{Neural Network Cluster Splitting}
+As part of track cleaning, shared hits are classified by a Neural Network (NN) to determine if they are compatible with the characteristic features of a merged cluster \cite{2014arXiv1406.7690A, ATL-PHYS-PUB-2015-006}.
+A merged cluster is one which has originated from more than one incident particle.
+The corresponding reconstructed cluster is made up of a combination of energy deposits from more than one particle, which have become merged due to the closeness of the associated particles and the limited resolution of the detector.
+While in general this event is rare, it is common for clusters to become merged in dense environments, as discussed in \cref{sec:b_had_reco}.
+If the cluster is predicted to be merged it is labelled as being freely shareable, or \textit{split}.
+Hits classified as split by the cluster splitting NN are allowed to be shared freely.
+Hits not compatible with the merged hypothesis can still be shared by a limited number of tracks, but come with a penalty for the track which may hinder its acceptance into the final track collection.
+%
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{chapters/2.detector/figs/merged-cluster.png}
+    \caption{
+      Particles (left) which have enough separation will leave charge depositions which are resolved into separate clusters.
+      Sufficiently close particles (right) can lead to merged clusters.
+      Their combined energy deposits are reconstructed as a single merged cluster.}
+    \label{fig:resolved/merged clusters}
+\end{figure}
+%
+
+
+\subsection{Vertices}\label{sec:vertex_reco}
+Groups of reconstructed tracks can be examined to determine whether the particles originated from a common spatial point of origin.
+This occurs when a particle decays or radiates.
 
 \subsubsection{Primary Vertices}
-Each proton-proton interaction happens at a \textit{primary vertex}. 
-Using tracks, all vertices are reconstructed iteratively. The primary vertex, or \textbf{hard scatter} of an event is chosen as the interaction whose associated tracks have the highest sum of squared $\mathrm{p}_T$.
+Each proton-proton interaction happens at a \textit{primary vertex} (PV).
+Primary vertices are iteratively reconstructed using tracks.
+The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma\pt^2$.
 
 \subsubsection{Secondary Vertices}
-SV1 JF
+Secondary vertices occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved.
+See \cref{sec:b_decay_topology}.
+Two widely used secondary vertexing tools are used within \ATLAS.
+Each attempts to reconstruct vertices given the tracks associated with a jet (see \cref{sec:jet_reco}).
+The first, SV1 by design attempts to find a single inclusive vertex per jet.
+The second, JetFitter
 
 
-\subsection{Jets}\label{sec:jets}
+\subsection{Jets}\label{sec:jet_reco}
+Jets are the reconstructed object corresponding to a spray of collimated stable particles which results from a decay chain.
+Jets are built by clustering constituent objects (e.g. tracks or calorimeter clusters) using a jet finding algorithm, for example the anti-$k_T$ algorithm \cite{Cacciari:2008gp}.
 
-Jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the anti-$k_T$ algorithm \cite{Cacciari:2008gp} with a radius parameter of $0.4$.
-The jet energy scale is calibrated according to Ref.~\cite{PERF-2016-04}.
+\subsubsection{Particle Flow Jets}
+Jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the anti-$k_T$ algorithm with a radius parameter of $0.4$.
+The jet energy scale is calibrated according to \rcite{PERF-2016-04}.
 Jets are also required not to overlap with a generator-level electron or muon from \Wboson boson decays.
 All jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$. 
 Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
@@ -398,11 +434,41 @@ If a track is within the association cones of more than one jet, it is assigned 
 Jet flavour labels are assigned according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
 
-
-\begin{itemize}
-  \item Jet finding algorithms
-\end{itemize}
+\subsubsection{Track Jets}
+???
 
 
 
-\subsection{Leptons}\label{sec:leptons}
+\subsection{Leptons}\label{sec:lepton_reco}
+
+Electrons and muons are stable leptons and leave characteristic signatures that are picked up in the ECal and MS respectively.
+The reconstruction of both types of of stable lepton is briefly outlined below.
+
+\subsubsection{Electrons}
+Electrons candidates are reconstructed by matching PV-compatible inner detector tracks to calorimeter clusters.
+The track-cluster matching criteria takes into account the significant energy loss of the electron due to bremsstrahlung.
+If a match is found, a refit of the track is performed using the Gaussian Sum Filter (GSF) \cite{ATLAS-CONF-2012-047}, which better handles trajectory reconstruction in the presence of bremsstrahlung.
+Various identification criteria are then applied using a  likelihood-based (LH) method to the candidates to improve purity.
+These include requirements on the track quality and cluster matching, the shape of shower in the ECal, leakage into the HCal, and the amount of transition radiation detected in the TRT.
+A full description can be obtained in \rcite{ATLAS-CONF-2016-024}.
+%
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.8\linewidth]{chapters/2.detector/figs/electron_reco.png}
+  \caption{
+    A sketch of electron reconstruction using the \ATLAS detector \cite{ATLAS-CONF-2016-024}.
+    Electron reconstruction makes use of the entire ID and the calorimeters.
+    In particular, discriminating information comes from the TRT and ECal.
+  }
+  \label{fig:electron_Reco}
+\end{figure}
+%
+
+
+\subsubsection{Muons}
+Muon reconstruction primarily makes use of the dedicated MS (see \cref{sec:muon_spectrometer}), but also relies on tracks from the ID and the presence of characteristic signatures in the calorimeters.
+Muon tracks are reconstructed by connect straight-line track segments, which are identified via a Hough transform, and combined into a approximately parabolic trajectory.
+Finally, a global $\chi^2$ fit is performed, taking into account possible interactions between the muon and the detector material.
+A reconstructed muon is called \textit{combined} if it completes successful matching to an ID track.
+Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
+
