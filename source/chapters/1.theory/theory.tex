@@ -233,11 +233,33 @@ There are no right handed neutrinos in the standard model.
 %The Standard Model incorporates parity violation by expressing the weak interaction as a chiral gauge interaction. Only the left-handed components of particles and right-handed components of antiparticles participate in weak interactions in the Standard Model. The weak force couples only to left handed particles in currents of the form $J^\mu = \overline{\nu}_e \gamma^\mu (1 - \gamma^5) e$ or $J^\mu = \overline{u} \gamma^\mu (1 - \gamma^5) \tilde{d}$. The $\tilde{d}$ state is due to the quark mixing: mass eigenstates are not the same as weak eigenstates.
 Furthermore, the weak sector exhibits CP violation.
 CP violation is one of the three necessary Sakharov conditions required to produce baryon asymmetry in the universe.
-Since the SM alone does not appear to have enough CP violation to generate the cosmologically observed matter-antimatter asymmetry, looking for signs of more experimental CP violation is considered to be a promising
-way to discover new physics.
+Since the SM alone does not appear to have enough CP violation to generate the cosmologically observed matter-antimatter asymmetry, looking for signs of more experimental CP violation is considered to be a promising way to discover new physics.
 
 
-The charge operator can be written \todo{put somehwere else?}
+The physical particles are detected in their mass eigenstates $q$, which diagonalise the mass matrix, but interact via the weak in interaction according to their weak eigenstates $\tilde{q}$, which are superpositions of the mass eigenstates.
+%For example, the object that couples to the up quark is $\tilde{d} = V_{ud} d + V_{us} s$
+Quark mixing can be expressed using the Cabibbo-Kobayashi-Maskawa (CKM) matrix, which specifies the strength of flavour-changing weak currents.
+The entries in the matrix are enumerated as
+%
+\begin{equation}
+    \begin{bmatrix}
+        \tilde{d} \\ \tilde{s} \\ \tilde{b} 
+    \end{bmatrix}
+    = \begin{bmatrix}
+        V_{ud} & V_{us} & V_{ub} \\  
+        V_{cd} & V_{cs} & V_{cb} \\  
+        V_{td} & V_{ts} & V_{tb} 
+    \end{bmatrix}
+    \begin{bmatrix}
+        {d} \\ {s} \\ {b} 
+    \end{bmatrix} ,
+\end{equation}
+%
+% predicted to be unitary but experimentally may not be 3 sigma
+and size of the elements $|V_{pq}|^2$ measures the probability of a transition between states $p$ and $q$.
+
+
+The charge operator $Q$ can be written \todo{put somehwere else?}
 %
 \begin{equation}\label{eq:charge_operator}
   Q = T_3 + Y .
@@ -321,9 +343,9 @@ Adding the particle content back to the theory by expanding the field around the
 \begin{equation}
   \phi = 
   \frac{1}{\sqrt{2}}
-  \begin{pmatrix}
+  \begin{bmatrix}
     0 \\ v + H
-  \end{pmatrix} ,
+  \end{bmatrix} ,
 \end{equation}
 %
 Where $H$ is a real scalar field, the ``true vacuum'' Higgs field.
@@ -335,16 +357,16 @@ This gives
   W_\mu^\pm = 
   \frac{1}{\sqrt{2}} (A^1_\mu \mp i A^2_\mu)
   \quad
-  \begin{pmatrix}
+  \begin{bmatrix}
     A_\mu \\ Z_\mu
-  \end{pmatrix} =
-  \begin{pmatrix}
+  \end{bmatrix} =
+  \begin{bmatrix}
       \cos\theta_W &  \sin\theta_W \\ 
     - \sin\theta_W &  \cos\theta_W
-  \end{pmatrix}
-  \begin{pmatrix}
+  \end{bmatrix}
+  \begin{bmatrix}
     B_\mu \\ A^3_\mu 
-  \end{pmatrix} .
+  \end{bmatrix} .
 \end{equation}
 %
 where $\theta_W$ is the weak mixing angle defined by 
@@ -385,7 +407,7 @@ The same methodology can be used to generate the fermion masses, as shown in the
 
 
 \subsection{Fermionic Yukawa Coupling}\label{sec:higgs_yukawa_coupling}
-
+\todo{unfinished}
 Adding the masses of the fermions by hand breaks the gauge invariance of the theory.
 %the necessity for fermion masses being generated in this way is different from that of the vector bosons, which cannot have locally invariant bilinear field terms in the Lagrangian. For the fermions, we cannot write a mass term due to the 
 \begin{comment}
@@ -415,44 +437,27 @@ If the $T = 1/2$ doublet $\phi$ has weak hypercharge $Y = 1/2$, then there is a 
 %
 
 
-The Yukawa terms mix quarks of different generations. The indices on the $\Lambda$ matrix stand for the generations, and the elements of $\Lambda$ are complex valued.
+The Yukawa terms mix quarks of different generations. The indices on the $\Lambda$ matrix stand for the generations, and the elements of $\Lambda$ are complex valued.\todo{what is lambda}
 
-The physical particles are detected in their mass eigenstates (but transform under $SU(2)$ according to their weak eigenstates). In other words, the physical particles diagonalise the mass matrix. It therefore makes sense to work in a basis that diagonalises the mass matrix. These are the mass eigenstates, as opposed to the weak eigenstates. Quark mixing can be expressed using the CKM matrix.
-%
-\begin{equation}
-    \begin{pmatrix}
-        \tilde{d} \\ \tilde{s} \\ \tilde{b} 
-    \end{pmatrix}
-    = \begin{pmatrix}
-        V_{ud} & V_{us} & V_{ub} \\  
-        V_{cd} & V_{cs} & V_{cb} \\  
-        V_{td} & V_{ts} & V_{tb} 
-    \end{pmatrix}
-    \begin{pmatrix}
-        {d} \\ {s} \\ {b} 
-    \end{pmatrix}
-\end{equation}
-%
-The CKM matrix is a result of the transformation between mass and gauge eigenstates of the quarks. It is a unitary matrix which contains information on the strength of flavour-changing weak decays. The $\tilde{q}$ represent gauge or weak eigenstates, whereas $q$ represent mass eigenstates. The size of the elements $|V_{pq}|^2$ measures the probability of a transition between states $p$ and $n$.
 
 We start with the most general form of the coupling of the $T = 1/2$, $Y=1/2$ Higgs field $\phi$ to the quark fields. From $\phi$ we can form a conjugate field $\phi^c$ which transforms under $SU(2) \otimes U(1)_Y$ as a doublet with $Y = -1/2$,
 %
 \begin{equation}\label{phi c field definition}
     \phi^c = i \sigma_2 \phi^* = 
-    \begin{pmatrix}
+    \begin{bmatrix}
     0 & 1 \\ -1 & 0
-    \end{pmatrix} 
-    \begin{pmatrix}
+    \end{bmatrix} 
+    \begin{bmatrix}
     {\phi_1}^\dagger \\ {\phi_2}^\dagger
-    \end{pmatrix} = \begin{pmatrix}
+    \end{bmatrix} = \begin{bmatrix}
     {\phi_2}^\dagger \\ -{\phi_1}^\dagger
-    \end{pmatrix} .
+    \end{bmatrix} .
 \end{equation}
 %
 We can see (???) that $\phi^c$ transforms under $SU(2)$ in the same way as $\phi$. The ground state of this conjugate field is 
 %
 \begin{equation}
-    {\phi_0}^c = \frac{1}{\sqrt{2}} \begin{pmatrix} v \\ 0 \end{pmatrix} .
+    {\phi_0}^c = \frac{1}{\sqrt{2}} \begin{bmatrix} v \\ 0 \end{bmatrix} .
 \end{equation}
 %
 The general gauge invariant expression for the coupling of the Higgs field to the quark fields is then of the form (???)
@@ -467,33 +472,57 @@ The general gauge invariant expression for the coupling of the Higgs field to th
 
 \subsection{Higgs Phenomenology}
 
+
+As previous discussed in this section, the Higgs plays a key role in the SM, giving mass to fundamental particles. 
+The Higgs itself gains mass through self interaction.
+
+Discuss open tasks
 \begin{itemize}
-  \item Production mechanisms
-  \item Decay modes
-  \item Relevance to discovery
-  \item Relevance to analysis Vhbb
+  \item measure coupling to bosons and fermions (why interesting?)
+  \item Searches for non-SM Higgs decays
+  \item Searches for additional Higgs bosons
 \end{itemize}
 
+The strength of the coupling between the Higgs and some other particle is proportional to the particle's mass.
+This fact dictates which production mechanisms and decay modes are dominant at the \LHC.
+The cross sections for different production mechanisms at a centre of mass energy \come{13} are shown as a function of the Higgs mass $m_H$ in \cref{fig:higgs_production_xs}.
+Production occurs mainly through gluon-gluon fusion ($pp \rightarrow H$), mediated by a virtual top quark loop. 
+Vector boson fusion ($pp \rightarrow qqH$) is the second most dominant production mechanism, in which a pair of \Wboson or \Zboson bosons fuse to produce a Higgs after being radiated by two quarks, which also occur in the final state.
+Next most common is the associated production of a Higgs and a vector boson ($pp \rightarrow VH$), in which a pair of quarks fuse to produce a single \Wboson or \Zboson boson which radiates a Higgs.
+((Top quark fusion ($gg \rightarrow ttH$) in which a pair of gluons each radiate a pair of quarks, two of which fuse  two produce a Higgs.
+Finally top quark radiating a Higgs $u/c + g \rightarrow u/c (or t) \rightarrow ht$.))
 
-%In 2015, 
-%Run 2
-%the LHC started to collide protons at a centre of mass energy of \come{13}.
-%The cross sections for the SM production modes increase by a factor of approximately two to four, depending
-%on the process, and the anticipated integrated luminosity for Run 2 which is scheduled to end in 2018 is
-%of the order of 120 fb−1
-%per experiment. Such a dataset will allow ATLAS and CMS to reduce the current
-%experimental uncertainties significantly, motivating the need for improved theoretical predictions.
+Although gluon-gluon fusion is the dominant production mode, focusing only on the associated Higgs production with a vector boson has the benefit of leading to a more conspicuous final state due to the likelihood of the vector bosons decaying leptons.
+Leptons are clean signals to detect and trigger on.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{chapters/1.theory/figs/plot_13tev_H_sqrt.pdf}
-  \caption{Higgs production cross sections at $\sqrt{s} = \SI{13}{\TeV}$ \cite{deFlorian:2016spz}.}
+  \includegraphics[width=0.7\linewidth]{chapters/1.theory/figs/plotAll_13tev_BSM_sqrt.pdf}
+  \caption{Higgs production cross sections as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$. At the Higgs mass $m_H = \SI{125}{\GeV}$, Higgs production is dominated by gluon-gluon fussion, vector boson fusion, and associated production with vector bosons. Uncertainties are shown in the shaded bands \cite{deFlorian:2016spz}.}
   \label{fig:higgs_production_xs}
 \end{figure}
 
+
+Since the Higgs proportional to mass as already mentioned, decays to heavier particles are favoured.
+The branching ratios of different Higgs decay modes are shown as a function of $m_H$ in \cref{fig:higgs_br}.
+Approximately \pct{60} of the time the Higgs decays to a pair of \bquarks, the dominant decay mode since the Higgs it not massive enough to decay to a pair for top quarks ($m_b = \SI{4.18}{\GeV}$ vs $m_t = \SI{173}{\GeV}$).
+The next heaviest fermions are the tau lepton and the \cquark, decays to pairs of these particles happen approximatesly an order of magnitude less often.
+
+Decays to pairs of vector bosons are via a virtual Higgs only, since the combined vector boson mass is greater than the Higgs mass.
+
+While the \Hgammagamma and $\PH \rightarrow \Zboson \Pphoton$ branching ratios are very small compared with fermionic decay modes (around \pct{0.2} for \Hgammagamma), these decay channels were instrumental in the initial discovery of the Higgs due to the low level of background processes which mimic the final state.
+
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.5\linewidth]{chapters/1.theory/figs/SMHiggsBR.YR4-square.pdf}
-  \caption{Higgs branch ratios at $\sqrt{s} = \SI{13}{\TeV}$ \cite{deFlorian:2016spz}.}
+  \includegraphics[width=0.5\linewidth]{chapters/1.theory/figs/Higgs_BR_LM.pdf}
+  \caption{
+    Higgs branching ratios as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$.
+    At the Higgs mass $m_H = \SI{125}{\GeV}$, the Higgs predominantly decays to a pair of \bquarks.
+    Uncertainties are shown in the shaded bands \cite{deFlorian:2016spz}.}
   \label{fig:higgs_br}
 \end{figure}
+
+This thesis presents Higgs analyses using the vector boson fusion production mode, where the Higgs decays to a pair of \bquarks $(pp \rightarrow VH(bb))$.
+The \Hbb decay mode directly probes the Higgs coupling to fermions, and more specifically to down-type quarks.
+This coupling was first observed in 2018 \cite{ATLAS-CONF-2018-036,CMS-HIG-18-016}.
+Ongoing work analysing the coupling strengths, in particular in the high energy regime.

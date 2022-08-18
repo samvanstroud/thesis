@@ -351,6 +351,8 @@ Objects relevant to the analyses described in this thesis are described below.
 
 
 \subsection{Tracks}\label{sec:track_reco}
+% diagram at 
+% https://atlassoftwaredocs.web.cern.ch/trackingTutorial/idoverview/
 The trajectories of charged particles are reconstructed as tracks from the energy depositions (called \textit{hits}) left by the particles as they traverse the sensitive elements of the inner detector.
 Tracks are used for a variety of downstream applications, including vertexing and jet tagging.
 A comprehensive introduction to ATLAS tracking is available in \cite{Cornelissen:2007vba}, while specific optimisations for dense environments are detailed in \cite{ATL-PHYS-PUB-2015-006, PERF-2015-08}.
@@ -410,7 +412,7 @@ Primary vertices are iteratively reconstructed using tracks.
 The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma\pt^2$.
 
 \subsubsection{Secondary Vertices}
-Secondary vertices occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved.
+Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved.
 See \cref{sec:b_decay_topology}.
 Two widely used secondary vertexing tools are used within \ATLAS.
 Each attempts to reconstruct vertices given the tracks associated with a jet (see \cref{sec:jet_reco}).

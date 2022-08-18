@@ -156,6 +156,36 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
 \end{table}
 
 
+Track selection follows the loose selection described in Ref.~\cite{ATL-PHYS-PUB-2020-014} and outlined in~\cref{tab:track_selections}, which was found to improve the flavour tagging performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate~\cite{PERF-2015-08}.
+
+\begin{table}[!htbp]
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \begin{tabular}{ll}
+    \toprule 
+    \textbf{Parameter} & \textbf{Selection} \\
+    \hline
+    $\pt$                & $> 500$ MeV \\
+    $|d_0|$              & $< 3.5$ mm \\
+    $|z_0 \sin\theta|$   & $< 5$ mm \\
+    Silicon hits         & $\ge 8$ \\
+    Shared silicon hits  & $< 2$ \\
+    Silicon holes        & $< 3$ \\
+    Pixel holes          & $< 2$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Quality selections applied to tracks,
+    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
+    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
+    Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    }
+  \vspace{4mm}
+  \label{tab:track_selections}
+\end{table}
+
+
 \subsection{Auxiliary Training Objectives}\label{sec:aux-train-objectives}
 
 In addition to the jet flavour classification, two auxiliary training objectives are defined.
@@ -263,7 +293,7 @@ These updated feature vectors are used to compute edge scores $e(h_i, h_j)$ for 
     e(h_i, h_j) = \mathbf{a}^\perp \theta \left[ \mathbf{W}h_i \oplus \mathbf{W}h_j \right],
 \end{equation}
 
-where $\oplus$ denotes vector concatenation, $\theta$ is a non-linear activation function, and $\mathbf{a}$ is a second fully connected layer.
+where $\oplus$ denotes vector concatenation, $\theta$ is a non-linear activation function, and $\mathbf{a}$ is a learned vector.
 These edge scores are then used to calculate attention weights $a_{ij}$ for each pair of nodes using the softmax function over the edge scores
 
 \begin{equation}\label{eq:attention weights}

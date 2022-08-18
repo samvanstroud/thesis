@@ -823,6 +823,7 @@ FUNCTION {booklet}
   %format.myurl * "{" howpublished * "}" output
   howpublished output
   address output
+  blank.sep
   format.date.paren.nomonth output
   new.block
   % note output
@@ -1020,6 +1021,7 @@ FUNCTION {techreport}
   format.tr.number output.nonnull
   %institution "institution" output.check
   address output
+  blank.sep
   format.date.paren.nomonth output
   %format.date "year" output.check
   new.block
