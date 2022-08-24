@@ -238,6 +238,7 @@
 %% AMS math package (optional)
 \ifx\@requireamsmath\@empty\else%
   \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
   \AtEndOfPackage{%
     %% Displayed maths environments re-defined to be the same as AMS' align
     \renewenvironment{displaymath}{\align}{\endalign\ignorespacesafterend}

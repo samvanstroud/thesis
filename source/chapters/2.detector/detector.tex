@@ -406,6 +406,10 @@ Hits not compatible with the merged hypothesis can still be shared by a limited 
 \subsection{Vertices}\label{sec:vertex_reco}
 Groups of reconstructed tracks can be examined to determine whether the particles originated from a common spatial point of origin.
 This occurs when a particle decays or radiates.
+Vertex reconstruction is made up of two stages.
+First, vertex finding takes place, which is the process of grouping tracks into compatible vertices.
+Second, vertex fitting combines information from compatible tracks to reconstruct the physical properties of the vertex, such as mass and position.
+
 
 \subsubsection{Primary Vertices}
 Each proton-proton interaction happens at a \textit{primary vertex} (PV).
@@ -413,12 +417,12 @@ Primary vertices are iteratively reconstructed using tracks.
 The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma\pt^2$.
 
 \subsubsection{Secondary Vertices}
-Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved.
-See \cref{sec:b_decay_topology}.
-Two widely used secondary vertexing tools are used within \ATLAS.
-Each attempts to reconstruct vertices given the tracks associated with a jet (see \cref{sec:jet_reco}).
-The first, SV1 by design attempts to find a single inclusive vertex per jet.
-The second, JetFitter
+Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved from the primary vertex (see \cref{sec:b_decay_topology}).
+Two widely used secondary vertexing tools are used within \ATLAS: SV1 and JetFitter \cite{FTAG-2018-01}.
+Each attempts to reconstruct secondary vertices inside a jet given the tracks associated to that jet (see \cref{sec:jet_reco} for more information about track association).
+SV1 by design attempts to reconstruct only a single inclusive vertex per jet.
+This inclusive vertex groups all \bhadron decay products, including tracks from the \bhadron decay itself (FromB) and tracks from $b \rightarrow c$ decays (FromBC).
+The second tool, JetFitter attempts to resolve each displaced vertex inside the jet, such that secondary vertices from \bhadron decays are reconstructed separately to tertiary vertices from $b \rightarrow c$ decay chains.
 
 
 \subsection{Jets}\label{sec:jet_reco}

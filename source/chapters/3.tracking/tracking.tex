@@ -76,9 +76,9 @@ While the multiplicity of the fragmentation products increases with the \bhadron
   \centering
   \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high-pt-b-tracks.png}
   \caption{
-    As the \bhadron $p_\text{T}$ increases, the decay length increases, so tracks will have less room to diverge before reaching detector elements.
-    Compounding this problem, the decay products become increasingly collimated.
-    The detector may then be unable to resolve individual tracks.
+    At lower \pt (left) the decay length of the \bhadron is reduced, and the resulting decay tracks are less collimated.
+    At higher \pt (right) the \bhadron decay length increases and the resulting decay tracks are more collimated and have less distance over which to diverge before reaching detector elements.
+    As a result, the ID may be unable to resolve charged depositions from different particles, instead reconstructing merged clusters.
   }
   \label{fig:high_pt_b_decay}
 \end{figure}
@@ -146,13 +146,23 @@ The combination of effects described above makes reconstructing tracks in the co
 %
 \end{comment}
 
+
+\begin{figure}[!htbp]
+  \centering
+  %\includegraphics[width=\textwidth]{res/figs/results/tracking/po_nHitsOnPix_From_B_DL.pdf}
+  \vspace{0.05em}
+  \caption{\bhadron decay track reconstruction efficiency.}
+  \label{fig:b_track_eff}
+\end{figure}
+%
+
 The above effects create two related, but distinct problems for \btagging.
 The first part is a drop in track reconstruction efficiency.
 As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
 Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
 The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
 This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage.
-this is shown in fig \todo{get a nice reco eff plot}.
+this is shown in \cref{fig:b_track_eff} \todo{get a nice reco eff plot}.
 
 %As a result, many B decay tracks are rejected in the ambiguity solving stage, leading to a severe drop in tracking reconstruction efficiency. This is shown by the severe decrease in reconstruction efficiency visible when comparing baseline tracking with the ideal pseudo-tracks in \cref{fig:reconstruction efficiency from B}. This situation presents a problem: relaxing cuts on shared hits significantly degrades the ambiguity solver's power to reject bad tracks. However for \bhadron decay tracks it seems these same restrictions on shared hits are seriously impairing the reconstruction efficiency of good tracks. 
 
@@ -299,14 +309,14 @@ The work outlined in the two preceding sections has uncovered issues with both t
     \label{fig:refit optimisation results}
 \end{figure}
 %
-Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to improve reconstruction performance. This consisted primarily of loosening the shared hit cuts in the ambiguity solver. While this did lead to a measurement increase in track reconstruction efficiency (see \cref{fig:reconstruction efficiency from B}), it was determined that the corresponding increase in fake tracks (i.e. those tracks for which the majority of hits do not come from a single truth particle) was too large to justify the implementation of the ``Bcut'' scheme. In conclusion, then, a different approach is required to address the problems discussed.
+Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to improve reconstruction performance. This consisted primarily of loosening the shared hit cuts in the ambiguity solver. While this did lead to a measurement increase in track reconstruction efficiency (see \cref{fig:b_track_eff}), it was determined that the corresponding increase in fake tracks (i.e. those tracks for which the majority of hits do not come from a single truth particle) was too large to justify the implementation of the ``Bcut'' scheme. In conclusion, then, a different approach is required to address the problems discussed.
 
 
 
 \subsection{Global \texorpdfstring{$\chi^2$}{chi2} Fitter Outlier Removal}\label{sec:gx2f_opt}
 \todo{discuss whether to keep this section}
-This section documents ongoing progress into improving hit assignments using the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in  cref sec:refit, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are indentified and removed. The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years. During this time, a new tracking sub-detector, the IBL, was installed, and subsequently precise detector alignments have been derived. The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures. Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
-This section documents an attempt to improve hit assignment the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in cref{sec:refit}, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are indentified and removed. The motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pt of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
+This section documents ongoing progress into improving hit assignments using the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in  cref sec:refit, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed. The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years. During this time, a new tracking sub-detector, the IBL, was installed, and subsequently precise detector alignments have been derived. The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures. Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
+This section documents an attempt to improve hit assignment the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in cref{sec:refit}, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed. The motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pt of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
 
 \subsubsection{Implementation}
 The outlier removal procedure for the pixel detector is described in this section. The states (also called measurements, or hits) on the track are looped over in order of increasing radial distance to the beam pipe. For each state, errors $\sigma(m_i)$ on the measurement of the transverse and longitudinal coordinates are calculated. These errors are dependent on the sub-detector which recorded the measurement (as some sub-detectors are more precise than others). Additionally, a residual displacement $r_i = m_i - x_i$ between the predicted position of the track $x_i$ (inclusive of the current measurement), and the position of the measurement itself, $m_i$, is calculated. The pull $p_i$ on the track state due to the current measurement is calculated according to
@@ -321,21 +331,17 @@ This pull is computed for the transverse and longitudinal coordinates of the mea
 \subsubsection{Cut Optimisation}\label{sec:cut opt}
 A systematic variation of the cut point \texttt{m\_outlcut} has been carried out. The value of \texttt{m\_outlcut} was reduced from 4 down to 1.75, a change which affects a silicon layers (the TRT has separate outlier removal logic). Furthermore, a specific cut for the IBL was introduced, and is set to 1.25. A second cut, \texttt{TrackChi2PerNDFCut}, is also used in the outlier removal. This value was reduced from 7 to 4. Finally, instead of taking the maximum of the pulls in the longitudinal and transverse directions, a quadrature sum is taken of these two values and used. This variation is labelled ``Mod GX2F'' in plots.
 
-The results, demonstrating a reduction in wrong hit assignment whist also improving slightly the good good hits assigned to tracks, are shown in \cref{fig:outlier cut scan}. The improvements are also observed when looking inclusively in all tracks, which removes the need for a specific $b$-jet ROI (a requirement which led to problems outlined in \cref{sec:roi opt}).
+The results, demonstrating a reduction in wrong hit assignment whist also improving slightly the good good hits assigned to tracks, are shown in \cref{fig:gx2f_opt_hits}. The improvements are also observed when looking inclusively in all tracks, which removes the need for a specific $b$-jet ROI (a requirement which led to problems outlined in \cref{sec:roi opt}).
 %
 \begin{figure}[!htbp]
     \centering
     \begin{subfigure}{.5\textwidth}
       \centering
       \includegraphics[width=\textwidth]{chapters/3.tracking/figs/p_nGoodHitsIBL_pTB_From_B.pdf}
-      %\caption{}
-      %\label{fig:outlier cut scan sub1}
     \end{subfigure}%
     \begin{subfigure}{.5\textwidth}
       \centering
       \includegraphics[width=\textwidth]{chapters/3.tracking/figs/p_nWrongHitsIBL_pTB_From_B.pdf}
-      %\caption{}
-      %\label{fig:outlier cut scan sub2}
     \end{subfigure}
     \caption{Profiles, as a function of parent \bhadron \pt, of good (left) and wrong (right) hit assignment rates on the IBL for tracks using baseline tracking (black), the modified version of the outlier removal procedure (red).}
     \label{fig:gx2f_opt_hits}

@@ -197,31 +197,6 @@ Each track is labelled with one of the exclusive categories defined in \cref{tab
 Since the presence of different track origins is strongly related to the flavour of the jet, training \GNN to recognise the origin of the tracks may provide an additional handle on the classification of the jet flavour.
 This task may also aid the jet flavour prediction by acting as a form of supervised attention~\cite{arxiv.2007.08294}~-~in detecting tracks from heavy flavour decays the model may learn to pay more attention to these tracks.
 
-\begin{table}[!htbp]
-  \footnotesize\centering
-  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{Truth origins which are used to categorise the physics process that led to the production of a track.
-            Tracks are matched to charged particles using the truth-matching probability~\cite{PERF-2015-08}.
-            A truth-matching probability of less than $0.5$ indicates that reconstructed track parameters are likely to be mismeasured and may not correspond to the trajectory of a single charged particle.
-            The ``OtherSecondary'' origin includes tracks from photon conversions, \Kshort and $\Lambda^0$ decays, and hadronic interactions.}
-  \begin{tabular}{lll}
-      \toprule 
-      \textbf{Truth Origin} & \textbf{Description} \\
-      \hline
-      Pileup  & From a \pp collision other than the primary interaction \\
-      Fake    & Created from the hits of multiple particles \\
-      Primary & Does not originate from any secondary decay \\
-      fromB   & From the decay of a \bhadron \\
-      fromBC  & From a \chadron decay, which itself is from the decay of a \bhadron \\
-      fromC   & From the decay of a \chadron \\
-      %fromTau & From the decay of a $\tau$ \\
-      OtherSecondary & From other secondary interactions and decays \\
-      \bottomrule
-  \end{tabular}
-  \vspace{4mm}
-  \label{tab:truth_origins}
-\end{table}
-
 Displaced decays of \bchadrons lead to secondary and tertiary vertices inside the jet.
 Displaced secondary vertices can also occur in \ljets as a result of material interactions and long-lived particle decays (e.g. \Kshort and $\Lambda^0$).
 The second auxiliary objective is the prediction of track-pair vertex compatibility. 
