@@ -9,138 +9,138 @@ If an algorithm could be trained to detect fake tracks, these could be removed b
 
 \section{Machine Learning Background}\label{sec:ml_background}
 
-Over the past few decades, machine learning techniques have become increasingly popular in high energy physics experiments due the increased volumes of high-dimensional data and improvements in the field of machine learning (in particular deep learning).
-Machine learning is the process in which a computer program automatically learns from data suitable parameters for a given model that can subsequently be used to to make predictions or inferences.
-This is opposed to explicitly programming instructions on how to perform a specific task.
-A subset of machine learning known as \textit{supervised learning} is used in this work, and consists of exposing a model to a number of labelled data samples and tasking the training algorithm with learning relationships between the input data and their labels.
+Over the past few decades, machine learning (ML) techniques have become increasingly popular in high energy physics experiments due the increased volumes of high-dimensional data and improvements in the field of machine learning (in particular deep learning).
+Machine learning is the process in which a computer program uses data to learn suitable parameters for a predictive model model.
+This is opposed to explicitly providing instructions on how to perform a task.
+A subfield known as \textit{supervised learning} is used in this work, and consists of exposing a model to a large number of labelled examples in order to extract relationships between the input data and their labels.
 These relationships are often complex, and explicitly programmed rules can fail to fully capture the relationships between inputs and outputs.
 
 %The field of machine learning aims to design computer programs which, rather than being programmed explicitly with instructions on how to perform a specific task, instead learn from a set of labelled training examples $S_i$ how to perform the task for themselves, essentially replacing the need to manually design a program to perform a specific task.
 %In this section a subset of machine learning techniques called supervised learning is described.
 
 In the simplest case, a set of $m$ labelled training examples $S = \{ (x_1, y_1) , \ldots , (x_m, y_m) \}$ is collected.
-Each element in the set $(x_i, y_i)$ consists of a input vector $x_i  \in \mathbb{R}^{\textnormal{input}}$, and the corresponding label $y_i$.
+Each element $(x_i, y_i)$ consists of a input vector $x_i  \in \mathbb{R}^{\textnormal{input}}$, and the corresponding label $y_i$.
 In classification problems, these labels are integer \textit{class labels} $y_i \in \{0,\ldots,N-1\}$, where $N$ is the number of classes, which specify which of a pre-determined set of categorical classes the training example belongs to.
-The rest of the discussion in this chapter is limited to supervised classification problems where $N = 2$, i.e. binary classification.
+The rest of the discussion in this chapter is limited to binary classification problems ($N = 2$).
+The two classes are often referred to as signal ($y_i = 1$) and background ($y_i = 0$), which need to be separated.
 Collecting sufficient and suitable data is one of the primary challenges of machine learning, as such data is not always readily available.
-Fortunately, sophisticated tools to simulate particle collisions have already been developed by the scientific community \cite{leshouchesaccords, leshouchesstandardisation}. Simulation plays a key role in particle physics. More detail is given in.\todo{fix}
+Fortunately, sophisticated tools to simulate particle collisions have already been developed by the scientific community \cite{leshouchesaccords, leshouchesstandardisation}. Simulation plays a key role in particle physics. More detail is given in.\todo{add section somwhere on sample info}
+
+After obtaining suitable training data, the next step is to define a model.
+Given an input domain $\mathbb{R}^{\textnormal{input}}$ and an output domain $(0, 1)$, the model
+$f_\theta: \mathbb{R}^{\textnormal{input}} \to (0, 1)$ is a parameterised functional mapping from input space to output space.
+Given an input example $x_i$ and a set of parameters $\theta$, the model outputs a prediction $\hat{y}_i \in (0, 1)$ for the true label $y_i$, as in
+%
+\begin{equation}
+    f_\theta(x_i) = \hat{y}_i .
+\end{equation}
+%
+The output $\hat{y}_i$ is in the interval $(0, 1)$ so as to be interpreted as the probability that the input example $x_i$ belongs to the signal class.
+The parameters $\theta$ of the model are randomly initialised, however the model is designed to be expressive enough to correctly map the inputs $x_i$ to the outputs $y_i$ given the correct choice of parameters.
+The model is then trained, which amounts to showing the model a series of labelled training examples and modifying the parameters of the model based on its performance.
 
 
 \subsection{Neural Networks}\label{sec:neural_nets}
 
-After obtaining suitable training data, the next step is to define a model.
-Given an input domain $\mathbb{R}^{\textnormal{input}}$ and an output domain $Y$, the model
-$f: \mathbb{R}^{\textnormal{input}} \to Y$ is a parameterised functional mapping from input space to an output space.
-In practice, $f$ is often implemented as a neural network, since these are easy to train via backpropagation.
-Given an input example $x_i$ and a set of parameters $\bm{\theta}$, the model outputs a prediction $\hat{y}_i \in Y$ for the true label $y_i$, as in
-%
-\begin{equation}
-    f(x_i, \bm{\theta}) = \hat{y}_i .
-\end{equation}
-%
-In the case of binary classification ($N = 2$), the output domain $Y = (0, 1)$ is typically a single-dimensional scalar value.
-The two classes are often referred to as signal ($y_i = 1$) and background ($y_i = 0$), which need to be separated.
-The output $\hat{y}_i$ is in the interval $(0, 1)$ so as to be interpreted as the probability that the input example $x_i$ belongs to the signal class, rather than the background class.
-
-The parameters $\bm{\theta}$ of the model are randomly initialised, however the model is designed to be expressive enough to correctly map the inputs $x_i$ to the outputs $y_i$ given the correct choice of parameters.
-The model then undergoes a processes  called \textit{training}, which amounts to showing the model a series of labelled training examples and modifying the parameters of the model which belong to one of several categories.
-The functional form of $h$ is chosen to maximise its effectiveness. Additionally specified are the coefficients of $h$, denoted $\bm\theta$, which are varied through the learning process to improve results. 
+Neural networks (NNs) are a common choice for the machine learning model $f$ since they have the ability to approximate any function \cite{HORNIK1989359} and are easy to train via backpropagation \cite{rumelhart1986learning}.
 
 \subsubsection{Artificial Neurons}
 
-The basic functional component of an ANN is the \textit{artificial neuron}, which is inspired by a mathematical model of a biological neuron \cite{mcculloch1943logical, hopfield1987neural}.
-An artificial neuron is defined by its weights $\bm{\theta}$.
-The neuron takes $n$ inputs and computes the dot product of the inputs and the weights and additionally adds a bias $\theta_0$.
-The result is fed into an activation function.
+The basic functional component of a NN is the \textit{artificial neuron} or node, which is loosely inspired by a mathematical model of a biological neuron \cite{mcculloch1943logical, hopfield1987neural}.
+An artificial neuron is defined by its parameters or \textit{weights} $\theta$ and a choice of activation function.
+Each neuron takes a fixed number of inputs and computes the dot product of the input and weight vectors $x^T \theta$ and additionally adds a constant bias term $\theta_0$.
+This term plays the role of a trainable constant value that is independent of the inputs.
 
 \begin{figure}[!htbp]
     \centering
     \input{chapters/track_classifier/figs/neuron.tex}
     \caption{
-      A diagram displaying the logical flow of a single neuron with 3 inputs $x_i^j$.
-      Each input is multiplied by a weight $\theta_i$, and the resulting values are summed.
+      A diagram displaying the logical flow of a single neuron with three inputs $x_i^j$.
+      Each input is multiplied by a weight $\theta_j$, and the resulting values are summed.
       A bias term $\theta_0$ is added, and the result is passed to an activation function.
       Each neuron can be thought of as a logistic regression model.
     }
     \label{fig:neuron}
 \end{figure}
 
-The bias input $b$ is always equal to $b = 1$ and is modulated by the bias weight $\theta_0$. This term plays the role of a trainable constant value that is independent of the inputs.
-
-
-
-The logistic regression model is a useful step to understanding an ANN. In essence, the logistic regression model amounts to a single neuron network. The gradient descent (\cref{sec:backprop_sgd}) algorithm is used to fit the model to the data. The predictor function $f$ has the linear form 
-%
-\begin{equation}\label{linear predictor}
-    f(\mathrm{x}_i) = \theta_0 + \theta_1 \mathrm{x}_1 + \ldots + \theta_n \mathrm{x}_n 
-    \bm{\theta} = \begin{pmatrix} \theta_0 , \theta_1 , \ldots , \theta_n \end{pmatrix}^T
-    \mathbf{x} = \begin{pmatrix} 1 , \mathrm{x}_1 , \ldots , \mathrm{x}_n \end{pmatrix}^T .
-\end{equation}
-%
-This expression can be written in terms of a vector dot product $f = \bm{\theta}^T \mathbf{x}$ if we express $\theta_j$ and $\mathrm{x}_i$ as vectors. The vector $\mathbf{x}$ has a $1$ as its $0^{\mathrm{th}}$ entry to give a constant term in the evaluation of $f$. This is known as the \textit{bias term}. As discussed, it only makes sense to obtain values in the interval $[0,1]$ from our model. As the predictor function is unbounded, it is intuitive to pass the output of the linear predictor to some bounded function. A common choice is the \textit{logistic function} $g(z)$, where
-%
-\begin{equation}\label{logistic}
-    g(z) = \frac{1}{1 + e^{-z}} \implies g'(z) = g(z) [1 - g(z)] .
-\end{equation}
-%
-The function $g(z)$ is known as the \textit{activation function}. A more detailed discussion on choice of activation function can be found in the next section. The application of $g(z)$ recovers the hypothesis function $h_\theta(\mathbf{x}) = g(\bm{\theta}^T \mathbf{x})$.
-
-
-
-\subsubsection{Activation Functions}
-
-As in their biological counterparts, the output of an artificial neuron cannot take any value - the neuron is either ``firing'' or ``not firing''. The role of the activation function is to compress neuron outputs between two boundaries. A naive way to do this is using the Heaviside step function (\ref{fig:activation_functions}), however this creates two problems. The first is that as the step function is linear, and as the hypothesis is built from several linear functions, we can only predict linear hypotheses. In this case the neural networks would fail to classify nonlinear data. The second problem is that the function has a vanishing (or infinite) gradient and is therefore not trainable. Instead, functions with a sigmoid shape are often employed. Some common examples are shown in \ref{fig:activation_functions}.
+The dot product is fed into an activation function $g$.
+The activation function has several uses, most notably acting as a source of non-linearity and bounding the output of the neuron.
+Some common activation functions are shown in \cref{fig:activation_functions}.
+The choice of activation function can have implications for the performance and convergence of the network, since the gradient of $g$ is used to compute the weight updates during training.
+This is also why input data is normalised to have zero mean and unity variance \cite{lecun2012efficient}.
 
 \begin{figure}[!htbp]
   \centering
   \input{chapters/track_classifier/figs/activations.tex}
-  \caption{A diagram displaying the logical flow of a single neuron with 3 inputs. Each neuron can be thought of as a logistic regression model.}
+  \caption{
+    Several common choices for the activation function $g$ of an artificial neuron.
+  }
   \label{fig:activation_functions}
 \end{figure}
-
-The standard logistic function may not be as quick to train as choices that are asymmetrical about the origin, for example the hyperbolic tangent \cite{efficientbackprop}. The gradient of the activation function dictates how quickly the network can learn - the weight will not change much in areas where the gradient is small. The mean output of a layer with an antisymmetric activation function will be closer to $0$ than for a symmetric activation, and this is where sigmoidal functions have largest gradient. As such, the weight update is more likely to be larger for an antisymmetric function. This is also why data is normalised to have mean and standard deviation equal to 1 in the preprocessing stage.
-
-Another activation function shown to have improvements over both the logistic function and $\tanh$ is the rectifier function. The Rectified Linear Unit (ReLU) were considered.
-
 
 
 \subsubsection{Networks}
 
-\subsubsection{Optimisation}
+Several neurons are linked together in layers to form a neural network.
+The inputs are propagated layer-by-layer through the network until reaching the final output layer.
+The number of layers and neurons per layer are important hyperparameters (those parameters which are not optimised as part of the training process) which influence the performance of the model.
+In the case of binary classification, the final output layer consists of a single neuron with a sigmoid activation 
+%
+\begin{equation}\label{eq:sigmoid}
+  g(z) = \frac{1}{1 + e^{-z}} ,
+\end{equation}
+%
+which is bounded between zero and one allowing the final output to be interpreted as the probability that the input sample belongs to the signal class.
+NNs have the crucial property of being differentiable functions, which facilitates training process described in the next section.
+
+%The activation $a_i^{(l)}$ is the output of the activation function $g(z)$ of the $i^{\text{th}}$ node in layer $l$. The tensor element $\Theta_{ji}^{(l)}$ is the weight connecting the $i^{\text{th}}$ node in layer $l - 1$ to the $j^{\text{th}}$ node in layer $l$. We can compute the outputs for each neuron in a layer simultaneously using ${a}_j^{(l)} = g(\Theta_{ji}^{(l)} a_i^{(l-1)})$, where the activation function is computed element wise on the vector. Computers can perform matrix operations in parallel, making a vectorised implementation such as this more efficient than calculating each output sequentially.
+
+%Taking an item from the dataset $S$, $(\mathbf{x}_i, {y}_i)$, the input $\mathbf{x}_i$ is propagated through the network from left to right, one layer at a time. Finally, the classification result of the network, given by the output of the final neuron $\hat{\mathrm{y}} = h(\mathbf{x}_i)$, is obtained and can be compared to the true category of the data $\mathrm{y}_i$. 
 
 
+
+\subsection{Training with Gradient Descent}\label{sec:training_sgd}
+
+A training algorithm is used to optimise the weights of a NN after exposure to the training data.
+%The performance of the trained model depends on the amount and quality of the training data, and the efficacy of the training algorithm.
+The training algorithm works minimising a loss function $L$, which quantifies the error in the model's predictions for a given input.
+NNs are commonly trained using backpropagation in combination with a variant of stochastic gradient descent to iteratively update the model parameters.
+In binary classification problems, the binary cross entropy given in \cref{eq:bce_loss} loss if often used.
 %
 \begin{equation}\label{eq:bce_loss}
-  J(\bm\theta) = -\frac{1}{m} \sum_{i=1}^m  \mathrm{y}_i \ln[h_\theta(\mathbf{x}_i)] + (1 - \mathrm{y}_i) \ln[1 - h_\theta(\mathbf{x}_i)] .
+  L(x_i, \theta) = y_i \ln[f_\theta(x_i)] + (1 - y_i) \ln[1 - f_\theta(x_i)]
 \end{equation}
 %
-
-
-\subsection{Backpropagation and Gradient Descent}\label{sec:backprop_sgd}
-
-Finally a training algorithm must be developed to allow the program to improve its accuracy through exposure to the dataset. The function $h$ can then be used to predict categories for unseen data. Once the form of $h$ is fixed, the algorithm optimises the coefficients $\bm\theta$ to obtain the best results. The effectiveness of the trained classifier depends on the amount and quality of the training data in $S$, and the efficacy of the training algorithm. The training algorithm works by acting to minimise the \textit{cost function} $J(\bm\theta)$, which gives a measurement of the wrongness of $h$.
-
-
-gradient descent is an example of an \textit{optimisation} algorithm that minimises the cost function $J(\bm\theta)$ (thereby fitting the logistic regression model discussed above to some data) by selecting the optimal values of $\bm\theta$. The algorithm works by computing the partial derivatives of $J(\bm{\theta})$ with respect to the parameters $\bm{\theta}$. The parameters are then altered slightly in the direction of decreasing slope, thereby reducing the cost function.
+Since the model $f$ is differentiable, the error for each parameter $\theta_i$ can be computed by taking partial derivative of $L$ with respect to the parameter.
+Updated parameters $\theta_i'$ are calculated by updating the original parameter in the direction which reduces the loss.
 %
 \begin{equation}\label{eq:weight_update}
-    \theta_j \coloneqq \theta_j - \alpha \pd{}{\theta_j} J(\bm\theta)
+  \theta_i' = \theta_i - \alpha \pd{L}{\theta_i}
 \end{equation}
 %
-The parameter $\alpha$ is known as the \textit{learning rate} and dictates the size of the step taken in the direction of the slope. The above step must be performed simultaneously for each $\theta_j$ in $\bm{\theta}$, after which a new value of $J(\bm{\theta})$ can be calculated, and the process repeated. We can compute the partial derivatives of $J$ using the derivative of the logistic function from eq. \ref{eq:bce_loss}. The results are substituted into \cref{eq:weight_update} to obtain
-%
-\begin{equation}\label{cfpd}
-    \pd{J(\bm\theta)}{\theta_j} = \frac{1}{m} \sum_{i=1}^m [h(\mathbf{x}_i) - \mathrm{y}_i] \mathrm{x}_j .
-\end{equation}
-%
-There are many extensions and variations of the gradient descent algorithm. Some examples that provided better results in this project are described briefly below.
-%
-\begin{itemize}
-    \item \textbf{Stochastic gradient descent} (SGD) performs a weight update after exposure to a fixed number of training examples, called a ``batch''. As such the cost function used is an approximation to eq. \cref{eq:bce_loss}. Standard gradient descent is unsuited to large datasets, and SGD has the advantage of introducing randomness from the approximation which means it can escape from local minima \cite{stochasticgrad}.
-    %\item \textbf{Adaptive gradient descent} (AdaGrad) adds a learning rate for each weight in the network, so that neurons can learn at individual rates. Built into the algorithm is a reduction in step size over time, so learning slows as training progresses. This encourages good convergence \cite{adagrad}.
-    \item \textbf{Adaptive Momentum} (Adam) accelerates SGD by dampening oscillations. A fraction of the previous weight update is used in the current update giving the process ``momentum'' \cite{2014arXiv1412.6980K}.
-    %\item \textbf{RMSProp} is a variation of AdaGrad that removes the restriction that the learning rate must be reduced over time. Instead the learning rate depends only on a fixed number of the most recent gradients, and hence the value it can take is more flexible.
-\end{itemize}
+The hyperparameter $\alpha$ is known as the \textit{learning rate} and dictates the size of the step taken in the direction of the slope. 
+The errors for each parameter are efficiently calculated using the backpropagation algorithm.
+The process of updating weights is repeated until the weights converge the network is trained.
+In practice, small batches of the input data are shown to the network at a time. For each batch the average loss is calculated and the network's weights are updated.
+There are many extensions and variations of the gradient descent algorithm.
+This work uses the Adam optimiser which adds momentum to the weight updates (dampening oscillations) and an adaptive per-parameter learning rate \cite{2014arXiv1412.6980K}.
+
+\begin{comment}
+The gradient descent (\cref{sec:backprop_sgd}) algorithm is used to fit the model to the data.
+Using \cref{eq:bce_loss}, an error for 
+From \cref{eq:bce_loss}, the error on the output node can be 
+The error for the final output node is computed first.
+Errors for nodes in the previous layers are computed by \textit{backpropagating} this error through the network.
+The error in the output node can be computed explicitly using the loss function in \cref{eq:bce_loss}.
+To find the errors for the nodes in the preceding layers $\delta^{(L-1)}_i$, we need to differentiate eq. \ref{neural cost} with respect to $z^{(L-1)}_i$.
+In order to perform the differentiation, we relate $z_1^{(L)} = g(z_j^{(L-1)}) \Theta_{1j}^{(L)}$.
+The result,is tantamount to propagating the output error back through the network using the weights, and multiplying at each node by the derivative of the activation function. Once the errors have been propagated through the network, the partial derivatives of $J$ can be found using the final expression in eq. \ref{backprop defs}. Lastly the weights are updated simultaneously using eq. \ref{update weights}. 
+
+gradient descent is an example of an \textit{optimisation} algorithm that minimises the cost function $J(\theta)$ (thereby fitting the logistic regression model discussed above to some data) by selecting the optimal values of $\theta$. The algorithm works by computing the partial derivatives of $J(\theta)$ with respect to the parameters $\theta$. The parameters are then altered slightly in the direction of decreasing slope, thereby reducing the cost function.
+%The partial derivative of the loss function can be calculated for every parameter $\theta_i$ in the model.
+
+The above step must be performed simultaneously for each $\theta_j$ in $\theta$, after which a new value of $J(\theta)$ can be calculated, and the process repeated. We can compute the partial derivatives of $J$ using the derivative of the logistic function from eq. \ref{eq:bce_loss}. The results are substituted into \cref{eq:weight_update} to obtain
+\end{comment}
 
 
 
@@ -149,8 +149,8 @@ There are many extensions and variations of the gradient descent algorithm. Some
 \section{Track Truth Origin Labelling}\label{sec:track_labelling}
 
 Crucial to supervised learning techniques are are the ground truth class labels which the machine learning model is trained to predict.
-, which are listed in \cref{tab:truth_origins}.
-
+A set of track truth labels which a high degree of granularity have been implemented, and are listed in \cref{tab:truth_origins}.
+%
 \begin{table}[!htbp]
     \footnotesize\centering
     \setlength{\tabcolsep}{0.5em} % for the horizontal padding
@@ -176,8 +176,8 @@ Crucial to supervised learning techniques are are the ground truth class labels 
     }
     \label{tab:truth_origins}
 \end{table}
-
-For the fake track classifier, the origins in \cref{tab:truth_origins} are used to construct a binary label by labelling all fake tracks which are not also fromB as background, and all other tracks (i.e. good tracks and fake fromB tracks) as signal.
+%
+For the fake track classification tool, the origins in \cref{tab:truth_origins} are used to construct a binary label by labelling all fake tracks which are not also fromB as background, and all other tracks (i.e. good tracks and fake fromB tracks) as signal.
 The fake track classifier is then trained to distinguish between these two categories of tracks.
 Fake tracks are defined using the \textit{truth-matching probability} (TMP), defined in \cref{eq:tmp_def}.
 This is a weighted sum of the number of hits on a track which are from the same truth particle, versus the total number of hits on the track.
@@ -202,7 +202,7 @@ The weights are subdetector-dependent are designed to account for the varying nu
 
 
 The rate of fake tracks increases at high transverse momentum as shown in \cref{fig:fakerate_vs_pt} due to the difficulties in track reconstruction outlined in \cref{sec:b_track_reco_challenges}.
-Correspondingly, the performance of \btagging algorithms is reduced, as shown for SV1 in \cref{fig:sv1_perf_nofake}.
+The performance of \btagging algorithms is reduced as a direct result of the presence of these fake tracks as shown for SV1 in \cref{fig:sv1_perf_nofake}.
 
 \begin{figure}[!htbp]
     \centering
@@ -222,16 +222,28 @@ Correspondingly, the performance of \btagging algorithms is reduced, as shown fo
       The \ljet efficiency is decreased, demonstrating that the presence of fake tracks is detrimental to algorithm performance.
     }
     \label{fig:sv1_perf_nofake}
-  \end{figure}
+\end{figure}
 
 
-\section{Conclusion}
-todo: culmination of this work in the general classifier tool
-
-Applications:
 \begin{itemize}
-    \item Frack to jet association
-    \item Fake track studies (removal and for recommendations)
+  \item network structure
+  \item trained on x tracks
+  \item train test
+  \item samples -- borrow from gnn note
+  \item performance plots
+  \item impact on btagging
 \end{itemize}
 
-Improved with GNNs
+\section{Conclusion}
+
+Fake tracks, which are prevalent in the core of high \pt jets, are shown to have an adverse impact on \btagging performance.
+A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being inputted to downstream \btagging algorithms.
+These fake or poorly reconstructed tracks could also be remove in other places\todo{keep?}
+
+Another application of this tool is to isolate a relatively pure sample of fake tracks to estimate the fake track rate in data, which can be used for tracking recommendations.
+
+A more advanced approach than detecting and removing fake tracks is to attempt to determine whether a track is good or fake, but allow any downstream tagging algorithms to use this information when coming to a descision about wether to tag a jet, rather than removing the track as an input.
+
+The approach here works on a track-by-track basis, but a more sophisticated approach would consider the correlations between the tracks inside a jet, as shown in \cref{chap:gnn_tagger}.
+
+Preliminary studies into a version of the tool which are used to select heavy flavour tracks from \bhadron decays have have led to the development of a mutliclassification approach...
