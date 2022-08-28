@@ -196,24 +196,36 @@ The weights are subdetector-dependent are designed to account for the varying nu
         }
 \end{equation}
 %
+The labelling scheme has designed to be useful beyond the classification of good and fake tracks.
 
 
 \section{Fake Track Identification Tool}\label{sec:fake_track_mva}
 
-
-The rate of fake tracks increases at high transverse momentum as shown in \cref{fig:fakerate_vs_pt} due to the difficulties in track reconstruction outlined in \cref{sec:b_track_reco_challenges}.
+The rate of fake tracks increases at high transverse momentum as shown in \cref{fig:fakerate_vs} due to the difficulties in track reconstruction outlined in \cref{sec:b_track_reco_challenges}.
 The performance of \btagging algorithms is reduced as a direct result of the presence of these fake tracks as shown for SV1 in \cref{fig:sv1_perf_nofake}.
 
+To identify and remove fake tracks, a NN classification tool was trained with good tracks as the signal class and fake tracks as the background class.
+Due to the imbalance between the two classes (with fake tracks being relatively uncommon), a weight was added to the loss function for the background class to account for this.
+The NN was made up of two hidden layers with 100 nodes each. The ReLU activation function was used in conjunction with the Adam optimiser.
+
 \begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.5\textwidth]{chapters/track_classifier/figs/fakerate_vs_pt.pdf}
-    \caption{
-      Rate of fake tracks as a function of jet transverse momentum.
-      The rate of fake tracks increases significantly as a function of \pt, and also increases as the distance to the jet axis decreases, and the number of tracks in the jet increases (not shown).
-    }
-    \label{fig:fakerate_vs_pt}
-  \end{figure}
-  
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fakerate_vs_pt.pdf}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fakerate_vs_dr.pdf}
+  \end{subfigure}
+  \caption{
+    Rate of fake tracks as a function of jet transverse momentum (left) and $\DeltaR(\textnormal{track}, \textnormal{jet})$ (right).
+    The rate of fake tracks increases significantly as a function of \pt, and also increases as the distance to the jet axis decreases, and the number of tracks in the jet increases (not shown).
+  }
+  \label{fig:fakerate_vs}
+\end{figure}
+
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.7\textwidth]{chapters/track_classifier/figs/sv1_perf_nofake.pdf}
@@ -224,17 +236,127 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
     \label{fig:sv1_perf_nofake}
 \end{figure}
 
+Inputs to the model are described in \cref{sec:model-inputs}, while fake track removal performance is given in \cref{sec:fake_track_mva_results}.
+
+\subsection{Model Inputs}\label{sec:model-inputs}
+
+%\newcommand{\ipdefsfootnote}{%
+%Impact parameter significances are defined as the IP divided by its corresponding uncertainty, $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
+%Track IP significances are lifetime signed according to the track's direction with respect to the jet axis and the primary vertex \cite{PERF-2012-04}.
+%}
+
+The fake track MVA is given two jet variables and 20 tracking related variables for each track fed into the network.\todo{copied from GN1, but fake track mva uses deta instead deta dphi}
+The jet transverse momentum and signed pseudorapidity constitute the jet-level inputs, with the track-level inputs listed in \cref{tab:fake_mva_track_inputs}.
+Full track parameter information and associated uncertainties, along with detailed hit information, carry valuable information about the jet flavour.
+
+\begin{table}[!htbp]
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \begin{tabular}{ll}
+    \toprule 
+    \textbf{Jet Input} & \textbf{Description} \\
+    \hline
+    $\pt$ & Jet transverse momentum \\
+    $\eta$ & Signed jet pseudorapidity \\
+    \toprule
+    \textbf{Track Input} & \textbf{Description} \\
+    \hline
+    $\pt$ & Track transverse momentum \\
+    $\DeltaR$ & Angular distance between the track and jet \\
+    $d_0$  & Closest distance from the track to the PV in the longitudinal plane \\
+    $z_0$  & Closest distance from the track to the PV in the transverse plane \\
+    nIBLHits   & Number of IBL hits \\
+    nPixHits   & Number of pixel hits \\
+    nSCTHits   & Number of SCT hits \\
+    nTRTHits   & Number of TRT hits \\
+    nBLHits    & Number of B-layer hits \\
+    nIBLShared & Number of shared IBL hits \\
+    nIBLSplit  & Number of split IBL hits \\
+    nPixShared & Number of shared pixel hits \\
+    nPixSplit  & Number of split pixel hits \\
+    nSCTShared & Number of shared SCT hits \\
+    nPixOutliers & Number of pixel outliers \\
+    nSCTOutliers & Number of SCT outliers \\
+    nTRTOutliers & Number of TRT outliers \\
+    $r$      & Radius of first hit \\
+    $nDOF$   & Number of degrees of freedom on the track \\
+    FracRank & Ambiguity solver ordering variable \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Input features to the \GNN model.
+    Basic jet kinematics, along with information about the reconstructed track parameters and constituent hits are used.
+    Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    The track leptonID is an additional input to the \GNNLep model.
+  }
+  \label{tab:fake_mva_track_inputs}
+\end{table}
+
+Track selection follows the loose selection described in \rcite{ATL-PHYS-PUB-2020-014} and outlined in \cref{tab:fake_track_mva_selections}, which was found to improve the flavour tagging performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate \cite{PERF-2015-08}.
+
+\begin{table}[!htbp]
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \begin{tabular}{ll}
+    \toprule 
+    \textbf{Parameter} & \textbf{Selection} \\
+    \hline
+    $\pt$                & $> 500$ MeV \\
+    $|d_0|$              & $< 3.5$ mm \\
+    $|z_0 \sin\theta|$   & $< 5$ mm \\
+    Silicon hits         & $\ge 8$ \\
+    Shared silicon hits  & $< 2$ \\
+    Silicon holes        & $< 3$ \\
+    Pixel holes          & $< 2$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{
+    Quality selections applied to tracks,
+    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
+    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
+    Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    }
+  \vspace{4mm}
+  \label{tab:fake_track_mva_selections}
+\end{table}
+
 
 \begin{itemize}
   \item network structure
   \item trained on x tracks
   \item train test
+  \item input variables
   \item samples -- borrow from gnn note
   \item performance plots
   \item impact on btagging
 \end{itemize}
 
-\section{Conclusion}
+\subsection{Results}\label{sec:fake_track_mva_results}
+
+\begin{table}[!htbp]
+  \footnotesize\centering
+  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+  \begin{tabular}{lllll}
+      \toprule
+      \multirow{2}{2cm}{MVA Output Cut} & \multicolumn{2}{l}{Good Track Efficiency} & \multicolumn{2}{l}{Fake Track Efficiency} \\
+      & All & FromB & All & FromB \\
+      \hline
+      0.06 & \pct{98.8} & \pct{98.9} & \pct{45.6} & \pct{39.8} \\
+      0.12 & \pct{97.3} & \pct{97.5} & \pct{59.4} & \pct{53.6} \\
+      \bottomrule
+  \end{tabular}
+  \caption{
+    Good and fake track selection efficiencies for the combined \ttbar and \Zprime samples.
+    Two working points are defined.
+  }
+  \label{tab:fake_track_mva_effs}
+\end{table}
+
+
+
+\section{Conclusion}\label{sec:fake_track_mva_conclusion}
 
 Fake tracks, which are prevalent in the core of high \pt jets, are shown to have an adverse impact on \btagging performance.
 A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being inputted to downstream \btagging algorithms.

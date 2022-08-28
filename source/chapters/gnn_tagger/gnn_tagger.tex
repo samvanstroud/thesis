@@ -111,13 +111,6 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{
-    Input features to the \GNN model.
-    Basic jet kinematics, along with information about the reconstructed track parameters and constituent hits are used.
-    Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
-    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-    The track leptonID is an additional input to the \GNNLep model.
-  }
   \begin{tabular}{ll}
     \toprule 
     \textbf{Jet Input} & \textbf{Description} \\
@@ -151,7 +144,13 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
     leptonID   & Indicates if track was used to reconstruct an electron or muon \\
     \bottomrule
   \end{tabular}
-  \vspace{4mm}
+  \caption{
+    Input features to the \GNN model.
+    Basic jet kinematics, along with information about the reconstructed track parameters and constituent hits are used.
+    Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
+    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
+    The track leptonID is an additional input to the \GNNLep model.
+  }
   \label{tab:track_inputs}
 \end{table}
 

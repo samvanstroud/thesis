@@ -256,24 +256,23 @@
 \fi
 
 %% ``DRAFT'' underprint and line numbering in draft mode (optional)
+\RequirePackage[pagewise]{lineno}
+%% hack for fixing line numbering 
+%% Patch 'normal' math environments:
+\newcommand*\linenomathpatch[1]{%
+  \cspreto{#1}{\linenomath}%
+  \cspreto{#1*}{\linenomath}%
+  \csappto{end#1}{\endlinenomath}%
+  \csappto{end#1*}{\endlinenomath}%
+}
+\linenomathpatch{equation}
+\linenomathpatch{gather}
+\linenomathpatch{multline}
+\linenomathpatch{align}
+\linenomathpatch{alignat}
+\linenomathpatch{flalign}
 \ifx\@requiredraft\@empty\else%
-  \RequirePackage[pagewise]{lineno}
   \RequirePackage{draftcopy}
-
-  %% hack for fixing line numbering 
-  %% Patch 'normal' math environments:
-  \newcommand*\linenomathpatch[1]{%
-    \cspreto{#1}{\linenomath}%
-    \cspreto{#1*}{\linenomath}%
-    \csappto{end#1}{\endlinenomath}%
-    \csappto{end#1*}{\endlinenomath}%
-  }
-  \linenomathpatch{equation}
-  %\linenomathpatch{gather}
-  %\linenomathpatch{multline}
-  %\linenomathpatch{align}
-  %\linenomathpatch{alignat}
-  %\linenomathpatch{flalign}
 \fi
 
 %% Index building (optional)

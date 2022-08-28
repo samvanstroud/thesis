@@ -61,6 +61,7 @@
 %% For websafe build we want hyperref and centred
 \ifx\@makeWeb\@empty\else%
   \PassOptionsToClass{oneside,hyperpdf}{hepthesis}%
+  \PassOptionsToPackage{running}{lineno}%
 \fi
 
 %% Load base class (options already passed)
@@ -189,9 +190,9 @@
 %%  - added linenumbers if in draft mode
 \let\@hepthesismainmatter\mainmatter
 \specialcomment{mainmatter}{%
-  \ifx\@makeDraft\@empty\else%
-    \linenumbers
-  \fi
+  \linenumbers
+  %\ifx\@makeDraft\@empty\else%  
+  %\fi
   \@mainmattertrue
   \adjustwidth{\@mainmatterextramargin}{\@mainmatterextramargin}%
   \begin{\@mainmatterspacing}%
