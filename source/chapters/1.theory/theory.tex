@@ -1,12 +1,5 @@
 \chapter{Theoretical Framework}\label{chap:theory}
 
-\begin{itemize}
-  \item Introduce sm
-  \item brief history
-  \item current areas of study
-  \item Reference relevenace to rest of thesis (studying hbb)
-\end{itemize}
-
 The Standard Model (SM) of particle physics is the theory describing all known elementary particles and their interactions via three of the four fundamental forces.
 Developed by merging the successful theories of quantum mechanics and relativity in the second half of the 20th century, the SM's position today at the centre of our understanding of the nature of the universe is firmly established by an unparalleled level of agreement between the predictions from the model and experimental results \cite{morel2020determination,sailer2022measurement}.
 
@@ -14,8 +7,9 @@ The SM has predicted the discovery of the top and bottom quarks \cite{CDF:1995wb
 The last missing piece of the SM to be discovered was the Higgs boson, first theorised in the 1960s \cite{Englert:1964et,Higgs:1964pj,Guralnik:1964eu}, and eventually observed at the LHC in 2012 \cite{HIGG-2012-27,CMS-HIG-12-028}.
 After its discovery, much ongoing work has been carried out performing detailed measurements of its mass and interactions with other particles.
 
-This thesis describes research to improve Higgs analysis to b quarks, by improving algorithm methods\dots
-
+This thesis describes various efforts in improving the understanding of the Higgs boson and its coupling to \bcquarks, primarily through the improvement of algorithmic tools, discussed in \cref{chap:track_classification_mva,chap:gnn_tagger}.
+Analysis work on \Hbb decays is also described in \cref{chap:vhbb_boosted}.
+In this chapter, an overview of the SM is given in \cref{sec:standard_model}, and a more detailed discussion of the Higgs sector and Higgs phenomenology is provided in \cref{sec:sm_higgs}.
 
 \section{The Standard Model}\label{sec:standard_model}
 
@@ -25,8 +19,8 @@ In this framework, particles are localised excitations of corresponding quantum 
 Central to QFT is the Lagrangian density which describes the kinematics and dynamics of a field.
 Observations of conserved quantities are linked, via Noether's theorem, to symmetries which are expressed by the Lagrangian.
 Alongside Global Poincar\'e symmetry, the SM Lagrangian observes a local non-Abelian $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ gauge symmetry.
-Gauge symmetries leave observable properties of the system unchanged when certain gauge transformations are applied to the fields.
-The full Lagrangain of the SM can be broken up into distinct terms corresponding to the different sectors.
+Gauge symmetries leave observable properties of the system unchanged when the corresponding gauge transformations are applied to the fields.
+The full Lagrangain of the SM can be broken up into distinct terms corresponding to the different sectors, as in \cref{eq:sm_lagrangian}.
 An overview of each sector is given in the following chapters.
 %
 \begin{equation}\label{eq:sm_lagrangian}
@@ -88,6 +82,7 @@ The SM contains $12$ \spinhalf fermions, listed in \cref{tab:sm_fermions}, and $
   \caption{
     The integer spin bosons of the SM \cite{Workman:2022ynf}.
     The photon, weak bosons and gluons are gauge bosons arising from gauge symmetries, and carry the four fundamental forces of the SM.
+    The recently discovered Higgs particle is the only scalar boson in the SM.
   }
   \label{tab:sm_bosons}
 \end{table}
@@ -104,6 +99,7 @@ The SM contains $12$ \spinhalf fermions, listed in \cref{tab:sm_fermions}, and $
 
 \subsection{Quantum Electrodynamics}\label{sec:qed}
 
+Quantum electrodynamics (QED) is the relativistic quantum theory which describes the interaction between lighted and charged matter.
 Consider a Dirac spinor field $\psi = \psi(x)$ and its adjoint $\overline{\psi} = \psi^\dagger \gamma^0$, where $\psi^\dagger$ denotes the Hermitian conjugate of $\psi$.
 The field $\psi$ describes fermionic \spinhalf particle, for example an electron.
 The Dirac Lagrangian density is
@@ -113,7 +109,7 @@ The Dirac Lagrangian density is
 \end{equation}
 %
 where $\slashed{\partial} = \gamma^\mu \partial_\mu$ denotes the contraction with the Dirac gamma matrices $\gamma^\mu$ (summation over up-down pairs of indices is assumed).
-Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation\todo{mention EoMs?}
+Application of the Euler-Lagrange equation on \cref{eq:dirac_lagrangian} yields the Dirac equation
 %
 \begin{equation}\label{eq:dirac_eq}
   (i \slashed{\partial}  - m )\psi = 0 .
@@ -140,22 +136,17 @@ The transformed interaction term
 \end{equation}
 %
 will then cancel the asymmetric term in \cref{eq:dirac_eq_transformed} as required.
-The $U(1)$ invariant Lagrangain can therefore be constructed by adding an interaction between $\psi$ and $A_\mu$ to \cref{eq:dirac_lagrangian}. The kinetic term for the the new field $A_\mu$ is also added in terms of $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$, which is trivially invariant under the transformation in \cref{eq:U(1)_transformation}.
-The interaction term is absorbed into the covariant derivative $D_\mu = \partial_\mu + i q A_\mu$, thus named as it transforms in the same way as the field $\psi$.
-This yields the QED Lagrangain
+The $U(1)$ invariant Lagrangain can therefore be constructed by adding an interaction between $\psi$ and $A_\mu$ to \cref{eq:dirac_lagrangian}. For completeness, the kinetic term for the the new field $A_\mu$ is also added in terms of $F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu$, which is trivially invariant under the transformation in \cref{eq:U(1)_transformation}.
+The interaction term is typically absorbed into the covariant derivative $D_\mu = \partial_\mu + i q A_\mu$, thus named as it transforms in the same way as the field $\psi$.
+Collecting these modifications to \cref{eq:dirac_lagrangian} yields the QED Lagrangain
 %
 \begin{equation}\label{eq:qed_lagrangian}
-  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D} - m )\psi ,
+  \mathcal{L}_{\textnormal{QED}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu} + \overline{\psi} (i \slashed{D} - m )\psi .
 \end{equation}
 %
 A quadratic term $A_\mu A^\mu$ is not invariant and therefore the the field $A_\mu$ must be massless.
-Requiring invariance under local $U(1)$ gauge transformations necessitated the addition of a new field $A_\mu$, corresponding to photons, which interact with charged matter. \todo{improve interpretation}
-
-
-
-
-
-
+Requiring invariance under local $U(1)$ gauge transformations necessitated the addition of a new field $A_\mu$, interpreted as the photon field, which interacts with charged matter.
+In the SM, the QED Lagrangain is absorbed into the electroweak sector, discussed in \cref{sec:ew_sector}.
 
 
 \subsection{Quantum Chromodynamics}\label{sec:qcd}
@@ -172,7 +163,7 @@ These span the space of infinitesimal group transformations and do not commute w
 %
 where $f_{abc}$ are the group's structure constants.
 Consider the six quark fields $q_k = q_k(x)$.
-Each flavour of quark $q_k$ transforms in the fundamental triplet representation, where each component of the triplet corresponds to a different value of the colour quantum number.
+Each flavour of quark $q_k$ transforms in the fundamental triplet representation, in which each component of the triplet corresponds to the colour quantum number for red, green and blue colour charged respectively.
 $G^{a}_{\mu\nu}$ are the eight gluon field strength tensors, one for each generator $T_a$, defined as
 %
 \begin{equation}\label{eq:qcd_field_strength_tensor}
@@ -198,12 +189,9 @@ Cubic and quartic terms of the gauge fields $A^a_\mu$ appear in the Lagrangian, 
 The QCD coupling constant $g_s$ varies, or ``runs'', with energy.
 At lower energy scales (and corresponding larger distance scales) the interaction is strong.
 This leads to quark confinement, whereby an attempt to isolate individual colour-charged quarks requires so much energy that additional quark-antiquark are produced.
-At higher energy scales (and corresponding smaller distance scales), asymptotic freedom occurs as the interactions become weaker, allowing perturbative calculations to be performned.
+At higher energy scales (and corresponding smaller distance scales), asymptotic freedom occurs as the interactions become weaker, allowing perturbative calculations to be performed.
 Hadrons are bound states of quarks.
-They are invariant under $SU(3)$ gauge transformations (i.e. are colour-charge neutral, or colourless).
-
-
-
+They are invariant under $SU(3)$ gauge transformations (i.e. are colour-charge neutral, or \textit{colourless}).
 
 
 
@@ -211,7 +199,8 @@ They are invariant under $SU(3)$ gauge transformations (i.e. are colour-charge n
 
 The weak and electromagnetic forces are unified in the Glashow-Weinberg-Salam (GWS) model of electroweak interaction \cite{Glashow:1961tr,Weinberg:1967tq,Salam:1968rm}.
 The Lagrangain is specified by requiring invariance under the symmetry group $SU(2)_L \otimes U(1)_Y$, as motivated by a large amount of experimental data.
-Here, $SU(2)_L$ is referred to as weak isospin and $U(1)_Y$ as weak hypercharge. (the product of the isospin and hypercharge groups.).
+Here, $SU(2)_L$ is referred to as weak isospin and $U(1)_Y$ as weak hypercharge.
+%(the product of the isospin and hypercharge groups.).
 
 The generators of $SU(2)_L$ are $T_a = \sigma_a/2$, where $\sigma_a$ are the three Pauli spin matrices which satisfy the commutation relation 
 %
@@ -223,41 +212,16 @@ The generator of $U(1)_Y$ is $Y = 1/2$.
 Each generator corresponds to a gauge field, which, after symmetry breaking (discussed in \cref{sec:sm_higgs}), give rise to the massive vector bosons, \Wpm and \Zboson, and the massless photon.
 The massive vector bosons are the carriers of the weak force, and are unique to the weak sector.
 Due to the mass of the force carriers, the weak force has a short range and so it appears weak even though its intrinsic strength is comparable to that of QED.
-The gauge bosons acquire mass through the Higgs mechanism, discussed in \cref{sec:sm_higgs}.
-\todo{why not mass by hand?}
+%The gauge bosons acquire mass through the Higgs mechanism, discussed in \cref{sec:sm_higgs}.
 
 The weak force violates parity conservation \cite{PhysRev.104.254,PhysRev.105.1413,PhysRev.105.1415}, i.e. invariance under parity transformations (mirror reflections).
 Only left handed fermions participate in the weak interaction.
-There are no right handed neutrinos in the standard model.
-\todo{add parity operator?}
+There are no right handed neutrinos in the standard model.\todo{elaborate}
+\todo{add parity operator def?}
 %The Standard Model incorporates parity violation by expressing the weak interaction as a chiral gauge interaction. Only the left-handed components of particles and right-handed components of antiparticles participate in weak interactions in the Standard Model. The weak force couples only to left handed particles in currents of the form $J^\mu = \overline{\nu}_e \gamma^\mu (1 - \gamma^5) e$ or $J^\mu = \overline{u} \gamma^\mu (1 - \gamma^5) \tilde{d}$. The $\tilde{d}$ state is due to the quark mixing: mass eigenstates are not the same as weak eigenstates.
 Furthermore, the weak sector exhibits CP violation.
 CP violation is one of the three necessary Sakharov conditions required to produce baryon asymmetry in the universe.
 Since the SM alone does not appear to have enough CP violation to generate the cosmologically observed matter-antimatter asymmetry, looking for signs of more experimental CP violation is considered to be a promising way to discover new physics.
-
-
-The physical particles are detected in their mass eigenstates $q$, which diagonalise the mass matrix, but interact via the weak in interaction according to their weak eigenstates $\tilde{q}$, which are superpositions of the mass eigenstates.
-%For example, the object that couples to the up quark is $\tilde{d} = V_{ud} d + V_{us} s$
-Quark mixing can be expressed using the Cabibbo-Kobayashi-Maskawa (CKM) matrix, which specifies the strength of flavour-changing weak currents.
-The entries in the matrix are enumerated as
-%
-\begin{equation}
-    \begin{bmatrix}
-        \tilde{d} \\ \tilde{s} \\ \tilde{b} 
-    \end{bmatrix}
-    = \begin{bmatrix}
-        V_{ud} & V_{us} & V_{ub} \\  
-        V_{cd} & V_{cs} & V_{cb} \\  
-        V_{td} & V_{ts} & V_{tb} 
-    \end{bmatrix}
-    \begin{bmatrix}
-        {d} \\ {s} \\ {b} 
-    \end{bmatrix} ,
-\end{equation}
-%
-% predicted to be unitary but experimentally may not be 3 sigma
-and size of the elements $|V_{pq}|^2$ measures the probability of a transition between states $p$ and $q$.
-
 
 The charge operator $Q$ can be written \todo{put somehwere else?}
 %
@@ -268,19 +232,21 @@ The charge operator $Q$ can be written \todo{put somehwere else?}
 
 
 
+
 \section{The Higgs Mechanism}\label{sec:sm_higgs}
 
-The Brout-Englert-Higgs mechanism (henceforth ``Higgs mechanism'') is the mechanism through which the fundamental particles of the SM acquire mass \cite{Englert:1964et,Higgs:1964pj,Guralnik:1964eu}.
+The Brout-Englert-Higgs mechanism (henceforth just ``Higgs mechanism'') is the mechanism through which the fundamental particles of the SM acquire mass \cite{Englert:1964et,Higgs:1964pj,Guralnik:1964eu}.
 Experimentally it was known that the weak force had a weak effective strength, which was suggestive of a massive mediating gauge particle.
 % heisenberg uncertainty principle - at low energies can borrow enough mass to create a mediator, but only for a short time, leading to short range
 However, directly adding mass to the weak gauge bosons violates the non-Abelian symmetry of the SM.
 Instead, the gauge bosons can gain mass through the interaction with a scalar Higgs field which results from the spontaneous breakdown of symmetry as discussed in \cref{sec:sm_ewsb}.
 Similarly, the Higgs mechanism gives mass to the fermions, as discussed in \cref{sec:higgs_yukawa_coupling}.
+\cref{sec:higgs_pheno} described some basic phenomenology of the Higgs particle relevant to hadron colliders.
 
 
 \subsection{Electroweak Symmetry Breaking}\label{sec:sm_ewsb}
 
-Spontaneous symmetry breaking (SSB) is a key part of the Higgs mechanism. It is the transition of a physical system from a state of manifest symmetry to a state of hidden, or ``broken'', symmetry. In particular, this applies to physical systems where the Lagrangian observes some symmetry, but the lowest energy vacuum states do not exhibit that same symmetry. In other words, the symmetry is broken for perturbations around the vacuum state.
+Spontaneous symmetry breaking (SSB) is a key part of the Higgs mechanism. It is the transition of a physical system from a state of manifest symmetry to a state of hidden, or \textit{broken}, symmetry. In particular, this applies to physical systems where the Lagrangian observes some symmetry, but the lowest energy vacuum states do not exhibit that same symmetry. In other words, the symmetry is broken for perturbations around the vacuum state.
 
 %
 \begin{figure}[!htbp]
@@ -308,10 +274,10 @@ where the covariant derivative is given by
 \end{equation}
 %
 and $T^a$ are the generators of $SU(2)$.
-The potential term $V(\phi)$ is made up of a quadratic and quartic term in the scalar field $\phi$, which contain an arbitrary parameter, respectively $\lambda$ and $\mu$.
+The potential term $V(\phi)$ is made up of a quadratic and quartic term in the scalar field $\phi$, which each contain an arbitrary parameter, respectively $\lambda$ and $\mu$.
 The quartic term gives the field self-interaction, and cannot be negative as this would lead to a potential that was unbounded from below.
 The quadratic term can be positive or negative.
-In the case where the quadratic term is positive, it is interpreted as a mass term for the scalar field
+In the case where the quadratic term is positive, it is interpreted as a mass term for the scalar field.
 By choosing $\mu^2 < 0$ the field becomes unphysical due to its negative mass.
 In order to obtain a physical interpretation of the Lagrangain in \cref{eq:sm_higgs_lagrangian} for the case where $\mu^2 < 0$, the field $\phi$ is expanded around the vacuum state.
 The vacuum expectation value (VEV) is expected value of the field $\phi$ which minimises the potential $V(\phi)$ (equivalently the expected value of the field operator $\phi$ when the system is in a vacuum state, $|\langle{\phi}\rangle_0|^2 \equiv |\bra{0} \phi \ket{0}|^2 \equiv \vev{\phi}$).
@@ -323,8 +289,10 @@ Minimising the potential gives a VEV of
 \end{equation}
 %
 Due to the shape of the potential in \cref{fig:higgs_potential}, there is degeneracy in the direction that the complex doublet $\phi$ points.
-As all the different vacuum states minimise the potential and therefore yield identical physics, so we can arbitrarily choose the state to lie along the second component of the doublet.
-Application of \cref{eq:charge_operator} shows this choice is manifestly invariant under, unbroken subgroup under which the ground state is invariant is $U(1)_Q$, generated by $Q$.
+As all the different vacuum states minimise the potential and therefore yield identical physics, one can arbitrarily choose the state to lie along the second component of the doublet.
+Application of \cref{eq:charge_operator} shows this choice is manifestly invariant under the charge operator.
+This allows the identification of the unbroken subgroup $U(1)_Q$,  under which the ground state is invariant.
+The generator of $U(1)_Q$ is the charge operator $Q$.
 %Different vacuum states are traversed by moving in flat directions of the potential.
 %Particles corresponding to fluctuations of the field along the flat directions in the potential are massless as they don't cost energy to attain.
 
@@ -336,11 +304,11 @@ Application of \cref{eq:charge_operator} shows this choice is manifestly invaria
 %introduced field (corresponding to a physical particle) gains mass.
 
 
-Adding the particle content back to the theory by expanding the field around the vacuum state, and making a transformation to the unitary gauge to remove unphysical would\nobreakdash-be Nambu-Goldstone modes (which arise in the context of global symmetries \cite{PhysRev.117.648,Goldstone1961FieldTW}) yields
+Adding the particle content back to the theory by expanding the field around the vacuum state, and making a transformation to the unitary gauge to remove unphysical would\nobreakdash-be Nambu-Goldstone modes (which arise in the context of global symmetries \cite{PhysRev.117.648,Goldstone1961FieldTW}), yields
 % adding particle content is performing a field substitution
 %transformation to the unitary gauge to regain physical interpretation
 %
-\begin{equation}
+\begin{equation}\label{eq:unitary_higgs}
   \phi = 
   \frac{1}{\sqrt{2}}
   \begin{bmatrix}
@@ -348,8 +316,8 @@ Adding the particle content back to the theory by expanding the field around the
   \end{bmatrix} ,
 \end{equation}
 %
-Where $H$ is a real scalar field, the ``true vacuum'' Higgs field.
-Substituting this into \cref{eq:sm_higgs_lagrangian} and identifying physical fields as quadratic terms of linear combinations, one can write the physical fields $W_\mu^\pm$, $Z_\mu$ and $A_\mu$ in terms of the original fields $A^a_\mu$ and $B_\mu$.
+Where $H$ is a real scalar field, the \textit{true vacuum} Higgs field.
+Substituting this into \cref{eq:sm_higgs_lagrangian} and identifying physical fields from the quadratic terms of linear combinations of unphysical fields, one can write the physical fields $W_\mu^\pm$, $Z_\mu$ and $A_\mu$ in terms of the original fields $A^a_\mu$ and $B_\mu$.
 %The physical fields are the natural mass eigenstates that yield quadratic terms of the form $m^2 \chi^\mu\chi_\mu$.
 This gives
 %
@@ -388,29 +356,29 @@ The Higgs mass is $m_H = v \sqrt{\lambda} = \mu$.
 
 This is the Higgs mechanism.
 It maintains the renormalisability and unitary of the SM whilst allowing the weak vector bosons to acquire mass.
-In summary, an unphysical complex scalar field $\phi$ with a nonzero VEV leads to spontaneous symmetry breaking from the full SM symmetry group $SU(3)_C \otimes SU(2)_L \otimes U(1)_Y$ to $SU(3)_C \otimes U(1)_\gamma$.
+In summary, an unphysical complex scalar field $\phi$ with a nonzero VEV leads to spontaneous symmetry breaking.
 Due to the non-Abelian symmetry breaking, would\nobreakdash-be massless Nambu-Goldstone modes, which arise after expansion around the true vacuum state, are exactly cancelled out by making a local gauge transformation to the unitary gauge, and instead are absorbed by the vector bosons, allowing them to acquire mass.
 
 This sector of the SM contains four fundamental parameters that must be taken from experiment.
 These can be specified by the Lagrangian parameters $g$, $g^\prime$, $v$ and $\lambda$ or the physically measurable parameters $m_Z$, $\sin\theta_W$, $m_H$ and $e$.
 In the local neighbourhood around the true vacuum, the macroscopic symmetry of the system is not realised, and therefore the physical particles do not obey the original symmetry. 
-However, information about the symmetry is retained through some additional constraints on the particles and their interactions.
-Prior to symmetry breaking, the potential contained two terms and two constants. After symmetry breaking we have three terms but still only two constants that relate these terms. This is the vestige of the original symmetry. %Because we have related $\mu$, $\lambda$ and $v$, when these would be three independent parameters if we had no symmetry.
+However, information about the symmetry is retained through some additional constraints on the parameters of the theory.
+Prior to symmetry breaking, the potential contained two terms and two constants. After symmetry breaking there are three terms but still only two constants that relate these terms. This is the vestige of the original symmetry. %Because we have related $\mu$, $\lambda$ and $v$, when these would be three independent parameters if we had no symmetry.
 %Note critically that symmetry places conditions on the two interaction terms, which are related to each other through the constants $\lambda$ and $v$. As $v$ already parameterises the mass of the field $f$, these two interaction terms are described by only one additional constant $\lambda$, when in general these terms could have their own independent coupling.
 
-Spontaneous symmetry breaking has taken us from $SU(2)_L \times U(1)_Y \rightarrow U(1)_{\gamma}$.
-Three broken generators of the symmetry group $U(2) = SU(2) \otimes U(1)$ have been absorbed into the definition of the physical weak vector bosons, giving them mass.
+Spontaneous symmetry breaking has modified the original symmetry group of the SM $SU(2)_L \times U(1)_Y \rightarrow SU(3)_C \otimes U(1)_Q$.
+Three broken generators from the symmetry group $SU(2)_L \times U(1)_Y$ have been absorbed into the definition of the physical weak vector bosons, giving them mass.
 The same methodology can be used to generate the fermion masses, as shown in the next section. 
 
 
 
-
-
 \subsection{Fermionic Yukawa Coupling}\label{sec:higgs_yukawa_coupling}
-\todo{unfinished}
+
 Adding the masses of the fermions by hand breaks the gauge invariance of the theory.
-%the necessity for fermion masses being generated in this way is different from that of the vector bosons, which cannot have locally invariant bilinear field terms in the Lagrangian. For the fermions, we cannot write a mass term due to the 
+%
 \begin{comment}
+the necessity for fermion masses being generated in this way is different from that of the vector bosons, which cannot have locally invariant bilinear field terms in the Lagrangian. For the fermions, we cannot write a mass term due to the 
+
 The reason is as follows: consider the standard \textbf{Dirac mass term} that we use to give mass to particles 
 %
 \begin{equation}\label{dirac mass term}
@@ -425,52 +393,109 @@ where the $\overline{\psi}_L \psi_L$ and $\overline{\psi}_R \psi_R$ vanish due t
 %
 Note that $\overline{\psi}_L = \overline{\psi_L}$. Now, \cref{dirac mass term} is note invariant under electroweak gauge transformations as the LH spinors transform under $SU(2)_L$ while RH spinors transform under $U(1)_Y$ (i.e. we could do an $SU(2)$ transformation that would affect $\psi_L$ but not $\psi_R$ which is clearly not invariant). 
 \end{comment}
-Instead, we can use a Yukawa coupling of the fermion fields with the Higgs field in order to generate mass terms after spontaneous electroweak symmetry breakdown \cite{Weinberg:1967tq}.
-In this way, the fermion masses are determined by the respective couplings to the Higgs field, and the VEV of the Higgs field itself, which sets the basic mass scale of the theory.
-
-If the $T = 1/2$ doublet $\phi$ has weak hypercharge $Y = 1/2$, then there is a unique renormalisable and gauge invariant coupling given by
 %
-\begin{equation}\label{eq:yukawa_coupling}
+Instead, we can use a Yukawa coupling between the fermion fields and the Higgs field in order to generate mass terms after spontaneous electroweak symmetry breakdown \cite{Weinberg:1967tq}.
+In this way, the fermion masses are determined by both the respective couplings to the Higgs field and the VEV of the Higgs field itself, which sets the basic mass scale of the theory.
+
+The Higgs field $\phi$ transforms as an $SU(2)$ doublet with $Y = 1/2$, as does the left-handed fermion field $\psi_L$.
+The right-handed fermion field $\psi_R$ transforms as an $SU(2)$ singlet.
+
+\subsubsection{Lepton Masses}
+
+The renormalisable and gauge invariant coupling between a fermionic field $\psi$ and a scalar Higgs field $\phi$ can be written as 
+%
+\begin{equation}\label{eq:yukawa_fermion_coupling}
   \mathcal{L}_{\textnormal{Yukawa}} = 
-  - G_f (\overline{\psi}_L \phi \psi_R + \overline{\psi}_R \phi \psi_L)
+  - g_f (\overline{\psi}_L \phi \psi_R + \overline{\psi}_R \phi^\dagger \psi_L) .
 \end{equation}
 %
+where $\psi_L = (\nu_L, e_L)$ and $\psi_R = e_R$ for the first generation leptons.
+After spontaneous symmetry breaking (see \cref{sec:sm_ewsb}), the scalar Higgs field in unitary gauge \cref{eq:unitary_higgs} consists of a VEV and the true vacuum Higgs field $H$.
+Substituting this in to \cref{eq:yukawa_fermion_coupling} yields
+%
+\begin{equation}\label{eq:lep_mass_term}
+  \mathcal{L}_{\textnormal{Yukawa}} = 
+  - \frac{v g_e}{\sqrt{2}} \overline{e} e
+  - \frac{g_e}{\sqrt{2}} \overline{e} H e ,
+\end{equation}
+%
+using $\overline{e} e = (\overline{e}_L + \overline{e}_R)(e_L + e_R) = \overline{e}_L e_R + \overline{e}_R e_L$.
+The VEV component of $\phi$ provides the first term in \cref{eq:lep_mass_term} which is quadratic in the electron field, and can therefore be identified as the electron mass term.
+An interaction term between the electron field $e$ and the true vacuum Higgs field $H$ is also present.
+Mass is generated for the other lepton generations in the same way.
 
+\subsubsection{Quark Masses}
 
-The Yukawa terms mix quarks of different generations. The indices on the $\Lambda$ matrix stand for the generations, and the elements of $\Lambda$ are complex valued.\todo{what is lambda}
-
-
-We start with the most general form of the coupling of the $T = 1/2$, $Y=1/2$ Higgs field $\phi$ to the quark fields. From $\phi$ we can form a conjugate field $\phi^c$ which transforms under $SU(2) \otimes U(1)_Y$ as a doublet with $Y = -1/2$,
+The down-type quarks acquire their mass analogous to the leptons, with $\psi_L = (u_L, d_L)$ and $\psi_R = d_R$ for the first quark generation.
+Mass is generated for the up-type quarks using the conjugate field to $\phi$ which transforms under $SU(2)$ as a doublet with $Y = -1/2$.
+The conjugate field $\tilde{\phi}$ is constructed as
 %
 \begin{equation}\label{phi c field definition}
-    \phi^c = i \sigma_2 \phi^* = 
+    \tilde{\phi} = 
+    i \sigma_2 \phi^\dagger = 
     \begin{bmatrix}
     0 & 1 \\ -1 & 0
     \end{bmatrix} 
     \begin{bmatrix}
     {\phi_1}^\dagger \\ {\phi_2}^\dagger
-    \end{bmatrix} = \begin{bmatrix}
-    {\phi_2}^\dagger \\ -{\phi_1}^\dagger
-    \end{bmatrix} .
+    \end{bmatrix} =
+    \frac{1}{\sqrt{2}}\begin{bmatrix}
+      v + H \\ 0
+    \end{bmatrix}
+    ,
 \end{equation}
 %
-We can see (???) that $\phi^c$ transforms under $SU(2)$ in the same way as $\phi$. The ground state of this conjugate field is 
+and transforms in the same way as $\phi$. 
+This field can be used to write an additional Yukawa coupling which provides mass for the up-type quarks in a similar way as before.
+%
+\begin{equation}\label{eq:up_quark_mass}
+  \mathcal{L}_{\textnormal{Yukawa}}^{\textnormal{up}} = 
+  - g_q (\overline{\psi}_L \tilde{\phi} \psi_R + \overline{\psi}_R \tilde{\phi}^\dagger \psi_L)
+\end{equation}
+%
+Considering the first generation of up-type quarks with $\psi_L = (u_L, d_L)$ and $\psi_R = u_R$, substitution into \cref{eq:up_quark_mass} yields 
 %
 \begin{equation}
-    {\phi_0}^c = \frac{1}{\sqrt{2}} \begin{bmatrix} v \\ 0 \end{bmatrix} .
+  \mathcal{L}_{\textnormal{Yukawa}}^{\textnormal{up}} = 
+  - \frac{v g_u}{\sqrt{2}} \overline{u} u
+  - \frac{g_u}{\sqrt{2}} \overline{u} H u .
 \end{equation}
 %
-The general gauge invariant expression for the coupling of the Higgs field to the quark fields is then of the form (???)
+The Yukawa terms mix quarks of different generations of lepton and quark.
+Physical particles are detected in their mass eigenstates $q$, which diagonalise the mass matrix, but interact via the weak in interaction according to their weak eigenstates $\tilde{q}$, which are superpositions of the mass eigenstates.
+This feature of the weak sector leads to mixing between different quarks and different leptons.
+%For example, the object that couples to the up quark is $\tilde{d} = V_{ud} d + V_{us} s$
+Quark mixing can be expressed using the Cabibbo-Kobayashi-Maskawa (CKM) matrix, which specifies the strength of flavour-changing weak currents.
+The entries in the matrix are enumerated as
 %
-\begin{equation}\label{quark mass term}
-    \mathcal{L}_{\phi, \text{quarks}} = - \sqrt{2} \left[ \overline{L}_N f^-_{NM} \phi R_{M-} +
-    \overline{L}_N f^+_{NM} \phi^c R_{M+} + \text{h.c.}
-    \right] ,
+\begin{equation}
+    \begin{bmatrix}
+        \tilde{d} \\ \tilde{s} \\ \tilde{b} 
+    \end{bmatrix}
+    = \begin{bmatrix}
+        V_{ud} & V_{us} & V_{ub} \\  
+        V_{cd} & V_{cs} & V_{cb} \\  
+        V_{td} & V_{ts} & V_{tb} 
+    \end{bmatrix}
+    \begin{bmatrix}
+        {d} \\ {s} \\ {b} 
+    \end{bmatrix} ,
 \end{equation}
 %
+% predicted to be unitary but experimentally may not be 3 sigma
+where the size of the elements $|V_{pq}|^2$ measures the probability of a transition between states $p$ and $q$.
+
+%%
+%\begin{equation}\label{quark mass term}
+%    \mathcal{L}_{\phi, \text{quarks}} = - \sqrt{2} \left[ \overline{L}_N f^-_{NM} \phi R_{M-} +
+%    \overline{L}_N f^+_{NM} \phi^c R_{M+} + \text{h.c.}
+%    \right] ,
+%\end{equation}
+%%
 
 
-\subsection{Higgs Phenomenology}
+
+\subsection{Higgs Phenomenology}\label{sec:higgs_pheno}
 
 
 As previous discussed in this section, the Higgs plays a key role in the SM, giving mass to fundamental particles. 
@@ -499,27 +524,31 @@ Leptons are clean signals to detect and trigger on.
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.7\linewidth]{chapters/1.theory/figs/plotAll_13tev_BSM_sqrt.pdf}
-  \caption{Higgs production cross sections as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$. At the Higgs mass $m_H = \SI{125}{\GeV}$, Higgs production is dominated by gluon-gluon fussion, vector boson fusion, and associated production with vector bosons. Uncertainties are shown in the shaded bands \cite{deFlorian:2016spz}.}
+  \caption{
+    Higgs production cross sections as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$ \cite{deFlorian:2016spz}.
+    Uncertainties are shown in the shaded bands.
+    At the Higgs mass $m_H = \SI{125}{\GeV}$, Higgs production is dominated by gluon-gluon fussion, vector boson fusion, and associated production with vector bosons.
+  }
   \label{fig:higgs_production_xs}
 \end{figure}
 
 
-Since the Higgs proportional to mass as already mentioned, decays to heavier particles are favoured.
+Since the Higgs couples proportional to mass as already mentioned, decays to heavier particles are favoured.
 The branching ratios of different Higgs decay modes are shown as a function of $m_H$ in \cref{fig:higgs_br}.
 Approximately \pct{60} of the time the Higgs decays to a pair of \bquarks, the dominant decay mode since the Higgs it not massive enough to decay to a pair for top quarks ($m_b = \SI{4.18}{\GeV}$ vs $m_t = \SI{173}{\GeV}$).
 The next heaviest fermions are the tau lepton and the \cquark, decays to pairs of these particles happen approximatesly an order of magnitude less often.
-
-Decays to pairs of vector bosons are via a virtual Higgs only, since the combined vector boson mass is greater than the Higgs mass.
-
+Decays to pairs of vector bosons are via a virtual off shell Higgs only, since the combined vector boson mass is greater than the Higgs mass.
 While the \Hgammagamma and $\PH \rightarrow \Zboson \Pphoton$ branching ratios are very small compared with fermionic decay modes (around \pct{0.2} for \Hgammagamma), these decay channels were instrumental in the initial discovery of the Higgs due to the low level of background processes which mimic the final state.
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.5\linewidth]{chapters/1.theory/figs/Higgs_BR_LM.pdf}
   \caption{
-    Higgs branching ratios as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$.
-    At the Higgs mass $m_H = \SI{125}{\GeV}$, the Higgs predominantly decays to a pair of \bquarks.
-    Uncertainties are shown in the shaded bands \cite{deFlorian:2016spz}.}
+    Higgs branching ratios as a function of Higgs mass $m_H$ at $\sqrt{s} = \SI{13}{\TeV}$ \cite{deFlorian:2016spz}.
+    Uncertainties are shown in the shaded bands.
+    At the Higgs mass $m_H = \SI{125}{\GeV}$, the Higgs predominantly decays to a pair of \bquarks, around \pct{60} of the time.
+    The subdominant decay mode is off shell to a pair of \Wboson bosons.
+    }
   \label{fig:higgs_br}
 \end{figure}
 
