@@ -206,7 +206,10 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
 
 To identify and remove fake tracks, a NN classification tool was trained with good tracks as the signal class and fake tracks as the background class.
 Due to the imbalance between the two classes (with fake tracks being relatively uncommon), a weight was added to the loss function for the background class to account for this.
-The NN was made up of two hidden layers with 100 nodes each. The ReLU activation function was used in conjunction with the Adam optimiser.
+The NN was made up of two hidden layers with 100 nodes per layer. 
+The ReLU activation function was used in conjunction with the Adam optimiser with a learning rate of $1e-3$.
+Optimisation of the networks architecture has been carried out to ensure good performance without a relatively small number of learnable parameters.
+The model was trained using \num{40} million tracks with a futher \num{1} million tracks each used for validation and testing.
 
 \begin{figure}[!htbp]
   \centering
@@ -237,6 +240,22 @@ The NN was made up of two hidden layers with 100 nodes each. The ReLU activation
 \end{figure}
 
 Inputs to the model are described in \cref{sec:fake_mva_model_inputs}, while fake track removal performance is given in \cref{sec:fake_track_mva_results}.
+
+\subsection{Datasets}\label{sec:track_classifier_datasets}
+
+To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ are used.
+The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays to an equal numbers of \bcl jets.
+The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pileup of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
+
+\newcommand{\hdampFootnote}{%
+The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
+
+The \ttbar events are generated using the \textsc{PowhegBox} \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} \textsc{v2} generator at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
+The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
+\Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
+The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
+Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
+
 
 \subsection{Model Inputs}\label{sec:fake_mva_model_inputs}
 
@@ -322,25 +341,37 @@ Track selection follows the loose selection described in \rcite{ATL-PHYS-PUB-202
   \label{tab:fake_track_mva_selections}
 \end{table}
 
+Inputs are scaled to have a central value of zero and a variance of unity before training and evaluation. 
 
-\begin{itemize}
-  \item network structure
-  \item trained on x tracks
-  \item train test
-  \item input variables
-  \item samples -- borrow from gnn note
-  \item performance plots
-  \item impact on btagging
-\end{itemize}
 
 \subsection{Results}\label{sec:fake_track_mva_results}
+
+Explain what a ROC is.
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/track_classifier_ouput.pdf}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/track_classifier_roc.pdf}
+  \end{subfigure}
+  \caption{
+    (left) A histogram of the model output separated for good and fake tracks, and further separated by those tracks which are from the decay of a \bhadron.
+    (right) The ROC curve for all tracks (solid line) and tracks from the decay of a \bhadron (dashed line).
+  }
+  \label{fig:track_classifier_output_roc}
+\end{figure}
 
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \begin{tabular}{lllll}
+  \begin{tabular}{ccccc}
       \toprule
-      \multirow{2}{2cm}{MVA Output Cut} & \multicolumn{2}{l}{Good Track Efficiency} & \multicolumn{2}{l}{Fake Track Efficiency} \\
+      \multirow{2}{2cm}{MVA Output Cut} & \multicolumn{2}{c}{Good Track Efficiency} & \multicolumn{2}{c}{Fake Track Efficiency} \\
       & All & FromB & All & FromB \\
       \hline
       0.06 & \pct{98.8} & \pct{98.9} & \pct{45.6} & \pct{39.8} \\
@@ -354,6 +385,28 @@ Track selection follows the loose selection described in \rcite{ATL-PHYS-PUB-202
   \label{tab:fake_track_mva_effs}
 \end{table}
 
+
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/track_classifier_result_lowpt.pdf}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/track_classifier_result_hipt.pdf}
+  \end{subfigure}
+  \caption{
+    The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of SV1 for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
+    The nominal SV1 \lrej (black) is compared to two working points of fake track removal (orange and red).
+    Removal of fake tracks based on truth information is shown by the green curves.
+  }
+  \label{fig:track_classifier_btag_effects}
+\end{figure}
+
+\todo{also show plots for JF?}
 
 
 \section{Conclusion}\label{sec:fake_track_mva_conclusion}

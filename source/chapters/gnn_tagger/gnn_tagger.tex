@@ -68,21 +68,9 @@ This note is organised as follows: a brief description of the ATLAS detector, ob
 
 \subsection{Datasets}\label{sec:datasets}
 
-To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ are used.
-The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays to an equal numbers of \bcl jets.
-The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pileup of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
+Datasets used to train the \GNN tagger are the same as described in \cref{sec:track_classifier_datasets}.
 
-\newcommand{\hdampFootnote}{%
-The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
-
-The \ttbar events are generated using the \textsc{PowhegBox} \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} \textsc{v2} generator at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
-The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
-\Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
-The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
-Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
-
-For the \ttbar events, at least one \Wboson boson from the top quark decay is required to decay leptonically.
-Truth labelled \bcl jets are kinematically re-sampled in \pt and $\eta$ to ensure identical distributions in these variables. 
+As previously, truth labelled \bcl jets are kinematically re-sampled in \pt and $\eta$ to ensure identical distributions in these variables. 
 The resulting dataset contains \njetstrain jets, \pct{60} of which are \ttbar jets and \pct{40} of which are \Zprime jets.
 While \DLr uses \pct{70} \ttbar jets and \pct{30} \Zprime jets, the change in sample composition did not affect the final performance of \GNN.
 To evaluate the performance of the model, \njetsval jets from both the \ttbar and \Zprime samples, which are statistically independent from the training sample, are used. 
