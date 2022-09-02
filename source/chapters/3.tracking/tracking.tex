@@ -230,6 +230,8 @@ Meanwhile, it is clear that for the B-layer, the ambiguity solver is being overl
 
 
 
+\begin{comment}
+
 \subsection{Looser Track Cuts \& Track Refit Procedure}\label{sec:bcut and refit}
 \todo{discuss whether to keep this section}
 A solution for the problem of wrong inner-layer hits on $B$ tracks had previously previously been developed. This solution selects tracks which pass a $b$-jet Region of Interest (ROI) selection, and then removes the innermost hits on these tracks based on the result of a ``refit'' procedure. The refit procedure runs as follows. Each track is refitted without the innermost hit, and if there is a significant improvement in the fit quality (the $\chi^2$ of the track fit divided by the number of degrees of freedom on the track $n$), the innermost hit is rejected and the new track is replaces the old. If the fit quality does not improve by a certain amount, the initial track is kept. This procedure is recursively applied. The $b$-jet ROI selection selects tracks that are matched within $dR < 0.14$ ($|\eta| < 0.1$, $|\phi| < 0.1$) of a CaloCluster with $E_T > 150$ GeV. The track itself must also pass a transverse momentum cut with \pT$>15$ GeV. The refit procedure was previously shown to lead to a reduction in the rate of wrongly assigned IBL hits on $B$ decay tracks (see \cref{fig:refit optimisation results sub2}). However, this apparent improvement did not lead to an increase in $b$-tagging performance. It was found that the refit procedure also removed unacceptable numbers of good hits, degrading the quality of un-problematic tracks, shown in \cref{fig:refit optimisation results sub1}. This is likely the cause of the underwhelming $b$-tagging performance improvement. 
@@ -311,6 +313,7 @@ The work outlined in the two preceding sections has uncovered issues with both t
 %
 Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to improve reconstruction performance. This consisted primarily of loosening the shared hit cuts in the ambiguity solver. While this did lead to a measurement increase in track reconstruction efficiency (see \cref{fig:b_track_eff}), it was determined that the corresponding increase in fake tracks (i.e. those tracks for which the majority of hits do not come from a single truth particle) was too large to justify the implementation of the ``Bcut'' scheme. In conclusion, then, a different approach is required to address the problems discussed.
 
+\end{comment}
 
 
 \subsection{Global \texorpdfstring{$\chi^2$}{chi2} Fitter Outlier Removal}\label{sec:gx2f_opt}
