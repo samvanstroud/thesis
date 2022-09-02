@@ -10,7 +10,9 @@ These auxiliary training objectives provide useful additional information on the
 For a \bjet efficiency of \pct{70}, the light ($c$)-jet rejection is improved by a factor of \ttbllo (\ttbclo) for jets coming from \ttbar decays with transverse momentum \ttbarpt.
 For jets coming from \Zprime decays with transverse momentum \Zprimept, the light ($c$)-jet rejection improves by a factor \zpbllo (\zpbclo) for a comparative \pct{30} \bjet efficiency.
 
-Work in this chapter has been published \cite{ATL-PHYS-PUB-2022-027}. Figures, tables and text from the published note are reproduced here.
+Work in this chapter has been published \cite{ATL-PHYS-PUB-2022-027}.
+The author of this thesis was on the editorial team.
+Figures, tables and text from the published note are reproduced here.
 
 
 \section{Motivation}\label{sec:gnn_motvation}
@@ -541,26 +543,54 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 \begin{figure}[!p]
     \centering
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_roc_ctag.pdf}
-    \caption{The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \ttbar jets with \ttbarpt.
-             The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
-             Binomial error bands are denoted by the shaded regions.
-             At $c$-jet tagging efficiencies than $\sim$\pct{25}, the \lrej becomes so large that the effect of the low number of jets is visible.
-             The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.}
+    \caption{
+        The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \ttbar jets with \ttbarpt.
+        The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
+        Binomial error bands are denoted by the shaded regions.
+        At $c$-jet tagging efficiencies than $\sim$\pct{25}, the \lrej becomes so large that the effect of the low number of jets is visible.
+        The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.
+    }
     \label{fig:ttbar_ctag_roc}
 \end{figure}
 
 \begin{figure}[!p]
    \centering
    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_roc_ctag.pdf}
-   \caption{The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \Zprime jets with \Zprimept.
-            The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
-            Binomial error bands are denoted by the shaded regions.
-            The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.}
+   \caption{
+        The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \Zprime jets with \Zprimept.
+        The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
+        Binomial error bands are denoted by the shaded regions.
+        The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.
+    }
    \label{fig:zprime_ctag_roc}
 \end{figure}
 
 
 
+\subsection{Jet Display Diagrams}
+
+\begin{figure}[!p]
+    \centering
+    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/bjet_vertex.pdf}
+    \caption{
+        A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
+        Vertices reconstructed by SV1 and JetFitter are also marked.
+    }
+    \label{fig:bjet_diag_1}
+ \end{figure}
+
+
+ \begin{figure}[!p]
+    \centering
+    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/bjet_vertex2.pdf}
+    \caption{
+        A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
+        Vertices reconstructed by SV1 and JetFitter are also marked.
+    }
+    \label{fig:bjet_diag_2}
+ \end{figure}
+
+ 
 
 \subsection{Ablations}\label{sec:gnn_ablations}
 
