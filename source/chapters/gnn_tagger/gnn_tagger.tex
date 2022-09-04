@@ -1,5 +1,9 @@
 \chapter{Graph Neural Network Flavour Tagger}\label{chap:gnn_tagger}
 
+Some of the work in this chapter has previously been published in \rcite{ATL-PHYS-PUB-2022-027}.
+The author of this thesis was on the editorial team.
+Figures, tables and text from the published note are reproduced here.
+
 Flavour tagging, the identification of jets originating from \bcquarks, is a critical component of the physics programme of the ATLAS experiment at the Large Hadron Collider. 
 Current flavour tagging algorithms rely on the outputs of several low-level algorithms, which reconstruct various properties of jets using charged particle tracks, that are then combined using machine learning techniques.
 In this note a new machine learning algorithm based on graph neural networks, \GNN, is introduced.
@@ -9,10 +13,6 @@ These auxiliary training objectives provide useful additional information on the
 \GNN compares favourably with the current ATLAS flavour tagging algorithms.
 For a \bjet efficiency of \pct{70}, the light ($c$)-jet rejection is improved by a factor of \ttbllo (\ttbclo) for jets coming from \ttbar decays with transverse momentum \ttbarpt.
 For jets coming from \Zprime decays with transverse momentum \Zprimept, the light ($c$)-jet rejection improves by a factor \zpbllo (\zpbclo) for a comparative \pct{30} \bjet efficiency.
-
-Work in this chapter has been published \cite{ATL-PHYS-PUB-2022-027}.
-The author of this thesis was on the editorial team.
-Figures, tables and text from the published note are reproduced here.
 
 
 \section{Motivation}\label{sec:gnn_motvation}
@@ -92,6 +92,7 @@ If a jet has more than 40 associated tracks, the first 40 tracks with the larges
 Full track parameter information and associated uncertainties, along with detailed hit information, carry valuable information about the jet flavour.
 In the dense cores of high-\pt jets, tracks are highly collimated and separation between tracks can be of the same order as the active sensor dimensions, resulting in merged clusters and tracks which share hits \cite{PERF-2015-08}.
 Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
+Full track parameter information and associated uncertainties, along with detailed hit information, carry valuable information about the jet flavour.
 
 Dependence on the absolute value of the azimuthal jet angle $\phi$ is explicitly removed by providing only the azimuthal angle of tracks relative to the jet axis. The track pseudorapidity is also provided relative to the jet axis.
 
@@ -103,7 +104,7 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
   \begin{tabular}{ll}
-    \toprule 
+    \toprule\hline 
     \textbf{Jet Input} & \textbf{Description} \\
     \hline
     $\pt$ & Jet transverse momentum \\
@@ -133,7 +134,7 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
     nPixHoles  & Number of pixel holes \\
     nSCTHoles  & Number of SCT holes \\
     leptonID   & Indicates if track was used to reconstruct an electron or muon \\
-    \bottomrule
+    \hline\bottomrule
   \end{tabular}
   \caption{
     Input features to the \GNN model.
@@ -145,35 +146,9 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
   \label{tab:track_inputs}
 \end{table}
 
-
-Track selection follows the loose selection described in Ref.~\cite{ATL-PHYS-PUB-2020-014} and outlined in~\cref{tab:track_selections}, which was found to improve the flavour tagging performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate~\cite{PERF-2015-08}.
-
-\begin{table}[!htbp]
-  \footnotesize\centering
-  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \begin{tabular}{ll}
-    \toprule 
-    \textbf{Parameter} & \textbf{Selection} \\
-    \hline
-    $\pt$                & $> 500$ MeV \\
-    $|d_0|$              & $< 3.5$ mm \\
-    $|z_0 \sin\theta|$   & $< 5$ mm \\
-    Silicon hits         & $\ge 8$ \\
-    Shared silicon hits  & $< 2$ \\
-    Silicon holes        & $< 3$ \\
-    Pixel holes          & $< 2$ \\
-    \bottomrule
-  \end{tabular}
-  \caption{
-    Quality selections applied to tracks,
-    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
-    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
-    Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
-    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-    }
-  \vspace{4mm}
-  \label{tab:track_selections}
-\end{table}
+Track selection follows the loose selection used for the fake track classification MVA in \cref{chap:track_classification_mva} and described in \cref{tab:fake_track_mva_selections}.
+This selection was found to improve the flavour tagging performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate~\cite{PERF-2015-08}.
+\cref{sec:looser_track_selection} demonstrates that further relaxation of the track selection requirements may be warranted. 
 
 
 \subsection{Auxiliary Training Objectives}\label{sec:aux-train-objectives}
@@ -287,13 +262,13 @@ A summary of the different classification networks used for the various training
       The hidden layers column contains a list specifying the number of neurons in each layer.
       }
   \begin{tabular}{lll}
-      \toprule 
+      \toprule\hline 
       \textbf{Network} & \textbf{Hidden layers} & \textbf{Output size} \\
       \hline
       Node classification network    & 128, 64, 32 & 7 \\
       Edge classification network    & 128, 64, 32 & 1 \\
       Graph classification network   & 128, 64, 32, 16 & 3 \\
-      \bottomrule
+      \hline\bottomrule
   \end{tabular}
   \vspace{4mm}
   \label{tab:architecture}
@@ -559,7 +534,7 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/bjet_vertex.pdf}
+    \includegraphics[width=0.95\textwidth]{chapters/gnn_tagger/figs/bjet_vertex.pdf}
     \caption{
         A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
         Vertices reconstructed by SV1 and JetFitter are also marked.
@@ -570,7 +545,7 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 
  \begin{figure}[!p]
     \centering
-    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/bjet_vertex2.pdf}
+    \includegraphics[width=0.95\textwidth]{chapters/gnn_tagger/figs/bjet_vertex2.pdf}
     \caption{
         A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
         Vertices reconstructed by SV1 and JetFitter are also marked.
@@ -801,25 +776,26 @@ Secondly, the jet classification and vertexing objectives can be considered auxi
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \caption{The area under the ROC curves (AUC) for the track classification from \GNN, compared to a standard multilayer perceptron (MLP) trained on a per-track basis. 
-            The unweighted mean AUC over the origin classes and weighted mean AUC (using as a weight the fraction of tracks from the given origin) is provided.
-            \GNN, which uses an architecture that allows track origins to be classified in a conditional manner as discussed in \cref{sec:Architecture}, outperforms the MLP model for both \ttbar and \Zprime jets.}
   \begin{tabular}{cccccccccc}
-      \toprule 
-      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{2}{c}{AUC}\\%                               & \multicolumn{2}{c}{Precision}                           & \multicolumn{2}{c}{Recall}                              & \multicolumn{2}{c}{F1}                                  \\
-      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted}\\% & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} \\
-      \cmidrule(lr){3-4}% \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
+      \toprule\hline 
+      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{2}{c}{AUC}\\                               & \multicolumn{2}{c}{Precision}                           & \multicolumn{2}{c}{Recall}                              & \multicolumn{2}{c}{F1}                                  \\
+      \multicolumn{1}{l}{}    & \multicolumn{1}{l}{} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted}\\ & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Weighted} \\
+      \cmidrule(lr){3-4} \cmidrule(lr){5-6} \cmidrule(lr){7-8} \cmidrule(lr){9-10}
 
       \multirow{2}{*}{\ttbar} & 
-      MLP & 0.87 & 0.89 \\ & %& 0.39 & 0.71 & 0.51 & 0.56 & 0.36 & 0.62 \\ & 
-      GN1 & \textbf{0.92} & \textbf{0.95} \\% & \textbf{0.51} & \textbf{0.82} & \textbf{0.64} & \textbf{0.70} & \textbf{0.51} & \textbf{0.74} 
+      MLP & 0.87 & 0.89 \\ & & 0.39 & 0.71 & 0.51 & 0.56 & 0.36 & 0.62 \\ & 
+      GN1 & \textbf{0.92} & \textbf{0.95} \\ & \textbf{0.51} & \textbf{0.82} & \textbf{0.64} & \textbf{0.70} & \textbf{0.51} & \textbf{0.74} 
       \\
       \multirow{2}{*}{\Zprime} & 
-      MLP & 0.90 & 0.94 \\ & %& 0.36 & 0.84 & 0.47 & 0.72 & 0.31 & 0.76 \\ &
-      GN1 & \textbf{0.94} & \textbf{0.96} \\% & \textbf{0.48} & \textbf{0.88} & \textbf{0.60} & \textbf{0.79} & \textbf{0.48} & \textbf{0.82} \\             
-      \bottomrule
+      MLP & 0.90 & 0.94 \\ & & 0.36 & 0.84 & 0.47 & 0.72 & 0.31 & 0.76 \\ &
+      GN1 & \textbf{0.94} & \textbf{0.96} \\ & \textbf{0.48} & \textbf{0.88} & \textbf{0.60} & \textbf{0.79} & \textbf{0.48} & \textbf{0.82} \\             
+      \hline\bottomrule
   \end{tabular}
-  \vspace{4mm}
+  \caption{
+    The area under the ROC curves (AUC) for the track classification from \GNN, compared to a standard multilayer perceptron (MLP) trained on a per-track basis. 
+    The unweighted mean AUC over the origin classes and weighted mean AUC (using as a weight the fraction of tracks from the given origin) is provided.
+    \GNN, which uses an architecture that allows track origins to be classified in a conditional manner as discussed in \cref{sec:Architecture}, outperforms the MLP model for both \ttbar and \Zprime jets.
+  }
   \label{tab:track_classification_metrics}
 \end{table}
 
@@ -869,4 +845,4 @@ Further studies need to be undertaken to verify the performance of \GNN on colli
 
 
 \section{Extensions}
-\subsection{Looser Track Selection}
+\subsection{Looser Track Selection}\label{sec:looser_track_selection}
