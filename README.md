@@ -8,3 +8,9 @@ export PATH=/cvmfs/sft.cern.ch/lcg/external/texlive/latest/bin/x86_64-linux:$PAT
 cd source 
 make
 ```
+
+To get a word count use
+
+```bash
+texcount -total -inc thesis.tex
+```
