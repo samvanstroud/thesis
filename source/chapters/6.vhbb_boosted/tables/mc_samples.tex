@@ -1,0 +1,100 @@
+\begin{table}[tb!]
+    \begin{center}{\fontsize{7}{7.9}\selectfont
+    \begin{tabular}{llllll} 
+      \toprule
+    Process & ME generator & ME PDF &PS and & UE model & Cross-section \hspace{2.5cm}\\
+    & & & Hadronisation & tune & order\\ 
+    \toprule
+    \multicolumn{6}{l}{Signal ($m_H = 125$~GeV and $b\bar{b}$ branching fraction set to 58\%)} \\
+    \midrule
+     $qq\to WH\to\ell\nu b\bar{b}$  &\textsc{Powheg-Box v2}~\cite{Alioli:2010xd} +&
+    NNPDF3.0NLO$^{(\star)}$~\cite{Ball:2014uwa} &\PYTHIAV{8.212}~\cite{Sjostrand:2014zea} & AZNLO~\cite{Aad:2014xaa} & NNLO(QCD)+  \\
+            &   \textsc{GoSam}~\cite{Cullen:2011ac} + \textsc{MiNLO}~\cite{Hamilton:2012np,Luisoni:2013kna}  & & & &NLO(EW)~\cite{Ciccolini:2003jy,Brein:2003wg,Ferrera:2011bk,Brein:2011vx,Ferrera:2013yga,Ferrera:2014lca,Campbell:2016jau} \\
+    $qq\to ZH\to\nu\nu b\bar{b}/\ell\ell b\bar{b}$ &\textsc{Powheg-Box v2} + & NNPDF3.0NLO$^{(\star)}$ &\PYTHIAV{8.212} & AZNLO & NNLO(QCD)$^{(\dagger)}$+  \\
+            &   \textsc{GoSam} + \textsc{MiNLO}  & & & &NLO(EW) \\
+    $gg  \to ZH\to\nu\nu b\bar{b}/\ell\ell b\bar{b}$ &\textsc{Powheg-Box v2} & NNPDF3.0NLO$^{(\star)}$ &\PYTHIAV{8.212} & AZNLO & NLO+  \\
+            &  & & & &NLL~\cite{Altenkamp:2012sx,Hespel:2015zea,Harlander:2014wda,Harlander:2013mla,Brein:2012ne}\\
+    \midrule
+    \multicolumn{6}{l}{Top quark ($m_t = 172.5$~\GeV)}  \\
+    \midrule
+    $t\bar{t}$ &\textsc{Powheg-Box v2}~\cite{Alioli:2010xd,Frixione:2007nw} &  NNPDF3.0NLO &\PYTHIAV{8.230} &A14~\cite{ATL-PHYS-PUB-2014-021}& NNLO+NNLL~\cite{Czakon:2011xx} \\
+    $s$-channel &\textsc{Powheg-Box v2}~\cite{Alioli:2009je,Alioli:2010xd} & NNPDF3.0NLO &\PYTHIAV{8.230} &A14 & NLO~\cite{Kidonakis:2010tc} \\
+    $t$-channel &\textsc{Powheg-Box v2}~\cite{Alioli:2009je,Alioli:2010xd} & NNPDF3.0NLO &\PYTHIAV{8.230} &A14& NLO~\cite{Kidonakis:2011wy} \\
+    $Wt$ &\textsc{Powheg-Box v2}~\cite{Re:2010bp,Alioli:2010xd} & NNPDF3.0NLO &\PYTHIAV{8.230} &A14& Approximate NNLO~\cite{Kidonakis:2010ux} \\
+    \midrule
+    \multicolumn{6}{l}{Vector boson + jets} \\
+    \midrule
+    $W\to\ell\nu$ & \textsc{Sherpa 2.2.1}~\cite{Gleisberg:2008ta,Bothmann:2019yzt,Cascioli:2011va,Gleisberg:2008fv} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1}~\cite{Schumann:2007mg,Hoeche:2012yf} & Default & NNLO~\cite{Catani:2009sm}  \\
+    $Z/\gamma^{*}\to\ell\ell$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NNLO    \\
+    $Z\to\nu\nu$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NNLO    \\
+    \midrule
+    \multicolumn{6}{l}{Diboson} \\
+    \midrule
+    $qq \to WW$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    $qq \to WZ$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    $qq \to ZZ$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    $gg \to VV$ & \textsc{Sherpa 2.2.2} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.2} & Default & NLO  \\
+    \bottomrule
+    \end{tabular}}
+    %\begin{tabular}{llllll} 
+    %  \toprule
+    %\hspace*{0.3cm} Process & ME generator & ME PDF &PS and & UE model & Cross-section \hspace{2.5cm}\\
+    %& & & Hadronisation & tune & order\\ 
+    %\midrule
+    %\multicolumn{6}{l}{Signal ($m_H = 125$~GeV)\ and $b\bar{b}$ branching fraction to 58\%} \\
+    % \midrule
+    %\hspace*{0.3cm} $qq\ensuremath{\rightarrow} WH$  &\textsc{Powheg-Box v2}~[69] +&
+    %NNPDF3.0NLO$^{(\star)}$~[70] &\PYTHIAV{8.212}~[61] & AZNLO~[71] & NNLO(QCD)+  \\
+    %\hspace*{0.5cm} $\ensuremath{\rightarrow}\ell\nu b\bar{b}$&   \textsc{GoSam}~[72] + \textsc{MiNLO}~[73,74]  & & & &NLO(EW)~[75--81] \\
+    %\hspace*{0.3cm} $qq\ensuremath{\rightarrow} ZH$ &\textsc{Powheg-Box v2} + & NNPDF3.0NLO$^{(\star)}$ &\PYTHIAV{8.212} & AZNLO & NNLO(QCD)$^{(\dagger)}$+  \\
+    %\hspace*{0.5cm}$\ensuremath{\rightarrow}\nu\nu b\bar{b}/\ell\ell b\bar{b}$&   \textsc{GoSam} + \textsc{MiNLO}  & & & &NLO(EW) \\
+    %\hspace*{0.3cm} $gg  \ensuremath{\rightarrow} ZH$ &\textsc{Powheg-Box v2} & NNPDF3.0NLO$^{(\star)}$ &\PYTHIAV{8.212} & AZNLO & NLO+  \\
+    %\hspace*{0.5cm}$\ensuremath{\rightarrow}\nu\nu b\bar{b}/\ell\ell b\bar{b}$&  & & & &NLL~[82--86]\\
+    %\midrule
+    %\multicolumn{6}{l}{Top quark, mass set to 172.5~GeV}  \\
+    %\midrule
+    %\hspace*{0.3cm} $t\bar{t}$ &\textsc{Powheg-Box v2}~[87] &  NNPDF3.0NLO &\PYTHIAV{8.230} &A14~[88]& NNLO+NNLL~[89] \\
+    %\hspace*{0.3cm} $s$-channel &\textsc{Powheg-Box v2}~[90] & NNPDF3.0NLO &\PYTHIAV{8.230} &A14 & NLO~[91] \\
+    %\hspace*{0.3cm} $t$-channel &\textsc{Powheg-Box v2}~[90] & NNPDF3.0NLO &\PYTHIAV{8.230} &A14& NLO~[92] \\
+    %\hspace*{0.3cm} $Wt$ &\textsc{Powheg-Box v2}~[93] & NNPDF3.0NLO &\PYTHIAV{8.230} &A14& Approximate NNLO~[94] \\
+    %\midrule
+    %\multicolumn{6}{l}{Vector boson + jets} \\
+    %\midrule
+    %\hspace*{0.3cm} $W\ensuremath{\rightarrow}\ell\nu$ & \textsc{Sherpa 2.2.1}~[64, 95, 96] & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1}~[97, 98] & Default & NNLO~[99]  \\
+    %\hspace*{0.3cm} $Z/\gamma^{*}\ensuremath{\rightarrow}\ell\ell$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NNLO    \\
+    %\hspace*{0.3cm} $Z\ensuremath{\rightarrow}\nu\nu$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NNLO    \\
+    %\midrule
+    %\multicolumn{6}{l}{Diboson} \\
+    %\midrule
+    %\hspace*{0.3cm} $qq \ensuremath{\rightarrow} WW$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    %\hspace*{0.3cm} $qq \ensuremath{\rightarrow} WZ$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    %\hspace*{0.3cm} $qq \ensuremath{\rightarrow} ZZ$ & \textsc{Sherpa 2.2.1} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.1} & Default & NLO  \\
+    %\hspace*{0.3cm} $gg \ensuremath{\rightarrow} VV$ & \textsc{Sherpa 2.2.2} & NNPDF3.0NNLO &  \textsc{Sherpa 2.2.2} & Default & NLO  \\
+    %\bottomrule
+    %\end{tabular}}
+    \caption
+    {
+      %The generators used for the simulation of the signal and background
+      %processes. 
+      Signal and background processes with the corresponding generators used for the nominal samples. 
+      If not specified, the order of the cross-section
+      calculation refers to the expansion in the strong coupling constant
+      ($\alphas$).  $(\star)$ The
+      events were generated using the first PDF in the NNPDF3.0NLO set and
+      subsequently reweighted to the PDF4LHC15NLO
+      set~\cite{Butterworth:2015oua} using the internal algorithm in
+      \textsc{Powheg-Box v2}.  $(\dagger)$ The NNLO(QCD)+NLO(EW)
+      cross-section calculation for the $pp \to ZH$ process already
+      includes the $gg\to ZH$ contribution.  The $qq\to ZH$ process is
+      normalised using the cross-section for the $pp \to ZH$ process,
+      after subtracting the $gg\to ZH$ contribution. An additional scale
+      factor is applied to the $qq \rightarrow VH$ processes as a function
+      of the transverse momentum of the vector boson, to account for
+      electroweak (EW) corrections at NLO\@. This makes use of the $VH$
+      differential cross-section computed with
+      \textsc{Hawk}~\cite{Denner:2011id,Denner:2014cla}.
+      \protect}
+    \label{tab:vhbb_samples}
+    \end{center}
+\end{table}
+    

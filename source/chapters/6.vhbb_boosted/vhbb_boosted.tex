@@ -1,74 +1,21 @@
 \chapter{Boosted VHbb Analysis}\label{chap:vhbb_boosted}
 
-This work has been published in \rcite{HIGG-2018-52}.
-Figures and tables are reproduced here.
-\todo{also cite internal note?}
+The Higgs boson, discovered at the LHC in 2012 \cite{HIGG-2012-27,CMS-HIG-12-028}, is predicted by the standard model to decay primarily to two \bquarks, with a branching factor of $0.582 \pm 0.007$ \cite{deFlorian:2016spz}. 
+Observation of this decay mode was reported by \ATLAS \cite{HIGG-2018-04} and \CMS \cite{CMS-HIG-18-016} in 2018.
+Whilst the dominant Higgs production mechanism at the LHC is gluon-gluon fusion as outlined in \cref{sec:higgs_pheno}, this mechanism has an overwhelming QCD multijet background and so overall sensitivity to the Higgs is low.
+The \hbb observation therefore searched for Higgs bosons produced in association with a vector boson (\Wboson or \Zboson).
+This production mechanism results in leptonic final states from the decay of the vector boson, allowing for leptonic triggering, whilst at the same time significantly reducing the multi-jet background.
+
+A closely related analysis \cite{HIGG-2018-52} measured the associated production of a Higgs boson decaying to \bquarks in events where the vector and Higgs bosons are highly boosted.
+The analysis is outlined in \cref{sec:vhbb_overview}.
+Modelling studies are listed in \cref{sec:vhbb_modelling}, and the results of the analysis are presented in \cref{sec:vhbb_results}.
+The author contributed to various signal and background modelling studies, fit studies, and to the diboson unblinding effort.
+This analysis has been published in \rcite{HIGG-2018-52}.
+Figures and tables from \rcite{HIGG-2018-52} are reproduced here.
+\todo{cite internal note?}
 
 \begin{comment}
-Paper abstract :
-The associated production of a Higgs boson with a $W$ or $Z$ boson
-decaying into leptons and where the Higgs boson decays to a $\bbbar$
-pair is measured in the high vector-boson transverse momentum regime,
-above \SI{250}{\GeV}, with the ATLAS detector. The analysed data,
-corresponding to an integrated luminosity of \intlumi, were collected
-in proton--proton collisions at the Large Hadron Collider between
-2015 and 2018 at a centre-of-mass energy of \sqsthirt. The measured
-signal strength, defined as the ratio of the measured signal yield to
-that predicted by the Standard Model, is $0.72 ^{+0.39}_{-0.36}$
-corresponding to an observed (expected) significance of 2.1 (2.7)
-standard deviations. Cross-sections of associated production of a
-Higgs boson decaying into $b$ quark pairs with a $W$ or $Z$ gauge
-boson, decaying into leptons, are measured in two exclusive
-vector boson transverse momentum regions, 250--\SI{400}{\GeV} and above \SI{400}{\GeV}, and
-interpreted as constraints on anomalous couplings in the framework of
-a Standard Model effective field theory.
-
-Final states containing zero, one and two charged
-leptons (electrons or muons) are considered. targeting the
-decays \Znn, \Wln\ and \Zll. The \hbb\ decay is reconstructed using a
-jet with transverse momentum $p_{\mathrm{T}} > \SI{250}{\GeV}$, found with
-the \antikt $R = 1.0$ jet algorithm, and groomed to remove soft
-and wide-angle radiation and to mitigate contributions from the
-underlying event and additional proton-proton collisions. Higgs
-bosons are identified using $b$-tagged $R = 0.2$ track-jets matched
-to the groomed \largeR\ calorimeter jets. 
-
-%For a Higgs boson mass of \SI{125}{\GeV}, an excess of events over the expected background from other Standard Model processes is found
-%with an observed significance of $3.5$ standard deviations, compared to an expectation of $3.0$
-%standard deviations. This excess provides evidence for the Higgs boson decay into b-quarks
-%and for its production in association with a vector boson. Assuming the Standard Model production 0.19
-%cross-section, the results are consistent with the value of the Yukawa coupling to b-quarks in the Standard Model.
-
-\end{comment}
-
-
-\section{Overview}
-
-Lifted from old Vhbb preamble chapter:
-
-The Higgs boson, discovered at the LHC in 2012, is predicted by the standard model to decay primarily to two $b$ quarks, with a branching factor of $0.582 \pm 0.007$ \cite{deFlorian:2016spz}. 
-Observation of this decay mode was recently reported by \ATLAS \cite{HIGG-2018-04}. Whilst the dominant Higgs production mode at the LHC is gluon-gluon fusion as outlined in \cref{sec:higgs_pheno}, this mode has an overwhelming QCD multijet background and so sensitivity to the Higgs is low. The \hbb observation therefore searched for Higgs bosons produced in association with a vector boson (W or Z). This production mechanism results in leptonic final states from the decay of the vector boson, allowing for leptonic triggering, whilst at the same time significantly reducing the multi-jet background. 
-
-A closely related analyses now searches for the \hbb decay of the Higgs boson, produced in association with a vector boson, when the vector boson and Higgs are highly boosted. The full Run-2 dataset is used for a total integrated luminosity of 139 fb$^{-1}$. The analysis is split into 0-, 1- and 2-lepton channels depending on the number of selected electrons and muons, to target the $\text{ZH} \rightarrow \nu\nu bb$, $\text{WH} \rightarrow \ell\nu bb$, $\text{ZH} \rightarrow \ell\ell bb$ processes, respectively, where $\ell$ is an electron or muon. In all channels, events are required to have exactly two $b$-tagged jets, which form the Higgs boson candidate. At least one of the $b$-tagged jets is required to have \pT greater than 45 GeV. Events are further split into 2-jet or 3-jet categories depending on whether additional, untagged jets are present. 
-
-In the 0- and 1-lepton channels, the analysis is further split into signal and control regions. To leading order, there are no additional $b$-jets in the event other than the two coming from the reconstructed Higgs candidate. For this reason, there is a signal region veto (i.e. events are not accepted into the signal region) for events with additional $b$-tagged jets in the event. Events with additional $b$-tagged jets are included in the control region, which is highly pure in \ttbar events. The control region is used to constrain the normalisation of the \ttbar background.
-
-
-\begin{comment}
-
-Lifted from paper:
-
-Since the discovery of the Higgs boson
-($H$)~\cite{Englert:1964et,Higgs:1964ia,Higgs:1964pj,Guralnik:1964eu}
-with a mass of around \SI{125}{\GeV}\cite{HIGG-2014-14} by the ATLAS
-%with a mass of around 125~\GeV~\cite{Tanabashi:2018oca} by the ATLAS
-and CMS Collaborations~\cite{HIGG-2012-27,CMS-HIG-12-028} in 2012,
-the analysis of proton--proton ($pp$) collision data at centre-of-mass
-energies of \SI{7}{TeV}, \SI{8}{TeV} and \SI{13}{\TeV} delivered by the Large Hadron
-Collider (LHC)~\cite{Evans:2008zzb} has led to precise
-measurements of the main production cross-sections and decay rates of
-the Higgs boson, as well as measurements of its mass and its spin and
-parity properties. In particular, the observation of the decay of the
+  In particular, the observation of the decay of the
 Higgs boson into $b$-quark pairs provided direct evidence for the
 Yukawa coupling of the Higgs boson to down-type
 quarks~\cite{HIGG-2018-04,CMS-HIG-18-016}.  Finally, a combination
@@ -81,42 +28,12 @@ the observation of this production process~\cite{HIGG-2018-04}.
 A first cross-section measurement as a
 function of the vector-boson transverse momentum was also carried out
 by the ATLAS Collaboration~\cite{HIGG-2018-50}.
-%, in the framework of ‘simplified template cross sections'
-%(STXS), using
-%the same dataset and jet reconstruction techniques.
-
-
 
 %In particular, the observation of the decay of the
 %Higgs boson to $b$-quark pairs when produced in association with a leptonically decaying $W$ or $Z$ boson provided direct
 %evidence for the Yukawa coupling of the Higgs boson to down-type quarks
 %and also established the observation of this production
 %process
-
-
-%an expected branching fraction of approximately 58\% for a mass of
-%$\mh=125$~\GeV\ was discovered in 2018 when produced in association
-%with a $W$ or $Z$ boson ($VH$) using data collected at Run~2 in 2015,
-%2016 and 2017, and at Run~1
-%precise measurement of its
-%mass (of approximately 125\,\GeV), its  Since then, the analysis of data
-%collected has led to the observation of many of the production modes
-%and decay channels predicted by the Standard Model (SM).
-%As well as probing the dominant decay of
-%the Higgs boson, this measurement allows the overall Higgs boson decay
-%width~\cite{Lafaye:2009vr,Heinemeyer:2013tqa} to be constrained and
-%provides the best sensitivity to the $ZH$ and $WH$ production modes,
-%which are (for instance) important elsements in the interpretation of
-%Higgs boson measurements in effective field
-%theories~\cite{Ellis:2014dva}.
-
-%The previous measurement of this decay allowed to probe the kinematic
-%properties of the Higgs boson in the low transverse momentum regime
-%($\pt<250$ \GeV) ~\cite{HIGG-2018-04,CMS-HIG-18-016}
-
-%however the
-%additional data collected in Run-2 allow us to access a new kinematic
-%regime at high transverse momentum, called the boosted regime.
 
 The previous ATLAS analyses~\cite{HIGG-2018-04,HIGG-2018-50} in this
 channel were mainly sensitive to vector bosons with transverse
@@ -134,6 +51,83 @@ $R=1.0$~\cite{Butterworth:2008iy}.
 This high-\pt\ regime is particularly interesting due to
 its sensitivity to physics beyond the Standard
 Model~\cite{Mimasu:2015nqa}.
+\end{comment}
+
+
+\section{Analysis Overview}\label{sec:vhbb_overview}
+
+The boosted \VHbb analysis is focused on the high transverse momentum regime.\todo{why interesting?}
+As such, the reconstructed vector boson is required to have $\ptv > \SI{250}{\GeV}$.
+Events are split into two \ptv bins with the first bin covering $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and the second covering $\ptv > \SI{400}{\GeV}$.
+The full \runtwo dataset at \come{13} is used for a total integrated luminosity of \intlumi.
+
+On top of the binning in \ptv, the events are further categorised into 0-, 1- and 2-lepton channels depending on the number of selected charged leptons (electrons and muons) are present in the reconstructed final state.
+The 0-lepton channel targets the $\Zboson \higgs \rightarrow \nu\nu \bbbar$ process, the 1-lepton channel targets $\Wboson \higgs \rightarrow \ell\nu \bbbar$, while the 2-lepton channel targets $\Zboson \higgs \rightarrow \ell\ell \bbbar$, where $\ell$ is an electron or muon and $\nu$ is a neutrino.
+In all channels, events are required to have exactly two \btagged $R=0.2$ trackjets (see \cref{sec:jet_reco}), which are used to reconstruct the Higgs boson candidate.
+At least one of the \btagged jets is required to have \pT greater than 45 GeV.
+Events are further split into 2-jet or 3-jet categories depending on whether additional untagged jets are present. 
+
+%  The \hbb\ decay is reconstructed using a
+% jet with transverse momentum $p_{\mathrm{T}} > \SI{250}{\GeV}$, found with
+% the \antikt $R = 1.0$ jet algorithm, and groomed to remove soft
+% and wide-angle radiation and to mitigate contributions from the
+% underlying event and additional proton-proton collisions. Higgs
+% bosons are identified using \btagged $R = 0.2$ track-jets matched
+% to the groomed \largeR\ calorimeter jets. 
+
+\subsection{Analsysis Selections}
+
+%
+\input{chapters/6.vhbb_boosted/tables/event_selection.tex}
+%
+
+\subsection{Signal and Control Regions}
+
+In the 0- and 1-lepton channels, the analysis is split into signal and control regions.
+The signal region (SR) should contain the events with Higgs candidates, while the control region (CR) is pure in \ttbar events and hence used to constrain the normalisation of the \ttbar background.
+
+To leading order, there are no additional $b$-jets in the event other than the two coming from the reconstructed Higgs candidate, which are inside the \largeR jet.
+For this reason, there is a signal region veto (i.e. events are not accepted into the signal region) for events with additional \btagged jets in the event.
+Events with additional \btagged jets outside the \largeR jet are included in the control region.
+In this case, the Higgs candidate (the \largeR jet containing two \btagged trackjets) is likely to be built from the boosted hadronic decay of a top quark (i.e. $t \rightarrow Wb$).
+An additional \btagged jet from the other top quark is likely to be present in the event.
+, which is highly pure in \ttbar events.
+
+
+  
+\begin{comment}
+
+Lifted from paper intro:
+
+Since the discovery of the Higgs boson
+($H$)~\cite{Englert:1964et,Higgs:1964ia,Higgs:1964pj,Guralnik:1964eu}
+with a mass of around \SI{125}{\GeV}\cite{HIGG-2014-14} by the ATLAS
+%with a mass of around 125~\GeV~\cite{Tanabashi:2018oca} by the ATLAS
+and CMS Collaborations~\cite{HIGG-2012-27,CMS-HIG-12-028} in 2012,
+the analysis of proton--proton ($pp$) collision data at centre-of-mass
+energies of \SI{7}{TeV}, \SI{8}{TeV} and \SI{13}{\TeV} delivered by the Large Hadron
+Collider (LHC)~\cite{Evans:2008zzb} has led to precise
+measurements of the main production cross-sections and decay rates of
+the Higgs boson, as well as measurements of its mass and its spin and
+parity properties. 
+
+%an expected branching fraction of approximately 58\% for a mass of
+%$\mh=125$~\GeV\ was discovered in 2018 when produced in association
+%with a $W$ or $Z$ boson ($VH$) using data collected at Run~2 in 2015,
+%2016 and 2017, and at Run~1
+%precise measurement of its
+%mass (of approximately 125\,\GeV), its  Since then, the analysis of data
+%collected has led to the observation of many of the production modes
+%and decay channels predicted by the Standard Model (SM).
+%As well as probing the dominant decay of
+%the Higgs boson, this measurement allows the overall Higgs boson decay
+%width~\cite{Lafaye:2009vr,Heinemeyer:2013tqa} to be constrained and
+%provides the best sensitivity to the $ZH$ and $WH$ production modes,
+%which are (for instance) important elsements in the interpretation of
+%Higgs boson measurements in effective field
+%theories~\cite{Ellis:2014dva}.
+
+
 
 %An
 %interesting regime where additional corrections to the high invariant
@@ -204,7 +198,7 @@ results can therefore not be straightforwardly combined.
 %reconstruction of secondary vertices, are associated.
 
 %to determine
-%associated with the \largeR jet are $b$-tagged, i.e.\ if they contain
+%associated with the \largeR jet are \btagged, i.e.\ if they contain
 %$b$-hadron decay products.
 
 %The approach to tagging presented in this
@@ -249,36 +243,15 @@ anomalous couplings in a Standard Model effective field theory
 \end{comment}
 
 
-\section{Analysis Overview}
+\section{MC Samples}
 
-VhbbNice as final state is leptonic so clean. Analysis is split into regions
-%
-\begin{itemize}
-    \item 0-lepton
-    \item 1-lepton
-    \item 2-lepton
-\end{itemize}
-%
-Events are categorised into the 0-, 1- and 2-lepton channels depending on the number of selected electrons and muons, to target the $ZH \rightarrow vvb\overline{b}$, $WH \rightarrow \ell \nu b \overline{b}$ and $ZH \rightarrow \ell \ell b \overline{b}$ signatures, respectively. In all
-channels, events are required to have exactly two b-tagged jets, which form the Higgs boson candidate. At least one b-tagged jet is required to have pT greater than 45 GeV. Events are further split into 2-jet or 3-jet categories depending on whether additional, untagged jets are present. In the 0- and 1-lepton channels, only one such jet is allowed, as the $t \overline{t}$ background is much larger in events with four jets or more. In the 2-lepton channel any number of jets is accepted in the 3-jet category.
+\input{chapters/6.vhbb_boosted/tables/mc_samples.tex}
 
-MVA is meant to discriminate in data between signal and background. It is trained using MC. The MVA output is cut on to define signal regions.
-MVAs are an evolution of cut based techniques to increasing signal discrimination. Discoveries are made by observing an excess of some process. However signal excesses in comparison to the background can be vanishingly small. Comparing the total number of events that occurred at ATLAS without and without Higgs events would be a fractional percent increase, and would be destroyed by systematic and statistical uncertainties. So, we need to look for an excess after selecting for those events which are most likely to be signal. If we understand how much background this selection process allows through, we can quantify the signal gain over the expected background.
-
-
-
-\begin{itemize}
-  \item \textbf{Signal region:} where you expect Higgs candidates to be. There might be contamination with other processes: the SR will not be 100\% pure. To LO, there are no additional $b$-jets outside the large-R jet that corresponds to the reconstructed Higgs candidate. So, there is a signal region veto (i.e. events are not accepted into the signal region if) for events with additional b-tagged jets in the event.
-  %
-  \item \textbf{Control region:} there is a $t\overline{t}$ control region. Here, the Higgs candidate will most likely be built from boosted hadronic decay of the top ($t\rightarrow Wb$). An additional b-jet from the other top-quark will decay still somewhere in the event. Obtain a ttbar CR in 0L and 1L by requiring additional b-tags outside the large-R jet.
-\end{itemize}
-
-
-\section{Modelling Work}
+\section{Modelling Studies}\label{sec:vhbb_modelling}
 
 \subsection{Background}
 %
-\input{chapters/6.vhbb_boosted/tables/sources_of_uncertainty}
+\input{chapters/6.vhbb_boosted/tables/sources_of_uncertainty.tex}
 %
 \subsubsection{Alternative Samples}
 As mentioned, alternative samples of V+jets events was generated using \textsc{MadGraph5\_aMC@NLO+Pythia8}, and the results are compared with the nominal \textsc{Sherpa 2.2.1} samples. This allows for a comparison of different parton showering and underlying event models, and derivation of the systematic uncertainties on the nominal choice of models.
@@ -344,9 +317,32 @@ Modelling is used to predict the outcomes of the analysis and to assess the impa
 
 
 
-\section{Fit Studies}
+\section{Results}\label{sec:vhbb_results}
+
+\begin{comment}
+  paper abstract
+  The measured
+  signal strength, defined as the ratio of the measured signal yield to
+  that predicted by the Standard Model, is $0.72 ^{+0.39}_{-0.36}$
+  corresponding to an observed (expected) significance of 2.1 (2.7)
+  standard deviations. Cross-sections of associated production of a
+  Higgs boson decaying into $b$ quark pairs with a $W$ or $Z$ gauge
+  boson, decaying into leptons, are measured in two exclusive
+  vector boson transverse momentum regions, 250--\SI{400}{\GeV} and above \SI{400}{\GeV}, and
+  interpreted as constraints on anomalous couplings in the framework of
+  a Standard Model effective field theory.
+
+  %For a Higgs boson mass of \SI{125}{\GeV}, an excess of events over the expected background from other Standard Model processes is found
+  %with an observed significance of $3.5$ standard deviations, compared to an expectation of $3.0$
+  %standard deviations. This excess provides evidence for the Higgs boson decay into b-quarks
+  %and for its production in association with a vector boson. Assuming the Standard Model production 0.19
+  %cross-section, the results are consistent with the value of the Yukawa coupling to b-quarks in the Standard Model.
+\end{comment}
+
+
 
 \subsection{Fit Model}
+
 A global profile likelihood fit is used to extract the signal strength $\mu$ and its significance from the data. This statistical setup treats each bin as a Poisson counting experiment. The combined likelihood over $N$ bins, without considering sources of systematic uncertainty, is given by
 %
 \begin{equation}
@@ -356,7 +352,7 @@ A global profile likelihood fit is used to extract the signal strength $\mu$ and
 where $s_i$ ($b_i$) is the expected number of signal (background) events in bin $i$, and $n_i$ is the number of events observed in data in bin $i$. The presence of systematic uncertainties which can affect the expected numbers of signal and background events necessitates the addition of nuisance parameters (NPs), $\theta$, to the likelihood. Each source of systematic uncertainty for V+jets samples discussed in the previous section was implemented as a NP $\theta_j$ in the fit. The presence of NPs modifies the likelihood as 
 %
 \begin{equation}
-    \mathcal{L}(\mu) \rightarrow \mathcal{L}(\mu, \theta) = \mathcal{L}(\mu) \times \mathcal{L}(\theta) ~,~~~~ s_i \rightarrow s_i(\theta) ~,~~~~ b_i \rightarrow b_i(\theta),
+    \mathcal{L}(\mu) \rightarrow \mathcal{L}(\mu, \theta) = \mathcal{L}(\mu) \times \mathcal{L}(\theta) , \quad s_i \rightarrow s_i(\theta) , \quad b_i \rightarrow b_i(\theta),
 \end{equation}
 %
 where
@@ -365,28 +361,34 @@ where
     \mathcal{L}(\theta) = \prod_{\theta_j \in \theta} \frac{\exp\left[{-\theta_j^2/2}\right]}{\sqrt{2\pi}}.
 \end{equation}
 %
+
+
+\subsection{Post-fit Results}
+
 Post-fit $m_J$ distributions in the high-purity medium \pTV regions for the 0- and 2-lepton channels are shown in \cref{fig:vhbb postfit plots}. The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
-%
+
 \begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{.4\textwidth}
     \centering
-    \begin{subfigure}{.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMax400_BMin250_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_J0_GlobalFit_conditionnal_mu1.pdf}
-      \caption{}
-      \label{fig:vhbb postfit plots sub1}
-    \end{subfigure}%
-    \begin{subfigure}{.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L2_T2_DSR_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_conditionnal_mu1.pdf}
-      \caption{}
-      \label{fig:vhbb postfit plots sub2}
-    \end{subfigure}
-    \vspace{-0.5em}
-    \caption{Post-fit distributions for the 0-lepton (\ref{fig:vhbb postfit plots sub1}) and 2-lepton (\ref{fig:vhbb postfit plots sub2}) channels in the high purity medium \pTV region, obtained in the combined conditional $\mu=1$ fit to data. The last bin of each plot is an overflow bin.}
-    \label{fig:vhbb postfit plots}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMax400_BMin250_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_J0_GlobalFit_conditionnal_mu1.pdf}
+  \end{subfigure}%
+  \begin{subfigure}{.4\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L2_T2_DSR_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_conditionnal_mu1.pdf}
+  \end{subfigure}
+  \caption{
+    Post-fit distributions for the 0-lepton (left) and 2-lepton (right) channels in the high purity medium \pTV region, obtained in the combined conditional $\mu=1$ fit to data. The last bin of each plot is an overflow bin.
+  }
+  \label{fig:vhbb postfit plots}
 \end{figure}
-%
+
+
+\input{chapters/6.vhbb_boosted/tables/mu_systs.tex}
+
 
 \section{Conclusion}
 
 Work has been carried out as part of the boosted VHbb analysis group to understand, and implement in the global profile likelihood fit, systematic uncertainties on V+jets samples. This background modelling work is an essential part of the success of the analysis. So far the fit has proved stable with the inclusion of the V+jets uncertainties, and detailed studies are now underway to determine the causes behind any observed pulls of the added NPs. Additional work is ongoing to help with the derivation of uncertainties on diboson samples, another important background. The analysis is already advanced, and is now progressing into its final stages. Publication is expected in the new year.
+
+This analysis would benefit greatly from the improved high \pt \btagging enabled by \GNN.
