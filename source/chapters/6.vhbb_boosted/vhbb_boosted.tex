@@ -39,7 +39,6 @@ to the groomed \largeR\ calorimeter jets.
 %and for its production in association with a vector boson. Assuming the Standard Model production 0.19
 %cross-section, the results are consistent with the value of the Yukawa coupling to b-quarks in the Standard Model.
 
-
 \end{comment}
 
 
@@ -48,14 +47,14 @@ to the groomed \largeR\ calorimeter jets.
 Lifted from old Vhbb preamble chapter:
 
 The Higgs boson, discovered at the LHC in 2012, is predicted by the standard model to decay primarily to two $b$ quarks, with a branching factor of $0.582 \pm 0.007$ \cite{deFlorian:2016spz}. 
-Observation of this decay mode was recently reported by ATLAS \cite{HIGG-2018-04}. Whilst the dominant Higgs production mode at the LHC is gluon-gluon fusion, this mode has an overwhelming QCD multijet background and so sensitivity to the Higgs is low. The \hbb observation therefore searched for Higgs bosons produced in association with a vector boson (W or Z). This production mechanism results in leptonic final states from the decay of the vector boson, allowing for leptonic triggering, whilst at the same time significantly reducing the multi-jet background. 
+Observation of this decay mode was recently reported by \ATLAS \cite{HIGG-2018-04}. Whilst the dominant Higgs production mode at the LHC is gluon-gluon fusion as outlined in \cref{sec:higgs_pheno}, this mode has an overwhelming QCD multijet background and so sensitivity to the Higgs is low. The \hbb observation therefore searched for Higgs bosons produced in association with a vector boson (W or Z). This production mechanism results in leptonic final states from the decay of the vector boson, allowing for leptonic triggering, whilst at the same time significantly reducing the multi-jet background. 
 
 A closely related analyses now searches for the \hbb decay of the Higgs boson, produced in association with a vector boson, when the vector boson and Higgs are highly boosted. The full Run-2 dataset is used for a total integrated luminosity of 139 fb$^{-1}$. The analysis is split into 0-, 1- and 2-lepton channels depending on the number of selected electrons and muons, to target the $\text{ZH} \rightarrow \nu\nu bb$, $\text{WH} \rightarrow \ell\nu bb$, $\text{ZH} \rightarrow \ell\ell bb$ processes, respectively, where $\ell$ is an electron or muon. In all channels, events are required to have exactly two $b$-tagged jets, which form the Higgs boson candidate. At least one of the $b$-tagged jets is required to have \pT greater than 45 GeV. Events are further split into 2-jet or 3-jet categories depending on whether additional, untagged jets are present. 
 
 In the 0- and 1-lepton channels, the analysis is further split into signal and control regions. To leading order, there are no additional $b$-jets in the event other than the two coming from the reconstructed Higgs candidate. For this reason, there is a signal region veto (i.e. events are not accepted into the signal region) for events with additional $b$-tagged jets in the event. Events with additional $b$-tagged jets are included in the control region, which is highly pure in \ttbar events. The control region is used to constrain the normalisation of the \ttbar background.
 
 
-\section{Introduction}
+\begin{comment}
 
 Lifted from paper:
 
@@ -247,10 +246,32 @@ anomalous couplings in a Standard Model effective field theory
 %‘stage 1’ results are presented in two kinematic fiducial volumes:
 %$250<\ptv>450~\GeV$ and $\ptv>450~\GeV$.
 
+\end{comment}
+
+
+\section{Analysis Overview}
+
+VhbbNice as final state is leptonic so clean. Analysis is split into regions
+%
+\begin{itemize}
+    \item 0-lepton
+    \item 1-lepton
+    \item 2-lepton
+\end{itemize}
+%
+Events are categorised into the 0-, 1- and 2-lepton channels depending on the number of selected electrons and muons, to target the $ZH \rightarrow vvb\overline{b}$, $WH \rightarrow \ell \nu b \overline{b}$ and $ZH \rightarrow \ell \ell b \overline{b}$ signatures, respectively. In all
+channels, events are required to have exactly two b-tagged jets, which form the Higgs boson candidate. At least one b-tagged jet is required to have pT greater than 45 GeV. Events are further split into 2-jet or 3-jet categories depending on whether additional, untagged jets are present. In the 0- and 1-lepton channels, only one such jet is allowed, as the $t \overline{t}$ background is much larger in events with four jets or more. In the 2-lepton channel any number of jets is accepted in the 3-jet category.
+
+MVA is meant to discriminate in data between signal and background. It is trained using MC. The MVA output is cut on to define signal regions.
+MVAs are an evolution of cut based techniques to increasing signal discrimination. Discoveries are made by observing an excess of some process. However signal excesses in comparison to the background can be vanishingly small. Comparing the total number of events that occurred at ATLAS without and without Higgs events would be a fractional percent increase, and would be destroyed by systematic and statistical uncertainties. So, we need to look for an excess after selecting for those events which are most likely to be signal. If we understand how much background this selection process allows through, we can quantify the signal gain over the expected background.
 
 
 
-
+\begin{itemize}
+  \item \textbf{Signal region:} where you expect Higgs candidates to be. There might be contamination with other processes: the SR will not be 100\% pure. To LO, there are no additional $b$-jets outside the large-R jet that corresponds to the reconstructed Higgs candidate. So, there is a signal region veto (i.e. events are not accepted into the signal region if) for events with additional b-tagged jets in the event.
+  %
+  \item \textbf{Control region:} there is a $t\overline{t}$ control region. Here, the Higgs candidate will most likely be built from boosted hadronic decay of the top ($t\rightarrow Wb$). An additional b-jet from the other top-quark will decay still somewhere in the event. Obtain a ttbar CR in 0L and 1L by requiring additional b-tags outside the large-R jet.
+\end{itemize}
 
 
 \section{Modelling Work}
