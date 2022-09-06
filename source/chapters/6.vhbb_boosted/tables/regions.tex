@@ -1,0 +1,34 @@
+\begin{table}[!htbp]\small
+	\footnotesize\centering
+    \setlength{\tabcolsep}{0.5em} % for the horizontal padding
+    \setlength{\extrarowheight}{2pt}
+	\begin{tabular}{ l | c | c | c | c | c | c}
+		\toprule\hline
+		%\hline
+		%\multirow{3}{*}{Channel}  & \multicolumn{6}{c}{Categories for both $250<p_T^V<\SI{400}{\GeV}$\ and $p_T^V \geq \SI{400}{\GeV}$} \\
+		\multirow{3}{*}[-4em]{\textbf{Channel}}  & \multicolumn{6}{c}{\textbf{Analysis Regions}} \\
+		\cline{2-7}  & \multicolumn{3}{c|}{$250<\ptv<\SI{400}{\GeV}$} & \multicolumn{3}{c}{$\ptv \geq \SI{400}{\GeV}$} \\
+		%\cline{2-7}  & \multicolumn{2}{c}{0 add. $b$-tagged track-jets & \multicolumn{2}{c}{$\geq1$ add. $b$-tagged track-jets} & \multicolumn{2}{c}{0 add. $b$-tagged track-jets & \multicolumn{2}{c}{$\geq1$ add. $b$-tagged track-jets}\\
+		\cline{2-7}  & \multicolumn{2}{c|}{\shortstack{0 add. $b$-track-jets }} & \multirow{2}{*}{\shortstack{$\geq1$ add. \\$b$-track-jets}} &  \multicolumn{2}{c|}{\shortstack{0 add. $b$-track-jets}} &  \multirow{2}{*}{\shortstack{$\geq1$ add.\\ $b$-track-jets}}\\
+		
+		\cline{2-3}
+		\cline{5-6}
+		& \shortstack{0 add. \\ small-\textit{R} jets}  & \shortstack{ $\geq1$ add.\\ small-\textit{R} jets}  &  &  \shortstack{0 add. \\ small-\textit{R} jets}  & \shortstack{$\geq1$ add. \\ small-\textit{R} jets} &  \\
+		\hline\hline
+		0-lepton      & HP SR  & LP SR & CR   & HP SR & LP SR  & CR   \\
+		\hline
+		1-lepton      & HP SR  & LP SR & CR   & HP SR & LP SR  & CR   \\
+		\hline
+		 2-lepton & \multicolumn{3}{c|}{SR} & \multicolumn{3}{c}{SR} \\
+         \hline\bottomrule
+	\end{tabular}
+    \caption{Summary of the
+	definition of the analysis regions. Signal enriched regions
+	are marked with the label SR. There are regions with
+	relatively large signal purity (HP SR) and with low purity (LP
+	SR). Background enriched regions are marked with the label
+	CR. The shorthand ``add'' stands for additional \smallR\ jets,
+	i.e. number of \smallR\ jets not matched to the Higgs-jet
+	candidate.}  \setlength{\extrarowheight}{1pt}
+	\label{tab:SR_CR_definition}
+\end{table}
