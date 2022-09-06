@@ -53,23 +53,31 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
 
 \section{Coordinate System \& Collider Definitions}
 
-\subsection{ATLAS Coordinate System}
+This section introduces the coordinate system used at \ATLAS in \cref{sec:coord_sys}.
+The parameterisation used for the specifying the trajectory of charged particle tracks is described in \cref{sec:track_parameterisation}, and definitions for some frequently occurring concepts and quantities is provided in \cref{sec:collider_defs}.
 
-%% from https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
-% ATLAS coordinate system
-ATLAS uses a right-handed coordinate system with its origin at the nominal interaction point in the centre of the detector and the \axis{z} along the beam pipe. The \axis{x} points from the interaction point to the centre of the LHC ring, and the \axis{y} points upwards. Cylindrical coordinates \((r,\phi)\) are used in the transverse plane, \(\phi\) being the azimuthal angle around the \axis{z}. The pseudorapidity is defined in terms of the polar angle \(\theta\) as \(\eta = -\ln \tan(\theta/2)\). Angular distance is measured in units of \(\DeltaR \equiv \sqrt{(\Delta\eta)^{2} + (\Delta\phi)^{2}}\).\todo{this is from pubcom}
+\subsection{\ATLAS Coordinate System}\label{sec:coord_sys}
 
+%% based on https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
+
+The origin of the coordinate system used by \ATLAS is at the nominal interaction point in the centre of the detector.
+As shown in \cref{fig:atlas_coord_system}, the \axis{z} points in the forward direction along the beam pipe, while the \axis{x} points from the interaction point to the centre of the LHC ring, and the \axis{y} points upwards.
 The transverse plane lies in $x$\nobreakdash-$y$ while the longitudinal plane lies along the \axis{z}.
-%
+A cylindrical coordinate system with coordinates $(r,\phi)$ is used in the transverse plane, where $r$ is the radius from the origin and $\phi$ is the azimuthal angle around the \axis{z}.
+
 \begin{figure}[!htbp]
   \centering
   \input{chapters/2.detector/figs/atlas_coord_system.tex}
   \caption{
-    The coordinate system used at the ATLAS detector, showing the locations of the four main experiments located at various points around the LHC.
+    The coordinate system used at the \ATLAS detector, showing the locations of the four main experiments located at various points around the LHC.
+    The 3-vector momentum $\bm{p} = (p_x, p_y, p_z)$ is shown by the red arrow.
     Reproduced from \rcite{Strong:2020mge}.
   }
   \label{fig:atlas_coord_system}
 \end{figure}
+
+
+%The pseudorapidity is defined in terms of the polar angle $\theta$ as $\eta = -\ln \tan(\theta/2)$.
 
 The polar angle $\theta$ is commonly specified in terms of the pseudorapidity $\eta$, defined as
 %
@@ -77,33 +85,59 @@ The polar angle $\theta$ is commonly specified in terms of the pseudorapidity $\
   \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right] .
 \end{equation}
 %
-Differences in $\eta$ are invariant under Lorentz boosts. Particle production is constant as a function of $\eta$.
-%particle production is constant as a function of rapidity, and because differences in rapidity are Lorentz invariant under boosts along the longitudinal axis: they transform additively, similar to velocities in Galilean relativity. A
+The pseudorapidity is a convenient quantity to work with as differences in $\eta$ are invariant under Lorentz boosts.
+In addition, particle production is constant as a function of $\eta$.
 
-The transverse momentum \pt is the sum in quadrature of the momenta in the transverse plane
+The transverse momentum \pt of an object is the sum in quadrature of the momenta in the transverse plane
 %
 \begin{equation}\label{eq:pt}
   \pt = \sqrt{ {p_x}^2 + {p_y}^2 } .
 \end{equation}
 
+Angular distance between two objects is measured in units of $\DeltaR$ and defined as the sum in quadrature of the $\eta$ and $\phi$ displacements as in
+%
+\begin{equation}\label{eq:delta_r}
+  \DeltaR = \sqrt{(\Delta\eta)^{2} + (\Delta\phi)^{2}} .
+\end{equation}
+%
+
+
+
+\subsection{Track Parameterisation}\label{sec:track_parameterisation}
+
+The trajectories of charged particle tracks are specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
 Transverse and longitudinal impact pararameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to the origin.
 The transverse IP \dzero and longitudinal IP \zzero are measured with respect to the hard scatter primary vertex (see \cref{sec:vertex_reco}).
+$\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track divided by the scalar 3-momentum.
+\cref{fig:track_params} shows each of these parameters diagrammatically.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.85\textwidth]{chapters/2.detector/figs/track_params.pdf}
+  \caption{
+    The track parameterisation used at the \ATLAS detector.
+    Five coordinates $(\dzero, \zzero, \phi, \theta, q/p)$ are specified, defined at the point closest approach of the track to the nominal interaction point at the origin of the coordinate system.
+  }
+  \label{fig:track_params}
+\end{figure}
+
 Impact parameter significances are defined as the IP divided by its corresponding uncertainty, $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
 Track IP significances are lifetime signed according to the track's direction with respect to the jet axis and the primary vertex \cite{PERF-2012-04}.
 
 %\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
 
-
-\subsection{Collider Definitions}\label{sec:collider_defs}
+\subsection{Hadron Collider Definitions}\label{sec:collider_defs}
 
 \subsubsection{Luminosity}
-The luminosity is defined by\todo{xy full def}
+The (instantaneous) luminosity is defined by\todo{xy full def}
 %
 \begin{equation}\label{eq:lumi_def}
 L = \frac{1}{\sigma} \der{N}{t} = \frac{f n_b N_1 N_2}{2 \pi \sigma_x \sigma_y},
 \end{equation}
 %
 where $N$ is the number of individual proton-proton collisions and $\sigma$ is the cross-sectional area of the beams as they cross.
+
+The integrated luminosity is defined by integrating the instantaneous luminosity over a time period.
 
 Total number of events is related to the total inelastic cross section\todo{define}
 %
@@ -117,7 +151,8 @@ Total number of events is related to the total inelastic cross section\todo{defi
   \centering
   \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
   \caption{
-    Delivered, recorded, and usable integrated luminosity as a function of time during \runtwo \cite{atlas-lumi-run2}.
+    Delivered, recorded, and usable integrated luminosity as a function of time over the course of \runtwo \cite{atlas-lumi-run2}
+    A total of \intlumi of collision data is labelled as good for physics.
   }
   \label{fig:run2_lumi}
 \end{figure}
@@ -137,7 +172,7 @@ The average number of pile-up interactions for different years during \runtwo is
 %
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/mu_2015_2018.pdf}
+  \includegraphics[width=0.6\textwidth]{chapters/2.detector/figs/mu_2015_2018.pdf}
   \caption{
     Average pile-up profiles measured by ATLAS during \runtwo \cite{atlas-lumi-run2}.
     During \runthree, even higher levels of pile-up are expected.
@@ -163,7 +198,8 @@ A more complete picture can be found in \rcite{PERF-2007-01}, or in the technica
   \includegraphics[width=0.9\linewidth]{chapters/2.detector/figs/atlas_detector.jpg}
   \caption{
     A 3D model of the entire \ATLAS detector. 
-    Cutouts through the detector }
+    Cutouts to the centre of the detector reval the different subdetectors which are arranged in layers around the nominal interaction point.
+  }
   \label{fig:atlas_detector}
 \end{figure}
 %
@@ -180,12 +216,14 @@ The inner detector is made up of several sub-systems, shown in \cref{fig:atlas_i
 The high-granularity silicon pixel detector covers the vertex region and typically provides four spacepoint measurements per track.
 It is followed by the silicon microstrip tracker (SCT), which usually provides a further four spacepoint measurements per track.
 These silicon detectors are complemented by the Transition Radiation Tracker (TRT),
-which enables radially extended track reconstruction up to \(|\eta| = 2.0\). 
+which enables radially extended track reconstruction up to $|\eta| = 2.0$. 
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.75\linewidth]{chapters/2.detector/figs/atlas_id.jpg}
-  \caption{A 3D model of the \ATLAS ID showing the barrel layers and end-cap disks.}
+  \caption{
+    A 3D model of the \ATLAS ID, made up of the pixel and SCT subdetectors, showing the barrel layers and end-cap disks.
+  }
   \label{fig:atlas_id_run1}
 \end{figure}
 %
@@ -214,7 +252,7 @@ Cluster positions have a resolution of approximately \SI{10}{\micro\meter} in $R
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.6\linewidth]{chapters/2.detector/figs/atlas_ibl.png}
-  \caption{A cross-sectional view of the \ATLAS IBL.}
+  \caption{A schematic cross-sectional view of the \ATLAS IBL.}
   \label{fig:atlas_ibl}
 \end{figure}
 
@@ -493,3 +531,7 @@ Finally, a global $\chi^2$ fit is performed, taking into account possible intera
 A reconstructed muon is called \textit{combined} if it completes successful matching to an ID track.
 Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
 
+
+\subsection{Missing Transverse Momentum}\label{sec:missing_Et}
+
+???
