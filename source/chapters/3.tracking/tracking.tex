@@ -1,9 +1,12 @@
 \chapter{Tracking and \btagging}\label{chap:tracking}
 
-Many ATLAS analyses rely on a method of tagging jets instantiated by \bquarks (\bjets) and rejecting jets created from other quarks ($c$ and light flavours $u$, $d$, $s$).
+Many ATLAS analyses rely on \btagging, which is a method of selecting jets instantiated by \bquarks (\bjets) and rejecting jets created from other quarks ($c$ and light flavours $u$, $d$, $s$).
 These \btagging algorithms work by discriminating for the unique signatures of \bjets discussed in \cref{sec:b_had_reco}.
-\btagging relies on the efficient and accurate reconstruction the tracks corresponding to the \bhadron decay products,
-as these tracks are used as the primary inputs to vertex reconstruction algorithms, jet making algorithms and jet tagging algorithms.
+The various tagging algorithms ultimately take as their input information about the reconstructed jet and any associated tracks.
+Successful \btagging relies therefore on the efficient and accurate reconstruction of tracks, and especially those tracks corresponding to the products of \bhadron decays.
+
+Historically a two tiered approach has been taken, in which so called \textit{low-level} taggers take as inputs information about the jet and associated tracks, and then outputs of several low-level taggers are fed into a \textit{high-level} tagger which uses a multivariate approach to discriminate between jet flavours.
+, as these tracks are used as the primary inputs to vertex reconstruction algorithms and jet tagging algorithms (for more information see \cref{chap:gnn_tagger}).
 
 This chapter summarises the challenges facing tracking and \btagging at high transverse momentum with an investigation into track reconstruction performance in \cref{sec:b_had_reco}.
 Some preliminary investigations into improving tracking in this regime are investigated in \cref{sec:b_track_reco_improvements}.
