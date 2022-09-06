@@ -17,6 +17,15 @@ Some preliminary investigations into improving tracking in this regime are inves
 
 This section outlines the typical detector signature of a \bhadron in \cref{sec:b_decay_topology} and discusses some associated reconstruction difficulties in \cref{sec:b_track_reco_challenges}.
 
+\begin{figure}[!tbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
+  \caption{
+    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey).
+    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
+    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
+  \label{fig:bjet_diagram}
+\end{figure}
 
 \subsection{Decay Topology}
 \label{sec:b_decay_topology}
@@ -59,16 +68,6 @@ Associated tracks and SVs can have a large transverse impact parameter \dzero as
 Additionally, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets.
 While the multiplicity of the fragmentation products increases with the \bhadron \pt, the  multiplicity of the products of the weak decay is unaffected.
 %However, both fragmentation and weak decay products have increased collimation at higher \pT.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
-  \caption{
-    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey).
-    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
-    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
-  \label{fig:bjet_diagram}
-\end{figure}
 
 
 
@@ -152,12 +151,16 @@ The combination of effects described above makes reconstructing tracks in the co
 
 \begin{figure}[!htbp]
   \centering
-  %\includegraphics[width=\textwidth]{res/figs/results/tracking/po_nHitsOnPix_From_B_DL.pdf}
-  \vspace{0.05em}
-  \caption{\bhadron decay track reconstruction efficiency.}
+  \includegraphics[width=0.6\textwidth]{chapters/3.tracking/figs/b_track_reco_eff.png}
+  \caption{
+    \bhadron decay track reconstruction efficiency as a function of truth \bhadron \pt \cite{2022DonalTrackReco}.
+    Nominal track reconstruction is shown in black, while the track reconstruction efficiency for track candidates (i.e. the pre-ambiguity solver efficiency) is shown in green.
+    For \highpt \bhadrons, the ambiguity solver is overly aggressive in its removal of \bhadron decay tracks.
+    Suggestions for the improvement of the track reconstruction efficiency in this regime by the loosening of cuts in the ambiguity solver are shown in blue and red.
+  }
   \label{fig:b_track_eff}
 \end{figure}
-%
+
 
 The above effects create two related, but distinct problems for \btagging.
 The first part is a drop in track reconstruction efficiency.
@@ -165,7 +168,7 @@ As mentioned, tracks originating from high energy \bhadron decay products can ha
 Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
 The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
 This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage.
-this is shown in \cref{fig:b_track_eff} \todo{get a nice reco eff plot}.
+this is shown in \cref{fig:b_track_eff}.
 
 %As a result, many B decay tracks are rejected in the ambiguity solving stage, leading to a severe drop in tracking reconstruction efficiency. This is shown by the severe decrease in reconstruction efficiency visible when comparing baseline tracking with the ideal pseudo-tracks in \cref{fig:reconstruction efficiency from B}. This situation presents a problem: relaxing cuts on shared hits significantly degrades the ambiguity solver's power to reject bad tracks. However for \bhadron decay tracks it seems these same restrictions on shared hits are seriously impairing the reconstruction efficiency of good tracks. 
 
@@ -175,8 +178,8 @@ The incorrect hits may skew the parameters of the track, which can in turn misle
 In particular, \btagging algorithms rely heavily on the transverse impact parameter significance \dzerosig of the track.
 The quality of this measurement is expected to be adversely affected by wrong inner-layer hits on the track. 
 
-The combination of reduced reconstruction efficiency and incorrectly assigned hits is thought to be the cause of the observed drop in \btagging efficiency at high energies, however it is not clear which effect may dominate.
-\todo{b-tagging vs pT plot}
+The combination of reduced reconstruction efficiency and incorrectly assigned hits is thought to be the cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
+\todo{cite sebs study showing they are approx similar impacts?}
 
 
 
@@ -185,13 +188,14 @@ The combination of reduced reconstruction efficiency and incorrectly assigned hi
 
 
 
+\section{Investigations into High \texorpdfstring{\pT}{pT} \bhadron Tracking}\label{sec:b_track_reco_improvements}
 
-\section{Investigating Improvements for High \texorpdfstring{\pT}{pT} B Tracking}\label{sec:b_track_reco_improvements}
+In \cref{sec:pseudotracks} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the baseline hit-to-track association in the dense cores of \highpt \bjets.
+\cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
+Not detailed here is an investigation into the bcut + refit method. Shown not to be promising, as, even though an improvement in the \bhadron decay track efficiency was observed, the corresponding increase in the fake track was shown to be unacceptable.
 
-An investigation into
 
-
-\subsection{Pseudotracks and Ideal Tracks}\label{sec:pseudo ideal tracking}
+\subsection{Pseudotracking}\label{sec:pseudotracks}
 
 Pseudo-tracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
 Each group of hits which passes basic quality requirements is directly used in a full resolution track fit.
@@ -376,14 +380,14 @@ An improvement, though modest, of all track parameter resolutions and pulls is o
 
 
 
-\subsubsection{Conclusion}
+\section{Conclusion}
 
+In this section, the difficulties facing efficient and accurate  track reconstruction, and hence performant \btagging, have been outlined.
+The ambiguity solver, which attempts to clean or reject tracks which have excessive number shared hits, is shown to be overly aggressive in the removal of \bhadron decay product track candidates.
 The ambiguity solving process relies on many pre-defined cuts which have not been optimised for high transverse momentum \bhadron track reconstruction.
-A full investigation 
+These conclusions have motivated further ongoing studies into the improvement of the track reconstruction in dense environments and the \highpt regime, such as those in \rcite{2022DonalTrackReco}.
 
-
-Though the results show some improvement over baseline tracking, the potential enhancement of these changes to $b$-tagging would need to be assessed before putting them in production. As there are some known data-MC discrepancies, fine tuned optimisation such as the work presented here presents an opportunity to over-optimise the tracking algorithms to MC.
-
-Need to be repeat in release 22.
-
-Work has lead to ongoing studies into improvement of the track reconstruction in dense environments and the \highpt regime \cite{2022DonalTrackReco}.
+An optimisation of the outlier removal process in the global $\chi^2$ fitter was also carried out.
+Though the results show some improvement over the baseline tracking scenario, these results need to be expanded upon by looking at the impact on the downstream \btagging algorithms before putting them into production.
+As there are some known data-MC discrepancies, fine tuned optimisation such as the work presented here presents an opportunity to over-optimise the tracking algorithms to MC.
+The studies were carried out in \rtwoone of the \ATLAS software, and need to be reproduced using the newer \rtwotwo to confirm the results against other changes in the baseline tracking configuration.
