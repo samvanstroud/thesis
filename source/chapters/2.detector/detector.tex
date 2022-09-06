@@ -429,22 +429,34 @@ The second tool, JetFitter attempts to resolve each displaced vertex inside the 
 
 \subsection{Jets}\label{sec:jet_reco}
 Jets are the reconstructed object corresponding to a spray of collimated stable particles which results from a decay chain.
-Jets are built by clustering constituent objects (e.g. tracks or calorimeter clusters) using a jet finding algorithm, for example the anti-$k_T$ algorithm \cite{Cacciari:2008gp}.
+Jets are built by clustering constituent objects (e.g. tracks or calorimeter clusters) using a jet finding algorithm, for example the \antikt algorithm \cite{Cacciari:2008gp}.
 
 \subsubsection{Particle Flow Jets}
-Jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the anti-$k_T$ algorithm with a radius parameter of $0.4$.
-The jet energy scale is calibrated according to \rcite{PERF-2016-04}.
+Particle-flow (PFlow) jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the \antikt algorithm with a radius parameter of $0.4$.
+Particle-flow objects integrate information from both the ID and the calorimeters, improving for example the energy resolution at high transverse momenta and reducing pileup contamination.
+The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
 Jets are also required not to overlap with a generator-level electron or muon from \Wboson boson decays.
-All jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$. 
+All jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
 Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
+
 Tracks are associated to jets using a \DeltaR association cone, the width of which decreases as a function of jet \pt, with a maximum cone size of $\DeltaR \approx 0.45$ for jets with $\pt = \SI{20}{\GeV}$ and minimum cone size of $\DeltaR \approx 0.25$ for jets with $\pt > \SI{200}{\GeV}$. 
 If a track is within the association cones of more than one jet, it is assigned to the jet which has a smaller $\DeltaR(\text{track}, \text{jet})$.
 
 Jet flavour labels are assigned according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
 
-\subsubsection{Track Jets}
-???
+PFlow jets are used to train the algorithms discussed in \cref{chap:track_classification_mva} and \cref{chap:gnn_tagger}.
+
+\subsubsection{Track-jets}
+Track-jets are built by clustering tracks using the \antikt clustering algorithm and are used in the analysis described in \cref{chap:vhbb_boosted}.
+The radius parameter is allowed to vary with transverse momentum such that a broader cone (up to $R=0.4$) is used for lower \pt track-jets and a narrower cone (down to $R=0.02$) for high \pt track-jets.
+At least two constituent tracks with $\pt > \SI{500}{\MeV}$ and $|\eta| < 2.5$ are required per track-jet.
+The track-jets themselves must satisfy $\pt > \SI{10}{\GeV}$ and $|\eta| < 2.5$.
+
+Truth flavour labels for track-jets are derived using the same ${\DeltaR(\text{hadron},\text{jet})<0.3}$ matching scheme as for PFlow jets.
+
+\subsubsection{\LargeR Jets}
+\LargeR jets have a radius parameter $R=1.0$ and are built by clustering topological calorimeter clusters using the \antikt algorithm.
 
 
 
