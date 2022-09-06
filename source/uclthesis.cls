@@ -67,11 +67,20 @@
 %% Load base class (options already passed)
 \LoadClass{hepthesis}
 
+%% -------------------------------------
+%% Formatting hacks
+%% -------------------------------------
 %% hack to make sure we only have a single colon after figure labels.
 %% https://tex.stackexchange.com/questions/29181/figure-and-table-numbers-in-caption-are-terminated-by-a-period-and-semicolon
 %\captionsetup{labelsep=colon}
 \renewcommand*{\figureformat}{\figurename~\thefigure}
 \renewcommand*{\tableformat}{\tablename~\thetable}
+
+% use this to visually mark overfull \hbox with a black box
+%\setlength{\overfullrule}{5pt}
+
+\renewcommand{\@pnumwidth}{2.0em} %even adjusting this down doesn't really help
+\renewcommand{\@tocrmarg}{3em}
 %% -------------------------------------
 %% Standard packages
 %% -------------------------------------
