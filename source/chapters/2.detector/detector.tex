@@ -56,7 +56,7 @@ Over the course of \runtwo a total integrated luminosity of \runtwointlumi was r
 In \cref{sec:coord_sys}, the coordinate system used at \ATLAS is introduced.
 The parameterisation used for the specifying the trajectory of charged particle tracks is described in \cref{sec:track_parameterisation}, and definitions for some frequently occurring concepts and quantities is provided in \cref{sec:collider_defs}.
 
-\subsection{\ATLAS Coordinate System}\label{sec:coord_sys}
+\subsection{ATLAS Coordinate System}\label{sec:coord_sys}
 
 %% based on https://twiki.cern.ch/twiki/bin/view/AtlasProtected/PubComCommonText
 
@@ -172,11 +172,14 @@ This reduces the effective luminosity.
 \end{comment}
 
 The total luminosity recorded over the course of \runtwo is shown in \cref{fig:run2_lumi}. In total, \intlumi of usable physics data was collected over the three-year run.
+The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF-2019-021}.
 %
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
-  \caption{Delivered, recorded, and usable integrated luminosity as a function of time over the course of \runtwo \cite{atlas-lumi-run2}. A total of \intlumi of collision data is labelled as good for physics.}
+  \caption{
+    Delivered, recorded, and usable integrated luminosity as a function of time over the course of \runtwo \cite{atlas-lumi-run2}.
+    A total of \intlumi of collision data is labelled as good for physics, meaning all sub-detector systems were operating nominally.}
   \label{fig:run2_lumi}
 \end{figure}
 %
@@ -508,7 +511,7 @@ The radius parameter is allowed to vary with transverse momentum such that a bro
 
 Truth flavour labels for track-jets are derived using the same ${\DeltaR(\text{hadron},\text{jet})<0.3}$ matching scheme as for PFlow jets.
 
-\subsubsection{\LargeR Jets}
+\subsubsection{\texorpdfstring{\LargeR}{Large-R} Jets}
 \LargeR jets have a radius parameter $R=1.0$ and are built by clustering topological calorimeter clusters using the \antikt algorithm \cite{Butterworth:2008iy}.
 The large radius parameter is especially useful for containing the decay products of a boosted Higgs boson, as discussed in \cref{chap:vhbb_boosted}. 
 
@@ -548,5 +551,9 @@ Combined muons undergo a further fit with the combined ID and MS hits, with the 
 
 
 \subsection{Missing Transverse Momentum}\label{sec:missing_Et}
+\todo{lifted from paper}
+The missing transverse momentum \vETmiss is reconstructed as the negative vector sum of the momenta of leptons and \smallR jets in the event plus a soft term built from additional tracks associated with the primary vertex \cite{PERF-2016-07}.
+\SmallR jets used for the \vETmiss reconstruction are required to have $\pt > \SI{20}{\GeV}$.
+The magnitude of \vETmiss is referred to as \ETmiss.
 
-worth adding?
+To suppress non-collision and multi backgrounds in the 0-lepton channel, an additional track-based missing transverse momentum estimator, \vETmisstrk, is built independently as the negative vector sum of the transverse momenta of all tracks from the primary vertex.
