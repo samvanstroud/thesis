@@ -33,7 +33,7 @@ The use of GNNs offers a natural way to classify jets with variable numbers of u
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.8\linewidth]{chapters/gnn_tagger/figs/GNN_compare_contrast.pdf}
+    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/GNN_compare_contrast.pdf}
     \caption{Comparison of the existing flavour tagging scheme (left) and \GNN (right). The existing approach utilises low-level algorithms (shown in blue), the outputs of which are fed into a high-level algorithm (\DLr). Instead of being used to guide the design of the manually optimised algorithms, additional truth information from the simulation is now being used as auxiliary training targets for \GNN. The solid lines represent reconstructed information, whereas the dashed lines represent truth information.}
     \label{fig:oldvsnew}
 \end{figure}
@@ -69,6 +69,10 @@ This note is organised as follows: a brief description of the ATLAS detector, ob
 \subsection{Datasets}\label{sec:datasets}
 
 Datasets used to train the \GNN tagger are the same as described in \cref{sec:track_classifier_datasets}.
+
+Jets are also required not to overlap with a generator-level electron or muon from \Wboson boson decays.
+All jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
+Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
 
 As previously, truth labelled \bcl jets are kinematically re-sampled in \pt and $\eta$ to ensure identical distributions in these variables. 
 The resulting dataset contains \njetstrain jets, \pct{60} of which are \ttbar jets and \pct{40} of which are \Zprime jets.
