@@ -142,14 +142,15 @@ The CR is used to constrain the normalisation of the \ttbar background in the fi
 \end{figure}
 %
 
-\subsection{Background Composition}
+\subsection{Background Composition}\label{sec:vebb_background_composition}
 
 After the selections described in \cref{sec:vhbb_selections} the number of background events mimicking the \VHbb signal is greatly reduced.
 However, the number of background events still greatly outnumbers that of signal events.
 The background processes are channel dependent.
-In the 0-lepton channel the dominant sources of backgrounds are \Zjets and \ttbar, with \Wjets and diboson events being subdominant.
-\ttbar and \Wjets are dominant in the 1-lepton channel, while single-top is subdominant.
-In the 2-lepton channel, \Zjets is again dominant followed by \Zboson\Zboson diboson events.
+In the 0-lepton channel the dominant sources of backgrounds are \Zjets ($\Zboson \to \nu\nu$) and \ttbar, with \Wjets and diboson events being subdominant.
+In the event of $\Wboson \to \tau\nu$, and subsequent decay of the $\tau$, or the lack of the successful reconstruction of the $e$ or $\mu$, \Wjets can also contribute to the 0-lepton channel.
+\ttbar and \Wjets (with a leptonic decay of the \Wboson as in $\Wboson \to \ell\nu$) are dominant in the 1-lepton channel, while single-top is subdominant.
+In the 2-lepton channel, \Zjets ($\Zboson \to \ell\ell$) is again dominant followed by \Zboson\Zboson diboson events.
 
 The diboson background $VV$ consists primarily of \Wboson\Zboson and \Zboson\Zboson events in which the \Zboson decays to a pair of \bquarks.
 This process very closely matches the signal, with a resonant peak occurring at $m_Z = \SI{91}{\GeV}$ and so is considered as an 
@@ -164,28 +165,51 @@ The multijet background is made up of jets with semileptonic heavy-flavour-hadro
 
 % Modelling (i.e. simulation of SM processes) is used for predicting the outcomes of the analysis and for assessing impact of sources of different systematics uncertainties. 
 
+% Modelling is used to predict the outcomes of the analysis and to assess the impact of sources of different systematic uncertainty.
+% Signal and background modelling has has primarily consisted of using Monte Carlo (MC) generators to produce simulated events.
+% The uncertainties on the simulated output must be well understood to perform a successful analysis.
+
 In order to observe a certain process, for example \VHbb, an increase in the number of observed events with respect to the background-only hypothesis is looked for.
 The excess is often relatively small against the total number of background events, and hence accurate modelling of the expected number of background and signal events is crucial for successfully performing the analysis.
 
-Systemic uncertainties are extensively employed to give the fit model described in \cref{sec:vhbb_fit} enough flexibility to account of inaccuracies due to imperfect modelling of the signal and background processes, and other experimental uncertainties.
+Systemic uncertainties are extensively employed to give the fit model described in \cref{sec:vhbb_fit} enough flexibility to account of inaccuracies in the model prediction
 
+The main types of systematic uncertainty are theoretical, experimental, and modelling.
+Theoretical uncertainties arise due to imperfect precision used in e.g. QCD calculations
+Experimental uncertainties arise due to the limited due to limited detector precision, imperfect reconstruction algorithms (in particular the \btagging algorithms), and due to the imperfect measurement of pile-up and integrated luminosity.
+Modelling uncertainties arise due to the imperfections in the generators used to produce the the simulated signal and background events.
+
+Theoretical and experimental uncertainties are described in less detail in this section, but are still fully taken into account in the fit model described in \cref{sec:vhbb_fit}.
+Modelling uncertainties are described in detail in the following sections.
+Modelling uncertainties:
 \textit{Nominal} samples are are used as a reference to which different variations can be compared.
 The nominal samples are chosen as the best possible representation of the underlying physical process.
 \textit{Alternative} samples are used to understand inaccuracies that may be present in the nominal samples.
 Some aspect of the nominal model is varied, and the discrepancy with respect to the nominal model is quantified.
 The discrepancy is used to systematic uncertainty associated with the model parameter which was changed.
 
-\subsection{Sources of Systematic Uncertainties}
 
-Sources of systematic uncertainty that are understood using variations in samples (internal weights or alternative samples):
+\subsection{Vector Boson + Jets Modelling}
+
+After event selection, the \Vjets background is a dominant background in all three analysis channels as described in \cref{sec:vebb_background_composition}.
+
+In order to access uncertainties associated with the use of MC generators, variations of the data are produced using alternative generators or variation of nominal generator parameters.
+The variation of nominal generator parameters can in certain cases be implemented using internal weight variations stored alongside the nominal events, and in other cases a new independent sample must be generated. The nominal generator used for \Vjets events is \textsc{Sherpa 2.2.1}, while \textsc{MadGraph5\_aMC@NLO+Pythia8} (which uses different parton showering models) is used as an alternative generator.
+
+Several sources of uncertainty, summarised in \cref{sec:sources_of_uncertainties}, have been assessed.
+
+\subsection{Sources of Systematic Uncertainties}\label{sec:sources_of_uncertainties}
+
+This section briefly describes the different sources of uncertainty in the predictive model used in the analysis, and how each source of uncertainty is implemented within the analysis procedure.
+Sources of systematic uncertainty that are understood using variations in samples are listed in \cref{tab:sources_of_uncertainty}:
 %
 \input{chapters/6.vhbb_boosted/tables/sources_of_uncertainty.tex}
 %
+
 \subsubsection{Alternative Samples}
 As mentioned, alternative samples of \Vjets events was generated using \textsc{MadGraph5\_aMC@NLO+Pythia8}, and the results are compared with the nominal \textsc{Sherpa 2.2.1} samples. This allows for a comparison of different parton showering and underlying event models, and derivation of the systematic uncertainties on the nominal choice of models.
 
 \subsubsection{Internal Weight Variations}
-
 As production of large MC samples is computationally expensive, a technique in state of the art simulation packages is to store some sources of variation as internal weights, which can be generated alongside the nominal samples, saving computation time. When filling histograms for the variations, bins are incremented by the internal weight of the event associated with the variation in question.
 
 Nominal signal samples generated with \textsc{Sherpa 2.2.1} include systematic variations of certain modelling parameters which are stored as alternative event weights. The samples contain event weight variations which correspond to variations of renormalisation scale $\mu_R$, and factorisation scale $\mu_F$, of $0.5$ and $2$ times the nominal value. Additionally stored is event weight variations corresponding to $30$ different variations on the PDF and two variations of the strong coupling constant $\alpha_S$. Variations of $\alpha_S$ were found to have negligible impact on the results of the analysis, and are not discussed further. 
@@ -239,31 +263,6 @@ Several different types of acceptance uncertainties have been calculated. These 
 The uncertainties on different systematics are summed in quadrature to give a total uncertainty on each region. A summary of the different acceptance uncertainties that were derived in this way and subsequently applied in the fit are given in \cref{tab:Vjets acceptance uncerts}. An effort has been made, wherever possible, to harmonise similar uncertainties across different analysis regions and channels.
 
 
-\subsection{Vector Boson + Jets Modelling}
-%The dominant background processes after the event selection correspond to the production of \vjets, where $V$ refers to either a \Wboson or \Zboson boson, \ttbar, single-top and dibosons.
-%VJETS DOMINANT
-The background processes involving \Wboson or \Zboson boson decays into leptons (including those in which the \Wboson boson arises from a top-quark decay) are collectively referred to as electroweak (EW), or \Vjets, backgrounds.
-\Wjets events are most relevant to the 1-lepton channel via the leptonic decay of $\Wboson \rightarrow \ell\nu$.
-In the event of $\Wboson \rightarrow \tau\nu$, and subsequent decay of the $\tau$, or the lack of the successful reconstruction of the $e$ or $\mu$, \Wjets can also contribute to the 0-lepton channel.
-Meanwhile, Z+jets contributes primarily to the 0- and 2-lepton channels via the processes $\Zboson \rightarrow \nu\nu$ and $\Zboson \rightarrow \ell\ell$ respectively.
-
-Modelling is used to predict the outcomes of the analysis and to assess the impact of sources of different systematic uncertainty.
-Signal and background modelling has has primarily consisted of using Monte Carlo (MC) generators to produce simulated events.
-The uncertainties on the simulated output must be well understood to perform a successful analysis.
-To achieve this, a set of ``nominal'' samples are first defined as a reference to which different variations can be compared.
-The nominal samples are chosen as the best possible representation of the underlying physical process. ``Alternative'' samples are used to understand the systematic uncertainties on the nominal samples.
-To generate an alternative sample, some aspect of the model is varied, and the simulation is re-run.
-A comparison back to the nominal sample gives a handle on the systematic uncertainty associated with the model parameter which was changed.
-Detailed information can be found in \cite{Bell:2316951}.
-In order to access uncertainties associated with the use of MC generators, variations of the data are produced using alternative generators or variation of nominal generator parameters.
-The variation of nominal generator parameters can in certain cases be implemented using internal weight variations stored alongside the nominal events, and in other cases a new independent sample must be generated. The nominal generator used for \Vjets events is \textsc{Sherpa 2.2.1}, while \textsc{MadGraph5\_aMC@NLO+Pythia8} (which uses different parton showering models) is used as an alternative generator.
-As production of large MC samples is computationally expensive, a feature of state of the art simulation packages is to store some sources of variation as internal event weights, which can be generated alongside the nominal samples, saving computation time. Several sources of uncertainty, summarised in \cref{tab:sources of uncertainty}, have been assessed.
-
-%
-\input{chapters/6.vhbb_boosted/tables/V+jets-acceptance-uncertainties-summary}
-%
-
-
 \subsubsection{Flavour Composition Uncertainties}
 \begin{comment}
 The 𝑊/𝑍+jets simulated event samples are split into 6 categories depending on the ‘truth’ labels of
@@ -274,12 +273,29 @@ variations of the ratios 𝑉 + 𝑏𝑐/𝑉 + 𝑏𝑏, 𝑉 + 𝑏𝑙/𝑉 +
 flavour composition in 𝑉+jets production, see Section 7.
 \end{comment}
 
+
+
+\subsubsection{Summary}
+%
+\input{chapters/6.vhbb_boosted/tables/V+jets-acceptance-uncertainties-summary}
+%
+
+
+
+
+
+
+
 \subsection{Diboson Modelling}
+
+
+...
 
 
 
 
 \section{Fit Model}\label{sec:vhbb_fit}
+
 
 
 \begin{comment}
@@ -323,6 +339,8 @@ where
 \end{equation}
 %
 
+
+Statstical uncertainty is also present.
 
 \section{Results}\label{sec:vhbb_results}
 
