@@ -341,7 +341,7 @@ This pull is computed for the transverse and longitudinal coordinates of the mea
 \subsubsection{Cut Optimisation}\label{sec:cut opt}
 A systematic variation of the cut point \texttt{m\_outlcut} has been carried out. The value of \texttt{m\_outlcut} was reduced from 4 down to 1.75, a change which affects a silicon layers (the TRT has separate outlier removal logic). Furthermore, a specific cut for the IBL was introduced, and is set to 1.25. A second cut, \texttt{TrackChi2PerNDFCut}, is also used in the outlier removal. This value was reduced from 7 to 4. Finally, instead of taking the maximum of the pulls in the longitudinal and transverse directions, a quadrature sum is taken of these two values and used. This variation is labelled ``Mod GX2F'' in plots.
 
-The results, demonstrating a reduction in wrong hit assignment whist also improving slightly the good good hits assigned to tracks, are shown in \cref{fig:gx2f_opt_hits}. The improvements are also observed when looking inclusively in all tracks, which removes the need for a specific $b$-jet ROI (a requirement which led to problems outlined in \cref{sec:roi opt}).
+The results, demonstrating a reduction in wrong hit assignment whist also improving slightly the good good hits assigned to tracks, are shown in \cref{fig:gx2f_opt_hits}. The improvements are also observed when looking inclusively in all tracks, which removes the need for a specific $b$-jet ROI.
 %
 \begin{figure}[!htbp]
     \centering
