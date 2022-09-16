@@ -3,6 +3,7 @@
 The Higgs boson, first observed by \ATLAS and \CMS at the LHC in 2012 \cite{HIGG-2012-27,CMS-HIG-12-028}, is predicted by the standard model to decay primarily to a pair of \bquarks, with a branching factor of $0.582 \pm 0.007$ for $m_H = \SI{125}{\GeV}$ \cite{deFlorian:2016spz}. 
 Observation of this decay mode was reported by \ATLAS \cite{HIGG-2018-04} and \CMS \cite{CMS-HIG-18-016} in 2018, establishing the first direct evidence for the Yukawa coupling of the Higgs boson to down-type quarks (see \cref{sec:higgs_yukawa_coupling}).
 The \Hbb process is also important for constraining the total decay width of the Higgs \cite{Lafaye:2009vr}.
+
 Whilst the dominant Higgs production mechanism at the LHC is gluon-gluon fusion as outlined in \cref{sec:higgs_pheno}, this mechanism has an overwhelming QCD multijet background and so overall sensitivity to the Higgs is low.
 The QCD multijet background refers to events containing one or more strongly produced jets which are not the decay product of heavy resonances, for example $g \to q\bar{q}$.
 The gluon-gluon fusion channel contains to leading order only jets in the final state, and therefore it is extremely difficult to distinguish signal events from the overwhelming multijet background.
@@ -141,62 +142,42 @@ The CR is used to constrain the normalisation of the \ttbar background in the fi
 \end{figure}
 %
 
-\section{Modelling \& Systematic Uncertainties}\label{sec:vhbb_modelling}
-
-%The dominant background processes after the event selection correspond to the production of \vjets, where $V$ refers to either a \Wboson or \Zboson boson, \ttbar, single-top and dibosons.
-
-\begin{comment}
-  andy bell
-  Whilst the multijet background is greatly reduced in the V H → V b¯b channel, a number of key
-backgrounds still remain. These backgrounds are significantly larger than the signal, and composed
-of several different processes. The main backgrounds are tt¯ (all channels), Z +jets (0- and 2-lepton),
-W + jets (0- and 1-lepton) and single top-quark (1-lepton)
-\end{comment}
-
-
-\subsection{Overview}
-
-
-
 \subsection{Background Composition}
 
-\begin{comment}
-The background contribution in the SRs is different for each of the three channels. In the 0-lepton channel,
-the dominant background sources are 𝑍 + jets and 𝑡𝑡¯ events with a significant contribution from 𝑊 + jets and
-diboson production. In the 1-lepton channel, the largest backgrounds are 𝑡𝑡¯ and 𝑊 +jets production followed
-by the single-top background. In the 2-lepton channel, 𝑍 + jets production is the dominant background
-followed by the 𝑍 𝑍 background. Contributions from 𝑡𝑡𝑉¯ and 𝑡𝑡𝐻¯ are negligible. The multĳet background,
-due to semileptonic heavy-flavour-hadron decays or misidentified jets, is found to be negligible in the 0-
-and 2-lepton channels as well as in the 1-lepton muon sub-channel after applying the event selections
-described in Section 5, as confirmed using data-driven techniques. In the 1-lepton electron sub-channel
-its contribution is not neglected. All initial background distribution shapes prior to the fit (described in
-Section 8), except those for multĳet, are estimated from the samples of simulated events. The multĳet
-shape and normalisation are determined using data.
+After the selections described in \cref{sec:vhbb_selections} the number of background events mimicking the \VHbb signal is greatly reduced.
+However, the number of background events still greatly outnumbers that of signal events.
+The background processes are channel dependent.
+In the 0-lepton channel the dominant sources of backgrounds are \Zjets and \ttbar, with \Wjets and diboson events being subdominant.
+\ttbar and \Wjets are dominant in the 1-lepton channel, while single-top is subdominant.
+In the 2-lepton channel, \Zjets is again dominant followed by \Zboson\Zboson diboson events.
 
-The 𝑊/𝑍+jets simulated event samples are split into 6 categories depending on the ‘truth’ labels of
-the track-jets ghost-associated to the Higgs-jet candidate: 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙, 𝑊/𝑍 + 𝑐𝑐,
-𝑊/𝑍 + 𝑐𝑙 and 𝑊/𝑍 + 𝑙𝑙; in this notation 𝑙 refers to a light-flavour jet.4 The 𝑊/𝑍 + 𝑏𝑏 fraction corresponds
-to approximately 80% of the total 𝑊/𝑍+jets background. This categorisation is used in the uncertainties
-variations of the ratios 𝑉 + 𝑏𝑐/𝑉 + 𝑏𝑏, 𝑉 + 𝑏𝑙/𝑉 + 𝑏𝑏 and 𝑉 + 𝑐𝑐/𝑉 + 𝑏𝑏 to cover uncertainties on the
-flavour composition in 𝑉+jets production, see Section 7.
+The diboson background $VV$ consists primarily of \Wboson\Zboson and \Zboson\Zboson events in which the \Zboson decays to a pair of \bquarks.
+This process very closely matches the signal, with a resonant peak occurring at $m_Z = \SI{91}{\GeV}$ and so is considered as an 
+irreducible background.
 
-In the statistical analysis described in Section 8, the components 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙 and
-𝑊/𝑍 + 𝑐𝑐 are treated as a single background component denoted by 𝑊/𝑍+HF. The 𝑊+HF and 𝑍+HF
-contributions, which together constitute 90% of 𝑉+jets background, are estimated separately, each with its
-own normalisation factor determined from the fit to data
+The $t\overline{t} V$, $t\overline{t} H$ and multijet backgrounds are negligible in the analysis phase space after the selections have been applied, with the exception of the 1-lepton electron sub-channel, in which multijet background is not ignored.
+The multijet background is made up of jets with semileptonic heavy-flavour-hadron decays (e.g. $b \to c \ell \nu$) and jets which are mis-tagged by the flavour tagging algorithm MV2c10.
 
 
-The diboson background process consists of final states arising mostly from 𝑊 𝑍 and 𝑍 𝑍 events, where
-a 𝑍 boson decays into a pair of 𝑏-quarks. This process has a topology very similar to that of the signal,
-exhibiting a peak in 𝑚J at the mass of the hadronically decaying vector boson. Although it is a subdominant
-contribution, it provides an important reference for validation. Its normalisation is measured simultaneously
-with the 𝑉𝐻 signal
+\section{Modelling \& Systematic Uncertainties}\label{sec:vhbb_modelling}
+% modelling note \cite{Bell:2316951}
 
+% Modelling (i.e. simulation of SM processes) is used for predicting the outcomes of the analysis and for assessing impact of sources of different systematics uncertainties. 
 
-\end{comment}
+In order to observe a certain process, for example \VHbb, an increase in the number of observed events with respect to the background-only hypothesis is looked for.
+The excess is often relatively small against the total number of background events, and hence accurate modelling of the expected number of background and signal events is crucial for successfully performing the analysis.
+
+Systemic uncertainties are extensively employed to give the fit model described in \cref{sec:vhbb_fit} enough flexibility to account of inaccuracies due to imperfect modelling of the signal and background processes, and other experimental uncertainties.
+
+\textit{Nominal} samples are are used as a reference to which different variations can be compared.
+The nominal samples are chosen as the best possible representation of the underlying physical process.
+\textit{Alternative} samples are used to understand inaccuracies that may be present in the nominal samples.
+Some aspect of the nominal model is varied, and the discrepancy with respect to the nominal model is quantified.
+The discrepancy is used to systematic uncertainty associated with the model parameter which was changed.
 
 \subsection{Sources of Systematic Uncertainties}
 
+Sources of systematic uncertainty that are understood using variations in samples (internal weights or alternative samples):
 %
 \input{chapters/6.vhbb_boosted/tables/sources_of_uncertainty.tex}
 %
@@ -204,6 +185,9 @@ with the 𝑉𝐻 signal
 As mentioned, alternative samples of \Vjets events was generated using \textsc{MadGraph5\_aMC@NLO+Pythia8}, and the results are compared with the nominal \textsc{Sherpa 2.2.1} samples. This allows for a comparison of different parton showering and underlying event models, and derivation of the systematic uncertainties on the nominal choice of models.
 
 \subsubsection{Internal Weight Variations}
+
+As production of large MC samples is computationally expensive, a technique in state of the art simulation packages is to store some sources of variation as internal weights, which can be generated alongside the nominal samples, saving computation time. When filling histograms for the variations, bins are incremented by the internal weight of the event associated with the variation in question.
+
 Nominal signal samples generated with \textsc{Sherpa 2.2.1} include systematic variations of certain modelling parameters which are stored as alternative event weights. The samples contain event weight variations which correspond to variations of renormalisation scale $\mu_R$, and factorisation scale $\mu_F$, of $0.5$ and $2$ times the nominal value. Additionally stored is event weight variations corresponding to $30$ different variations on the PDF and two variations of the strong coupling constant $\alpha_S$. Variations of $\alpha_S$ were found to have negligible impact on the results of the analysis, and are not discussed further. 
 
 \subsubsection{Parameterisation Methods}
@@ -211,6 +195,9 @@ While the inclusion of internal weight variation in MC event generators has decr
 
 
 \subsection{Shape Uncertainties}
+\begin{comment}
+For each variation two different sets of systematics are determined: acceptance uncertainties for the analysis categories and shape uncertainties for the $p_T^V$ and $m_{bb}$ shape. These two distributions were chosen since Run 1 experience shows that they are sufficiently decorrelated, the most important input variables for the BDTs and uncertainties on those two variables cover sufficiently shape uncertainties in the other input variables.
+\end{comment}
 In order to derive shape uncertainties (which as the name suggests affect shapes but not overall normalisations of distributions), the following procedure is carried out. Normalised distributions of the reconstructed Higgs candidate mass $m_J$ are compared for the nominal sample and variations. For each variation, the ratio of the variation to nominal is calculated, and an analytic function is fit to those sources of variation which have a ratio deviating from unity. If different analysis regions or channels show the same pattern of variation, a common uncertainty is assigned. An example of a significant source of uncertainty, arising from choice of factorisation scale $\mu_R$ is shown in \cref{fig:vhbb muR shape fitted}. An exponential function has been fitted to the ratio of the normalised distributions. Two different analysis regions (medium and high \pTV bins) are shown. The difference of the shape of the variation means that two separate uncertainties have to be added in the fit, and applied individually in each \pTV region. 
 %
 \begin{figure}[!htbp]
@@ -253,6 +240,8 @@ The uncertainties on different systematics are summed in quadrature to give a to
 
 
 \subsection{Vector Boson + Jets Modelling}
+%The dominant background processes after the event selection correspond to the production of \vjets, where $V$ refers to either a \Wboson or \Zboson boson, \ttbar, single-top and dibosons.
+%VJETS DOMINANT
 The background processes involving \Wboson or \Zboson boson decays into leptons (including those in which the \Wboson boson arises from a top-quark decay) are collectively referred to as electroweak (EW), or \Vjets, backgrounds.
 \Wjets events are most relevant to the 1-lepton channel via the leptonic decay of $\Wboson \rightarrow \ell\nu$.
 In the event of $\Wboson \rightarrow \tau\nu$, and subsequent decay of the $\tau$, or the lack of the successful reconstruction of the $e$ or $\mu$, \Wjets can also contribute to the 0-lepton channel.
@@ -274,12 +263,38 @@ As production of large MC samples is computationally expensive, a feature of sta
 \input{chapters/6.vhbb_boosted/tables/V+jets-acceptance-uncertainties-summary}
 %
 
+
+\subsubsection{Flavour Composition Uncertainties}
+\begin{comment}
+The 𝑊/𝑍+jets simulated event samples are split into 6 categories depending on the ‘truth’ labels of
+the track-jets ghost-associated to the Higgs-jet candidate: 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙, 𝑊/𝑍 + 𝑐𝑐,
+𝑊/𝑍 + 𝑐𝑙 and 𝑊/𝑍 + 𝑙𝑙; in this notation 𝑙 refers to a light-flavour jet.4 The 𝑊/𝑍 + 𝑏𝑏 fraction corresponds
+to approximately 80% of the total 𝑊/𝑍+jets background. This categorisation is used in the uncertainties
+variations of the ratios 𝑉 + 𝑏𝑐/𝑉 + 𝑏𝑏, 𝑉 + 𝑏𝑙/𝑉 + 𝑏𝑏 and 𝑉 + 𝑐𝑐/𝑉 + 𝑏𝑏 to cover uncertainties on the
+flavour composition in 𝑉+jets production, see Section 7.
+\end{comment}
+
 \subsection{Diboson Modelling}
 
 
 
 
-\section{Fit Model}
+\section{Fit Model}\label{sec:vhbb_fit}
+
+
+\begin{comment}
+  All initial background distribution shapes prior to the fit (described in Section 8), except those for multĳet, are estimated from the samples of simulated events. The multĳet shape and normalisation are determined using data
+  \end{comment}
+
+\begin{comment}
+  The normalisation on the diboson background is left floating in the fit, i.e. measured simulatneously along with the $VH$ signal
+
+
+  In the statistical analysis described in Section 8, the components 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙 and
+𝑊/𝑍 + 𝑐𝑐 are treated as a single background component denoted by 𝑊/𝑍+HF. The 𝑊+HF and 𝑍+HF
+contributions, which together constitute 90% of 𝑉+jets background, are estimated separately, each with its
+own normalisation factor determined from the fit to data
+\end{comment}
 
 %The \HiggsJet\ mass candidate in the different signal
 %regions are used as the discriminant variable and are combined using a
