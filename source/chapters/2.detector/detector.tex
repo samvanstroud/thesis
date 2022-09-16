@@ -382,10 +382,10 @@ The toroidal magnets generate a field which is largely orthogonal to the muon tr
 The \SI{2.5}{\nano\second} bunch spacing used over the course of \runtwo corresponds to a bunch-crossing or event rate of \SI{40}{\mega\hertz} (see \cref{tab:lhc_runs}).
 If the full information for the detector was written out for each event, this would correspond to the generation of \SI{60}{\tera\byte} of data each second.
 This is more than can be feasibly processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is potentially interesting and should be kept for further analysis.
-The trigger system is comprised of two levels which search for signs of electrons, muons photons, taus and jets, as well as events with high total or missing transverse energy.
+The trigger system is comprised of two levels which search for signs of electrons, muons, taus, photons, and jets, as well as events with high total or missing transverse energy.
 The hardware-based Level-1 (L1) trigger uses coarse information from the calorimeters and MS to accept events at a rate of \SI{100}{\kilo\hertz} within \SI{2.5}{\micro\second} of the event.
 After the L1 trigger, the software-based High Level Trigger (HLT) makes use of \num{40000} CPU cores to make a final selection on surviving events within a few hundred milliseconds. 
-The final event read-out rate is approximately \SI{1.2}{\kilo\hertz}, corresponding\SI{1.2}{\giga\byte\per\second} of permenant data storage.
+The final event read-out rate is approximately \SI{1.2}{\kilo\hertz}, corresponding to \SI{1.2}{\giga\byte\per\second} of permenant data storage.
 More information is provided in \cite{TRIG-2016-01}.
 %Regions of Interest (ROIs) from the L1 trigger are used.
 
@@ -522,11 +522,12 @@ Electrons and muons are stable leptons and leave characteristic signatures that 
 The reconstruction of both types of of stable lepton is briefly outlined below.
 
 \subsubsection{Electrons}
-Electrons candidates are reconstructed by matching PV-compatible inner detector tracks to calorimeter clusters.
+Electrons candidates are reconstructed by matching PV-compatible inner detector tracks to topological calorimeter clusters.
 The track-cluster matching criteria takes into account the significant energy loss of the electron due to bremsstrahlung.
 If a match is found, a refit of the track is performed using the Gaussian Sum Filter (GSF) \cite{ATLAS-CONF-2012-047}, which better handles trajectory reconstruction in the presence of bremsstrahlung.
-Various identification criteria are then applied using a  likelihood-based (LH) method to the candidates to improve purity.
-These include requirements on the track quality and cluster matching, the shape of shower in the ECal, leakage into the HCal, and the amount of transition radiation detected in the TRT.
+Various identification criteria are then applied to the candidates using a likelihood-based (LH) method to improve purity.
+These include requirements on the track quality and cluster matching, the shape of electromagnetic shower in the ECal, leakage into the HCal, and the amount of transition radiation detected in the TRT.
+Isolation criteria with respect to other nearby ID tracks and calorimeter clusters may also be applied.
 A full description can be obtained in \rcite{ATLAS-CONF-2016-024}.
 %
 \begin{figure}[!htbp]
@@ -548,7 +549,7 @@ Muon tracks are reconstructed by connect straight-line track segments, which are
 Finally, a global $\chi^2$ fit is performed, taking into account possible interactions between the muon and the detector material.
 A reconstructed muon is called \textit{combined} if it completes successful matching to an ID track.
 Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
-
+More information on muon reconstruction can be found in \rcite{PERF-2015-10}.
 
 \subsection{Missing Transverse Momentum}\label{sec:missing_Et}
 \todo{lifted from paper}

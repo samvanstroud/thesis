@@ -90,8 +90,10 @@
 %% Script font
 \RequirePackage{mathrsfs} 
 
-%% For Feynman diagrams
-\RequirePackage{feynmf}
+%% For Feynman diagrams - none of them work well
+%\RequirePackage{feynmp}
+%\usepackage[force]{feynmp-auto}
+%\usepackage[compat=1.1.0]{tikz-feynman}
 
 %%% Using Babel allows other languages to be used and mixed-in easily
 \RequirePackage[ngerman,english]{babel}

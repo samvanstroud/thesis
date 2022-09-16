@@ -75,13 +75,13 @@ Figures and tables from \rcite{HIGG-2018-52} are reproduced here.
   jets, reconstructed with a \pt-dependent radius parameter, associated
   with the \largeR\ jet and identified as containing a $b$-hadron.
   
-  \end{comment}
+\end{comment}
 
 \section{Analysis Overview}\label{sec:vhbb_overview}
 
 The boosted \VHbb analysis is focused on the high transverse momentum regime, which has the benefit of being more sensitive to physics beyond the Standard Model \cite{Mimasu:2015nqa}, but the disadvantage of being more challenging due to the increased difficulty in the accurate reconstructed of highly energy events (discussed in \cref{chap:tracking}).
 In order to focus on the \highpt regime, the reconstructed vector boson is required to have $\ptv > \SI{250}{\GeV}$(see \cref{sec:vhbb_object_reco}).
-Events are also split into two \ptv bins with the first bin covering $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and the second covering $\ptv > \SI{400}{\GeV}$.
+Events are also split into two \ptv bins with the first bin covering $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and the second covering $\ptv > \SI{400}{\GeV}$, which allows the analysis to account for the improved signal-to-background in the \highpt regime.
 
 The previous \ATLAS analysis in \rcite{HIGG-2018-04} was primarily sensitive to vector bosons with a more modest \ptv boost in the region of 100--\SI{300}{\GeV}.
 In this regime, the Higgs candidate was reconstructed using a pair of jets with radius parameter of $R = 0.4$, called \smallR jets.
@@ -94,7 +94,7 @@ Refer to \cref{sec:jet_reco} for more details on jet reconstruction.
 On top of the binning in \ptv, selected events are further categorised into 0-, 1- and 2-lepton channels depending on the number of selected charged leptons (electrons and muons) are present in the reconstructed final state (also referred to as 0L, 1L, and 2L respectively).
 The 0-lepton channel targets the $\Zboson \higgs \rightarrow \nu\nu \bbbar$ process, the 1-lepton channel targets $\Wboson \higgs \rightarrow \ell\nu \bbbar$, and the 2-lepton channel targets $\Zboson \higgs \rightarrow \ell\ell \bbbar$, where $\ell$ is an electron or muon and $\nu$ is a neutrino.
 Each channel has a dedicated set of selections which are listed in more detail in \cref{sec:vhbb_selections}.
-Events in the 0- and 1-lepton channels are further split depending on the number of additional untagged \smallR jets
+Events in the 0- and 1-lepton channels are further split depending on the number of additional \smallR jets
 not matched to the Higgs-jet candidate.
 The high-purity signal region (HP SR) has zero such jets, while the low-purity signal region (LP SR) has one or more.
 %The 0- and 1-lepton channels are split into high- and low-purity signal regions based on the number of additional untagged \smallR jets present in the event.
@@ -123,8 +123,20 @@ observed in the data.
 
 
 \subsection{Object Reconstruction}\label{sec:vhbb_object_reco}
+
 The presence of neutrinos in the $\Wboson \higgs \rightarrow \ell\nu \bbbar$ and $\Zboson \higgs \rightarrow \ell\ell \bbbar$ signatures can be inferred from a momentum imbalance in the transverse plane \cref{sec:missing_Et}.
 The vector boson transverse momentum \ptv is reconstructed as the missing transverse energy \ETmiss in the 0-lepton channel, as the magnitude of the summed \vETmiss and charged-lepton momentum in the 1-lepton channel, and as the transverse momentum of the 2-lepton system in the 2-lepton channel (see \cref{sec:missing_Et}).
+
+Leptons are used for the channel classification and to select relevant events as outlined in \cref{sec:vhbb_selections}.
+Electrons and muons are reconstructed as outlined in \cref{sec:lepton_reco}.
+Electron identification follows the approach outlined in \rcite{HIGG-2018-04}.
+In addition to the likelihood-based method described in \cref{sec:lepton_reco}, \textit{baseline} electrons are required to satisfy $\pt > \SI{7}{\GeV}$, $|\eta| < 2.47$, $\dzerosig < 5$, and $|\zzsth|< \SI{0.5}{\milli\meter}$.
+\textit{Signal} electron additionally are required to satisfy a tighter likelihood identification selection.
+Muons are required to satisfy $\pt > \SI{7}{\GeV}$, $|\eta| < 2.7$, $\dzerosig < 3$, and $|\zzsth|< \SI{0.5}{\milli\meter}$.
+\textit{Baseline} muons are required to pass the `loose' identification described in \rcite{PERF-2015-10}, while \textit{signal} muons are required to pass the `medium' identification working point.
+All signal leptons are required to additionally satisfy a $\pt > \SI{27}{\GeV}$ selection criteria, except for muons in the 1-lepton channel where a cut of \SI{25}{\GeV} is used.
+The number of baseline leptons is used to categorise the event into the 0-, 1- or 2-lepton channels.
+The 1- and 2-lepton channels additionally require one signal lepton to be present.
 
 The track-jets matched to the Higgs candidate are \btagged using the MV2c10 \btagging algorithm \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
 MV2c10 is a machine learning algorithm using a Boosted Decision Tree (BDT) which is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
@@ -149,7 +161,14 @@ As mentioned, the candidate \largeR jet is required to have two ghost-assciated 
 These track-jets are required to have at least two constituent tracks with $\pt > \SI{500}{\MeV}$ and $|\eta| < 2.5$.
 The track-jets themselves must satisfy $\pt > \SI{10}{\GeV}$ and $|\eta| < 2.5$.
 
-The combined selections in \cref{sec:vhbb_selections} result in a signal efficiency ranging from 6--\pct{16} for the $\Wboson\higgs$ and $\Zboson\higgs$ processes depending on the channel and \ptv bin.
+In the 0-lepton channel, trigger selections are applied using an \ETmiss trigger with a luminosity-dependent threshold between 70--\SI{110}{\GeV}.
+In the 1-lepton electron sub-channel a combination of single electron triggers is used with minimum \pt thresholds between 24--\SI{26}{\GeV}.
+In the muon sub-channel the same \ETmiss trigger as the 0-lepton channel is used.
+Since muons are not used for the \ETmiss trigger calculations, this is in effect a \pt requirement on the muon-neutrino system, which in the analysis phase space is more efficient than a single-muon trigger.
+The 2-lepton channel uses the same triggering strategy as the 1-lepton channel.
+In all channels, the trigger selections applied are fully efficient for events selected using the full requirements in \cref{tab:vhbb_selection}.
+
+The combined selections in \cref{tab:vhbb_selection} result in a signal efficiency ranging from 6--\pct{16} for the $\Wboson\higgs$ and $\Zboson\higgs$ processes depending on the channel and \ptv bin.
 
 %
 \input{chapters/6.vhbb_boosted/tables/event_selection.tex}
@@ -164,8 +183,6 @@ Taking this into account, signal regions (SR) in the 0- and 1-lepton channels ar
 from events which fail this veto. The SRs and CRs are accounted for in the same way in the fit, but CRs are
 dominated by backgrounds and are used to constrain specific background components.
 
-Events are further split into 2-jet or 3-jet categories depending on whether additional untagged \smallR jets with $R=0.4$ are present.
-
 In the 0- and 1-lepton channels, the analysis is split into signal and control regions.
 The signal region (SR) should contain the events with Higgs candidates, while the control region (CR) is pure in \ttbar events and hence used to constrain the normalisation of the \ttbar background.
 
@@ -175,6 +192,19 @@ Events with additional \btagged jets outside the \largeR jet are included in the
 In this case, the Higgs candidate (the \largeR jet containing two \btagged track-jets) is likely to be built from the boosted hadronic decay of a top quark (i.e. $t \rightarrow Wb$).
 An additional \btagged jet from the other top quark is likely to be present in the event.
 , which is highly pure in \ttbar events.
+
+%
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.65\textwidth]{chapters/6.vhbb_boosted/figs/sr_cr_diagrams.pdf}
+  \caption{
+    Diagrams or the signal process (top) and the 0-lepton and 1-lepton \ttbar backgrounds (middle, bottom).
+    Object to the right of centre are reconstructed within the \largeR jet.
+    For the backgrounds, the \largeR jet contains a mis-tagged $c$- or \ljet.
+  }
+  \label{fig:sr_cr_diagrams}
+\end{figure}
+%
 
 \section{Modelling \& Systematic Uncertainties}\label{sec:vhbb_modelling}
 
@@ -194,6 +224,41 @@ W + jets (0- and 1-lepton) and single top-quark (1-lepton)
 
 
 \subsection{Background Composition}
+
+\begin{comment}
+The background contribution in the SRs is different for each of the three channels. In the 0-lepton channel,
+the dominant background sources are 𝑍 + jets and 𝑡𝑡¯ events with a significant contribution from 𝑊 + jets and
+diboson production. In the 1-lepton channel, the largest backgrounds are 𝑡𝑡¯ and 𝑊 +jets production followed
+by the single-top background. In the 2-lepton channel, 𝑍 + jets production is the dominant background
+followed by the 𝑍 𝑍 background. Contributions from 𝑡𝑡𝑉¯ and 𝑡𝑡𝐻¯ are negligible. The multĳet background,
+due to semileptonic heavy-flavour-hadron decays or misidentified jets, is found to be negligible in the 0-
+and 2-lepton channels as well as in the 1-lepton muon sub-channel after applying the event selections
+described in Section 5, as confirmed using data-driven techniques. In the 1-lepton electron sub-channel
+its contribution is not neglected. All initial background distribution shapes prior to the fit (described in
+Section 8), except those for multĳet, are estimated from the samples of simulated events. The multĳet
+shape and normalisation are determined using data.
+
+The 𝑊/𝑍+jets simulated event samples are split into 6 categories depending on the ‘truth’ labels of
+the track-jets ghost-associated to the Higgs-jet candidate: 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙, 𝑊/𝑍 + 𝑐𝑐,
+𝑊/𝑍 + 𝑐𝑙 and 𝑊/𝑍 + 𝑙𝑙; in this notation 𝑙 refers to a light-flavour jet.4 The 𝑊/𝑍 + 𝑏𝑏 fraction corresponds
+to approximately 80% of the total 𝑊/𝑍+jets background. This categorisation is used in the uncertainties
+variations of the ratios 𝑉 + 𝑏𝑐/𝑉 + 𝑏𝑏, 𝑉 + 𝑏𝑙/𝑉 + 𝑏𝑏 and 𝑉 + 𝑐𝑐/𝑉 + 𝑏𝑏 to cover uncertainties on the
+flavour composition in 𝑉+jets production, see Section 7.
+
+In the statistical analysis described in Section 8, the components 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙 and
+𝑊/𝑍 + 𝑐𝑐 are treated as a single background component denoted by 𝑊/𝑍+HF. The 𝑊+HF and 𝑍+HF
+contributions, which together constitute 90% of 𝑉+jets background, are estimated separately, each with its
+own normalisation factor determined from the fit to data
+
+
+The diboson background process consists of final states arising mostly from 𝑊 𝑍 and 𝑍 𝑍 events, where
+a 𝑍 boson decays into a pair of 𝑏-quarks. This process has a topology very similar to that of the signal,
+exhibiting a peak in 𝑚J at the mass of the hadronically decaying vector boson. Although it is a subdominant
+contribution, it provides an important reference for validation. Its normalisation is measured simultaneously
+with the 𝑉𝐻 signal
+
+
+\end{comment}
 
 \subsection{Sources of Systematic Uncertainties}
 
