@@ -294,44 +294,89 @@ An effort has been made, wherever possible, to harmonise similar uncertainties a
 
 \input{chapters/6.vhbb_boosted/tables/V+jets-acceptance-uncertainties-summary.tex}
 
-
 \subsubsection{Shape Uncertainties}
 
 In order to derive shape uncertainties (which as the name suggests affect shapes but not overall normalisations of distributions), the following procedure is carried out.
-Normalised distributions of the reconstructed Higgs candidate mass $m_J$ are compared for the nominal sample and variations.
-For each variation, the ratio of the variation to nominal is calculated, and an analytic function is fit to those sources of variation which have a ratio deviating from unity.
+Normalised distributions of the reconstructed \largeR Higgs candidate jet mass $m_J$ are compared for the nominal sample and variations.
+For each variation, the ratio of the variation to nominal is calculated, and an analytic function is fit to the ratio.
 If different analysis regions or channels show the same pattern of variation, a common uncertainty is assigned.
-An example of a significant source of uncertainty, arising from choice of factorisation scale $\mu_R$ is shown in \cref{fig:vhbb muR shape fitted}.
-An exponential function has been fitted to the ratio of the normalised distributions.
-Two different analysis regions (medium and high \pTV bins) are shown.
-The difference of the shape of the variation means that two separate uncertainties have to be added in the fit, and applied individually in each \pTV region. 
+An example of a significant source of uncertainty, arising from choice of factorisation scale $\mu_R$ is shown in \cref{fig:Vjets_SysMUR}.
+HP SRs split into medium and high \pTV bins are shown for the 0-lepton channel for \Whf and \Zhf jets.
+The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zjets contribution are merged, since the shapes in $m_J$ are consistent across channels.
+An exponential function $e^{p_0+p_1x}+p_2$ has been fitted to the ratio of the normalised distributions.
+The magnitude of the variation does show \ptv dependence, and so two separate uncertainties are added in the fit, and applied individually in each \pTV region. 
 %
 \begin{figure}[!htbp]
-    \centering
-    \begin{subfigure}{.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/1L_Whf_2tag1pfat0pjet_250_400ptv_SRCR_mJ_SysMUR_T_Norm.pdf}
-      \caption{}
-      \label{fig:vhbb muR shape fitted sub1}
-    \end{subfigure}%
-    \begin{subfigure}{.4\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/1L_Whf_2tag1pfat0pjet_400ptv_SRCR_mJ_SysMUR_T_Norm.pdf}
-      \caption{}
-      \label{fig:vhbb muR shape fitted sub2}
-    \end{subfigure}
-    \vspace{-0.5em}
-    \caption{Normalised distributions of leading fat jet mass $m_J$ for medium (\ref{fig:vhbb muR shape fitted sub1}) and high (\ref{fig:vhbb muR shape fitted sub2}) \pTV analysis regions for W+heavy-flavour-jets in the 0 lepton channel.
-    Merged in heavy flavours, high and low purity signal regions.
-    The renormalisation scale $\mu_R$ has been varied by a factor of 2 (``1up'') and 0.5 (``1down''). An exponential function has been fit to the ratio.}
-    \label{fig:vhbb muR shape fitted}
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Whf_2tag1pfat0jet_250_400ptv_SR_noaddbjetsr_mJIncl_SysMUR.pdf}
+    \caption{\Whf, HP SR, medium \pTV}
+    \label{fig:Vjets_SysMUR_sub1}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Whf_2tag1pfat0jet_400ptv_SR_noaddbjetsr_mJIncl_SysMUR.pdf}
+    \caption{\Whf, HP SR, high \pTV}
+    \label{fig:Vjets_SysMUR_sub2}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Zhf_2tag1pfat0jet_250_400ptv_SR_noaddbjetsr_mJIncl_SysMUR.pdf}
+    \caption{\Zhf, HP SR, medium \pTV}
+    \label{fig:Vjets_SysMUR_sub3}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Zhf_2tag1pfat0jet_400ptv_SR_noaddbjetsr_mJIncl_SysMUR.pdf}
+    \caption{\Zhf, HP SR, medium  \pTV}
+    \label{fig:Vjets_SysMUR_sub4}
+  \end{subfigure}%
+  \hfill
+  \caption{Normalised leading \largeR jet mass distribution from \Zboson and \Whf processes in the HP SR of the \zlep channel. The renormalisation scale $\mu_r$ has been varied by a factor of 2 (1up) and 0.5 (1down). An exponential function is fitted to the ratio between the nominal and variation samples.}
+  \label{fig:Vjets_SysMUR}
 \end{figure}
 
-The shapes of the $m_J$ distributions between LP and HP SRs are found to be consistent.
-Also consistent is the shape of $m_J$ when comparing between the 0- and 1-lepton channels for the \Wjets and between the 0- and 2-lepton channels for the \Zjets contribution.
-This allows to merge these regions 
+The impacts of variations in the factorisation scale $\mu_{F}$ and the choice of PDF set on \mJ shape were found to be negligible in comparison with $\mu_{R}$ and are hence ignored.
+
+The shape uncertainties derived on the SRs are also applied to the CRs, as the low statistics in the CRs make it difficult to derive dedicated shape uncertainties.
+All the shape uncertainties are fully correlated accross regions.
+
+%and the UP and DOWN are considered as symmetric variations.
 
 
+A comparison of the \mJ shapes between \SHERPA and \MADGRAPH is shown in \cref{fig:Vjets_MGSherpa_inc}.
+The plots are split by process and channel, but merged in SR purity and \ptv bins reflecting similarities between the \mJ shapes across these regions.
+Due to the low statistics available for the alternate \MADGRAPH sample, and the lack of statistically significant variation between the samples, no associated shape uncertainty is added to the fit in this case. 
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Whf_2tag1pfat0pjet_ptvinc_SR_noaddbjetsr_mJIncl.pdf}
+    \caption{\Whf, \pTV inclusive SR, \zlep channel}
+    \label{fig:Vjets_MGSherpa_inc_sub1}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/1L_Whf_2tag1pfat0pjet_ptvinc_SR_noaddbjetsr_mJIncl.pdf}
+    \caption{\Whf, \pTV inclusive SR, \olep channel}
+    \label{fig:Vjets_MGSherpa_inc_sub2}
+  \end{subfigure}
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/0L_Zhf_2tag1pfat0pjet_ptvinc_SR_noaddbjetsr_mJIncl.pdf}
+    \caption{\Zhf, \pTV inclusive SR, \zlep channel}
+    \label{fig:Vjets_MGSherpa_inc_sub3}
+  \end{subfigure}%
+  \hfill
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/2L_Zhf_2tag1pfat0pjet_ptvinc_SR_mJIncl.pdf}
+    \caption{\Zhf, \pTV inclusive SR, \tlep channel}
+    \label{fig:Vjets_MGSherpa_inc_sub4}
+  \end{subfigure}%
+  \hfill
+  \caption{The comparison on \mJ shapes between \SHERPA and \MADGRAPH samples
+  from \Vhf process in \pTV inclusive signal regions.
+  The Kolmogorov-Smirnov test and $\chi^2/ndf$ are shown on the plots.}
+  \label{fig:Vjets_MGSherpa_inc}
+\end{figure}
 
 
 \subsection{Diboson Modelling}
