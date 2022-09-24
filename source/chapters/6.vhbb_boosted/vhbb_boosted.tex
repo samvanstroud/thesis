@@ -247,7 +247,7 @@ A method to parameterise the systematic variation using one sample, and to then 
 This method was used to derive resummation and merging uncertainties for the nominal \textsc{Sherpa 2.2.1} sample, using a previous (lower statistic) \textsc{Sherpa 2.1} alternative sample.
 The resulting uncertainties were studied and found to be negligible in comparison with systematics from other sources.
 
-\subsection{Vector Boson + Jets Modelling}
+\subsection{Vector Boson + Jets Modelling}\label{sec:vjets_modelling}
 
 After event selection, the \Vjets background is a dominant background in all three analysis channels as described in \cref{sec:vebb_background_composition}.
 The \Vjets samples are split into categories depending on the truth flavour of the track-jets which are ghost-associated to the \largeR jet Higgs candidate.
@@ -286,6 +286,8 @@ The acceptance uncertainties relevant to the \Vjets processes are summarised bel
     %
     \item \textbf{Flavour relative acceptance:} for each flavour $V$+$xx$, where $xx\in$ \{$bc$,$bl$,$cc$\} the ratio of $V$+$xx$/$V$+$bb$ events is calculated. This corresponds to the uncertainty of $Vbb$ events due to the miss-tagging of other flavours V$xx$.
     %variations in the 𝑉 + 𝑏𝑐/𝑉 + 𝑏𝑏, 𝑉 + 𝑏𝑙/𝑉 + 𝑏𝑏 and 𝑉 + 𝑐𝑐/𝑉 + 𝑏𝑏 ratios are accounte for independently for the 𝑊- and 𝑍-boson backgrounds.
+    %
+    \item \textbf{Channel relative acceptance:} corresponding to the uncertainty in the normalisation of \Vjets events events due to the migration of events between channels.
 \end{itemize}
 %
 The uncertainties arising from the different sources described in \cref{sec:sources_of_uncertainties} are summed in quadrature to give a total uncertainty on each region.
@@ -298,14 +300,17 @@ An effort has been made, wherever possible, to harmonise similar uncertainties a
 
 In order to derive shape uncertainties (which as the name suggests affect shapes but not overall normalisations of distributions), the following procedure is carried out.
 Normalised distributions of the reconstructed \largeR Higgs candidate jet mass $m_J$ are compared for the nominal sample and variations.
-For each variation, the ratio of the variation to nominal is calculated, and an analytic function is fit to the ratio.
+For each variation, the ratio of the variation to nominal is calculated, the up and down variations are symmetrised, and an analytic function is fit to the symmetrised ratio.
 If different analysis regions or channels show the same pattern of variation, a common uncertainty is assigned.
 An example of a significant source of uncertainty, arising from choice of factorisation scale $\mu_R$ is shown in \cref{fig:Vjets_SysMUR}.
 HP SRs split into medium and high \pTV bins are shown for the 0-lepton channel for \Whf and \Zhf jets.
 The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zjets contribution are merged, since the shapes in $m_J$ are consistent across channels.
 An exponential function $e^{p_0+p_1x}+p_2$ has been fitted to the ratio of the normalised distributions.
 The magnitude of the variation does show \ptv dependence, and so two separate uncertainties are added in the fit, and applied individually in each \pTV region. 
-%
+
+The shape uncertainties for $\mu_R$ were derived on the SRs but are also applied to the CRs, as the low statistics in the CRs make it difficult to derive dedicated shape uncertainties.
+All the shape uncertainties are fully correlated accross regions.
+
 \begin{figure}[!htbp]
   \centering
   \begin{subfigure}{.5\textwidth}
@@ -334,14 +339,6 @@ The magnitude of the variation does show \ptv dependence, and so two separate un
   \caption{Normalised leading \largeR jet mass distribution from \Zboson and \Whf processes in the HP SR of the \zlep channel. The renormalisation scale $\mu_r$ has been varied by a factor of 2 (1up) and 0.5 (1down). An exponential function is fitted to the ratio between the nominal and variation samples.}
   \label{fig:Vjets_SysMUR}
 \end{figure}
-
-The impacts of variations in the factorisation scale $\mu_{F}$ and the choice of PDF set on \mJ shape were found to be negligible in comparison with $\mu_{R}$ and are hence ignored.
-
-The shape uncertainties derived on the SRs are also applied to the CRs, as the low statistics in the CRs make it difficult to derive dedicated shape uncertainties.
-All the shape uncertainties are fully correlated accross regions.
-
-%and the UP and DOWN are considered as symmetric variations.
-
 
 A comparison of the \mJ shapes between \SHERPA and \MADGRAPH is shown in \cref{fig:Vjets_MGSherpa_inc}.
 The plots are split by process and channel, but merged in SR purity and \ptv bins reflecting similarities between the \mJ shapes across these regions.
@@ -379,6 +376,9 @@ Due to the low statistics available for the alternate \MADGRAPH sample, and the 
 \end{figure}
 
 
+The impacts of variations in the factorisation scale $\mu_{F}$ and the choice of PDF set on \mJ shape were also found to be negligible in comparison with $\mu_{R}$ and are hence not associated uncertainty was added to the fit.
+
+
 \subsection{Diboson Modelling}
 
 The uncertainties for the diboson background generallys follows that of \Vjets.
@@ -390,12 +390,66 @@ Acceptance and shape uncertainties are derived in an analagous fashion to \Vjets
 \subsubsection{Acceptance Uncertainties}
 
 Diboson acceptance uncertainties are summarised in \cref{tab:diboson_acceptance_uncerts}.
+Variations from $\mu_R$, $\mu_F$, PDF choice and alternative generator are considered and are combined combined through a sum in quadrature as described in \cref{sec:vjets_modelling}.
+The largest modification to the nominal acceptance results from the \textsc{Powheg+Pythia8} alternate sample, which modifies several parts of the generative model at the same time.
+Since the diboson contribution to the \ttbar control region is small, no SR-to-CR relative acceptance uncertainty is required.
+
+For the $WZ$ contribution, uncertainties are derived using the 1-lepton channel and applied to all three channels.
+An additional \pct{8} channel migration uncertainty is applied on the 0-lepton channel.
+For the $ZZ$ contribution, the normalisation uncertainty is calculated using the 2-lepton channel and applied to all three channels.
+The 0- and 1-lepton channels have a similar HP-to-LP relative acceptance uncertainty of \pct{18}.
+The 1-lepton medium-to-high \ptv relative acceptance is based off the value obtained from the 2-lepton channel.
+\pct{30} and \pct{18} channel migration uncertainties are applied in the 0- and 1-lepton channels respectively.
+
+Since the contribution from $WW$ is small, dedicated studies are not performed, but a \pct{25} normalisation uncertainty is applied in all the three channels which is based on the modelling studies performed for the previous analysis \cite{HIGG-2018-04}.
 
 \input{chapters/6.vhbb_boosted/tables/VV_acceptance_uncertainties.tex}
 
 \subsubsection{Shape Uncertainties}
 
-textsc
+Diboson shape uncertainties are derived in a similar fashion to \Vjets.
+Only the uncertainties associated with systematic variation of $\mu_R$ and the event generator have a non-negligible impact on the \mJ shape.
+Variation of $\mu_R$ produces consistent \mJ shape impacts across all regions and channels, and hence only a single associated uncertainty is derived, shown in \cref{fig:VV_muRFit}.
+A hyperbolic tangent is fitted to the symmetrised ratio.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{chapters/6.vhbb_boosted/figs/012L_VV_2tag1pfat0pjet_ptvinc_SR_noaddbjetsr_mJIncl_SysMUR.pdf}
+  \caption{
+    Normalised leading \largeR jet mass distribution from $WZ$ and $ZZ$ process, merged among all the signal regions and lepton channels.
+    The renormalisation scale $\mu_R$ has been varied by a factor of 2 (1up) and 0.5 (1down).
+    The red line shape shows the fitting results of the hyperbolic tangent function.
+  }
+  \label{fig:VV_muRFit}
+\end{figure}
+
+The comparison between the nominal \textsc{Sherpa} and alternative \POWPYTHIA8 samples is shown in \cref{fig:VV_PP8Fit} for the 0- and 1-lepton channels for both $WZ$ and $ZZ$ processes.
+For these channels, the shape of \mJ varies in opposite directions in the LP and HP signal regions.
+Shapes are similar between \ptv bins, the 0- and 1-lepton channels and for $WZ$ and $ZZ$.
+A third order polynomial is fitted to the ratio, and this function transitions to a constant piecewise function in the high mass region to accurately represent the shape taking into account large statistical uncertainties.
+Dependence on event generator was found to be negligible within statistical uncertainty in the 2-lepton channel.
+All diboson shape uncertainties are fully correlated in the fit.
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/01L_VV_2tag1pfat0jet_ptvinc_SR_noaddbjetsr_mJIncl_SysPwPy.pdf}
+    \caption{High purity signal region}
+    \label{fig:VV_PP8Fit_sub1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/01L_VV_2tag1pfat1pjet_ptvinc_SR_noaddbjetsr_mJIncl_SysPwPy.pdf}
+    \caption{Low purity signal region}
+    \label{fig:VV_PP8Fit_sub2}
+  \end{subfigure}
+  \caption{
+    The comparison on \mJ shapes between \SHERPA and \POWPYTHIA8 samples from $WZ$ and $ZZ$ process in high and low purity signal regions.
+    \pTV regions and 0- and 1-lepton channels are merged.  
+    The dashed green line shows the fitted third order polynomial function and the blue lines show the function after a protection is added in the high mass region.
+  }
+  \label{fig:VV_PP8Fit}
+\end{figure}
+
 
 
 \section{Fit Model}\label{sec:vhbb_fit}
