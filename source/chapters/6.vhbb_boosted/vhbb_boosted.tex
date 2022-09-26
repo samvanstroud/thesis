@@ -116,7 +116,7 @@ The combined selections in \cref{tab:vhbb_selection} result in a signal efficien
 \input{chapters/6.vhbb_boosted/tables/event_selection.tex}
 %
 
-\subsection{Control Region}\label{sec:vhbb_control_region}
+\subsection{Control Regions}\label{sec:vhbb_control_region}
 
 The \ttbar process presents a major background in the 0- and 1-lepton channels.\todo{not sure where the 0L ttbar ETmiss comes from}
 In these events, the Higgs candidate is often reconstructed from a correctly tagged \bjet from the top decay $t \to \Wboson b$, and an incorrectly tagged $c$- or \ljet from the subsequent decay of the \Wboson, as shown in \cref{fig:sr_cr_diagrams}.
@@ -562,37 +562,42 @@ The result of this fit can be used to calculate expected (median) significances,
 
 \section{Results}\label{sec:vhbb_results}
 
-In the present analysis, the two signal strength parameters \muVH and \muVZ are extracted from a simultaneous maximisation of the likelihood.
+In the present analysis, the two signal strength parameters \muVH and \muVZ are extracted from a simultaneous maximisation of the likelihood described in \cref{sec:vhbb_fit}.
+The results of the analysis are summarised in this section.
+Post-fit \mJ distributions are shown in \cref{sec:postfit_plots}.
+The observed signal strengths are given in \cref{sec:signal_strengh_sigs}, along with observed and expected significances.
+Finally in \cref{sec:sys_results} the impact of systematic uncertainties on the results is examined.
 
-\subsection{Post-fit Distributions}
 
-Post-fit \mJ distributions in the high-purity medium \pTV regions for the 0- and 2-lepton channels are shown in \cref{fig:vhbb_postfit_plots}. The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
+\subsection{Post-fit Distributions}\label{sec:postfit_plots}
+
+In addition to the observed significance and signal strength, it is also useful to study the post-fit \mJ distributions to compare the simulation and data using the best-fit values $\hat{\mu}$ and $\hat{\theta}$.
+Post-fit \mJ distributions are given for the signal regions in the 0-, 1- and 2-lepton channels in \cref{fig:vhbb_postfit_plots}.
+The LP and HP regions are merged for the 0- and 1-lepton channels.
+The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
+In general there is a good level of agreement between the simulation and data, indicating the fit model is performing as expected.
+\cref{fig:vhbb_postfit_plots_cr} shows the post-fit plots for the \ttbar control regions.
+Again, a good level of agreement is observed given the statistical uncertainties on the distributions.
 
 \begin{figure}[!htbp]
   \centering
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_BMax400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}%
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_BMax400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L1_distmBB_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}%
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L1_distmBB_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L2_T2_DSR_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}%
   \begin{subfigure}{.4\textwidth}
     \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_incJet1_Y6051_DSR_T2_L2_distmBB_J0_GlobalFit_unconditionnal_mu1.pdf}
-    %\caption{}
   \end{subfigure}
   \caption{
     The \mJ post-fit distributions
@@ -614,7 +619,39 @@ Post-fit \mJ distributions in the high-purity medium \pTV regions for the 0- and
 \end{figure}
 
 
-\subsection{Observed Signal Strength}
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L0_T2_DSRtopaddbjetcr_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_unconditionnal_mu1.pdf}
+  \end{subfigure}%
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L1_T2_DSRtopaddbjetcr_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_unconditionnal_mu1.pdf}
+  \end{subfigure}
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_incJet1_Y6051_DSRtopaddbjetcr_T2_L0_distmBB_J0_GlobalFit_unconditionnal_mu1.pdf}
+  \end{subfigure}%
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_incJet1_Y6051_DSRtopaddbjetcr_T2_L1_distmBB_J0_GlobalFit_unconditionnal_mu1.pdf}
+  \end{subfigure}
+  \caption{
+    The \mJ post-fit distributions in the \ttbar control region for
+    (top) the \zlep channel and the \olep channel for $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and (bottom) the \zlep\ channel and the \olep\ channel for $\ptv > \SI{400}{\GeV}$.
+    The background
+    contributions after the likelihood fit are shown as filled
+    histograms. The Higgs boson signal ($\mh = \SI{125}{\GeV}$) is shown as a
+    filled histogram on top of the fitted backgrounds normalised to the
+    signal yield extracted from data ($\mu_{VH}^{bb}=0.72$), and
+    unstacked as an unfilled histogram, scaled by the SM prediction times a factor 
+    of 2. The size of the combined statistical and systematic
+    uncertainty for the sum of the fitted signal and background is
+    indicated by the hatched band. The highest bin in the distributions
+    contains the overflow.
+  }
+  \label{fig:vhbb_postfit_plots_cr}
+\end{figure}
+
+
+\subsection{Observed Signal Strength \& Significance}\label{sec:signal_strengh_sigs}
 
 The measured signal strength is computed as the ratio between the measured signal yield to the prediction from the SM.
 The result for \muVH is given in \cref{eq:muVH}, while the result for \muVZ is given in \cref{eq:muVZ}.
@@ -627,9 +664,8 @@ The result for \muVH is given in \cref{eq:muVH}, while the result for \muVZ is g
   \muVZ = 0.91 ^{+0.29}_{-0.23} = 0.91 \pm 0.15 \mathrm{(stat.)} ^{+0.24}_{-0.17} \mathrm{(syst.)},
 \end{equation}
 %
-These values correspond to an observed (expected) signal strength of 2.1 (2.7) standard deviations.
-  
-
+These values correspond to an observed (expected) significance of 2.1 (2.7) standard deviations.
+These results are summarised in \cref{fig:money_plot}, which shows the background-subtracted \mJ distribution.
 
 \begin{figure}[!htbp]
   \centering
@@ -653,7 +689,7 @@ These values correspond to an observed (expected) signal strength of 2.1 (2.7) s
 
 
 
-\subsection{Impact of Systematics}
+\subsection{Impact of Systematics}\label{sec:sys_results}
 
 \input{chapters/6.vhbb_boosted/tables/mu_systs.tex}
 
