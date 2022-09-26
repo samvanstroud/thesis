@@ -57,7 +57,7 @@ Data from centre-of-mass energy \come{13} proton-proton collisions at the \LHC r
 The resulting dataset corresponds to a total integrated luminosity of \intlumi (see \cref{fig:run2_lumi}).
 
 An overview of the MC simulated samples used in the analysis is given in \cref{tab:vhbb_samples}.
-These samples are used to model the signal and background processes relevant to the analysis, with the exception of teh multijet background which is modelled using a data-driven technique.
+These samples are used to model the signal and background processes relevant to the analysis, with the exception of the multijet background which is modelled using a data-driven technique.
 Data and simulated events are reconstructed using the same algorithms, and a reweighting is applied to the simulated events in order to match the pile-up distribution
 observed in the data.
 %
@@ -258,8 +258,8 @@ The full flavour composition breakdown for each channel and analaysis region are
 In order to access uncertainties associated with the use of MC generators, variations of the data are produced using alternative generators or variation of nominal generator parameters as described in \cref{sec:implementation_of_variations}.
 As described in \cref{sec:vhbb_samples}, the nominal MC event generator used for \Vjets events is \textsc{Sherpa 2.2.1}, while \textsc{MadGraph5\_aMC@NLO+Pythia8} (which uses a different parton showering model) is used as an alternative generator.
 
-Modelling systematics can have several impacts, including affecting the overall normalisation for different processes, and the relative acceptances between different analysis regions (i.e. migrations between HP and LP SRs, between the SR and CR, and between \pTV bins), and the shapes of the $m_J$ distributions.
-Since the fit model fits only the \largeR jet mass $m_J$ to data, all shape uncertainties are estimated with respect to this observable.
+Modelling systematics can have several impacts, including affecting the overall normalisation for different processes, and the relative acceptances between different analysis regions (i.e. migrations between HP and LP SRs, between the SR and CR, and between \pTV bins), and the shapes of the \mJ distributions.
+Since the fit model fits only the \largeR jet mass \mJ to data, all shape uncertainties are estimated with respect to this observable.
 Several sources of uncertainty, summarised in \cref{sec:sources_of_uncertainties}, have been assessed.
 
 \input{chapters/6.vhbb_boosted/tables/Wjets_0L_flavcomp.tex}
@@ -299,12 +299,12 @@ An effort has been made, wherever possible, to harmonise similar uncertainties a
 \subsubsection{Shape Uncertainties}
 
 In order to derive shape uncertainties (which as the name suggests affect shapes but not overall normalisations of distributions), the following procedure is carried out.
-Normalised distributions of the reconstructed \largeR Higgs candidate jet mass $m_J$ are compared for the nominal sample and variations.
+Normalised distributions of the reconstructed \largeR Higgs candidate jet mass \mJ are compared for the nominal sample and variations.
 For each variation, the ratio of the variation to nominal is calculated, the up and down variations are symmetrised, and an analytic function is fit to the symmetrised ratio.
 If different analysis regions or channels show the same pattern of variation, a common uncertainty is assigned.
 An example of a significant source of uncertainty, arising from choice of factorisation scale $\mu_R$ is shown in \cref{fig:Vjets_SysMUR}.
 HP SRs split into medium and high \pTV bins are shown for the 0-lepton channel for \Whf and \Zhf jets.
-The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zjets contribution are merged, since the shapes in $m_J$ are consistent across channels.
+The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zjets contribution are merged, since the shapes in \mJ are consistent across channels.
 An exponential function $e^{p_0+p_1x}+p_2$ has been fitted to the ratio of the normalised distributions.
 The magnitude of the variation does show \ptv dependence, and so two separate uncertainties are added in the fit, and applied individually in each \pTV region. 
 
@@ -452,99 +452,208 @@ All diboson shape uncertainties are fully correlated in the fit.
 
 
 
-\section{Fit Model}\label{sec:vhbb_fit}
+\section{Statistcal Treatment}\label{sec:vhbb_fit}
+
+Selected events are used to perform a statistical test of the background-only hypothesis, i.e. a model which does not include the \VHbb process.
+The test involves a binned global maximum-profile-likelihood fit from the model to the data using the \mJ distribution, and combines all the analysis regions defined in \cref{tab:SR_CR_definition}.
+The test is based on the profile likelihood ratio test statistic.
+The signal strength $\mu = \sigma / \sigma_{\textnormal{SM}}$ is defined as the ratio between the observed and predicted cross-sections, where $\mu = 0$ corresponds to the background-only hypothesis and $\mu = 1$ corresponds to the SM prediction.
+It is a parameter of interest (POI) which acts to scale the total number of signal events.
+
+The present analysis makes use of two POIs.
+The first, \muVH, is the signal strength for the \VHbb process, the primary process under investigation.
+The diboson production strength \muVZ for the \VZbb process is measured simultaneously and provides a validation of the analysis apparatus used for the primary \Hbb measurement.
+Alongside the two POIs, the predictive model depends on several uninteresting parameters which are not the primary target of measurement.
+These parameters are called nuisance parameters (NPs), collectively referred to as $\theta$.
+Freely floating background normalisations are implemented as NPs and are also extracted during the fitting processes.
 
 
+\subsection{Likelihood Function}
 
-\begin{comment}
-  All initial background distribution shapes prior to the fit (described in Section 8), except those for multĳet, are estimated from the samples of simulated events. The multĳet shape and normalisation are determined using data
-  \end{comment}
-
-\begin{comment}
-  The normalisation on the diboson background is left floating in the fit, i.e. measured simulatneously along with the $VH$ signal
-
-
-  In the statistical analysis described in Section 8, the components 𝑊/𝑍 + 𝑏𝑏, 𝑊/𝑍 + 𝑏𝑐, 𝑊/𝑍 + 𝑏𝑙 and
-𝑊/𝑍 + 𝑐𝑐 are treated as a single background component denoted by 𝑊/𝑍+HF. The 𝑊+HF and 𝑍+HF
-contributions, which together constitute 90% of 𝑉+jets background, are estimated separately, each with its
-own normalisation factor determined from the fit to data
-\end{comment}
-
-%The \HiggsJet\ mass candidate in the different signal
-%regions are used as the discriminant variable and are combined using a
-%binned maximum-likelihood fit, referred to as the global likelihood
-%fit, which allows the signal yield and the background normalisations
-%to be extracted.
-
-%The signal is extracted from a combined profile likelihood fit to the \largeR jet mass, using several signal and control regions. The yield of diboson production $VZ$ with $Z \rightarrow b\bar{b}$ is also measured using the same fit and provides a validation of the analysis. The cross-section measurements are performed within the simplified template cross-section (STXS) framework~\cite{deFlorian:2016spz, Badger:2016bpw}. These measurements are then used to constrain anomalous couplings in a Standard Model effective field theory (SMEFT)~\cite{Contino:2013kra}.
-
-A global profile likelihood fit is used to extract the signal strength $\mu$ and its significance from the data. This statistical setup treats each bin as a Poisson counting experiment. The combined likelihood over $N$ bins, without considering sources of systematic uncertainty, is given by
+The statistical setup treats each bin as a Poisson counting experiment and is based on the \textsc{RooStats} framework \cite{moneta2010roostats}.
+The combined likelihood over $N$ bins is constructed as the product of Poisson probabilities in each bin.
+Considering the simplified case of a single signal strength parameter $\mu$, and neglecting sources of systematic or statistical uncertainty, this is given by
 %
 \begin{equation}
     \mathcal{L}(\mu) = \prod_{i=1}^N \frac{(\mu s_i + b_i)^{n_i}}{n_i!} \exp \left[ - (\mu s_i + b_i) \right],
 \end{equation}
 %
-where $s_i$ ($b_i$) is the expected number of signal (background) events in bin $i$, and $n_i$ is the number of events observed in data in bin $i$. The presence of systematic uncertainties which can affect the expected numbers of signal and background events necessitates the addition of nuisance parameters (NPs), $\theta$, to the likelihood. Each source of systematic uncertainty for \Vjets samples discussed in the previous section was implemented as a NP $\theta_j$ in the fit. The presence of NPs modifies the likelihood as 
+where $s_i$ ($b_i$) is the expected number of signal (background) events in bin $i$, and $n_i$ is the number of observed data events in bin $i$.
+
+\subsubsection{Treatment of Uncertainties}
+
+Systematic uncertainties can modify the predicted signal and background yields $s_i$ and $b_i$. 
+Each source of systematic uncertainty is taken into account by adding an additional NP $\theta_j$ to the likelihood in the form of a Gaussian cost function.
+The combined effect of the NPs is then
 %
 \begin{equation}
-    \mathcal{L}(\mu) \rightarrow \mathcal{L}(\mu, \theta) = \mathcal{L}(\mu) \times \mathcal{L}(\theta) , \quad s_i \rightarrow s_i(\theta) , \quad b_i \rightarrow b_i(\theta),
+  \mathcal{L}(\theta) = 
+  \prod_{j = 1}^{N_\theta}
+  \frac{1}{\sqrt{2 \pi \sigma_j}}
+  \exp\left[ \frac{- (\overline{\theta}_j - \theta_j)^2}{2 \sigma_j^2} \right] ,
 \end{equation}
 %
-where
+where $N_\theta$ is the number of NPs, $\overline{\theta}_j$ is the nominal value of the $j$th NP, $\theta_j$ is the fitted value, and $\sigma_j$ is the corresponding associated prior uncertainty on $\theta_j$.
+As the fitted value of the $\theta_j$ deviates from it's nominal value, a cost is introduced.
+The presence of NPs modifies the likelihood as 
 %
 \begin{equation}
-    \mathcal{L}(\theta) = \prod_{\theta_j \in \theta} \frac{\exp\left[{-\theta_j^2/2}\right]}{\sqrt{2\pi}}.
+    \mathcal{L}(\mu) \rightarrow \mathcal{L}(\mu, \theta) = \mathcal{L}(\mu) \mathcal{L}(\theta) .
 \end{equation}
 %
+The predicted signal and background yields are also modified by the presence of the NPs with
+%
+\begin{equation}
+  s_i \rightarrow s_i(\theta) , \quad b_i \rightarrow b_i(\theta) .
+\end{equation}
+%
+Statstical uncertainty is also present, and implemented using a dedicated NP for each bin.
+
+\subsubsection{Fit Procedure and Statistical Tests}
+
+The best-fit value of $\mu$, denoted $\hat\mu$, is obtained via an unconditional maximisisation of the likelihood.
+The likelihood is also used to construct a statistical test which can confirm or reject the background-only hypothesis.
+The test statistic $q_\mu$ is constructed from the profile likelihood ratio, as in
+%
+\begin{equation}
+  q_\mu = -2 \ln \frac{\mathcal{L(\mu, \hat{\hat{\theta}}_\mu )} } { \mathcal{L(\hat{\mu}, \hat{\theta}}) }
+\end{equation}
+%
+where $\hat{\mu}$ and $\hat{\theta}$ are chosen to maximise the likelihood $\mathcal{L}$, and the profile value $\hat{\hat{\theta}}_\mu$ is obtained from a conditional maximisation fo the likelihood for a specific choice of $\mu = 0$ corresponding to the background-only hypothesis.
+% i.e. this is the profile likelihood (double hat term)
+
+The test statistic is used to construct a $p$-value which is used to confirm or accept the background-only hypothesis.
+The $p$-value is typically reported in terms of the significance $Z$, defined as the number of standard deviations for a Gaussian Normal distribution which will produce a one-sided tail integral equal to the $p$-value, as in
+%
+\begin{equation}
+  p = \int_Z^{\infty} \frac{1}{\sqrt{2 \pi}} e^{-x^2/2} ~\mathrm{d} x
+  = 1 - \Phi(Z) .
+\end{equation}
+%
+Typically a value of $Z=3$ constitues \textit{evidence} of a processes, while $Z=5$ is required for a \textit{discovery}.
+Alongside the $p$-value, the best-fit value of the signal strength $\hat\mu$ and its corresponding uncertainty are typically quoted, and compared to their expected values (see \cref{sec:fit_expected}).
+
+\begin{comment}
+  All initial background distribution shapes prior to the fit (described in Section 8), except those for multĳet, are estimated from the samples of simulated events. The multĳet shape and normalisation are determined using data  
+  The normalisation on the diboson background is left floating in the fit, i.e. measured simultaneously along with the $VH$ signal
+\end{comment}
 
 
-Statstical uncertainty is also present.
+\subsection{Background Normalisations}
+
+The normalisation of the largest backgrounds are left floating and are determined in the fit.
+The corresponding postfit background normalisations are listed in \cref{tab:bkg_norms}.
+A single normalisation factor is used for \Whf and \Zhf, which constitue more than \pct{90} of the total \Vjets background, since the use of independent factors in different channels were found to be compatible.
+
+\input{chapters/6.vhbb_boosted/tables/bkg_norms.tex}
+
+The normalisations and shapes of all other backgrounds, with the exception of the multijet background which is estimated using a data driven technique, are initialised using the simulated samples.
+
+
+\subsection{Asimov Dataset \& Expected Results}\label{sec:fit_expected}
+
+The Asimov dataset is constructed by replacing the data with the sum of the signal and background predictions $n_i = s_i + b_i$.
+A fit to this dataset using the nominal values of the NPs from the simulation will recover the input values and is useful for studying constraints on and correlations between the NPs.
+
+Alternatively, a conditional fit to the Asimov dataset can be performed using values of the background NPs which are determined from an unconditional fit to data.
+The signal NPs and POIs are fixed at their nominal values from the SM simulation.
+The result of this fit can be used to calculate expected (median) significances, which can be compared to their observed values.
+%The fit is conditional on the signal strength parameter, which is fixed at its nominal value.
 
 \section{Results}\label{sec:vhbb_results}
 
-\begin{comment}
-  paper abstract
-  The measured
-  signal strength, defined as the ratio of the measured signal yield to
-  that predicted by the Standard Model, is $0.72 ^{+0.39}_{-0.36}$
-  corresponding to an observed (expected) significance of 2.1 (2.7)
-  standard deviations. Cross-sections of associated production of a
-  Higgs boson decaying into $b$ quark pairs with a \Wboson or \Zboson gauge
-  boson, decaying into leptons, are measured in two exclusive
-  vector boson transverse momentum regions, 250--\SI{400}{\GeV} and above \SI{400}{\GeV}, and
-  interpreted as constraints on anomalous couplings in the framework of
-  a Standard Model effective field theory.
+In the present analysis, the two signal strength parameters \muVH and \muVZ are extracted from a simultaneous maximisation of the likelihood.
 
-  %For a Higgs boson mass of \SI{125}{\GeV}, an excess of events over the expected background from other Standard Model processes is found
-  %with an observed significance of $3.5$ standard deviations, compared to an expectation of $3.0$
-  %standard deviations. This excess provides evidence for the Higgs boson decay into b-quarks
-  %and for its production in association with a vector boson. Assuming the Standard Model production 0.19
-  %cross-section, the results are consistent with the value of the Yukawa coupling to b-quarks in the Standard Model.
-\end{comment}
+\subsection{Post-fit Distributions}
 
-\subsection{Pre-fit Yields}
-
-
-\subsection{Post-fit Results}
-
-Post-fit $m_J$ distributions in the high-purity medium \pTV regions for the 0- and 2-lepton channels are shown in \cref{fig:vhbb postfit plots}. The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
+Post-fit \mJ distributions in the high-purity medium \pTV regions for the 0- and 2-lepton channels are shown in \cref{fig:vhbb_postfit_plots}. The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
 
 \begin{figure}[!htbp]
   \centering
   \begin{subfigure}{.4\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMax400_BMin250_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_J0_GlobalFit_conditionnal_mu1.pdf}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_BMax400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
   \end{subfigure}%
   \begin{subfigure}{.4\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L2_T2_DSR_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_conditionnal_mu1.pdf}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L0_distmBB_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
+  \end{subfigure}
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_BMax400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L1_distmBB_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
+  \end{subfigure}%
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_Y6051_DSRnoaddbjetsr_T2_L1_distmBB_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
+  \end{subfigure}
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_distmBB_J0_L2_T2_DSR_Y6051_incJet1_Fat1_incFat1_BMin250_BMax400_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
+  \end{subfigure}%
+  \begin{subfigure}{.4\textwidth}
+    \includegraphics[width=\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin400_incFat1_Fat1_incJet1_Y6051_DSR_T2_L2_distmBB_J0_GlobalFit_unconditionnal_mu1.pdf}
+    %\caption{}
   \end{subfigure}
   \caption{
-    Post-fit distributions for the 0-lepton (left) and 2-lepton (right) channels in the high purity medium \pTV region, obtained in the combined conditional $\mu=1$ fit to data. The last bin of each plot is an overflow bin.
+    The \mJ post-fit distributions
+    in (top) the 0-, (middle) 1- and (bottom) \tlep SRs for
+    (left) $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and (right) $\ptv \geq \SI{400}{\GeV}$. The LP and HP regions are merged for the \zlep and \olep channels.
+    The fitted background contributions
+    are shown as filled histograms. The Higgs boson signal ($m_H =
+    \SI{125}{\GeV}$) is shown as a filled histogram and is 
+    normalised to the signal yield extracted from data
+    ($\muVH = 0.72$), and as an unstacked unfilled histogram,
+    scaled by the SM prediction times a factor of two. The size of the
+    combined on the sum of the
+    fitted signal and background is shown in the hatched band. The
+    highest bin contains the overflow. 
+    %The ratio of the data to the sum of the fitted signal and background is shown in the lower panel.
+    %Post-fit distributions for the 0-lepton (left) and 2-lepton (right) channels in the high purity medium \pTV region, obtained in the combined conditional $\mu=1$ fit to data. The last bin of each plot is an overflow bin.
   }
-  \label{fig:vhbb postfit plots}
+  \label{fig:vhbb_postfit_plots}
 \end{figure}
 
+
+\subsection{Observed Signal Strength}
+
+The measured signal strength is computed as the ratio between the measured signal yield to the prediction from the SM.
+The result for \muVH is given in \cref{eq:muVH}, while the result for \muVZ is given in \cref{eq:muVZ}.
+%
+\begin{equation}\label{eq:muVH}
+  \muVH = 0.72 ^{+0.39}_{-0.36} = 0.72 ^{+0.29}_{-0.28}  \mathrm{(stat.)} ^{+0.26}_{-0.22} \mathrm{(syst.)}.
+\end{equation}
+%
+\begin{equation}\label{eq:muVZ}
+  \muVZ = 0.91 ^{+0.29}_{-0.23} = 0.91 \pm 0.15 \mathrm{(stat.)} ^{+0.24}_{-0.17} \mathrm{(syst.)},
+\end{equation}
+%
+These values correspond to an observed (expected) signal strength of 2.1 (2.7) standard deviations.
+  
+
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_incFat1_Fat1_incJet1_Y6051_DSRnoaddbjetsr_T2_L3_distmBB_Higgsweighted_BkgSub_GlobalFit_unconditionnal_mu1.pdf}
+  \caption{
+    \mJ distribution in data after subtraction of all backgrounds except for the $WZ$ and $ZZ$ diboson processes. The contributions from all lepton channels and signal regions are summed and weighted by their
+    respective values of the ratio of fitted Higgs boson signal and
+    background yields. The expected contribution of the associated $WH$
+    and $ZH$ production of a SM Higgs boson with $m_H = \SI{125}{\GeV}$ is
+    shown scaled by the measured combined signal strength
+    ($\muVH=0.72$). The diboson contribution is normalised to its
+    best-fit value of $\muVZ=0.91$. The size of the combined
+    statistical and systematic uncertainty is indicated by the hatched
+    band. This error band is computed from a full signal-plus-background
+    fit including all the systematic uncertainties defined in
+    \cref{sec:vhbb_modelling}, except for the $VH/VZ$
+    experimental and theory uncertainties.  
+  }
+  \label{fig:money_plot}
+\end{figure}
+
+
+
+\subsection{Impact of Systematics}
 
 \input{chapters/6.vhbb_boosted/tables/mu_systs.tex}
 
