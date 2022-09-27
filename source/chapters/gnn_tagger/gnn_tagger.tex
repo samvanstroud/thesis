@@ -45,14 +45,14 @@ The low-level algorithms can be manually optimised reconstruction algorithms, fo
 In contrast \GNN utilises a single neural network, which directly takes the tracks and some information about the jet as inputs. As such, it does not depend on any other flavour tagging algorithm, and a single training of the \GNN fully optimises all aspects of the algorithm.  
 
 \GNN is trained to understand the internal structure of the jet through the use of two auxiliary training objectives: the grouping of tracks originating from a common vertex, and the prediction of the underlying physics process from which each track originated.
-These auxiliary objectives are meant to guide the neural network towards a more complete understanding of the underlying physics, removing the need for the low-level algorithms, and therefore simplifying the process of optimising the tagger for new regions of phase space (e.g. \ctag or high-\pt \btag), or when the detector or charged particle reconstruction algorithms are updated.
+These auxiliary objectives are meant to guide the neural network towards a more complete understanding of the underlying physics, removing the need for the low-level algorithms, and therefore simplifying the process of optimising the tagger for new regions of phase space (e.g. \ctag or \highpt \btag), or when the detector or charged particle reconstruction algorithms are updated.
 The training targets for the primary and auxiliary objectives are extracted from “truth information”, i.e. information only available in simulation, as opposed to reconstructed quantities available in both collision data and simulation.
 
 In this note, the following benefits of this approach will be shown:
 
 \begin{enumerate}
     \item Improved performance with respect to the current ATLAS flavour tagging algorithms, with larger background rejection for a given signal efficiency.
-    \item The same network architecture can be easily optimised for a wider variety of use cases (e.g. \cjet tagging and high-\pt jet tagging), since there are no low-level algorithms to retune.
+    \item The same network architecture can be easily optimised for a wider variety of use cases (e.g. \cjet tagging and \highpt jet tagging), since there are no low-level algorithms to retune.
     \item There are fewer flavour tagging algorithms to maintain.
     \item Alongside the network's prediction of the jet flavour, the auxiliary vertex and track origin predictions provide more information on why a jet was (mis)tagged or not. This information can also have uses in other applications, for instance to explicitly reconstruct displaced decay vertices or to remove fake tracks.\footnote{\fakesfootnote}
 \end{enumerate}
@@ -94,7 +94,7 @@ Track IP significances are lifetime signed according to the track's direction wi
 The jet transverse momentum and signed pseudorapidity constitute the jet-level inputs, with the track-level inputs listed in \cref{tab:track_inputs}.
 If a jet has more than 40 associated tracks, the first 40 tracks with the largest transverse IP significance\footnote{\ipdefsfootnote} \dzerosig are selected as inputs.
 Full track parameter information and associated uncertainties, along with detailed hit information, carry valuable information about the jet flavour.
-In the dense cores of high-\pt jets, tracks are highly collimated and separation between tracks can be of the same order as the active sensor dimensions, resulting in merged clusters and tracks which share hits \cite{PERF-2015-08}.
+In the dense cores of \highpt jets, tracks are highly collimated and separation between tracks can be of the same order as the active sensor dimensions, resulting in merged clusters and tracks which share hits \cite{PERF-2015-08}.
 Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
 Full track parameter information and associated uncertainties, along with detailed hit information, carry valuable information about the jet flavour.
 
@@ -374,7 +374,7 @@ To account for this, the range of $b$-jet tagging efficiencies displayed in \cre
 For \ttbarjets with \ttbarpt, \GNN demonstrates considerably better \clrej compared with \DLr across the full range of $b$-jet tagging efficiencies probed.
 The relative improvement depends on the \bjet tagging efficiency, with the largest improvements found at lower values.
 At a $b$-jet tagging efficiency of \pct{\ttlo}, the \crej improves by a factor of \ttbclo and the \lrej improves by a factor of \ttbllo with respect to \DLr.
-For high-\pt \Zprimejets with \Zprimept, \GNN also brings considerable performance improvements with respect to \DLr across the range of $b$-jet tagging efficiencies studied.
+For \highpt \Zprimejets with \Zprimept, \GNN also brings considerable performance improvements with respect to \DLr across the range of $b$-jet tagging efficiencies studied.
 Again, the largest relative improvement in performance comes at lower $b$-jet tagging efficiencies.
 At a $b$-jet tagging efficiency of \pct{\zplo}, \GNN improves the \crej by a factor of \zpbclo and the \lrej by a factor of \zpbllo.
 An increasing statistical uncertainty due to the high rejection of background affects the comparison at lower $b$-jet tagging efficiencies.
@@ -412,7 +412,7 @@ As shown in \cref{fig:vs_pt_flat_leff}, the greatest improvement of \GNNLep over
 \end{figure}
 
 The performance of the taggers is strongly dependent on the jet \pt.
-Charged particle reconstruction is particularly challenging within high-\pt jets \cite{PERF-2015-08}.
+Charged particle reconstruction is particularly challenging within \highpt jets \cite{PERF-2015-08}.
 The multiplicity of fragmentation particles increases as a function of \pt, while the number of particles from heavy flavour decays stays constant.
 Collimation of particles inside the jet increases and approaches the granularity of the tracking detectors, making it difficult to resolve the trajectories of different particles.
 Furthermore, at high \pt, heavy flavour hadrons will travel further into the detector before decaying.
@@ -535,6 +535,8 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 
 
 \subsection{Jet Display Diagrams}
+
+\todo{write}
 
 \begin{figure}[!p]
     \centering
@@ -837,6 +839,33 @@ Fake tracks, followed by pileup tracks, are the easiest to classify in both samp
 \section{Extensions}
 \subsection{Looser Track Selection}\label{sec:looser_track_selection}
 
+The track selections used to produce the main results are listed in \cref{tab:fake_track_mva_selections}.
+This selection includes a cut on the number of shared silicon modules $N^{\textnormal{Si}}_{\textnormal{shared}}$.
+This value is calculated as 
+%
+\begin{equation}
+    N^{\textnormal{Si}}_{\textnormal{shared}} = 
+    \frac{N^{\textnormal{Pix}}_{\textnormal{shared}} + N^{\textnormal{SCT}}_{\textnormal{shared}}}{2}
+\end{equation}
+%
+where $N^{\textnormal{Pix}}_{\textnormal{shared}}$ is the number of shared pixel hits and $N^{\textnormal{SCT}}_{\textnormal{shared}}$ is the number of shared SCT modules on a track.
+The nominal cut used elsewhere in this thesis is $N^{\textnormal{Si}}_{\textnormal{shared}} < 2$.
+As the rate of shared hits is significantly higher for \bhadron decay tracks than for other tracks, this cut rejects a significant proportion of these tracks.
+\cref{fig:ttbar_gn1_loose,fig:zprime_gn1_loose} show the result of training the \GNN tagger with the full relaxation of this cut, i.e. allowing tracks with any number of shared hits.
+The shared hit requirements applied by the ambiguity solver as part of track reconstruction (see \cref{sec:track_reco}) are still applied.
+In addition, the maximum allowed value of \dzero is increased from \SI{3.5}{\milli\meter} to \SI{5.5}{\milli\meter}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_zprime.pdf}
+    \caption{
+        The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbar jets with \ttbarpt, for the looser track selection trainings of \GNN.
+        The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
+        A value of $\fc = 0.018$ is used in the calculation of \Db for DL1d and $\fc = 0.05$ is used for \GNN.
+        Binomial error bands are denoted by the shaded regions.
+    }
+    \label{fig:ttbar_gn1_loose}
+\end{figure}
 
 \begin{figure}[!htbp]
     \centering
@@ -851,6 +880,13 @@ Fake tracks, followed by pileup tracks, are the easiest to classify in both samp
 \end{figure}
 
 
+\subsection{Model Optimisations}
+
+\todo{write}
+
+\subsection{Additional Auxiliary Tasks}
+
+\todo{write}
 
 
 \section{Conclusion}\label{sec:gnn_conclusion}
@@ -860,12 +896,20 @@ A novel jet tagger, \GNN, with a graph neural network architecture and trained w
 \GNN is shown to improve flavour tagging performance with respect to \DLr, the current default ATLAS flavour tagging algorithm, when compared in simulated collisions.
 \GNN improves \clrej for \ttbarjets with \ttbarpt by factors of \ttbclo and \ttbllo respectively at a \bjet tagging efficiency of $70\%$ when compared with \DLr.
 For \Zprimejets with \Zprimept, \GNN improves the \crej by a factor of \zpbclo and \lrej by a factor of \zpbllo for a comparative \bjet efficiency of $30\%$.
-Previous multivariate flavour tagging algorithms relied on inputs from low-level tagging algorithms, whereas \GNN needs no such inputs, making it more flexible. It can be easily fully optimised via a retraining for specific flavour tagging use cases, as demonstrated with \ctag and high-\pt \btag, without the need for time-consuming retuning of the low-level tagging algorithms.
+Previous multivariate flavour tagging algorithms relied on inputs from low-level tagging algorithms, whereas \GNN needs no such inputs, making it more flexible. It can be easily fully optimised via a retraining for specific flavour tagging use cases, as demonstrated with \ctag and \highpt \btag, without the need for time-consuming retuning of the low-level tagging algorithms.
 The model is also simpler to maintain and study due to the reduction of constituent components.
 \GNN demonstrates improved track classification performance when compared with a simple per-track MLP and an efficiency of $\sim80\%$ for inclusive vertex finding in \bjets.
 The auxiliary track classification and vertex finding objectives are shown to significantly contribute to the performance in the jet classification objective, and are directly responsible for the improvement over \DLr.
 Further studies need to be undertaken to verify the performance of \GNN on collision data.
-%Due to good performance and relative ease of optimisation, application of a GNN model could lead to improved performance for other use cases extending beyond standard $b$- and \ctag applications.
-%The flexible nature of the \GNN model may make it a good candidate for other tasks, such as $X \rightarrow bb$ and $X \rightarrow cc$ tagging, and vertexing for long lived particle decays. Exporing the application of \GNN to these tasks is left for future work.
 
-Future work will include adding modalities from other subdetectors and combining these in an efficient way.
+
+future work
+\begin{itemize}
+    \item %Due to good performance and relative ease of optimisation, application of a GNN model could lead to improved performance for other use cases extending beyond standard $b$- and \ctag applications.
+    %The flexible nature of the \GNN model may make it a good candidate for other tasks, such as $X \rightarrow bb$ and $X \rightarrow cc$ tagging, and vertexing for long lived particle decays. Exporing the application of \GNN to these tasks is left for future work.
+    \item more aux tasks, regression
+    \item Future work will include adding modalities from other subdetectors and combining these in an efficient way.
+\end{itemize}
+
+
+
