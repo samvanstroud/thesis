@@ -507,7 +507,23 @@ The predicted signal and background yields are also modified by the presence of 
   s_i \rightarrow s_i(\theta) , \quad b_i \rightarrow b_i(\theta) .
 \end{equation}
 %
-Statstical uncertainty is also present, and implemented using a dedicated NP for each bin.
+For NPs which are left freely floating in the fit, no corresponding Gaussian constraint is added to the liklihood.
+
+Statstical uncertainty is also present, and implemented using a dedicated NP for each bin which can scale the background yield in that bin.
+Statistical NPs are also implemented using a Gaussian constraint.
+
+\subsubsection{Smoothing and Pruning}
+
+Systematic uncertainties are smoothed and pruned in the fit.
+Smoothing accounts for the large statistical uncertainty present in some bins that are subject to large fluctuations.
+The smoothing procedure relies on the assumption that the impact of systematics should be approximately monotonic and correlated between neighbouring bins.
+
+In addition to smoothing, pruning is the process of removing from the fit those systematics which only have a very small effect.
+This improves the stability of the fit by reducing the number of degrees of freedom.
+Acceptance uncertainties are pruned in a given region if they have a variation of less than \pct{0.5}, or if the up and down variations have the same sign in that region.
+Shape uncertainties are pruned in a given region if the deviation in each bin is less than \pct{0.5} in that region.
+In addition, acceptance and shape uncertainties are neglected in a given region for any background which makes up less than \pct{2} of the total background in a given region.
+
 
 \subsubsection{Fit Procedure and Statistical Tests}
 
@@ -654,18 +670,23 @@ Again, a good level of agreement is observed given the statistical uncertainties
 \subsection{Observed Signal Strength \& Significance}\label{sec:signal_strengh_sigs}
 
 The measured signal strength is computed as the ratio between the measured signal yield to the prediction from the SM.
-The result for \muVH is given in \cref{eq:muVH}, while the result for \muVZ is given in \cref{eq:muVZ}.
+The combed result for all three lepton channels and all analysis regions is given for \muVH in \cref{eq:muVH}, and for \muVZ is given in \cref{eq:muVZ}.
+Both results include a full breakdown of the systematic and   statistical uncertainties.
 %
 \begin{equation}\label{eq:muVH}
-  \muVH = 0.72 ^{+0.39}_{-0.36} = 0.72 ^{+0.29}_{-0.28}  \mathrm{(stat.)} ^{+0.26}_{-0.22} \mathrm{(syst.)}.
+  \muVH = 0.72 ^{+0.39}_{-0.36} = 0.72 ^{+0.29}_{-0.28}  \mathrm{(stat.)} ^{+0.26}_{-0.22} \mathrm{(syst.)}
 \end{equation}
 %
 \begin{equation}\label{eq:muVZ}
-  \muVZ = 0.91 ^{+0.29}_{-0.23} = 0.91 \pm 0.15 \mathrm{(stat.)} ^{+0.24}_{-0.17} \mathrm{(syst.)},
+  \muVZ = 0.91 ^{+0.29}_{-0.23} = 0.91 \pm 0.15 \mathrm{(stat.)} ^{+0.24}_{-0.17} \mathrm{(syst.)} 
 \end{equation}
 %
-These values correspond to an observed (expected) significance of 2.1 (2.7) standard deviations.
+The results for \muVH and \muVZ agree with the expectation from the SM within their combined uncertainty.
+The \muVH measurement is dominated by statistical uncertainty, while the \muVZ measurement is dominated by systematic sources of uncertainty.
+These measured signal strength for \muVZ corresponds to an observed significance of 2.1 standard deviations, with an expected (median) significance given the SM prediction of 2.7 standard deviations obtained using the method described in \cref{sec:fit_expected}.
+The diboson observed (expected) signal strength significance is 5.4 (5.7).
 These results are summarised in \cref{fig:money_plot}, which shows the background-subtracted \mJ distribution.
+A clear signal excess is visible around the Higgs mass of $m_H = \SI{125}{\GeV}$.
 
 \begin{figure}[!htbp]
   \centering
@@ -687,10 +708,71 @@ These results are summarised in \cref{fig:money_plot}, which shows the backgroun
   \label{fig:money_plot}
 \end{figure}
 
+\subsubsection{Compatability Studies}
+
+Alongside the standard 2-POI fit, a (3+1)-POI fit can be performed by splitting \muVH into three separate POIs, one for each channel.
+A simultaneous fit to the channel specific signal strengths can then be performned, which allows a comparison of the contributions from each channel.
+\cref{fig:channel_comp} compares the best-fit signal strengths.
+The 0- and 1-lepton channels show a signal strength which is consistent with the SM prediction, while the 2-lepton channel shows a small deivation within the $1\sigma$ uncertainty.
+Overall, good compatibility is observed via a $\chi^2$ test with a corresponding $p$-value of \pct{49}.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{chapters/6.vhbb_boosted/figs/Plot_mu_102_VH.pdf}
+  \caption{
+    Signal strength compatibility test between the (3+1)-POI fit (with the three lepton channels splitted) and the default (1+1)-POI fit. The compatibility of the three channels is evaluated via a $\chi^2$ difference test and results in a p-value of \pct{49}.
+  }
+  \label{fig:channel_comp}
+\end{figure}
+
 
 
 \subsection{Impact of Systematics}\label{sec:sys_results}
 
+The impact of systematic uncertainties on the final fitted value \muhatVH is studied looking at the NP rankings, and the uncertainty breakdown.
+
+\cref{fig:np_ranking} shows the NP ranking, which is used to visualise which out of the many NPs involved in the fit have the largest impact on the sensitivity to the fitted POI.
+To obtain the ranking, a likelihood scan is performed for each NP $\theta_j$.
+First, an unconditional fit is used to determine $\hat{\theta}_j$.
+From this best-fit point, the NP is varied in steps and the likelihood is recomputed until the $\pm 1 \sigma_{\hat{\theta}_j}$ values are reached.
+For each corresponding value of $\theta_j$, the change in the best-fit value of the POI, $\Delta \muhatVH$ is calculated and used to rank the NPs.
+Also shown in \cref{fig:np_ranking} are the pulls and constraints for the highest ranked NPs.
+
+The experimental uncertainty on the signal \largeR jet mass resolution (JMR) has the largest impact of any NP.
+It is a significant contributor to the overall uncertainty on \muVH in \cref{eq:muVH}.
+JMR and jet energy scale (JES) uncertainties also have impacts for the \Vjets background and for the diboson background.
+The freely-floating \Zhf normalisation is the second highest ranked NP, and is heavily constrained by the fit.
+The $VZ$ POI \muVZ is also a significant NP when considering the primary \muVH measurement.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{chapters/6.vhbb_boosted/figs/Ranking_VH_Observed.pdf}
+  \caption{
+    Impact of systematic uncertainties on the fitted $VH$ signal-strength parameter \muVH sorted in decreasing order.
+    The boxes show the variations of $\hat{\mu}$, referring to the top $x$-axis, when fixing the corresponding individual nuisance parameter to its post-fit value modified upwards or downwards by its post-fit uncertainty, i.e. $\hat{\theta} \pm \sigma_{\hat{\theta}}$, and repeating the fit.
+    The impact of up- and down-variations can be distinguished via the dashed and plane box fillings.
+    The yellow boxes show the pre-fit impact (top $x$-axis) by varying each nuisance parameter by $\pm 1$. The filled circles show the deviation of the fitted value for each nuisance parameter, $\hat{\theta}$, from their nominal input value $\theta_0$ expressed in standard deviations with respect to their nominal uncertainties $\Delta \theta$ (bottom $x$-axis).
+    The error bars show the post-fit uncertainties on $\hat{\theta}$ with respect to their nominal uncertainties.
+    The open circles show the fitted values and uncertainties of the normalization parameters that are freely floating in the fit.
+    Pre-fit, these parameters have a value of one.
+  }
+  \label{fig:np_ranking}
+\end{figure}
+
+The NP ranking highlights individual NPs which have a large impact on the POI measurement sensitivity.
+Complementary information is provided at a higher level by considering the overall impact of different groups of systematics.
+The groups are constructed from NPs which have similar physical origin.
+The results are provided in \cref{tab:mu_syst_unc}.
+
+\begin{comment}
+ First, the nominal fit is run and the uncertainty on the
+PoI σµˆ is extracted via a likelihood scan. Then, for each group g an additional fit
+is run with all NPs from the group fixed to their central values. The uncertainty
+on the PoI from this fit, σ
+g
+µˆ
+, is then subtracted in quadrature from σµˆ to obtain
+\end{comment}
 \input{chapters/6.vhbb_boosted/tables/mu_systs.tex}
 
 
