@@ -403,7 +403,7 @@ After initial tests and investigation, it was found that fake tracks which were 
 The application of a single tool which removed all fake tracks was no longer optimal.
 A second tool was trained in the same manner of the first, this one was designed to distinguish between those tracks which were from the decay of a \bhadron and those which were not.
 A 2-dimensional cut was then used to only reject those tracks that had a high probability of being fake, and also a low probability of being a \bhadron decay track.
-The \ljet efficiency of SV1 shows an improvement when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_classifier_btag_effects}
+The \ljet efficiency of SV1 shows an improvement when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_mva_sv1}
 
 \begin{figure}[!htbp]
   \centering
@@ -421,7 +421,26 @@ The \ljet efficiency of SV1 shows an improvement when using the combined tools t
     The nominal SV1 \lrej (black) is compared to two working points of fake track removal (orange and red).
     Removal of fake tracks based on truth information is shown by the green curves.
   }
-  \label{fig:track_classifier_btag_effects}
+  \label{fig:track_mva_sv1}
+\end{figure}
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_lowpt.pdf}
+  \end{subfigure}
+  \quad
+  \begin{subfigure}[b]{0.48\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_highpt.pdf}
+  \end{subfigure}
+  \caption{
+    The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of SV1 for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
+    The nominal SV1 \lrej (black) is compared to two working points of fake track removal (orange and red).
+    Removal of fake tracks based on truth information is shown by the green curves.
+  }
+  \label{fig:track_mva_jf}
 \end{figure}
 
 \todo{also show plots for JF?}

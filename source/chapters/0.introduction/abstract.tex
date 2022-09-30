@@ -1,18 +1,19 @@
 % no more than 300 words
 
-This thesis presents investigations into the challenges of, and potential improvements to, \bjet identification at the \ATLAS experiment at the Large Hadron Collider.
-A focus is placed on high transverse momentum regime, within which successful \bjet identification becomes difficult.
+This thesis presents investigations into the challenges of, potential improvements to, and the application of \bjet identification at the \ATLAS experiment at the Large Hadron Collider (\LHC).
+A focus is placed on the high transverse momentum regime, which is a critical region in which to study the Standard Model, but within which successful \bjet identification becomes difficult.
+
 As \bjet identification relies on the successful reconstruction of charged particle trajectories (tracks), the tracking performance is investigated and potential improvements are assessed.
-Track reconstruction becomes increasingly difficult at high transverse momentum due to the increased multiplicity and collimation of tracks, and also due to the presence of displaced tracks that occur as the result of the decay of a long-flying \bhadron.
-The investigations reveal that the track quality selections applied during track reconstruction are suboptimal for tracks inside high transverse momentum \bjets, motivating future studies into the optimisation of these cuts.
+Track reconstruction becomes increasingly difficult at high transverse momentum due to the increased multiplicity and collimation of tracks, and also due to the presence of displaced tracks that may occur as the result of the decay of a long-flying \bhadron.
+The investigations revealed that the track quality selections applied during track reconstruction are suboptimal for tracks inside high transverse momentum \bjets, motivating future studies into the optimisation of these cuts.
 
 To improve \btagging performance two novel techniques are employed: the classification of the origin of tracks and the application of graph neural networks.
-Classification of track origin is shown to improve low level algorithm performance, and can be used as an auxiliary training task for a high-level jet flavour tagger.
-A graph neural network (GNN) jet flavour tagger has been developed.
-This tagger requires only tracks and information jet variables as inputs, making a break from previous high-level taggers which relied on the outputs of other algorithms.
-The model is trained to simultaneously predict the jet flavour, track origins, and track-pair compatability (i.e. vertexing), and demonstrates markedly improvements in \btagging performance, both at low and high transverse momenta. 
-The closely related task of \cjet identification also benefits from these methods.
+An algorithm has been developed to classify the origin of tracks, which allows a more optimal collection of tracks to be selected for use in other algorithms. A graph neural network (GNN) jet flavour tagger has also been developed.
+This tagger requires only tracks and jet variables as inputs, making a break from previous algorithms, which relied on the outputs of several other algorithms.
+This model is trained to simultaneously predict the jet flavour, track origins, and track-pair compatibility (i.e. vertexing), and demonstrates markedly improvements in \btagging performance, both at low and high transverse momenta.
+The closely related task of c-jet identification also benefits from these methods.
 
-Analaysis of high transverse momentum \Hbb decays, where the Higgs boson is produced in association with a vector boson, was also performed using \SI{13}{\TeV} proton-proton collision data from the course of \runtwo of the \LHC.
+Analysis of high transverse momentum \Hbb decays, where the Higgs boson is produced in association with a vector boson, was also performed using \intlumi of \SI{13}{\TeV} proton-proton collision data from \runtwo of the \LHC.
 The analysis is described, with a focus on the detailed modelling studies performed by the author.
+The analysis measured provided first measurements in this channel of the Higgs boson production in two high transverse momentum regions. 
 The impact of applying the improved GNN-based \btagging algorithms to the analysis is also studied.
