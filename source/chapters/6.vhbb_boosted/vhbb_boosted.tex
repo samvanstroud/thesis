@@ -762,18 +762,21 @@ The $VZ$ POI \muVZ is also a significant NP when considering the primary \muVH m
 The NP ranking highlights individual NPs which have a large impact on the POI measurement sensitivity.
 Complementary information is provided at a higher level by considering the overall impact of different groups of systematics.
 The groups are constructed from NPs which have similar physical origin.
-The results are provided in \cref{tab:mu_syst_unc}.
+The impact on each group is calculated by running a fit with all the NPs in the given group fixed to their nominal values.
+The uncertainty on the POI extracted from this fit is subtracted in quadrature from the the uncertainty on the POI from the nominal fit, and the resulting values are provided as the impact for each group.
+The full breakdown for the observed impact of uncertainties on the \muVH signal strength is provided in \cref{tab:mu_syst_unc}.
+The total systematic impact is the difference in quadrature between the nominal uncertainty on \muVH and the combined statistical impact.
+The ``data stat only'' group fixes all NPs at their nominal value, while the total statistical impact fixes all NPs except floating normalisations.
+The floating normalisations group fixes only the NPs associated with normalisation which are left floating in the fit.
+The uncertainty on \muVH is dominated by combined statistcal effects (0.28), although the combined impact of systematics (0.24) is of a comparable size.
+The signal largest group is the data stat uncertainty (0.25), demonstrating that the analysis would benefit from an increased integrated luminosity or improved efficiency to select signal relevant events (recall from \cref{sec:vhbb_selections} the signal efficiency is in the range of \pct{10}).
+Of the experimental systematic sources of uncertainty, the dominant impact is the experimental uncertainties associated with the reconstruction of \largeR jets (0.13).
+Other experimental sources of uncertainty are small in comparison.
+Modelling uncertainties also have a large contribution to the overall systematic uncertainty.
+The biggest contribution to the overall uncertainty is the combined statistical uncertainty on the simulated samples (0.09), which contain only a finite number of events.
+Out of the backgrounds, the \Wjets and \Zjets have the highest (0.06) and second-highest (0.05) impact respectively.
 
-\begin{comment}
- First, the nominal fit is run and the uncertainty on the
-PoI σµˆ is extracted via a likelihood scan. Then, for each group g an additional fit
-is run with all NPs from the group fixed to their central values. The uncertainty
-on the PoI from this fit, σ
-g
-µˆ
-, is then subtracted in quadrature from σµˆ to obtain
-\end{comment}
-\input{chapters/6.vhbb_boosted/tables/mu_systs.tex}
+\input{chapters/6.vhbb_boosted/tables/mu_systs_breakdown.tex}
 
 
 
