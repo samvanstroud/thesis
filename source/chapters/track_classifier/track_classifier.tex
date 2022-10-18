@@ -325,8 +325,8 @@ Inputs are scaled to have a central value of zero and a variance of unity before
     \textbf{Parameter} & \textbf{Selection} \\
     \hline
     $\pt$                & $> 500$ MeV \\
-    $|d_0|$              & $< 3.5$ mm \\
-    $|z_0 \sin\theta|$   & $< 5$ mm \\
+    $|\dzero|$              & $< 3.5$ mm \\
+    $|\zzero\sin\theta|$   & $< 5$ mm \\
     Silicon hits         & $\ge 8$ \\
     Shared silicon hits  & $< 2$ \\
     Silicon holes        & $< 3$ \\
@@ -335,7 +335,7 @@ Inputs are scaled to have a central value of zero and a variance of unity before
   \end{tabular}
   \caption{
     Quality selections applied to tracks,
-    where $d_0$ is the transverse IP of the track, $z_0$ is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
+    where \dzero is the transverse IP of the track, \zzero is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle.
     Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
     Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
     A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
