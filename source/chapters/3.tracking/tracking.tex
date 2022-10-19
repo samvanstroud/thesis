@@ -1,13 +1,15 @@
 \chapter{Tracking and \texorpdfstring{\btagging}{b-tagging}}\label{chap:tracking}
 
 Many ATLAS analyses rely on \btagging, which is a method of selecting jets instantiated by \bquarks (\bjets) and rejecting jets created from other quarks ($c$ and light flavours $u$, $d$, $s$).
-These \btagging algorithms work by discriminating for the unique signatures of \bjets discussed in \cref{sec:b_had_reco}.
-The various tagging algorithms ultimately take as their input information about the reconstructed jet and any associated tracks.
+These \btagging algorithms work by discriminating for the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
+The various \btagging algorithms ultimately take as their input information about the reconstructed jet and its associated tracks.
 Successful \btagging relies therefore on the efficient and accurate reconstruction of tracks, and especially those tracks corresponding to the products of \bhadron decays.
 
-Historically a two tiered approach has been taken, in which so called \textit{low-level} taggers take as inputs information about the jet and associated tracks, and then outputs of several low-level taggers are fed into a \textit{high-level} tagger which uses a multivariate approach to discriminate between jet flavours.
-, as these tracks are used as the primary inputs to vertex reconstruction algorithms and jet tagging algorithms (for more information see \cref{chap:gnn_tagger}).
+Historically a two tiered approach to \btagging has been taken, in which so called \textit{low-level} taggers take as inputs information about the jet and associated tracks, and attempt to reconstruct or identify some aspect of a \bjet, such as displaced tracks or secondary vertices.
+The outputs of several low-level taggers are then fed into a \textit{high-level} tagger, which uses a multivariate approach to discriminate between jet flavours.
 
+
+As the different \btagging algorithms ultimately rely on tracks accurate and efficient track reconstruction is essential.
 This chapter summarises the challenges facing tracking and \btagging at high transverse momentum with an investigation into track reconstruction performance in \cref{sec:b_had_reco}.
 Some preliminary investigations into improving tracking in this regime are investigated in \cref{sec:b_track_reco_improvements}.
 
@@ -21,7 +23,7 @@ This section outlines the typical detector signature of a \bhadron in \cref{sec:
   \centering
   \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
   \caption{
-    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey).
+    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey)~\cite{bjetdiagram}.
     The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
     The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
   \label{fig:bjet_diagram}
@@ -38,13 +40,15 @@ See \rcite{Webber:1999ui} for a more in depth discussion on hadronisation and th
 Henceforth the combined hadronisation and fragmentation products will be referred to collectively as fragmentation.
 
 \bhadrons are interesting objects of study due to their relatively long proper lifetimes $\tau \approx \SI{1.5}{\pico\second}$.
-Early studies showed that \bhadrons did not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
-The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
 This lifetime corresponds to a proper decay length $c \tau \approx \SI{450}{\micro\meter}$.
+Experiment has shown that \bhadrons do not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
+The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
 In the rest frame of the detector, the typical \bhadron travels a distance 
+%
 \begin{equation}
   d = \gamma \beta c \tau \approx \gamma c \tau
 \end{equation}
+%
 before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
 For a \SI{1}{\TeV} \bhadron, this gives $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) at a radius of \SI{33}{\milli\meter} (see \cref{fig:b_lxy_vs_pt}).
 This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices at the \bhadron decay point.
@@ -64,10 +68,10 @@ This significant displacement is characteristic of \bjets and makes it possible 
 These particles, along with any fragmentation particles, are reconstructed in the detector as a jet.
 A \bjet has several characteristic features which differentiate it from \ljets.
 These features stem from the significant displacement of the \bhadron that can occur in high transverse momentum \bjets.
-Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron dis placement (as shown in \cref{fig:bjet_diagram}).
+Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
 Additionally, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets.
 While the multiplicity of the fragmentation products increases with the \bhadron \pt, the  multiplicity of the products of the weak decay is unaffected.
-%However, both fragmentation and weak decay products have increased collimation at higher \pT.
+However, both fragmentation and weak decay products have increased collimation at higher \pT.
 
 
 
@@ -90,7 +94,7 @@ For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combina
 As the jet energy increases, the multiplicity of tracks in the jet increases due to the presence of additional fragmentation particles.
 Fragmentation and weak decay products also become increasingly collimated as their inherited transverse momentum increases.
 Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
-At high energies, the increased decay length of \bhadrons (and \chadrons) means that decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}).
+At high energies, the increased decay length of \bhadrons (and \chadrons) means that decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}\todo{cant find source of this image, will have to preproduce}).
 If the weak decay takes place close enough to a detector layer, or if the particles are otherwise sufficiently collimated, charge deposits left by nearby particles may not be resolved individually, instead being reconstructed as merged clusters.
 As discussed in \cref{sec:track_reco}, merged clusters are generally rare, and so shared hits generally predict bad tracks and are correspondingly penalised during track reconstruction.
 However, in the core of high \pT \bjets the density of particles is high enough that the probability of cluster merging increases dramatically.
@@ -167,8 +171,7 @@ The first part is a drop in track reconstruction efficiency.
 As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
 Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
 The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
-This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage.
-this is shown in \cref{fig:b_track_eff}.
+This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage as shown in \cref{fig:b_track_eff}.
 
 %As a result, many B decay tracks are rejected in the ambiguity solving stage, leading to a severe drop in tracking reconstruction efficiency. This is shown by the severe decrease in reconstruction efficiency visible when comparing baseline tracking with the ideal pseudo-tracks in \cref{fig:reconstruction efficiency from B}. This situation presents a problem: relaxing cuts on shared hits significantly degrades the ambiguity solver's power to reject bad tracks. However for \bhadron decay tracks it seems these same restrictions on shared hits are seriously impairing the reconstruction efficiency of good tracks. 
 
@@ -179,7 +182,7 @@ In particular, \btagging algorithms rely heavily on the transverse impact parame
 The quality of this measurement is expected to be adversely affected by wrong inner-layer hits on the track. 
 
 The combination of reduced reconstruction efficiency and incorrectly assigned hits is thought to be the cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
-\todo{cite sebs study showing they are approx similar impacts?}
+\todo{include plot from sebs study showing they are approx similar impacts? or just mention result?}
 
 
 
@@ -192,10 +195,10 @@ The combination of reduced reconstruction efficiency and incorrectly assigned hi
 
 In \cref{sec:pseudotracks} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the baseline hit-to-track association in the dense cores of \highpt \bjets.
 \cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
-Not detailed here is an investigation into the bcut + refit method. Shown not to be promising, as, even though an improvement in the \bhadron decay track efficiency was observed, the corresponding increase in the fake track was shown to be unacceptable.
+%Not detailed here is an investigation into the bcut + refit method. Shown not to be promising, as, even though an improvement in the \bhadron decay track efficiency was observed, the corresponding increase in the fake track was shown to be unacceptable.
 
 
-\subsection{Pseudotracking}\label{sec:pseudotracks}
+\subsection{Pseudo-tracking}\label{sec:pseudotracks}
 
 Pseudo-tracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
 Each group of hits which passes basic quality requirements is directly used in a full resolution track fit.
