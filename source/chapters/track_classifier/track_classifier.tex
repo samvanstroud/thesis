@@ -25,7 +25,7 @@ The rest of the discussion in this chapter is limited to binary classification p
 The two classes are often referred to as signal ($y_i = 1$) and background ($y_i = 0$), which need to be separated.
 Collecting sufficient and suitable data is one of the primary challenges of machine learning, as such data is not always readily available.
 Fortunately, sophisticated tools to simulate particle collisions have already been developed by the scientific community \cite{leshouchesaccords, leshouchesstandardisation}.
-These tools play a key role in generating a suitablly large amount of labelled data which is used to train algorithms.
+These tools play a key role in generating a suitably large amount of labelled data which is used to train algorithms.
 More detail on the input datasts is given in \cref{sec:track_classifier_datasets}.
 
 After obtaining suitable training data, the next step is to define a model.
@@ -121,7 +121,7 @@ Updated parameters $\theta_i'$ are calculated by updating the original parameter
 \end{equation}
 %
 The hyperparameter $\alpha$ is known as the \textit{learning rate} and dictates the size of the step taken in the direction of the slope. 
-The errors for each parameter are efficiently calculated using the backpropagation algorithm.
+The errors for each parameter are efficiently calculated using the backpropagation algorithm \cite{rumelhart1986learning}.
 The process of updating weights is repeated until the weights converge the network is trained.
 In practice, small batches of the input data are shown to the network at a time. For each batch the average loss is calculated and the network's weights are updated.
 There are many extensions and variations of the gradient descent algorithm.
@@ -156,7 +156,7 @@ The labelling scheme has designed to be useful beyond the classification of good
 The origins are determined by analysing the detailed simulated truth record for the truth particle associated with each track.
 Tracks are associated with truth particles by selecting the truth particle with the highest \textit{truth-matching probability} (TMP), defined in \cref{eq:tmp_def}.
 This is a weighted sum of the number of hits on a track which are from the same truth particle, versus the total number of hits on the track.
-The weights are subdetector-dependent are designed to account for the varying number of layers in each of the subdetectors.
+The weights are subdetector-dependent are designed to account for the varying number of layers (and therefore expected number of hits) in each of the subdetectors.
 %
 \begin{equation}\label{eq:tmp_def}
     \textnormal{TMP} = 
@@ -205,13 +205,13 @@ Fake tracks are made up of combinatorial fakes, which are tracks which do not co
 \section{Fake Track Identification Tool}\label{sec:fake_track_mva}
 
 The rate of fake tracks increases at high transverse momentum as shown in \cref{fig:fakerate_vs} due to the difficulties in track reconstruction outlined in \cref{sec:b_track_reco_challenges}.
-The performance of \btagging algorithms is reduced as a direct result of the presence of these fake tracks as shown for SV1 in \cref{fig:sv1_perf_nofake}.
+The performance of \btagging algorithms is reduced as a direct result of the presence of these fake tracks as shown for SV1 in \cref{fig:sv1_perf_nofake}, where the \leff decreases by up to \pct{35} at a \beff of \pct{35}.
 
 To identify and remove fake tracks, a NN classification tool was trained with good tracks as the signal class and fake tracks as the background class.
 Due to the imbalance between the two classes (with fake tracks being relatively uncommon), a weight was added to the loss function for the background class to account for this.
 The NN was made up of two hidden layers with 100 nodes per layer. 
 The ReLU activation function was used in conjunction with the Adam optimiser with a learning rate of $1\text{e}{-3}$.
-Optimisation of the networks architecture has been carried out to ensure good performance without a relatively small number of learnable parameters.
+Optimisation of the networks architecture has been carried out to ensure good performance with a relatively small number of learnable parameters.
 The model was trained using \num{40} million tracks with a futher \num{1} million tracks each used for validation and testing.
 
 \begin{figure}[!htbp]
@@ -247,7 +247,7 @@ Inputs to the model are described in \cref{sec:fake_mva_model_inputs}, while fak
 \subsection{Datasets}\label{sec:track_classifier_datasets}
 
 To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ are used.
-The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays to an equal numbers of \bcl jets.
+The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to an equal numbers of \bcl jets.
 The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pileup of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
 
 \newcommand{\hdampFootnote}{%
@@ -258,6 +258,10 @@ The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to m
 \Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
 The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
 Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
+
+Additionally, all jets are required not to overlap with a generator-level electron or muon from \Wboson boson decays.
+Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
+Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
 
 
 \subsection{Model Inputs}\label{sec:fake_mva_model_inputs}
@@ -350,12 +354,13 @@ Inputs are scaled to have a central value of zero and a variance of unity before
 \subsection{Results}\label{sec:fake_track_mva_results}
 
 
-Performance of the fake track classification tool was run on $1$ million tracks tracks in jets in the combined \ttbar and \Zprime samples.
+In order to evaluate the of the fake track classification tool, a orthogonal test sample of $1$ million tracks in jets in the combined \ttbar and \Zprime samples was used.
 The continuous scalar output from the NN model is interpreted as the probability that a given track is a good track (i.e. not fake).
 \cref{fig:track_classifier_output_roc} shows the performance of the fake track classification MVA. The signal and background classes are well separated in the output of the tool.
-Also shown in a receiver operating characteristic (ROC) curve, which plots the rate of true positives against the rate of false positives over a scan of cut points on the NN output ranging from zero to one.
+Also shown is a receiver operating characteristic (ROC) curve, which plots the rate of true positives against the rate of false positives over a scan of cut points on the NN output ranging from zero to one.
 The area under the curve (AUC) gives a summary of the aggregate classification power of the model.
-The fake track classification tool achieves an AUC of $0.935$ for all tracks. Considering only tracks from \bhadron decays, this value drops slightly to $0.928$. 
+The fake track classification tool achieves an AUC of $0.935$ for all tracks, which is indicative of a well-performing model.
+Considering only tracks from \bhadron decays, this value drops slightly to $0.928$. 
 
 \begin{figure}[!htbp]
   \centering
@@ -384,7 +389,7 @@ The results demonstrate that the tool is effective in retaining \pct{98.8} of go
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
   \begin{tabular}{ccccc}
       \toprule\hline
-      \multirow{2}{2cm}{MVA Output Cut} & \multicolumn{2}{c}{Good Track Efficiency} & \multicolumn{2}{c}{Fake Track Efficiency} \\
+      \multirow{2}{2cm}{MVA Output Cut} & \multicolumn{2}{c}{\textbf{Good Track Efficiency}} & \multicolumn{2}{c}{\textbf{Fake Track Efficiency}} \\
       & All & From $b$ & All & From $b$ \\
       \hline
       0.06 & \pct{98.8} & \pct{98.9} & \pct{45.6} & \pct{39.8} \\
@@ -400,10 +405,16 @@ The results demonstrate that the tool is effective in retaining \pct{98.8} of go
 \end{table}
 
 After initial tests and investigation, it was found that fake tracks which were the result of \bhadron decays actually aided \btagging performance.
-The application of a single tool which removed all fake tracks was no longer optimal.
+The application of a single tool which removed all fake tracks was therefore not optimal.
 A second tool was trained in the same manner of the first, this one was designed to distinguish between those tracks which were from the decay of a \bhadron and those which were not.
 A 2-dimensional cut was then used to only reject those tracks that had a high probability of being fake, and also a low probability of being a \bhadron decay track.
-The \ljet efficiency of SV1 shows an improvement when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_mva_sv1}
+
+The \ljet efficiency of SV1 is successfully reduced when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_mva_sv1}.
+At a \beff of \pct{70}, the \ljet mistag rate for jets with $250 < \pt < \SI{400}{\GeV}$ is reduced from $0.054$ to $0.044$, a relative improvement of approximately \pct{20}.
+For jets in $400 < \pt < \SI{1000}{\GeV}$ the mistage rate drops from 0.1 to 0.08 for a similar relative improvement of \pct{20}.
+The performance of the track classification tools is also shown for JetFitter in \cref{fig:track_mva_jf}.
+The results are generally consistent as for those from SV1, with up to a \pct{20} improvement in the \lrej for a given \beff WP in the two jet \pt bins.
+
 
 \begin{figure}[!htbp]
   \centering
@@ -418,7 +429,7 @@ The \ljet efficiency of SV1 shows an improvement when using the combined tools t
   \end{subfigure}
   \caption{
     The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of SV1 for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
-    The nominal SV1 \lrej (black) is compared to two working points of fake track removal (orange and red).
+    The nominal SV1 \lrej (black) is compared to two working points, labelled ``A'' (red) and ``B'' (orange) of fake track removal, which represent two different 2D working points of the track classification tools.
     Removal of fake tracks based on truth information is shown by the green curves.
   }
   \label{fig:track_mva_sv1}
@@ -443,7 +454,6 @@ The \ljet efficiency of SV1 shows an improvement when using the combined tools t
   \label{fig:track_mva_jf}
 \end{figure}
 
-\todo{also show plots for JF?}
 
 
 \section{Conclusion}\label{sec:fake_track_mva_conclusion}
@@ -451,16 +461,17 @@ The \ljet efficiency of SV1 shows an improvement when using the combined tools t
 Fake tracks, which are prevalent in the core of high \pt jets, are shown to have an adverse impact on \btagging performance.
 A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being inputted to downstream \btagging algorithms.
 It was found that, since many \bhadron decay tracks are poorly reconstructed and thus marked as fake, it was necessary also to train a second algorithm to detect \bhadron decay tracks so that the removal of these tracks could be avoided.
-Removing fake and non-$b$ decay tracks in this way was found to improve the tagging efficiency of SV1 and JetFitter at high transverse momentum.
+Removing fake and non-$b$ decay tracks in this way was found to improve the \ljet mistagging rate of SV1 and JetFitter by up to \pct{20} at high transverse momentum.
 
-While removing tracks prior to their input to the low level tagging algorithms is beneficial, a more performant alternative would be to keep these tracks but label them as being fake or poorly reconstructed, and allow the tagging algorithms to take this into consideration, potentially still making use of some of the information.
+While removing tracks prior to their input to the low level tagging algorithms is shown here beneficial, a more performant alternative might be to keep these tracks but label them as being fake (for example using the output of the classification tool), and allow the tagging algorithms to take this into consideration, potentially still making use of some of the information.
+This is not straightforward with manually optimised taggers such as SV1 and JetFitter, but is possible with approaches such as those described in \cref{chap:gnn_tagger}.
 %A more advanced approach than detecting and removing fake tracks is to attempt to determine whether a track is good or fake, but allow any downstream tagging algorithms to use this information when coming to a descision about wether to tag a jet, rather than removing the track as an input.
-
 %These fake or poorly reconstructed tracks could also be remove in other places\todo{keep?}
 
-These tools, which identify the origin of a given track, have other potential uses.
+Tools which identify the origin of a given track have other potential uses.
 One application is to isolate a relatively pure sample of fake tracks which can be used to estimate the fake track rate in data, which would be useful for producing the recommendations for tracking systematic uncertainties.
 Another application would be to use the \bhadron track identification tool to improve the track-to-jet association.
+Both applications are currently under investigation.
 
 The approach here works on a track-by-track basis, but a more sophisticated approach would consider the correlations between the tracks inside a jet, as shown in \cref{chap:gnn_tagger}.
 
