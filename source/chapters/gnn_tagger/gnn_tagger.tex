@@ -8,7 +8,7 @@ As discussed in \cref{chap:tracking}, flavour tagging is the identification of j
 Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
 It is crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
 
-Existing flavour tagging algorithms, such as \DLr, use as inputs the outputs from a number of low-level algorithms.
+Existing flavour tagging algorithms, such as \DLr~\cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}, use as inputs the outputs from a number of low-level algorithms.
 The low-level algorithms each reconstruct various features of jets using the tracks which have been associated to the jet.
 The outputs from the low-level algorithms are then combined in a machine learning model.
 This chapter introduces \GNN, a novel ML-based flavour tagging algorithm based on graph neural networks (GNNs).
@@ -253,13 +253,14 @@ By requiring the model to predict the truth origin of each track and the vertex 
 
 \subsection{Architecture}\label{sec:Architecture}
 
-As discussed above, the \GNN model combines a graph neural network architecture~\cite{2020-gnn-in-particle-physics} with auxiliary training objectives in order to determine the jet flavour.
-Coarse optimisation of the network architecture hyperparameters, for example number of layers and number of neurons per layer, has been carried out to maximise the tagging efficiency.
+As discussed in the previous sections, \GNN is a graph neural network which makes use of auxiliary training objectives in order to determine the jet flavour.
+A coarse optimisation of the network architecture hyperparameters (for example number of layers and number of neurons per layer) has been carried out in order to maximise the flavour tagging performance, but it is likely that further dedicated optimisation studies could lead to further performance improvements. 
 
-The model architecture is based on a previous implementation of a graph neural network jet tagger~\cite{serviansky2020set2graph}.
-As compared to the previous approach, \GNN uses a only a single graph neural network and makes use of a more sophisticated graph neural network layer \cite{2021arXiv210514491B}, described below.
-These changes yield improved tagging performance and a significant reduction in training time with respect to the previous approach.
-Further different from the previous model is the fact that the auxiliary classification tasks are performed at the end, along with the graph classification, as opposed to at an intermediate stage and then being fed back in to the model.
+The model architecture builds on a previous implementation of a GNN-based jet tagger~\cite{serviansky2020set2graph}.
+The previous approach was comprised of two separate graph neural networks with the auxiliary tasks being performed at an intermediate stage after the first and before the second.
+This two stage approach was found to be unnecessary and as such \GNN simplifies the architecture into a single graph neural network with the auxiliary tasks being performed at the end, alongside the primary jet classification task.
+\GNN makes use of a more sophisticated graph neural network layer \cite{2021arXiv210514491B}, which is described in more detail below.
+The changes significantly improved tagging performance and also led to a significant reduction in training time.
 
 As inputs, the model takes information about the jet and a number of associated tracks, as detailed in \cref{sec:model-inputs}.
 The jet variables are concatenated with the variables for each track as shown in \cref{fig:model_input_array}.
@@ -336,14 +337,17 @@ A summary of the different classification networks used for the various training
   \label{tab:architecture}
 \end{table}
 
-A node classification network, which takes as inputs the features from a single output node from the graph network and the global jet representation, predicts the track truth origin, as defined in \cref{tab:truth_origins}.
-This network has three hidden layers containing 128, 64 and 32 neurons respectively, and an output size of seven, corresponding to the seven different truth origins.
+A node classification network predicts the track truth origin as defined in~\cref{tab:truth_origins}.
+This network takes as inputs the features from a single output node from the graph network and the global representation of the jet.
+The node network has three hidden layers containing 128, 64 and 32 neurons respectively, and an output size of seven, corresponding to the seven different truth origins defined in~\cref{tab:truth_origins}.
 
-An edge classification network, which takes as inputs the concatenated representations from each pair of tracks and the global jet representation, is used to predict whether the tracks in the track-pair belong to a common vertex.
-The edge network has three hidden layers containing 128, 64 and 32 neurons respectively, and a single output, which is used to perform binary classification of the track-pair compatability.
-These predictions are used for the auxiliary training objectives discussed in \cref{sec:aux-train-objectives}.
+An edge classification network is used to predict whether the tracks in the track-pair belong to a common vertex.
+This network takes as inputs the concatenated representations from each pair of tracks and the global jet representation.
+Similar to the node network, the edge network has three hidden layers containing 128, 64 and 32 neurons respectively, and a single output, which is used to perform binary classification of the track-pair compatability.
+The output predictions for the two auxiliary networks are used for the auxiliary training objectives discussed in \cref{sec:aux-train-objectives}.
 
-Finally, the graph classification network takes only the global jet representation as input, and predicts the jet flavour. 
+Finally, the graph classification network is used to predict the jet flavour.
+This network takes only the global jet representation as input.
 The graph classification network is comprised of four fully connected hidden layers with 128, 64, 32 and 16 neurons respectively, and has three outputs corresponding to the \bcl jet classes. 
 
 
@@ -360,52 +364,55 @@ $L_\text{vertex}$ is computed by averaging over all intra-jet track-pairs in the
 
 The different losses converge to different values during training, reflecting differences in the relative difficulty of the various training objectives.
 The values of $L_\text{vertex}$ and $L_\text{track}$ are weighted by $\alpha = 1.5$ and $\beta = 0.5$ respectively to ensure they converge to similar values, giving them an equal weighting towards $L_\text{total}$. 
-The values of $\alpha$ and $\beta$ also ensure that $L_\text{jet}$ converges to a larger value than $L_\text{vertex}$ and $L_\text{track}$, reflecting the primary importance of the jet classification objective.
-In practice, the final performance of the model was not sensitive to modest variations in the loss weights $\alpha$ and $\beta$, or to pre-training using $L_\text{total}$ and fine tuning on the jet classification task only.
-As there was a significant variation in the relative frequency of tracks of different origins, the contribution of each origin class to $L_\text{track}$ was weighted by the inverse of the frequency of their occurrence.
-In $L_\text{vertex}$, the relative class weight in the loss for track-pairs where both tracks are from either a \borchadron is increased by a factor of two as compared with other track-pairs.
+The values of $\alpha$ and $\beta$ are chosen to ensure that $L_\text{jet}$ converges to a larger value than either $L_\text{vertex}$ and $L_\text{track}$, which reflects the primary importance of the jet classification objective.
+It was found that in practice the overall performance of the model was not sensitive to modest changes in the loss weights $\alpha$ and $\beta$.
+Pre-training using $L_\text{total}$ (i.e. on all tasks) and fine tuning on only the jet classification task also did not improve performance versus the described standard setup, indicating that the auxiliary tasks are not in direct competition with the jet classification task.
+As there was a large variation in the relative abundance of tracks of the different origins, the contribution of each origin to $L_\text{track}$ was weighted by the inverse of the frequency of their occurrence.
+In vertexing loss $L_\text{vertex}$, the class weight for track-pairs where both tracks are from either a \borchadron was increased by a factor of two as compared with other track-pairs, to encourage the network to focus on correctly classifying heavy flavour vertices.
 
-The track classification and vertexing objectives are supplementary to the jet classification objective and trainings can be performed with either the node or edge networks, or both, removed, as discussed in \cref{sec:gnn_ablations}.
-In these cases, the corresponding losses $L_\text{vertex}$ and $L_\text{track}$ are removed from the calculation of $L_\text{total}$. 
-The resulting trainings demonstrate how useful the different auxiliary training objectives are for the primary jet classification objective.
+\GNN can be trained with either the node or edge networks (and their corresponding auxiliary tasks), or both, removed, as discussed in \cref{sec:gnn_ablations}.
+In such cases, the corresponding losses $L_\text{vertex}$ and $L_\text{track}$ are also removed from the calculation of the overall loss $L_\text{total}$. 
+The performance of the resulting models provides a useful indication of the benefit of including the auxiliary tasks to the primary jet classification objective.
 
-\GNN trainings are run for \nepochs epochs on 4 NVIDIA V100 GPUs, taking around \minsperepoch mins to complete each epoch over the training sample of \njetstrain jets described in \cref{sec:datasets}.
+\GNN is trained for \nepochs epochs on 4 NVIDIA V100 GPUs.
+Each epoch takes approximately \minsperepoch mins to complete over the training sample of \njetstrain jets described in \cref{sec:datasets}.
 The Adam optimiser~\cite{arxiv.1412.6980} with an initial learning rate of $1\mathrm{e}{-3}$, and a batch size of 4000 jets (spread across the 4 GPUs) was used.
-Typically the validation loss, calculated on \njetsval jets, stabilised after around 60 epochs.
+Typically the validation loss, calculated on \njetsval jets, became stable after around 60 epochs.
 The epoch that minimized the validation loss was used for evaluation.
-\GNN has been integrated into the ATLAS software~\cite{ATL-SOFT-PUB-2021-001} using ONNX~\cite{bai2019}, and jet flavour predictions for the test sample are computed using the ATLAS software stack.
+\GNN has been integrated into the ATLAS software~\cite{ATL-SOFT-PUB-2021-001} using ONNX~\cite{bai2019}.
+The test sample jet flavour predictions scores are computed using the ATLAS software stack as a verification of this process.
 %\todo{inlcude loss vs epoch? or save for paper}
 
 
 \section{Results}\label{sec:gnn_results}
 
 
-The performance of the \GNN tagger is evaluated for both \btag and \ctag use cases, and for both jets with \ttbarpt from the \ttbar sample and jets with \Zprimept from the \Zprime sample.
-Performance is compared to the \DLr tagger \cite{ATL-PHYS-PUB-2017-013}, which has been retrained on 75 million jets from the same samples as \GNN.
-%Sample prepration is identical for the different models.
-The input RNNIP tagger \cite{ATL-PHYS-PUB-2017-003} to \DLr has not been retrained.
+The \GNN tagger is evaluated both as a \btag and \ctag algorithm in \cref{sec:gnn_btag_perf} and \cref{sec:gnn_ctag_perf} respectively.
+Evaluation is performed separately on both \ttbarjets with \ttbarpt and \Zprimejets with \Zprimept.
+The performance of the model is compared to the \DLr tagger~\cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}, which has been retrained on 75 million jets from the same samples as \GNN.
+The input RNNIP tagger~\cite{ATL-PHYS-PUB-2017-003} to \DLr has not been retrained.
+As discussed, each tagger predicts the probability that a jet belongs to the \bcl classes.
+To use the model for \btag, these probabilities are combined into a single score \Db, which is defined as
 %\DLr is a modification of the previous \DLr tagger \cite{ATL-PHYS-PUB-2017-013} which which replaces RNNIP with DIPS, a separately trained track-based algorithm based on deep sets. 
 %The DIPS tagger uses the loose track selection defined in \cite{ATL-PHYS-PUB-2020-014}.
-
-The taggers predict the probability that a jet belongs to the \bcl classes. To use the model for \btag, these probabilities are combined into a single score \Db, defined as
 
 \begin{equation}\label{eq:btag-disc}
     \Db = \log{\frac{p_b}{(1-\fc )p_l + \fc  p_c}} ,
 \end{equation}
 
 where \fc is a free parameter that determines the relative weight of $p_c$ to $p_l$ in the score \Db, controlling the trade-off between $c$- and \lrej performance.
-This parameter is set to a value of $\fc = 0.018$ for the \DLr model, obtained through an optimisation procedure designed to maximise the \clrej of \DLr \cite{ATL-PHYS-PUB-2017-013}.
-For the \GNN models a value of $\fc = 0.05$ is used, based on a similar optimisation procedure.
-The choice of \fc is arbitrary, with the different optimised values reflecting the relative $c$- versus light-jet rejection performance of the various taggers.
-A fixed-cut working point (WP) defines the corresponding selection applied to the tagging discriminant \Db in order to achieve a given inclusive efficiency on the \ttbar sample.
+The choice of \fc is arbitrary, with the different optimised values reflecting the relative $c$- versus \ljet rejection performance of the various taggers.
+This parameter is set to a value of $\fc = 0.018$ for the \DLr model, obtained through an optimisation procedure designed to maximise the \clrej of \DLr described in \rcite{ATL-PHYS-PUB-2017-013}.
+Based on a similar optimisation procedure, a value of $\fc = 0.05$ is used for the \GNN models.
+A fixed-cut working point (WP) defines the corresponding selection applied to the tagging discriminant \Db in order to achieve a given efficiency on the inclusive \ttbar sample.
 
-The technical implementation of \GNN results in any jet with no associated tracks or exactly one associated track to be classified as a \ljet.
+The technical implementation of \GNN in the ATLAS software stack requires any jet with zero or one associated tracks to be classified as a \ljet.
 The impact of this on the tagging performance of \GNN was found to be negligible, with \pct{0.12} of \ttbarbjets and \pct{0.02} of \Zprimebjets affected.
-Of those, \pct{89} of the \ttbarbjets and \pct{98} of the \Zprimebjets are classified as \ljets by \DLr at the \pct{70} \ttbar WP.
+Of those, \pct{89} of the \ttbarbjets and \pct{98} of the \Zprimebjets are also classified as \ljets by \DLr at the \pct{70} \ttbar WP.
 
-A comparison of the \btag discriminant \Db between \DLr and \GNN is given in \cref{fig:ttbar_btag_disc}. 
-The shapes of the distributions are broadly similar for \bcl jets, however, the \GNN model shifts the \bjet distribution to higher values of \Db in the regions with the best discrimination.
-The \GNN \cjet distribution is also shifted to lower values of \Db when compared with \DLr, enhancing the separation and indicating that \GNN will improve \cjet rejection when compared with \DLr.
+A comparison of the \btag discriminant \Db between \DLr and \GNN is shown in \cref{fig:ttbar_btag_disc}. 
+The shapes of the \Db distributions are generally similar for \bcl jets between both models, however, \GNN shifts the \bjet distribution to higher values of \Db in the regions with the greatest discrimination.
+The \GNN \cjet distribution is also shifted to lower values of \Db when compared with \DLr, enhancing the separation and indicating that \GNN is improving \cjet rejection when compared with \DLr.
 
 \begin{figure}[!htb]
     \centering
@@ -420,34 +427,37 @@ The \GNN \cjet distribution is also shifted to lower values of \Db when compared
 
 \subsection{\texorpdfstring{\btagging}{b-tagging} Performance}\label{sec:gnn_btag_perf}
 
-The performance of a \btag algorithm is quantified by its power to reject \cljets for a given $b$-jet tagging efficiency, or WP. 
-In order to compare the \btag performance of the different taggers for the $b$-jet tagging efficiencies in the range typically used by analyses, the corresponding \clrej rates are displayed in \cref{fig:ttbar_btag_roc,fig:zprime_btag_roc} for jets in the \ttbar and \Zprime samples respectively.
-Four standard WPs with $b$-jet tagging efficiencies of \pct{60}, \pct{70}, \pct{77} and \pct{85} are used by physics analyses depending on their specific signal and background requirements.
-These WPs are defined using \ttbarjets only.
-The $b$-jet tagging efficiencies for \Zprimejets are lower than the corresponding WPs calculated in the \ttbar sample, due to the much higher jet \pt range in the \Zprime sample.
-For instance the WP defined to provide a $70\%$ $b$-jet tagging efficiency on the \ttbar sample results in a $b$-jet tagging efficiency of $\sim30\%$ on the \Zprime sample.
-To account for this, the range of $b$-jet tagging efficiencies displayed in \cref{fig:zprime_btag_roc} is chosen to span the lower values achieved in the \Zprime sample.
+The performance of \btag algorithms is quantified by their ability to reject \cljets for a given \bjet selection efficiency, or working point (WP). 
+In order to compare the \btag performance of the different taggers for the \bjet tagging efficiencies in the range typically used by analyses, the corresponding \clrej rates are displayed in \cref{fig:ttbar_btag_roc,fig:zprime_btag_roc} for jets in the \ttbar and \Zprime samples respectively.
+Four standard WPs are defined with \bjet tagging efficiencies of \pct{60}, \pct{70}, \pct{77} and \pct{85} respectively.
+These WPs are commonly used by physics analyses depending on their specific signal and background requirements.
+The WPs are defined based on \ttbarjets only.
+Due to the much higher jet \pt range in the \Zprime sample, and the increased difficulty in tagging jets at \highpt (see \cref{chap:tracking}), the \bjet tagging efficiencies for \Zprimejets are lower than the corresponding WPs calculated in the \ttbar sample.
+For instance the WP cut value compute to provide a $70\%$ \bjet tagging efficiency on the \ttbar sample results in a \bjet tagging efficiency of just $\sim30\%$ on the \Zprime sample.
+In order to account for this, the range of \bjet tagging efficiencies displayed for plots showing the performance for \Zprimejets (for example \cref{fig:zprime_btag_roc}) is chosen to span the lower efficiencies achieved in the \Zprime sample at \highpt.
 
-For \ttbarjets with \ttbarpt, \GNN demonstrates considerably better \clrej compared with \DLr across the full range of $b$-jet tagging efficiencies probed.
-The relative improvement depends on the \bjet tagging efficiency, with the largest improvements found at lower values.
-At a $b$-jet tagging efficiency of \pct{\ttlo}, the \crej improves by a factor of \ttbclo and the \lrej improves by a factor of \ttbllo with respect to \DLr.
-For \highpt \Zprimejets with \Zprimept, \GNN also brings considerable performance improvements with respect to \DLr across the range of $b$-jet tagging efficiencies studied.
-Again, the largest relative improvement in performance comes at lower $b$-jet tagging efficiencies.
-At a $b$-jet tagging efficiency of \pct{\zplo}, \GNN improves the \crej by a factor of \zpbclo and the \lrej by a factor of \zpbllo.
-An increasing statistical uncertainty due to the high rejection of background affects the comparison at lower $b$-jet tagging efficiencies.
-It is estimated that for a $b$-jet tagging efficiency of $70\%$ in the \ttbar sample, $\sim5\%$ ($\sim30\%$) of the relative improvement in the $c$-jet (light-jet) rejection comes from loosening the track selection and for a $b$-jet tagging efficiency of $30\%$ in the \Zprime the corresponding number is $\sim10\%$ for both $c$-jets and light-jets.
-Given the sophisticated exploitation of low-level information, further studies are needed to confirm if the performance gain is also observed in experimental data.
+For \ttbarjets with \ttbarpt, \GNN demonstrates considerably better \clrej when compared with \DLr across the full range of \bjet tagging efficiencies studied.
+The relative improvement is strongly dependent on the \bjet tagging efficiency under study.
+The largest improvements are found at lower \bjet tagging efficiencies.
+At a \bjet tagging efficiency of \pct{\ttlo}, the \crej improves by a factor of \ttbclo while the \lrej improves by a factor of \ttbllo with respect to \DLr.
+For \highpt \Zprimejets with \Zprimept, \GNN also brings a significant performance improvement with respect to \DLr across the range of \bjet tagging efficiencies studied.
+Again, the largest relative improvement in performance comes at the lower \bjet tagging efficiencies.
+At a \bjet efficiency of \pct{\zplo}, \GNN improves the \crej with respect to \DLr by a factor of \zpbclo and the \lrej by a factor of \zpbllo.
+The performance comparison at lower \bjet tagging efficiencies is made more difficult due to the increased statistical uncertainties which result from the high rejection of background.
+It is estimated that for a \bjet tagging efficiency of $70\%$ in the \ttbar sample, $\sim5\%$ ($\sim30\%$) of the relative improvement in the \cjet (\ljet) rejection comes from loosening the track selection and for a \bjet tagging efficiency of $30\%$ in the \Zprime the corresponding number is $\sim10\%$ for both \cjets and \ljets.
+Given that \GNN exploites the low-level detector information in a more complete and sophisticated way than \DLr, further studies are needed to confirm that the performance gain observed in these simulated samples is also observed in experimental data.
 
-The \GNNLep variant shows improved performance with respect to the baseline \GNN model, demonstrating the additional jet flavour discrimination power provided by the leptonID track input.
+The \GNNLep variant of \GNN demonstrates further improved performance with respect to the baseline model.
+This demonstrates the additional jet flavour discrimination power provided by the leptonID track input.
 For \ttbarjets, the relative \crej improvement with respect to \DLr at the \bWP{\ttlo} increases from a factor of \ttbclo for \GNN to a factor of $\sim 2.8$ for \GNNLep.
-The improvement in \lrej also increases from a factor of \ttbllo to $\sim 2.5$ at this WP.
-For \Zprimejets, the relative \crej (\lrej) improvement with respect to \DLr increases from a factor of \zpbclo to $\sim 3$ (\zpbllo to $\sim 7.5$) at a $b$-jet tagging efficiency of \pct{\zplo}.
-As shown in \cref{fig:vs_pt_flat_leff}, the greatest improvement of \GNNLep over \GNN is seen at low \pt.
+The improvement in \lrej also increases from a factor of \ttbllo to $\sim 2.5$ at the same WP.
+For \Zprimejets, the relative \crej (\lrej) improvement with respect to \DLr increases from a factor of \zpbclo to $\sim 3$ (\zpbllo to $\sim 7.5$) at a \bjet tagging efficiency of \pct{\zplo}.
+As shown in \cref{fig:vs_pt_flat_leff}, the greatest improvement of \GNNLep over \GNN is seen at lower transverse momenta.
 
 \begin{figure}[!p]
     \centering
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_roc_btag.pdf}
-    \caption{The \cjet (left) and \ljet (right) rejections as a function of the $b$-jet tagging efficiency for \ttbarjets with \ttbarpt.
+    \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbarjets with \ttbarpt.
              The ratio with respect to the performance of the \DLr algorithm is shown in the bottom panels.
              A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN and \GNNLep.
              Binomial error bands are denoted by the shaded regions.
@@ -459,7 +469,7 @@ As shown in \cref{fig:vs_pt_flat_leff}, the greatest improvement of \GNNLep over
 \begin{figure}[!p]
     \centering
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_roc_btag.pdf}
-    \caption{The \cjet (left) and \ljet (right) rejections as a function of the $b$-jet tagging efficiency for \Zprimejets with \Zprimept.
+    \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprimejets with \Zprimept.
              The ratio with respect to the performance of the \DLr algorithm is shown in the bottom panels.
              A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN and \GNNLep.
              Binomial error bands are denoted by the shaded regions.
@@ -468,52 +478,19 @@ As shown in \cref{fig:vs_pt_flat_leff}, the greatest improvement of \GNNLep over
     \label{fig:zprime_btag_roc}
 \end{figure}
 
-The performance of the taggers is strongly dependent on the jet \pt.
-Charged particle reconstruction is particularly challenging within \highpt jets \cite{PERF-2015-08}.
-The multiplicity of fragmentation particles increases as a function of \pt, while the number of particles from heavy flavour decays stays constant.
-Collimation of particles inside the jet increases and approaches the granularity of the tracking detectors, making it difficult to resolve the trajectories of different particles.
-Furthermore, at high \pt, heavy flavour hadrons will travel further into the detector before decaying.
-For hadrons which traverse one or more layers of the ID before decaying, the corresponding decay tracks may pick up incorrect hits, left by the hadron itself or fragmentation particles, in the inner layers of the detector, reducing the accuracy of the reconstructed track parameters.
-These factors contribute to a reduced reconstruction efficiency for heavy flavour tracks, and a general degradation in quality of tracks inside the core of a jet, which in turn reduces the jet classification performance.
+In general, the performance of all the taggers is strongly dependent on the jet \pt.
+This is due to the increased multiplicity and collimation of tracks, and the displaced decays that result from within the heavy flavour jets.
+These factors aredescribed in more detail in \cref{chap:tracking}.
+Together, they contribute to a reduced reconstruction efficiency for heavy flavour tracks, and a general degradation in quality of tracks inside the core of a jet, which in turn reduces the jet tagging performance.
 
-% In order to study how the \bseleff of the taggers varies as a function of jet \pt, the \beff for \ttbarZprimejets at a fixed \pct{77} \ttbar WP is shown in as a function of \pt in \cref{fig:vs_pt_fixed_ttbar}.
-% For \ttbarjets, the different taggers perform similarly in the different \pt bins.
-% Performance for jets with $\pt < \SI{100}{\GeV}$ is lower than jets with $\pt > \SI{100}{\GeV}$ due to the shorter flight distance of the \bhadron in low \pt jets.
-% For \Zprimejets at the \pct{77} \ttbar WP, the efficiency for each of the taggers starts high at around \pctr{60}{70} for $\pt < \SI{1}{\TeV}$, and then drops with increasing \pt, beginning to plateau at around \pctr{5}{15} above \SI{4}{\TeV}.
-% At low $\pt < \SI{500}{\GeV}$, the \beff at a fixed \leff for \DLr (\GNN) is \pct{65} (\pct{75}), and this drops to approximately \pct{10} (\pct{20}) as the jet \pt moves to extreme ranges of up to $\pt > \SI{4}{\TeV}$.
-% At \SI{1}{\TeV}, \GNN improves the \beff at a fixed \ceff (\leff) as compared with \DLr by \pct{10} (\pct{20}).
-% Above \SI{4}{\TeV}, the relative increase in \bjet tagging efficiency between \DLr and \GNN is larger, with increases of up to \pct{30} (\pct{80}) at a fixed \crej (\lrej).
+In order to study how the tagging performance changes as a function of the jet \pt, the \bjet tagging efficiency as a function of \pt for a fixed \ljet rejection of 100 in each bin is shown in \cref{fig:vs_pt_flat_leff}.
+For \ttbarjets, at a fixed \ljet rejection of 100, \GNN improves the \bjet tagging efficiency by approximately \pct{4} across all the jet \pt bins.
+Meanwhile, \GNNLep again demonstrates improved performance with respect to \GNN, in particular at lower \pt.
+The relative increase in the \bjet tagging efficiency increases from \pct{4} to \pct{8} with respect to \DLr.
+For \Zprimejets, \GNN again outperforms \DLr across the entire jet \pt range studied.
+The largest relative improvement in performance is found at the highest transverse momenta of jet $\pt > \SI{2}{\TeV}$, and corresponds to an approximate factor of 2 improvement in efficiency with respect to \DLr.
 
-% The \bseleff of the \GNNLep variant is similar to the baseline \GNN model for both \ttbarZprimejets at the \pct{77} \ttbar WP.
-In order to study how the $b$-jet tagging efficiency of the taggers varies as a function of jet \pt, the $b$-jet tagging efficiency as a function of \pt for a fixed light-jet rejection of 100 in each bin is shown in \cref{fig:vs_pt_flat_leff}.
-For \ttbarjets, at a fixed \ljet rejection of 100, \GNN improves the $b$-jet tagging efficiency by approximately \pct{4} across all jet \pt bins.
-\GNNLep shows improved performance with respect to \GNN, in particular at lower \pt, with the relative increase in the $b$-jet tagging efficiency going from \pct{4} to \pct{8}.
-For \Zprimejets, \GNN has a higher $b$-jet tagging efficiency than \DLr across the \pt range, with the largest relative improvement in performance, approximately a factor of 2, found at jet $\pt > \SI{2}{\TeV}$.
-\GNN outperforms \DLr across the entire jet \pt spectrum studied. 
-The performance was also evaluated as a function of the average number of pileup interactions in an event, and was found to have no significant dependence on this quantity.
-
-% \begin{figure}[!p]
-%     \centering
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_fixed_beff_by_pt_btag.pdf}
-%         %\caption{sub}
-%         %\label{fig:sub}
-%     \end{subfigure}
-%     \quad
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_fixed_beff_by_pt_btag.pdf}
-%         %\caption{sub}
-%         %\label{fig:sub}
-%     \end{subfigure}
-%     \caption{The \btag efficiency for \ttbarjets (left) and \Zprime jets (right) as a function of jet \pt for a fixed \pct{77} \ttbar \beff.
-%              For \ttbarjets, the taggers show a similar response in the different \pt bins.
-%              For \Zprimejets, performance drops off with increasing \pt for all taggers, though \GNN improves the \beff by up to a factor of 2.5 for jets with $\pt > \SI{3}{\TeV}$.
-%              The standard error on the mean is shown in the shaded regions.
-%              }
-%     \label{fig:vs_pt_fixed_ttbar}
-% \end{figure}
+The performance of the model was also evaluated as a function of the average number of pileup interactions in the event. No significant dependence of the tagging performance was observed.
 
 
 \begin{figure}[!htbp]
@@ -546,35 +523,36 @@ The performance was also evaluated as a function of the average number of pileup
 
 \subsection{\texorpdfstring{\ctagging}{c-tagging} Performance}\label{sec:gnn_ctag_perf}
 
-\GNN does not rely on any manually optimised low-level tagging algorithms.
-Since these algorithms were originally designed and tuned with \btag, rather than \ctag, in mind, the low level tagging algorithms may be suboptimal for \ctag.
-Therefore, the tagging of \cjets presents a compelling use case for \GNN.
-As the model is trained with three output classes, using it as a \ctagging algorithm is trivially analogous to the \btag approach.
-The output probabilities are combined into a single score \Dc, defined similarly to \cref{eq:btag-disc} as
+As discussed previously, \GNN does not rely on any inputs from manually optimised low-level tagging algorithms.
+Since these algorithms were originally designed and tuned with the aim of \btag, and not \ctag, the low level tagging algorithms may perform suboptimally for \ctag purposes.
+The tagging of \cjets therefore presents a compelling use case for \GNN.
+As each of the the models is trained with three output classes, using it as a \ctagging algorithm is trivially analogous to the approach used for \btag.
+The model output probabilities are combined into a single score \Dc, which is defined similarly to \cref{eq:btag-disc} as
 
 \begin{equation}\label{eq:ctag-disc}
     D_c = \log{\frac{p_c}{(1-f_b)p_l + f_b p_b}} .
 \end{equation}
 
-A value of $\fb = 0.2$ is used for all models.
-Similar to \cref{sec:gnn_btag_perf}, performance of the different taggers is compared by scanning through a range of $c$-jet tagging efficiencies and plotting the corresponding \blrej rates.
-As in \cref{sec:gnn_btag_perf}, WPs are defined using \ttbarjets.
-Standard $c$-jet tagging efficiency WPs are significantly lower in comparison with the \btag WPs in order to maintain reasonable $b$- and light-jet rejection rates.
-This is reflected in the range of $c$-jet tagging efficiencies used in \cref{fig:ttbar_ctag_roc,fig:zprime_ctag_roc}.
-In \cref{fig:ttbar_ctag_roc}, which displays the \ctag performance of the models on the \ttbarjets, \GNN performs significantly better than \DLr.
-The \blrej improve most at lower $c$-jet tagging efficiencies, with both background rejections increasing by a factor of 2 with respect to \DLr at a $c$-jet tagging efficiency of \pct{25}.
-\GNNLep outperforms \GNN, with the \brej (\lrej) relative improvement increasing from a factor of 2 to 2.1 (2 to 2.3) at the \WP{25}{c}.
-\cref{fig:zprime_ctag_roc} shows the \ctag performance on the \Zprimejets.
+A value of $\fb = 0.2$ is used for all models, based on the same optimisation procedure that was used for the \btag use case.
+Similar to \cref{sec:gnn_btag_perf}, the different taggers are compared to oneanother by scanning through a range of \cjet tagging efficiencies and plotting the corresponding \blrej rates.
+As in \cref{sec:gnn_btag_perf}, the WPs are defined using \ttbarjets.
+Standard \cjet tagging efficiency WPs used by physics analyses are significantly lower than the \btag WPs in order to maintain reasonable $b$- and \ljet rejection rates.
+This is reflected in the range of \cjet tagging efficiencies used in \ctag plots such as \cref{fig:ttbar_ctag_roc,fig:zprime_ctag_roc}.
+\cref{fig:ttbar_ctag_roc} displays the \ctag performance of the models on the \ttbarjets.
+\GNN is shiown to perform significantly better than \DLr.
+Similar to the \btag case, the \blrej improve most at lower \cjet tagging efficiencies, with both background rejections increasing by a factor of 2 with respect to \DLr at a \cjet tagging efficiency of \pct{25}.
+\GNNLep again outperforms \GNN, though the improvements with respect to the baseline model are more modest, with the \brej (\lrej) relative improvement increasing from a factor of 2 to 2.1 (2 to 2.3) at the \WP{25}{c}.
+\cref{fig:zprime_ctag_roc} shows the \ctag performance on the \Zprimejets with \Zprimept.
 Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the \lrej by a factor of 2 at the \WP{25}{c}.
 
 \begin{figure}[!p]
     \centering
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_roc_ctag.pdf}
     \caption{
-        The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \ttbar jets with \ttbarpt.
+        The \bjet (left) and \ljet (right) rejections as a function of the \cjet tagging efficiency for \ttbar jets with \ttbarpt.
         The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
         Binomial error bands are denoted by the shaded regions.
-        At $c$-jet tagging efficiencies than $\sim$\pct{25}, the \lrej becomes so large that the effect of the low number of jets is visible.
+        At \cjet tagging efficiencies than $\sim$\pct{25}, the \lrej becomes so large that the effect of the low number of jets is visible.
         The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.
     }
     \label{fig:ttbar_ctag_roc}
@@ -584,7 +562,7 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
    \centering
    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_roc_ctag.pdf}
    \caption{
-        The \bjet (left) and \ljet (right) rejections as a function of the $c$-jet tagging efficiency for \Zprime jets with \Zprimept.
+        The \bjet (left) and \ljet (right) rejections as a function of the \cjet tagging efficiency for \Zprime jets with \Zprimept.
         The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
         Binomial error bands are denoted by the shaded regions.
         The lower $x$-axis range is chosen to display the \cjet tagging efficiencies usually probed in these regions of phase space.
@@ -640,19 +618,21 @@ Again, SV1 is overly aggressive by merging the two heavy flavour decay vertices 
 
 \subsection{Ablations}\label{sec:gnn_ablations}
 
-Several ablations, the removal of components in the model to study their impact, are carried out to determine the importance of the auxiliary training objectives of \GNN to the overall performance.
-The ``\GNN No Aux'' variant retains the primary jet classification objective, but removes both track classification and vertexing auxiliary objectives (see \cref{sec:aux-train-objectives}) and as such only minimises the jet classification loss.
-The ``\GNN TC'' variant includes track classification but not vertexing, while ``\GNN Vert'' includes vertexing, but not track classification.
+Ablation studies (the removal of certain components of a given model in order to study the impact of that component) are carried are carried out to determine the importance of the auxiliary training objectives of \GNN to the overall performance.
+The ``\GNN No Aux'' variant retains the primary jet classification objective, but removes both track classification and vertexing auxiliary objectives (see \cref{sec:aux-train-objectives}) and correspondingly only minimises the jet classification loss.
+The ``\GNN TC'' variant includes track classification objective but not the vertexing objective.
+Finally, the ``\GNN Vert'' includes the vertexing objective, but not the track classification objective.
 
-For jets in both the \ttbar and \Zprime samples, the models without one or both of the auxiliary objectives display significantly reduced \clrej when compared with the baseline \GNN model, as shown in \cref{fig:ttbar_btag_roc_ab,fig:zprime_btag_roc_ab}.
-For \ttbarjets, the performance of \GNN No Aux is similar to \DLr, while \GNN TC and \GNN Vert perform similarly to each other.
-% with improvements in the \crej of \pct{80} and improvements in the \lrej of \pct{75} at a $b$-jet tagging efficiency of \pct{60}.
-For \Zprimejets, the \GNN No Aux model shows a clear improvement in \clrej when compared with \DLr at lower $b$-jet tagging efficiencies.
+For jets in both the \ttbar and \Zprime samples, a general trend is observed that the models trained without one or both of the auxiliary objectives results in significantly reduced \clrej when compared with the baseline \GNN model.
+This result is shown clearly in \cref{fig:ttbar_btag_roc_ab,fig:zprime_btag_roc_ab}.
+For \ttbarjets, the performance of \GNN No Aux is similar to \DLr, while \GNN TC and \GNN Vert perform similarly to each other with improvements in the \crej of \pct{80} and improvements in the \lrej of \pct{75} at a \bjet tagging efficiency of \pct{60}.
+For \Zprimejets meanwhile, the \GNN No Aux model already shows a clear improvement in \clrej when compared with \DLr at lower \bjet tagging efficiencies.
 Similar to \ttbarjets, \GNN TC and \GNN Vert perform similarly, and bring large gains in background rejection when compared with \GNN No Aux, but the combination of both auxiliary objectives yields the best performance.
 
 It is notable that the \GNN No Aux model matches or exceeds the performance of \DLr without the need for inputs from the low-level algorithms.
-This indicates that the performance improvements enabled by \GNN appear to be able to compensate for the removal of the low-level algorithm inputs.
+This indicates that the performance improvements enabled by the improved neural network architecture used in \GNN appear to be able to compensate for the removal of the low-level algorithm inputs.
 The \GNN TC and \GNN Vert variants each similarly outperform \DLr, demonstrating that both contribute to the overall high performance of the baseline model.
+The overall best performing model is the full version of \GNN trained with both auxiliary objective, demonstrating that the both auxiliary objectives are complementary.
 
 
 \begin{figure}[!p]
@@ -673,19 +653,15 @@ The \GNN TC and \GNN Vert variants each similarly outperform \DLr, demonstrating
 
 \subsection{Inclusion of Low-Level Vertexing Algorithms}\label{sec:gnn_low_level_vert_impact}
 
-\GNN does not include inputs from low-level tagging algorithms, including the vertexing tools SV1 and JetFitter \cite{FTAG-2018-01}.
-Since these algorithms are known to improve the performance of \DLr, it was feasible that their inclusion in \GNN may further improve on the performance of the \GNN models.
-In a dedicated training of \GNN the SV1 and JetFitter tagger outputs were added to the \GNN jet classification network as an input, similar to their use in \DLr.
-These outputs include information on the reconstructed vertices, including the number of vertices, the vertex mass, displacement, and other properties.
+As already mentioned, \GNN does not include any inputs from the low-level tagging algorithms, including the vertexing algorithms SV1 and JetFitter \cite{FTAG-2018-01}.
+Since these algorithms are known to play a key role in contributing to the performance of \DLr, it was necessary to study whether their inclusion in \GNN resulted in further performance improvements.
+In a dedicated training of \GNN the SV1 and JetFitter tagger outputs were added to the \GNN jet classification network as an input, similar to how they are used in \DLr.
+These outputs include information on the reconstructed vertices, including the number of vertices, and the mass, displacement, and other properties of the highest ranking reconstructed vertex.
 In addition, the index of the reconstructed SV1 or JetFitter vertices were included as two track-level inputs to \GNN. 
-%These indices were also used to construct an edge feature for the edge classification network, which was given a value of one if the track-pair were from a common reconstructed V1 or JetFitter vertex, and zero otherwise.
+These indices were also used to construct an edge feature for the edge classification network, which was given a value of one if the track-pair were from a common reconstructed V1 or JetFitter vertex, and zero otherwise.
 The jet classification performance of this \GNN model was not significantly different to the baseline model, and in some cases the performance was slightly reduced.
-%As \GNN does not benefit from the inclusion of information from SV1 and JetFitter it can function as a highly performant standalone tagger that does not require (beyond etraining) any manual optimisation to achieve good performance in a wide range of phase spaces.
+As \GNN does not benefit from the inclusion of information from SV1 and JetFitter it can function as a highly performant standalone tagger that does not require (beyond retraining) any manual optimisation to achieve good performance in a wide range of phase spaces.
 A dedicated look at the vertexing performance of \GNN with some comparisons to SV1 and JetFitter is found in \cref{sec:gnn_vert_perf}
-
-
-
-
 
 
 
@@ -841,19 +817,21 @@ For \Zprimebjets, JetFitter finds $35\%$ of vertices in the first bin, dropping 
 
 \subsection{Track Classification Performance}\label{sec:gnn_tc_perf}
 
-As discussed in \cref{sec:aux-train-objectives}, one of the auxiliary training objectives for \GNN is to predict the truth origin of each track in the jet.
-Since the equivalent information is not provided by any of the existing flavour tagging tools, as a benchmark a multi-class classification multilayer perceptron (MLP) is trained on the same tracks used for the baseline \GNN training.
-The model uses the same concatenated track-and-jet inputs as \GNN (see \cref{sec:model-inputs}), but processes only a single track at a time.
-The model is comprised of five densely connected layers with 200 neurons per layer, though the performance was not found to be strongly sensitive to changes in the network structure. 
-To measure the track classification performance, the area under the curve (AUC) of the receiver operating characteristic (ROC) curve is computed for each origin class using a one versus all classification approach.
-The AUCs for the different truth origin classes are averaged using both an unweighted and a weighted approach.
-%Several metrics are used to measure the performance of the two models in \cref{tab:track_classification_metrics}, where the performance for the different truth origin classes is averaged over using both an unweighted and a weighted approach.
-The unweighted mean treats the performance of each class equally, while the weighted mean uses the fraction of tracks from each origin as a weight.
-As seen in \cref{tab:track_classification_metrics}, \GNN outperforms the MLP, both at \ttbarpt for \ttbarjets, and at \Zprimept for \Zprimejets.
-For tracks in \ttbarjets, \GNN can reject \pct{65} of fake tracks while retaining more than \pct{99} of good tracks.
+One of the two auxiliary training objectives used by \GNN is to predict the truth origin of each track associated to the jet, as discussed in \cref{sec:aux-train-objectives}.
+Since the equivalent information is not provided by any of the existing flavour tagging tools, a benchmark model based on  a standard multi-class feed-forward classification network is trained on the same tracks used for the baseline \GNN training.
+The model uses precisely the same concatenated track-and-jet inputs as used by \GNN (see \cref{sec:model-inputs}), but processes only a single track at a time, meaning it cannot take into account the correlations between tracks when determining the track origin.
+The model is made up of five densely connected linear layers with 200 neurons in each layer.
+The performance of the model was found to be unsensitive to changes in the network structure. 
+
+To measure the track classification performance, the area under the curve (AUC) of the receiver operating characteristic (ROC) curve is computed for each origin class, using a one-versus-all classification approach.
+The AUCs for the different truth origins are averaged using both an unweighted and a weighted mean.
+The unweighted mean treats the performance of each class equally, while the weighted mean uses as a weight the relative abundance of tracks of each class.
+\cref{tab:track_classification_metrics} demonstrates clearly that \GNN outperforms the MLP both at \ttbarpt for \ttbarjets and at \Zprimept for \Zprimejets.
+For example, \GNN can reject \pct{65} of fake tracks in \ttbarjets, while retaining more than \pct{99} of good tracks (i.e.those tracks which are not fake).
 The \GNN model has two advantages over the MLP which can explain the performance improvement.
-Firstly, the mixing of information between tracks, enabled by the fully connected graph network architecture as discussed in \cref{sec:Architecture}, is likely to be beneficial since the origins of different tracks within a jet are to some extent correlated.
-Secondly, the jet classification and vertexing objectives can be considered auxiliary to the track classification task, and may bring improved track classification performance with respect to the standalone MLP.
+Firstly, the graph neural network architecture enables the sharing of information between tracks as discussed in \cref{sec:Architecture}.
+This is likely to be beneficial since the origins of different tracks within a jet are correlated.
+Secondly, the jet classification and vertexing objectives may be complementary to the track classification objective, and so the track classification performance is improved by the combined training of complementary objectives.
 
 \begin{table}[!htbp]
   \footnotesize\centering
@@ -883,10 +861,10 @@ Secondly, the jet classification and vertexing objectives can be considered auxi
 
 
 \cref{fig:track_origin_roc} shows the track origin classification ROC curves for the different track origins for \ttbarZprimejets.
-In order to improve legibility of the figure, the heavy flavour truth origins have been combined weighted by their relative abundance, as have the Primary and OtherSecondary labels.
-In \ttbarZprimejets, the AUC of the different (grouped) origins is above $0.9$, representing good classification performance.
-Fake tracks, followed by pileup tracks, are the easiest to classify in both samples.
-%the FromC tracks which are \chadron decay products, are the hardest to classify, possibly due to their similarity to both fragmentation tracks and \bhadron decay tracks, depending on the \chadron in question.
+In order to improve visual readability of the plot, the curves for the heavy flavour truth origins (FromB, FromBC and FromC) have been combined (weighted by their relative abundance), as have the Primary and OtherSecondary origins.
+In \ttbarZprimejets, the AUC of all the different origin groups exceeds $0.9$, representing strong overall classification performance.
+In both samples fake tracks are the easiest to classify, followed by pileup tracks.
+The FromC tracks which are \chadron decay products, are the hardest to classify, possibly due to their similarity to both fragmentation tracks and \bhadron decay tracks, depending on the \chadron species in question.
 
 \begin{figure}[!htbp]
     \centering
@@ -977,3 +955,5 @@ The addition of other auxiliary training objectives, such as the truth \bhadron 
 Additional future work includes the verification of the performance of \GNN on collision data, and the full calibration of the model so it can be used by analyses.
 The flexible nature of the model means it can also be readily applied to other related problems outside of standard $b$- and \ctagging applications, for example $X \rightarrow bb$ and $X \rightarrow cc$ tagging.
 The model could also be repurposed as a pileup jet tagger, or general primary and secondary vertexing tool.
+
+The model also demonstrates strong performance for the HLLHC \cref{ATL-PHYS-PUB-2022-047}.
