@@ -533,6 +533,15 @@ Hits not compatible with the merged hypothesis can still be shared by a limited 
 \end{figure}
 %
 
+\subsubsection{Pseudotracking}\label{sec:pseudotracks}
+
+Pseudotracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
+Each collection of hits which, as a unit, satisfies basic quality requirements is directly used in a full resolution track fit.
+If the track fit is successful, a ``pseudotrack'' track is created and stored.
+If the track fit fails, or the collection of hits does not pass the basic quality requirements (for example because of a lack of hits) then the particle is said to be un-reconstructable.
+In this way, pseudotracking performance represents the ideal reconstruction performance given the ATLAS detector, with perfect hit-to-track association and and track reconstruction efficiency.
+The approach was introduced in \rcite{Jansky:2013ryb} as a way to obtain a fast approximation of tracking reconstruction for simulated data, however the technique has become a useful tool for studying tracking performance in general \cite{ATL-PHYS-PUB-2015-006}.
+
 
 \subsection{Vertices}\label{sec:vertex_reco}
 Groups of reconstructed tracks can be examined to determine whether the particles originated from a common spatial point of origin.

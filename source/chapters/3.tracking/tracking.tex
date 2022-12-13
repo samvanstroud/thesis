@@ -1,14 +1,14 @@
 \chapter{Tracking and \texorpdfstring{\btagging}{b-tagging}}\label{chap:tracking}
 
-Many ATLAS analyses rely on \btagging, which is the selection of instantiated by \bquarks (\bjets) and rejecting jets created from other quarks ($c$ and light flavours $u$, $d$, $s$).
-These \btagging algorithms (also called \textit{taggers}) work by discriminating for the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
+Many ATLAS analyses rely on \btagging, which is the identification of jets instantiated by \bhadrons (\bjets), as opposed to those instantiated by quarks ($c$- and light-flavour hadrons).
+These \bjet identification algorithms (also called \textit{taggers}) work by identifying the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
 The various \btagging algorithms ultimately take as their input information about the reconstructed jet and its associated tracks.
 Successful \btagging relies therefore on the efficient and accurate reconstruction of tracks, and especially those tracks corresponding to the products of \bhadron decays.
 
 Historically a two tiered approach to \btagging has been taken, in which so called \textit{low-level} taggers take as inputs information about the jet and associated tracks, and attempt to reconstruct or identify some aspect of a \bjet, such as displaced tracks or secondary vertices.
 The outputs of several low-level taggers are then fed into a \textit{high-level} tagger, which uses a multivariate approach to discriminate between jet flavours.
 
-As the different \btagging algorithms ultimately rely on tracks accurate and efficient track reconstruction is essential.
+As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
 This chapter summarises the challenges facing tracking and \btagging at high transverse momentum with an investigation into track reconstruction performance in \cref{sec:b_had_reco}.
 Some preliminary investigations into improving tracking in this regime are investigated in \cref{sec:b_track_reco_improvements}.
 
@@ -20,30 +20,21 @@ Some preliminary investigations into improving tracking in this regime are inves
 
 This section outlines the typical detector signature of a \bhadron in \cref{sec:b_decay_topology} and discusses some associated reconstruction difficulties in \cref{sec:b_track_reco_challenges}.
 
-\begin{figure}[!tbp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
-  \caption{
-    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey)~\cite{bjetdiagram}.
-    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
-    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
-  \label{fig:bjet_diagram}
-\end{figure}
 
 \subsection{Decay Topology}
 \label{sec:b_decay_topology}
 
 \bhadrons are quasi-stable bound states of a bottom quark and one or more lighter quarks.
-Collectively, these are the \bmesons (e.g. $\PBplus = u \overline{b}$, $\PBzero = d \overline{b}$) and baryons with (e.g. $\Lambda_b^0 = udb$).
-After a \bquark is produced as the result of some proton-proton collision, they quickly hadronise.
+Collectively, these are the \bmesons (e.g. $\PBplus = u \overline{b}$, $\PBzero = d \overline{b}$) and baryons (e.g. $\Lambda_b^0 = udb$).
+After a \bquark is produced as the result of a proton-proton collision, they quickly hadronise.
 The hadronisation process is hard -- around 70-80\% of the \bquark's momentum is passed to the \bhadron, with the rest being radiated as prompt hadronisation or fragmentation particles.
 See \rcite{Webber:1999ui} for a more in depth discussion on hadronisation and the closely related process of fragmentation.
 Henceforth the combined hadronisation and fragmentation products will be referred to collectively as fragmentation.
 
 \bhadrons are interesting objects of study due to their relatively long proper lifetimes $\tau \approx \SI{1.5}{\pico\second}$~\cite{PhysRevD.98.030001}.
 This lifetime corresponds to a proper decay length $c \tau \approx \SI{450}{\micro\meter}$.
-Experiment has shown that \bhadrons do not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
-The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
+%Experiment has shown that \bhadrons do not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
+%The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
 In the rest frame of the detector, the typical \bhadron travels a distance 
 %
 \begin{equation}
@@ -51,7 +42,10 @@ In the rest frame of the detector, the typical \bhadron travels a distance
 \end{equation}
 %
 before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
-For a \SI{1}{\TeV} \bhadron, this gives $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) at a radius of \SI{33}{\milli\meter} (see \cref{fig:b_lxy_vs_pt}).
+
+For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
+Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure) 
+\cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
 This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices at the \bhadron decay point.
 
 \begin{figure}[!htbp]
@@ -65,18 +59,32 @@ This significant displacement is characteristic of \bjets and makes it possible 
   \label{fig:b_lxy_vs_pt}
 \end{figure}
 
-\bhadrons decay weakly to on average four or five collimated stable particles.
-These particles, along with any fragmentation particles, are reconstructed in the detector as a jet.
+\bhadrons decay weakly to on average four or five collimated stable particles \cite{ATL-PHYS-PUB-2014-008}.
+These particles, along with any other fragmentation particles, are reconstructed in the detector as a jet.
 A \bjet has several characteristic features which differentiate it from \ljets.
-These features stem from the significant displacement of the \bhadron that can occur, in particular for high transverse momentum \bjets.
+These features stem from the significant displacement of the \bhadron that can occurs due to it's lifetime.
 The primary feature is the presence of a high mass secondary vertex that is significantly displaced from the primary vertex.
 Reconstruction of these vertices from tracks with common points of spatial origin is a common approach used in the identification of \bjets.
 
+
+\begin{figure}[!tbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
+  \caption{
+    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey)~\cite{bjetdiagram}.
+    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
+    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
+  \label{fig:bjet_diagram}
+\end{figure}
+
+
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
-Additionally, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
+Since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
+The \bhadron also decays semileptonically in approximately \pct{23} of cases \cite{Workman:2022ynf}.
+The presence of a reconstructed electron or muon inside a jet can also be a key indicator that the jet was instantiated by a \bhadron.
 
-These signatures are primarily identified using tracks associated to jets.
+These signatures are primarily identified using tracks associated to jets, or using reconstructed electrons or muons, which also rely on tracks as discussed in \cref{sec:lepton_reco}.
 As such, efficient and accurate track reconstruction is essential for high performance flavour tagging.
 
 
@@ -84,58 +92,31 @@ As such, efficient and accurate track reconstruction is essential for high perfo
 
 \subsection{Challenges Facing \bhadron Reconstruction}\label{sec:b_track_reco_challenges}
 
+As discsused, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
+For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combination of effects.
+As the \bhadron energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay is unaffected.
+The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become outnumbered.
+Both fragmentation and \bhadron weak decay products also become increasingly collimated as their inherited transverse momentum increases.
+At high energies, the increased decay length of \bhadrons (and \chadrons) means that decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}).
+If the weak decay of the \bhadron takes place close enough to a detector layer, or if the particles are otherwise sufficiently collimated, charge deposits left by nearby particles may not be resolved individually, instead being reconstructed as merged clusters.
+
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high-pt-b-tracks.png}
+  \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high_pt_b_decay.pdf}
   \caption{
     At lower \pt (left) the decay length of the \bhadron is reduced, and the resulting decay tracks are less collimated.
     At higher \pt (right) the \bhadron decay length increases and the resulting decay tracks are more collimated and have less distance over which to diverge before reaching detector elements.
-    As a result, the ID may be unable to resolve charged depositions from different particles, instead reconstructing merged clusters.
+    As a result, the ID may be unable to resolve charged depositions from different particles, resulting merged clusters.
   }
   \label{fig:high_pt_b_decay}
 \end{figure}
 
-As discsused, a necessary requirement for successful jet \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
-For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combination of effects.
-As the jet energy increases, the multiplicity of tracks in the jet increases due to the presence of additional fragmentation particles.
-Fragmentation and weak decay products also become increasingly collimated as their inherited transverse momentum increases.
-Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
-
-At high energies, the increased decay length of \bhadrons (and \chadrons) means that decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}\todo{cant find source of this image, will have to preproduce}).
-If the weak decay takes place close enough to a detector layer, or if the particles are otherwise sufficiently collimated, charge deposits left by nearby particles may not be resolved individually, instead being reconstructed as merged clusters.
 As discussed in \cref{sec:track_reco}, merged clusters are generally rare, and so shared hits generally predict bad tracks and are correspondingly penalised during track reconstruction.
 However, in the core of high \pT \bjets the density of particles is high enough that the probability of cluster merging increases dramatically.
-Successful reconstruction of such tracks requires the presence of shared hits, but the presence of these can paradoxically end up impairing the successfully reconstruction of the track.
+Successful reconstruction of such tracks requires the presence of shared hits to be effectively dealt with but in the standard reconstruction the the presence of these can end up impairing the successfully reconstruction of the track.
 Furthermore, decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
 
-While the multiplicity of the fragmentation products increases with the \bhadron \pt, the  multiplicity of the products of the weak decay is unaffected.
-However, both fragmentation and weak decay products have increased collimation at higher \pT.
-The combination of effects described above makes reconstructing tracks in the core of high \pT \bjets particularly challenging.
-
-%
-\begin{figure}[!htbp]
-    \centering
-    \begin{subfigure}{.48\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/3.tracking/figs/overlay_po_nHitsOnIBL_From_B_pT.pdf}
-      %\caption{}
-      %\label{fig:n hits on ibl}
-    \end{subfigure}%
-    \begin{subfigure}{.48\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/3.tracking/figs/overlay_po_nHitsOnPix_From_B_pT.pdf}
-      %\caption{}
-      %\label{fig:n hits on pix}
-    \end{subfigure}
-    \caption{
-      Hit multiplicities on the IBL (left) and the pixel layers (right) as a function of the \pT of the reconstructed track.
-      Tracks from the weak decay of the \bhadron are shown in red, while fragmentation tracks (which are prompt) are in blue.
-      For each of these, standard tracks and pseudo-tracks are plotted.
-      Hit multiplicities on the pseudo-tracks at high \pt due to the increased flight of the \bhadron. 
-      The baseline tracks have more hits than the pseudo-tracks, indicating that they are being incorrectly assigned additional hits.}
-    \label{fig:total hits on pix bs, frag}
-\end{figure}
-%
+%Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
 
 
 
@@ -154,13 +135,20 @@ The combination of effects described above makes reconstructing tracks in the co
     \centering
     %\includegraphics[width=\textwidth]{res/figs/results/tracking/po_nHitsOnPix_From_B_DL.pdf}
     \vspace{0.05em}
-    \caption{The total number of pixel hits on tracks from \bhadron decays as a function of the production radius of the decay product. An excess of hits is assigned to the standard tracks in comparison to the ideal pseudo-tracks.}
+    \caption{The total number of pixel hits on tracks from \bhadron decays as a function of the production radius of the decay product. An excess of hits is assigned to the standard tracks in comparison to the ideal pseudotracks.}
     \label{fig:total hits on pix from b}
     \label{fig:misc}
 \end{figure}
 %
 \end{comment}
 
+
+The above effects create two related, but distinct problems for \btagging.
+The first part is a drop in track reconstruction efficiency.
+%As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
+%Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
+The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
+This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage and an overall descrease in the \bhadron decay track reconstruction efficiency as shown in \cref{fig:b_track_eff}.
 
 \begin{figure}[!htbp]
   \centering
@@ -174,24 +162,49 @@ The combination of effects described above makes reconstructing tracks in the co
   \label{fig:b_track_eff}
 \end{figure}
 
+%As a result, many B decay tracks are rejected in the ambiguity solving stage, leading to a severe drop in tracking reconstruction efficiency. This is shown by the severe decrease in reconstruction efficiency visible when comparing baseline tracking with the ideal pseudotracks in \cref{fig:reconstruction efficiency from B}. This situation presents a problem: relaxing cuts on shared hits significantly degrades the ambiguity solver's power to reject bad tracks. However for \bhadron decay tracks it seems these same restrictions on shared hits are seriously impairing the reconstruction efficiency of good tracks. 
 
-The above effects create two related, but distinct problems for \btagging.
-The first part is a drop in track reconstruction efficiency.
-As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
-Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
-The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
-This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage as shown in \cref{fig:b_track_eff}.
-
-%As a result, many B decay tracks are rejected in the ambiguity solving stage, leading to a severe drop in tracking reconstruction efficiency. This is shown by the severe decrease in reconstruction efficiency visible when comparing baseline tracking with the ideal pseudo-tracks in \cref{fig:reconstruction efficiency from B}. This situation presents a problem: relaxing cuts on shared hits significantly degrades the ambiguity solver's power to reject bad tracks. However for \bhadron decay tracks it seems these same restrictions on shared hits are seriously impairing the reconstruction efficiency of good tracks. 
-
-The second part of the problem is that, due to the high multiplicity of clusters available for assignment in the vicinity of the typical high energy \bhadron decay track, and also given the strong positive bias of the ambiguity solver towards those tracks with precise pixel measurements (especially the innermost IBL measurement), many \bhadron decay tracks are assigned incorrect inner layer hits.
-This is only a problem for those decay products which were produced inside the pixel detector as a result of a long-flying \bhadron, and so do not have a correct hit available for assignment.
+The second part of the problem is that, due to the high multiplicity of clusters available for assignment in the vicinity of the typical high energy \bhadron decay track, and also given the strong positive bias of the ambiguity solver towards those tracks with pixel measurements in each layer (especially the innermost IBL measurement), many \bhadron decay tracks are assigned incorrect inner layer hits.
+This is only a problem for those decay products which were produced within the pixel detector as a result of a significantly displaced \bhadron decay, and so do not have a correct hit available for assignment.
+\cref{fig:pseudo_pix_hits} shows the number of hits as a function of the reconstructed track \pt for fragmentation tracks and tracks form the weak decay of the \bhadron.
+The baseline tracks represent the standard reconstruction setup, while the pseudotracks represent the ideal tracking setup as outlined in \cref{sec:pseudotracks}.
 The incorrect hits may skew the parameters of the track, which can in turn mislead the downstream \btagging algorithms.
 In particular, \btagging algorithms rely heavily on the transverse impact parameter significance \dzerosig of the track.
-The quality of this measurement is expected to be adversely affected by wrong inner-layer hits on the track. 
+The quality of this measurement is expected to be adversely affected by wrong inner-layer hits on the track.
+Furthermore, multiple tracks sharing an incorrect hit can lead to the creation of spurious secondary vertices, which can cause further problems for the downstream \btagging algorithms.
 
-The combination of reduced reconstruction efficiency and incorrectly assigned hits is thought to be the cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
-\todo{include plot from sebs study showing they are approx similar impacts? or just mention result?}
+
+\begin{figure}[!htbp]
+  \centering
+  \begin{subfigure}{.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapters/3.tracking/figs/overlay_po_nHitsOnIBL_From_B_pT.pdf}
+    %\caption{}
+    %\label{fig:n hits on ibl}
+  \end{subfigure}%
+  \begin{subfigure}{.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{chapters/3.tracking/figs/overlay_po_nHitsOnPix_From_B_pT.pdf}
+    %\caption{}
+    %\label{fig:n hits on pix}
+  \end{subfigure}
+  \caption{
+    Hit multiplicities on the IBL (left) and the pixel layers (right) as a function of the \pT of the reconstructed track.
+    Tracks from the weak decay of the \bhadron are shown in red, while fragmentation tracks (which are prompt) are in blue.
+    Baseline tracks are those produced in the standard reconstruction described in \cref{sec:track_reco}, while pseudotracks represent the ideal performance of the ATLAS detector and are described in \cref{sec:pseudotracks}.
+    Hit multiplicities on the pseudotracks decrease at high \pt due to the flight of the \bhadron before its decay. 
+    The baseline tracks have more hits than the pseudotracks, indicating that they are being incorrectly assigned additional hits on the inner layers of the detector.
+  }
+  \label{fig:pseudo_pix_hits}
+\end{figure}
+
+The combination of the effects described makes reconstructing tracks in the core of high \pT \bjets particularly challenging.
+The reduced reconstruction efficiency of \bhadron decay tracks and incorrectly assigned hits is thought to be the primary cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
+\todo{include plot from sebs study showing they are approx similar impacts? or just mention result?
+Can do put need to remove ATLAS labels.
+Alternatively you can put an interal reference to his work
+and state what the outcome is
+}
 
 
 
@@ -202,27 +215,22 @@ The combination of reduced reconstruction efficiency and incorrectly assigned hi
 
 \section{Investigations into High \texorpdfstring{\pT}{pT} \bhadron Tracking}\label{sec:b_track_reco_improvements}
 
-In \cref{sec:pseudotracks} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the baseline hit-to-track association in the dense cores of \highpt \bjets.
+In \cref{sec:sharedhits} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the shared hit requirements on tracks in the dense cores of \highpt \bjets.
 \cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
 %Not detailed here is an investigation into the bcut + refit method. Shown not to be promising, as, even though an improvement in the \bhadron decay track efficiency was observed, the corresponding increase in the fake track was shown to be unacceptable.
 
 
-\subsection{Pseudo-tracking}\label{sec:pseudotracks}
+\subsection{Shared Hits}\label{sec:sharedhits}
 
-Pseudo-tracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
-Each group of hits which passes basic quality requirements is directly used in a full resolution track fit.
-If the track fit is successful, a ``pseudo-track'' track is created and stored.
-If the track fit fails, or the collection of hits does not pass the basic quality requirements (for example because of a lack of hits) then the particle is said to be un-reconstructable.
-In this way, pseudo-tracking performance represents the ideal reconstruction performance given the ATLAS detector, with perfect hit-to-track association and and track reconstruction efficiency.
-The approach was introduced in \cite{Jansky:2013ryb} as a way to obtain a fast approximation of tracking reconstruction for simulated data, however the technique has become a useful tool for studying tracking performance in general \cite{ATL-PHYS-PUB-2015-006}.
 
-The ambiguity solver is not run for pseudo-tracks.
-However, if the standard track collection is produced alongside the pseudo-tracks, then cluster splitting neural networks will be run for the standard tracks, and the resulting classification of clusters will be propagated to hits on pseudo-tracks.
+
+The ambiguity solver is not run for pseudotracks.
+However, if the standard track collection is produced alongside the pseudotracks, then cluster splitting neural networks will be run for the standard tracks, and the resulting classification of clusters will be propagated to hits on pseudotracks.
 This quirk allows one to study the inefficiencies of the cluster splitting process, and relatedly to determine whether shared hit cuts in the ambiguity solver are too loose or too tight.
 The fraction of hits that are shared for the IBL and the B-layer is shown in \cref{fig:shared_hits_pseudo}.
-The shared hits on pseudo-tracks represent correctly assigned hits from merged clusters that were not able to be classified as split by the cluster splitting neural networks.
-As such, these represent the number of shared hits the ambiguity solver should aim to allow.
-For shared hits on the IBL for particles produced before the IBL, the cuts appear to be successful in disallowing excessive numbers of shared hits.
+The shared hits on pseudotracks represent correctly assigned hits from merged clusters that were not able to be classified as split by the cluster splitting neural networks.
+As such, these represent the number of shared hits the ambiguity solver should aim to allow given the current performance of the cluster splitting algorithm.
+For shared hits on the IBL for particles produced before the IBL, the baseline selection appears to be successful in disallowing excessive numbers of shared hits.
 However, the ambiguity solver fails to limit shared hits for those particles produced after the IBL, reflecting the previously discussed problem of displaced tracks picking up incorrect hits.
 Meanwhile, it is clear that for the B-layer, the ambiguity solver is being overly aggressive in its rejection of shared hits.
 
@@ -241,8 +249,8 @@ Meanwhile, it is clear that for the B-layer, the ambiguity solver is being overl
       %\label{fig:shared_hits_pseudo on B}
     \end{subfigure}
     \caption{
-      The rate of shared hits on \bhadron decay tracks on the IBL (left), and the B-layer (right), as a function of the production radius of the \bhadron decay product. 
-      Pseudo-tracks represent ideal performance given the ATLAS detector, and given also the efficiency of the NN cluster splitting algorithms.
+      The fraction of hits which are shared on \bhadron decay tracks on the IBL (left), and the B-layer (right), as a function of the production radius of the \bhadron decay product. 
+      Pseudotracks represent the ideal performance given the ATLAS detector, see \cref{sec:pseudotracks}.
     }
     \label{fig:shared_hits_pseudo}
 \end{figure}
@@ -259,9 +267,9 @@ The performance of both the ROI, and the hit removal using track fit information
 
 \subsubsection{Region of Interest Optimisation}\label{sec:roi opt}
 
-Selection cuts for the $b$-jet ROI were determined on a largely ad-hoc basis. An effort was made to systematically optimise the selection cuts. The decay tracks of $B$ hadrons are tightly collimated with the $B$ itself, with most decay products satisfying $dR(B, \text{track}) < 0.02$, as shown in \cref{fig:B dR match sub1}. Meanwhile, calorimeter clusters relating to the $B$ hadrons are generally found within $dR < 0.05$ of the $B$ \cref{fig:B dR match sub2}. In total, then, $B$ decay tracks will usually be found within $dR<0.07$ of the relevant calorimeter cluster, which suggests that the current $dR<0.14$ is loose by a factor of two. Similar analysis of cluster and track energy distributions found that the related cuts were also loose, and so they were modified from $E_T > 150$ GeV to $E_T > 300$ GeV, and from $p_T > 15$ GeV to $p_T > 30$ GeV. 
+Selection cuts for the $b$-jet ROI were determined on a largely ad-hoc basis. An effort was made to systematically optimise the selection cuts. The decay tracks of \bhadrons are tightly collimated with the $B$ itself, with most decay products satisfying $dR(B, \text{track}) < 0.02$, as shown in \cref{fig:B dR match sub1}. Meanwhile, calorimeter clusters relating to the \bhadrons are generally found within $dR < 0.05$ of the $B$ \cref{fig:B dR match sub2}. In total, then, $B$ decay tracks will usually be found within $dR<0.07$ of the relevant calorimeter cluster, which suggests that the current $dR<0.14$ is loose by a factor of two. Similar analysis of cluster and track energy distributions found that the related cuts were also loose, and so they were modified from $E_T > 150$ GeV to $E_T > 300$ GeV, and from $p_T > 15$ GeV to $p_T > 30$ GeV. 
 
-Additionally examined in the course of this work was the fake rate of the $b$-jet ROI. The distributions in \cref{fig:cluster purity in pt} demonstrate that most of clusters passing the $E_T > 150$ GeV selection were unable to be matched to a nearby $B$ hadron using truth information. Clusters that pass the selection but do not correspond to energy depositions from $B$ hadrons lead to fake ROIs. As a consequence of these distributions, tracks selected by the ROI are largely impure in the desired $B$ hadron tracks.
+Additionally examined in the course of this work was the fake rate of the $b$-jet ROI. The distributions in \cref{fig:cluster purity in pt} demonstrate that most of clusters passing the $E_T > 150$ GeV selection were unable to be matched to a nearby \bhadron using truth information. Clusters that pass the selection but do not correspond to energy depositions from \bhadrons lead to fake ROIs. As a consequence of these distributions, tracks selected by the ROI are largely impure in the desired \bhadron tracks.
 
 The modified ROI was used to re-run the refit procedure. A comparison of of ``standard'' and ``optimised'' (using the optimised $b$-jet ROI) refit procedures is found in \cref{fig:refit optimisation results}. These results show that whilst tighter selection cuts did lead to a recovery of some good hits (\cref{fig:refit optimisation results sub1}), performance with respect to the baseline is still significantly degraded. 
 
@@ -280,7 +288,7 @@ The modified ROI was used to re-run the refit procedure. A comparison of of ``st
       \caption{}
       \label{fig:B dR match sub2}
     \end{subfigure}
-    \caption{Distributions of angular distance $dR$ between $B$ hadrons and their weak decays and other fragmentation tracks (\cref{fig:B dR match sub1}), and the distribution of angular distance $dR$ between $B$ hadrons and the calorimeter clusters in the hadronic calorimeter (\cref{fig:B dR match sub2}). In \cref{fig:B dR match sub1}, the tracks from the weak decay of the $B$ are significantly more collimated to the $B$ than the other fragmentation tracks.}
+    \caption{Distributions of angular distance $dR$ between \bhadrons and their weak decays and other fragmentation tracks (\cref{fig:B dR match sub1}), and the distribution of angular distance $dR$ between \bhadrons and the calorimeter clusters in the hadronic calorimeter (\cref{fig:B dR match sub2}). In \cref{fig:B dR match sub1}, the tracks from the weak decay of the $B$ are significantly more collimated to the $B$ than the other fragmentation tracks.}
     \label{fig:B dR match}
 \end{figure}
 %
@@ -304,13 +312,13 @@ It is clear from the distributions in \cref{fig:refit chi2 dists} that the fit q
       \caption{}
       \label{fig:refit chi2 dists}
     \end{subfigure}
-    \caption{The distribution of cluster transverse momentum, in \cref{fig:cluster purity in pt} for both clusters that were able (orange) and unable (blue) to be matched to a $B$ hadron using MC truth information. The normalisation shows that the majority of clusters are not matched to $B$ hadrons, resulting in fake ROIs. In \cref{fig:refit chi2 dists}, the fractional improvement in track fit quality ($\chi^2/n$) is shown for all track (blue), tracks with good IBL hits (green), and tracks with wrong IBL hits (orange). The distributions are overlapping, suggesting that the $\chi^2/n$ improvement is not a good discriminator of good and wrong hits.}
+    \caption{The distribution of cluster transverse momentum, in \cref{fig:cluster purity in pt} for both clusters that were able (orange) and unable (blue) to be matched to a \bhadron using MC truth information. The normalisation shows that the majority of clusters are not matched to \bhadrons, resulting in fake ROIs. In \cref{fig:refit chi2 dists}, the fractional improvement in track fit quality ($\chi^2/n$) is shown for all track (blue), tracks with good IBL hits (green), and tracks with wrong IBL hits (orange). The distributions are overlapping, suggesting that the $\chi^2/n$ improvement is not a good discriminator of good and wrong hits.}
     \label{fig:cluster chi2 info}
 \end{figure}
 %
 
 \subsubsection{Conclusion}
-The work outlined in the two preceding sections has uncovered issues with both the $b$-jet ROI, and the methodology of identification and removal of wrong hits on tracks inside a given ROI. Attempts were made to optimise the selection cuts of the ROI, however the large background of energetic phenomena produced in collisions that are not $B$ hadron related means that the ROI is largely unsuccessful in selecting a pure sample of likely $B$ hadron candidates. An additional effort was made to improve the removal of wrong hits using other information in addition to the track fit improvement. Information such as the type and locations of its, and track $d_0$ were considered. While progress here was not insignificant, without substantial overhaul of the ROI to improve $B$ purity, the results were not strong enough to demonstrate any viable solutions that would successful target and then improve $B$ hadron decay tracks.
+The work outlined in the two preceding sections has uncovered issues with both the $b$-jet ROI, and the methodology of identification and removal of wrong hits on tracks inside a given ROI. Attempts were made to optimise the selection cuts of the ROI, however the large background of energetic phenomena produced in collisions that are not \bhadron related means that the ROI is largely unsuccessful in selecting a pure sample of likely \bhadron candidates. An additional effort was made to improve the removal of wrong hits using other information in addition to the track fit improvement. Information such as the type and locations of its, and track $d_0$ were considered. While progress here was not insignificant, without substantial overhaul of the ROI to improve $B$ purity, the results were not strong enough to demonstrate any viable solutions that would successful target and then improve \bhadron decay tracks.
 %
 \begin{figure}[!htbp]
     \centering
@@ -336,25 +344,44 @@ Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to i
 
 
 \subsection{Global \texorpdfstring{$\chi^2$}{chi2} Fitter Outlier Removal}\label{sec:gx2f_opt}
-\todo{discuss whether to keep this section}
-This section documents ongoing progress into improving hit assignments using the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in  cref sec:refit, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed. The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years. During this time, a new tracking sub-detector, the IBL, was installed, and subsequently precise detector alignments have been derived. The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures. Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
-This section documents an attempt to improve hit assignment the Global $\chi^2$ Fitter (GX2F) to prevent wrong hits from being assigned to tracks during the track fit. This is in contrast to the approach discussed in cref{sec:refit}, which attempts to identify and remove wrong hits after the reconstruction of the track (of which the track fit is a part). As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed. The motivation for this approach comes from the low rate of labelled outliers in baseline tracking. For example, while approximately 15\% of $B$ hadron decay tracks have a wrong IBL hit (a value which only increases with the \pt of the $B$), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
+
+This section documents ongoing progress into improvement of hit-to-track assignment by using the Global $\chi^2$ Fitter (GX2F) to identify and prevent incorrect hits from being assigned to tracks during the track fit.
+This is in contrast to a previously investigated approach \cite{AdorniBraccesiChiassi:2021irw} which attempted to identify and remove wrong hits after the reconstruction of the track.
+As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed.
+
+The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years, and was originally only optimised in the context of prompt, isolated tracks.
+During this time, a new tracking sub-detector, the IBL, was installed.
+The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures.
+Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking.
+For example, while approximately 15\% of \bhadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the \bhadron), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
+
 
 \subsubsection{Implementation}
-The outlier removal procedure for the pixel detector is described in this section. The states (also called measurements, or hits) on the track are looped over in order of increasing radial distance to the beam pipe. For each state, errors $\sigma(m_i)$ on the measurement of the transverse and longitudinal coordinates are calculated. These errors are dependent on the sub-detector which recorded the measurement (as some sub-detectors are more precise than others). Additionally, a residual displacement $r_i = m_i - x_i$ between the predicted position of the track $x_i$ (inclusive of the current measurement), and the position of the measurement itself, $m_i$, is calculated. The pull $p_i$ on the track state due to the current measurement is calculated according to
+The outlier removal procedure for the pixel detector is described in this section. The hits on the track are looped over in order of increasing radial distance to the beam pipe. For each hit, errors $\sigma(m_i)$ on the measurement of the transverse and longitudinal coordinates are calculated. These errors are dependent on the sub-detector which recorded the measurement (some sub-detectors are more precise than others). Additionally, a residual displacement $r_i = m_i - x_i$ between the predicted position of the track $x_i$ (inclusive of the current measurement), and the position of the hit itself, $m_i$, is calculated. The pull $p_i$ on the track state due to the current measurement is calculated according to
 %
 \begin{equation}
     p_i = \frac{m_i - x_i}{\sqrt{\sigma(m_i)^2 - \sigma(x_i)^2}}
 \end{equation}
 %
-This pull is computed for the transverse and longitudinal coordinates of the measurement, and the maximum of the two is selected and checked to see if it exceeds a certain threshold. If it does, the hit will be removed, after some additional checks are made to confirm or deny the presence of the outlier. The threshold is set as a member variable \texttt{m\_outlcut}. The results of varying this cut are described in \cref{sec:cut opt}.
+This pull is computed for the transverse and longitudinal coordinates of the measurement, and the maximum of the two is selected and checked to see if it exceeds a certain selection threshold. If it does, the hit will be removed if the track also exceeds a threshold on the total $\chi^2/n$.
+The results of varying the outlier selection and $\chi^2/n$ thresholds are described below.
 
 
-\subsubsection{Cut Optimisation}\label{sec:cut opt}
-A systematic variation of the cut point \texttt{m\_outlcut} has been carried out. The value of \texttt{m\_outlcut} was reduced from 4 down to 1.75, a change which affects a silicon layers (the TRT has separate outlier removal logic). Furthermore, a specific cut for the IBL was introduced, and is set to 1.25. A second cut, \texttt{TrackChi2PerNDFCut}, is also used in the outlier removal. This value was reduced from 7 to 4. Finally, instead of taking the maximum of the pulls in the longitudinal and transverse directions, a quadrature sum is taken of these two values and used. This variation is labelled ``Mod GX2F'' in plots.
+\subsubsection{Cut Optimisation}
 
-The results, demonstrating a reduction in wrong hit assignment whist also improving slightly the good good hits assigned to tracks, are shown in \cref{fig:gx2f_opt_hits}. The improvements are also observed when looking inclusively in all tracks, which removes the need for a specific $b$-jet ROI.
-%
+A systematic variation of the outlier selection and $\chi^2/n$ thresholds has been carried out.
+Both thresholds were reduced in fixed step sizes of 0.25 for the outlier selection threshold and 1 for the $\chi^2/n$ threshold.
+The results for the best performing selections are discussed below.
+The value of the outlier selection threshold was reduced from 4 down to 1.75, a change which affects a silicon layers (the TRT has separate outlier removal logic).
+Furthermore, a specific cut for the IBL was introduced, and is set to 1.25.
+The second threshold on the track $\chi^2/n$ was also reduced from 7 to 4.
+Finally, instead of taking the maximum of the pulls in the longitudinal and transverse directions, a quadrature sum is taken of these two values and used.
+This variation is labelled ``Mod GX2F'' in plots.
+
+The results are shown in \cref{fig:gx2f_opt_hits} and demonstrate a reduction in wrong hit assignment whist also improving slightly the rate at which good hits are assigned to tracks.
+For a \SI{1}{\TeV} track, the rate to assignment good hits to the track increases by approximately \pct{10}, while the rate to assign incorrect hits decreases by approximately \pct{16}.
+The improvements are also observed when looking inclusively in all tracks, which avoids the need for a specific \bjet region-of-interest selection.
+
 \begin{figure}[!htbp]
     \centering
     \begin{subfigure}{.48\textwidth}
@@ -365,11 +392,16 @@ The results, demonstrating a reduction in wrong hit assignment whist also improv
       \centering
       \includegraphics[width=\textwidth]{chapters/3.tracking/figs/p_nWrongHitsIBL_pTB_From_B.pdf}
     \end{subfigure}
-    \caption{Profiles, as a function of parent \bhadron \pt, of good (left) and wrong (right) hit assignment rates on the IBL for tracks using baseline tracking (black), the modified version of the outlier removal procedure (red).}
+    \caption{
+      The rate to assign good (left) and wrong (right) IBL hits as a function of \bhadron \pt for tracks using baseline tracking (black) and the modified version of the outlier removal procedure (red).
+      For each track, the corresponding \pt bin is filled with the number of good or wrong hits and this value is averaged to show the overall rate.
+    }
     \label{fig:gx2f_opt_hits}
 \end{figure}
-%
-An improvement, though modest, of all track parameter resolutions and pulls is observed. Some results are shown in \cref{fig:gx2f_opt_hits,fig:gx2f_opt_pulls}, whilst the remainder of the plots can be found in the talks linked on the task's Jira page. The results demonstrate an improvement in hit assignment, unchanged reconstruction efficiency, and modest improvement in track parameter resolutions and pulls. In addition, the truth match probability of track is unchanged, suggesting that there is no increase in fake track rates. The changes are expected to have a negligible impact on computational resources.
+
+An improvement, though modest, of all track parameter resolutions and pulls is observed.
+The improvement for the transverse impact parameter pull is shown in \cref{fig:gx2f_opt_pulls}.
+The results demonstrate an improvement in hit assignment, unchanged reconstruction efficiency, and modest improvement in track parameter resolutions and pulls. In addition, the truth match probability of track is unchanged, suggesting that there is no increase in fake track rates. The changes are expected to have a negligible impact on computational resources.
 
 \begin{figure}[!htbp]
     \centering
@@ -385,7 +417,7 @@ An improvement, though modest, of all track parameter resolutions and pulls is o
       %\caption{}
       %\label{fig:z0 pull}
     \end{subfigure}
-    \caption{(left) B hadron decay track $d_0$ pulls for baseline and modified GX2F tracks. (right) The magnitude of the decay track $d_0$ pull as a function of B hadron transverse momentum.}
+    \caption{(left) \bhadron decay track \dzero pulls (\dzero/\dzerosig) for baseline and modified GX2F tracks. (right) The absolute value of the \dzero pull as a function of \bhadron transverse momentum.}
     \label{fig:gx2f_opt_pulls}
 \end{figure}
 
@@ -395,11 +427,12 @@ An improvement, though modest, of all track parameter resolutions and pulls is o
 \section{Conclusion}
 
 In this section, the difficulties facing efficient and accurate  track reconstruction, and hence performant \btagging, have been outlined.
-The ambiguity solver, which attempts to clean or reject tracks which have excessive number shared hits, is shown to be overly aggressive in the removal of \bhadron decay product track candidates.
-The ambiguity solving process relies on many pre-defined cuts which have not been optimised for high transverse momentum \bhadron track reconstruction.
+The ambiguity solver, which attempts to clean or reject tracks which have an excessive number of shared hits, is shown to be overly aggressive in the removal of \bhadron decay product track candidates.
+The ambiguity solving process relies on a complicated pre-defined selection which has not been optimised for high transverse momentum \bhadron track reconstruction.
 These conclusions have motivated further ongoing studies into the improvement of the track reconstruction in dense environments and the \highpt regime, such as those in \rcite{2022DonalTrackReco}.
 
-An optimisation of the outlier removal process in the global $\chi^2$ fitter was also carried out.
+An optimisation of the outlier removal process in the global $\chi^2$ fitter was carried out.
 Though the results show some improvement over the baseline tracking scenario, these results need to be expanded upon by looking at the impact on the downstream \btagging algorithms before putting them into production.
-As there are some known data-MC discrepancies, fine tuned optimisation such as the work presented here presents an opportunity to over-optimise the tracking algorithms to MC.
+As there are some known data-MC discrepancies, fine tuned optimisation such as the work presented here presents an opportunity to over-optimise the tracking algorithms on MC.
 The studies were carried out in \rtwoone of the \ATLAS software, and need to be reproduced using the newer \rtwotwo to confirm the results against other changes in the baseline tracking configuration.
+Thanks to the all-in-one flavour tagging approach described in \cref{chap:gnn_tagger}, it will also be easier in future to verify that the improvements to the track reconstruction have a positive impact on the flavour tagging performance.
