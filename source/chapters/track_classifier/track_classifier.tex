@@ -237,7 +237,8 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
     \centering
     \includegraphics[width=0.7\textwidth]{chapters/track_classifier/figs/sv1_perf_nofake.pdf}
     \caption{
-      The \ljet efficiency of the low level tagger SV1 as a function of \bjet efficiency for the nominal tracking setup (black) and for the case where fake tracks which are not from the decay of a \bhadron are removed.
+      The \ljet efficiency of the low level tagger SV1 for \Zprimejets with \Zprimept, as a function of \bjet efficiency.
+      The nominal tracking setup (black) is shown alongside the case where fake tracks which are not from the decay of a \bhadron are removed.
       The \ljet efficiency is decreased, demonstrating that the presence of fake tracks is detrimental to the algorithm performance.
     }
     \label{fig:sv1_perf_nofake}
@@ -479,7 +480,7 @@ A 2-dimensional cut was then used to only reject those tracks that had a high pr
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \begin{tabular}{lp{3cm}p{3cm}p{3cm}p{3cm}}
+  \begin{tabular}{lp{2cm}p{2cm}p{4cm}p{4cm}}
       \toprule\hline
       \textbf{WP} & \textbf{Fake MVA Cut} & \textbf{\bhadron Decay MVA Cut} & \textbf{Retained \bhadron Tracks} & \textbf{Fake \& Non \bhadron Tracks Rejected} \\
       \hline
@@ -499,9 +500,9 @@ A 2-dimensional cut was then used to only reject those tracks that had a high pr
 The \ljet efficiency of SV1 is successfully reduced when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_mva_sv1}.
 At a \beff of \pct{70}, the \ljet mistag rate for jets with $250 < \pt < \SI{400}{\GeV}$ is reduced from $0.054$ to $0.044$, a relative improvement of approximately \pct{20}.
 For jets with $400 < \pt < \SI{1000}{\GeV}$ the mistage rate drops from 0.1 to 0.08 for a similar relative improvement of \pct{20}.
-The performance of the track classification tools is also shown for JetFitter in \cref{fig:track_mva_jf}.
-The results are generally consistent with those from SV1, with up to a \pct{20} improvement in the \lrej for a given \beff WP in the two jet \pt bins.
-
+The performance of the fake track removal approach was also tested for the other low level vertexing algorithm: JetFitter.
+A similar level of improvement in the \ljet mistag rate was observed of up to a \pct{20} reduction for both low- and \highpt \Zprimejets.
+Together, these results demonstrate that by identifying and removing fake tracks which are not the result of the weak decay of a \bhadron, the performance of the low level tagging algorithms can be improved.
 
 
 \begin{figure}[!htbp]
@@ -516,31 +517,31 @@ The results are generally consistent with those from SV1, with up to a \pct{20} 
       \includegraphics[width=\textwidth]{chapters/track_classifier/figs/sv1_mva_hipt.pdf}
   \end{subfigure}
   \caption{
-    The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of SV1 for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
+    The effect of applying the fake track identification algorithm together with the \bhadron decay track identification on the jet tagging performance of SV1 for \Zprimejets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
     The nominal SV1 \lrej (black) is compared to two working points of fake track removal, labelled ``A'' (red) and ``B'' (orange), which represent two different 2D working points of the track classification tools.
     Removal of fake tracks based on truth information is shown by the green curves.
   }
   \label{fig:track_mva_sv1}
 \end{figure}
 
-\begin{figure}[!htbp]
-  \centering
-  \begin{subfigure}[b]{0.48\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_lowpt.pdf}
-  \end{subfigure}
-  \quad
-  \begin{subfigure}[b]{0.48\textwidth}
-      \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_highpt.pdf}
-  \end{subfigure}
-  \caption{
-    The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of JetFitter for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
-    The nominal JetFitter \lrej (black) is compared to two working points of fake track removal, labelled ``A'' (red) and ``B'' (orange).
-    Removal of fake tracks based on truth information is shown by the green curves.
-  }
-  \label{fig:track_mva_jf}
-\end{figure}
+%\begin{figure}[!htbp]
+%  \centering
+%  \begin{subfigure}[b]{0.48\textwidth}
+%      \centering
+%      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_lowpt.pdf}
+%  \end{subfigure}
+%  \quad
+%  \begin{subfigure}[b]{0.48\textwidth}
+%      \centering
+%      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_highpt.pdf}
+%  \end{subfigure}
+%  \caption{
+    %The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of JetFitter for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
+%    The nominal JetFitter \lrej (black) is compared to two working points of fake track removal, labelled ``A'' (red) and ``B'' (orange).
+%    Removal of fake tracks based on truth information is shown by the green curves.
+%  }
+%  \label{fig:track_mva_jf}
+%\end{figure}
 
 
 
@@ -548,7 +549,7 @@ The results are generally consistent with those from SV1, with up to a \pct{20} 
 
 Fake tracks, which are prevalent in the core of high \pt jets, have an adverse impact on \btagging performance.
 A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being input to the \btagging algorithms.
-It was found that \bhadron decay tracks can also be poorly reconstructed and thus marked as fake, it was necessary also to train a second algorithm to detect \bhadron decay tracks so that the removal of these tracks could be avoided.
+Since it was found that \bhadron decay tracks can also be poorly reconstructed and thus marked as fake, it was deemed necessary also to train a second algorithm to detect \bhadron decay tracks so that the removal of these tracks could be avoided.
 Removing fake and non-$b$ decay tracks in this way was found to improve the \ljet mistagging rate of SV1 and JetFitter by up to \pct{20} at high transverse momentum.
 The improved achieved using the classification tools was in general comparable with the improvement achieved when using the truth information to remove the fake tracks not from the decay of a \bhadron.
 
