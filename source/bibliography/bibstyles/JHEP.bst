@@ -253,6 +253,18 @@ FUNCTION {format.myurl}
   if$
 }
 
+FUNCTION {format.addurl}
+{
+  url empty$
+  {howpublished }
+  %{"\href{" url *"}{" * howpublished * "}" * }
+  %{"\url{" url * "}{" * url * "}" *}
+  {"\href{" url *
+   "}{" * howpublished * "}" * }
+
+  if$
+}
+
 
 INTEGERS { nameptr namesleft numnames }
 
@@ -821,13 +833,22 @@ FUNCTION {booklet}
   %  }
   %if$
   %format.myurl * "{" howpublished * "}" output
-  howpublished output
-  address output
+  %howpublished output
+  %format.myurl output
+  %blank.sep
+  
+  howpublished empty$
+    {""}
+    {format.addurl output}
+  if$
   blank.sep
   format.date.paren.nomonth output
+  address output
+
   new.block
   % note output
   doi output
+
   fin.entry
 }
 
