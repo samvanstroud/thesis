@@ -834,20 +834,22 @@ This value is calculated as
 where $N^{\textnormal{Pix}}_{\textnormal{shared}}$ is the number of shared pixel hits and $N^{\textnormal{SCT}}_{\textnormal{shared}}$ is the number of shared SCT modules on a track.
 The nominal cut used elsewhere in this thesis is $N^{\textnormal{Si}}_{\textnormal{shared}} < 2$.
 As the rate of shared hits is significantly higher for \bhadron decay tracks than for other tracks, especially at \highpt, this cut rejects a significant proportion of these tracks.
+
 \cref{fig:ttbar_gn1_loose,fig:zprime_gn1_loose} show the result of training the \GNN tagger with the full relaxation of this cut, i.e. allowing tracks with any number of shared hits.
 The shared hit requirements applied by the ambiguity solver as part of track reconstruction (see \cref{sec:track_reco}) are still applied.
 In addition, the maximum allowed value of \dzero is increased from \SI{3.5}{\milli\meter} to \SI{5.0}{\milli\meter}.
 The results show that optimisation of the input track selection can lead to significant improvements in performance over the default selection.
-It is also possible that additional studies on further loosening the selection could yield further improved results.
-The maximum number of tracks provided as input to the model could also be increased from the default value of 40.
-In order to change the default tracking setup, studies investigating the modelling uncertainties of the additional tracks need to be carried out.
+For the \ttbarjets shown in \cref{fig:ttbar_gn1_loose}, the effect of loosening the track selection is limited.
+This is expected due to the lower prevalence of shared hits at highly displaced tracks at lower transverse momenta.
+However for \Zprimejets as shown in \cref{fig:zprime_gn1_loose}, the \lrej improves with respect to the baseline \GNN model by \pct{30}, while the \lrej improves by \pct{70} at the \WP{50}{b}.
+
 
 \begin{figure}[!p]
     \centering
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_ttbar.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbar jets with \ttbarpt, for the looser track selection trainings of \GNN.
-        The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
+        The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
         A value of $\fc = 0.018$ is used in the calculation of \Db for DL1d and $\fc = 0.05$ is used for \GNN.
         Binomial error bands are denoted by the shaded regions.
     }
@@ -859,23 +861,72 @@ In order to change the default tracking setup, studies investigating the modelli
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_zprime.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprime jets with \Zprimept, for the looser track selection trainings of \GNN.
-        The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
+        The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
         A value of $\fc = 0.018$ is used in the calculation of \Db for DL1d and $\fc = 0.05$ is used for \GNN.
         Binomial error bands are denoted by the shaded regions.
     }
     \label{fig:zprime_gn1_loose}
 \end{figure}
 
+Although the results demonstrate a significant performance improvement at \highpt, it is also possible that additional studies on further loosening the selection could yield further improved results.
+For example the selections on the number of number of holes and the longitudinal impact parameter could be further relaxed.
+The maximum number of tracks provided as input to the model could also be increased from the default value of 40.
+In order to change the default tracking setup, studies investigating the modelling uncertainties of the additional tracks need to be carried out.
 
-\section{Implementations of \GNN}\label{sec:gnn_trig_upgrade}
 
-The model also demonstrates strong performance for the HL-LHC \cite{ATL-PHYS-PUB-2022-047}.
 
-\todo{do}
-\begin{itemize}
-    \item trigger plot
-    \item upgrade plot
-\end{itemize}
+\section{Other Implementations of \GNN}\label{sec:gnn_trig_upgrade}
+
+The implementation of \GNN described in this chapter has been re-used in several other contexts, demonstrating its flexibility to easily provide good jet flavour tagging performance with minimal overhead.
+The model has been implemented as a \bjet tagger in the High Level Trigger (HLT) (see \cref{sec:trigger}).
+The inputs to the model are the running on precision tracks and jet level quantities reconstructed after primary vertexing.
+\cref{fig:gn1_trigger} shows the performance of \GNN versus a comparable DL1d model \cite{ATLAS:2022qxm}, and two versions of DIPS \cite{ATL-PHYS-PUB-2020-014}, with EMTopo and PFlow jets (see \cref{sec:jet_reco}) based on a low-precision region-of-interest based tracking pass.
+The trigger implementation of \GNN improves upon the \lrej of DL1d by \pct{50} at the \WP{60}{b} for \ttbarjets with \ttbarpt.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{chapters/gnn_tagger/figs/gn1_trigger.pdf}
+    \caption{
+        The \lrej as a function of the \beff \ttbarjets with \ttbarpt for events with a centre of mass energy \come{13.6} \cite{gn1-trigger}.
+        The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
+        Binomial error bands are denoted by the shaded regions.
+        The purple vertical dashed lines represent the most common working points used for b-tagging.
+    }
+    \label{fig:gn1_trigger}
+\end{figure}
+
+
+The model also demonstrates strong performance for the High Luminosity \LHC (HL-LHC), as documented in \rcite{ATL-PHYS-PUB-2022-047}.
+\cref{fig:gn1_hllhc_ttbar,fig:gn1_hllhc_zprime} are reproduced from \rcite{ATL-PHYS-PUB-2022-047}.
+The results show that \GNN outperforms other existing flavour tagging algorithms when trained on an entirely different detector geometry.
+When compared with DL1d \cite{ATLAS:2022qxm}, \GNN improves on the \crej (\lrej) by a factor of $\sim 2$ ($\sim 2.5$) for \ttbarjets at the \WP{60}{b}.
+Significant improvements in rejections are also observed for \Zprimejets.
+
+\begin{figure}[!p]
+    \centering
+    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_hl_ttbar.pdf}
+    \caption{
+        The \crej (left) and \lrej (right) as a function of the \beff for \ttbarjets with \ttbarpt for events with a centre of mass energy \come{14} \cite{ATL-PHYS-PUB-2022-047}.
+        The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
+        Binomial error bands are denoted by the shaded regions.
+        The purple vertical dashed lines represent the most common working points used for b-tagging.
+    }
+    \label{fig:gn1_hllhc_ttbar}
+\end{figure}
+
+\begin{figure}[!p]
+    \centering
+    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_hl_zprime.pdf}
+    \caption{
+        The \crej (left) and \lrej (right) as a function of the \beff for \Zprimejets with \Zprimept for events with a centre of mass energy \come{14} \cite{ATL-PHYS-PUB-2022-047}.
+        The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
+        Binomial error bands are denoted by the shaded regions.
+    }
+    \label{fig:gn1_hllhc_zprime}
+\end{figure}
+
+
+
 
 %Plus trigger. There is a public trigger and the PUB Note for the upgrade studies
 %I would briefly discuss both and include the references. 
@@ -904,13 +955,9 @@ Further improvements in the $b$- and \ctagging performance are likely possible w
 The addition of other auxiliary training objectives, such as the truth \bhadron decay radius and transverse momentum, may also yield additional performance gains on top of the gains achieved by loosening the input track selection (demonstrated in \cref{sec:looser_track_selection}).
 
 Additional future work includes the verification of the performance of \GNN on collision data, and the full calibration of the model so it can be used by analyses.
-The flexible nature of the model means it can also be readily applied to other related problems outside of standard $b$- and \ctagging applications, for example $X \rightarrow bb$ and $X \rightarrow cc$ tagging.
+The flexible nature of the model means it can also be readily applied to other related problems outside of standard $b$- and \ctagging applications, as demonstrated in \cref{sec:gnn_trig_upgrade}.
+Additional applications for the architecture include $X \rightarrow bb$ and $X \rightarrow cc$ tagging.
 The model could also be repurposed as a pileup jet tagger, or general primary and secondary vertexing tool.
-
-And flavour tagging in the trigger and for the High Luminosity LHC as described in \cref{sec:gnn_trig_upgrade}.
-
-
-
 
 %\GNN outperforms the existing ATLAS flavour tagging algorithms as shown in \cref{sec:gnn_btag_perf,sec:gnn_ctag_perf}.
 %For a \bjet efficiency of \pct{70}, the light ($c$)-jet rejection is improved by a factor of \ttbllo (\ttbclo) for jets coming from \ttbar decays with transverse momentum \ttbarpt.
