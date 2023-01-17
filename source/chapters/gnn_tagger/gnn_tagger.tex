@@ -637,6 +637,16 @@ In the same range, the efficiency of SV1 increases from \pct{60} to \pct{75}.
 \GNN displays less dependence on \pt than JetFitter and SV1, efficiently finding upwards of \pct{80} of vertices in \bjets in this \pt region. 
 For \bjets with $\pt > \SI{100}{\GeV}$, JetFitter finds approximately \pct{65} of vertices, SV1 finds approimately \pct{75} of vertices, and \GNN finds approximately \pct{80} of vertices.
 
+\cref{fig:zprime_vert_eff} compares the exclusive vertex finding efficiencies of JetFitter and \GNN for multitrack vertices.
+For \Zprimebjets, the vertex finding efficiency drops steeply with increasing \pt up until $\pt = \SI{3}{\TeV}$.
+\GNN outperforms SV1 and JetFitter across the \pt spectrum.
+In the first bin, the efficiency of \GNN is $75\%$, while the efficiencies of SV1 and JetFitter are around $60\%$.
+The efficiency of SV1 drops rapidly to almost zero above \SI{3}{\TeV}, while JetFitter and \GNN retain approximately \pct{25} and \pct{30} efficiency respectively.
+JetFitter finds $45\text{\nobreakdash-}50\%$ of vertices in \ttbarbjets, while \GNN finds $60\text{\nobreakdash-}65\%$.
+For \Zprimebjets, JetFitter finds $35\%$ of vertices in the first bin, dropping to $20\%$ of vertices above \SI{2}{\TeV}.
+\GNN finds $55\%$ of vertices in the first bin, dropping to $30\%$ above \SI{2}{\TeV}.
+
+
 \begin{figure}[!htbp]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -653,21 +663,13 @@ For \bjets with $\pt > \SI{100}{\GeV}$, JetFitter finds approximately \pct{65} o
         %\label{fig:sub}
     \end{subfigure}
     \caption{
-        Vertex finding efficiency as a function of jet \pt for \ttbarbjets using the exclusive (left) and inclusive (right) vertex finding approaches.
+        Heavy flavour vertex finding efficiency as a function of jet \pt for \ttbarbjets using the exclusive (left) and inclusive (right) vertex finding approaches.
         The exclusive vertexing approach includes single track vertices while the inclusive approach requires vertices to contain at least two tracks.
         Efficient vertex finding requires the recall of at least $65\%$ of the tracks in the truth vertex, and allows no more than $50\%$ of the tacks to be included incorrectly.
-        Binomial error bands are denoted by the shaded regions.}
+        Binomial error bands are denoted by the shaded regions.
+        }
     \label{fig:ttbar_vert_eff}
 \end{figure}
-
-\cref{fig:zprime_vert_eff} compares the exclusive vertex finding efficiencies of JetFitter and \GNN for multitrack vertices.
-For \Zprimebjets, the vertex finding efficiency drops steeply with increasing \pt up until $\pt = \SI{3}{\TeV}$.
-\GNN outperforms SV1 and JetFitter across the \pt spectrum.
-In the first bin, the efficiency of \GNN is $75\%$, while the efficiencies of SV1 and JetFitter are around $60\%$.
-The efficiency of SV1 drops rapidly to almost zero above \SI{3}{\TeV}, while JetFitter and \GNN retain approximately \pct{25} and \pct{30} efficiency respectively.
-JetFitter finds $45\text{\nobreakdash-}50\%$ of vertices in \ttbarbjets, while \GNN finds $60\text{\nobreakdash-}65\%$.
-For \Zprimebjets, JetFitter finds $35\%$ of vertices in the first bin, dropping to $20\%$ of vertices above \SI{2}{\TeV}.
-\GNN finds $55\%$ of vertices in the first bin, dropping to $30\%$ above \SI{2}{\TeV}.
 
 \begin{figure}[!htbp]
     \centering
@@ -685,12 +687,77 @@ For \Zprimebjets, JetFitter finds $35\%$ of vertices in the first bin, dropping 
         %\label{fig:sub}
     \end{subfigure}
     \caption{
-        Inclusive vertex finding efficiency for multitrack truth vertices in \ttbarbjets (left) and \Zprimejets (right) as a function of jet \pt.
+        Heavy flavour vertex finding efficiency as a function of jet \pt for \Zprimebjets using the exclusive (left) and inclusive (right) vertex finding approaches.
         The exclusive vertexing approach includes single track vertices while the inclusive approach requires vertices to contain at least two tracks.
         Efficient vertex finding requires the recall of at least $65\%$ of the tracks in the truth vertex, and allows no more than $50\%$ of the tacks to be included incorrectly.
+        Binomial error bands are denoted by the shaded regions.
         }
     \label{fig:zprime_vert_eff}
 \end{figure}
+
+
+
+While \cref{fig:ttbar_vert_eff,fig:zprime_vert_eff} indicate that \GNN is able to successfully find displaced heavy flavour vertices in \bjets, it is also important to consider the vertexing performance inside \ljets.
+\ljets may also contain displaced vertices due to long lived secondary particles and material interactions.
+These tracks have a truth origin of OtherSecondary in the truth labelling scheme enumerated in see \cref{tab:truth_origins}.
+The efficiency to reconstruct vertices comprised of OtherSecondary tracks can be computed in an analogous way to the heavy flavour vertexing efficiency, which is described above.
+\cref{fig:ttbar_vert_leff,fig:zprime_vert_leff} show the efficiency to reconstruct displaced OtherSecondary vertices in \ljets as a function of \pt for \ttbarjets and \Zprimejets respectively.
+The figures demonstrate that \GNN is able to more effectively find such vertices in \ljets as compared with SV1 and JetFitter.
+Since the properties of the displaced vertices in \ljets are likely to be significantly different to heavy flavour vertices found in heavy flavour jets, the improved reconstruction of such vertices may help to differentiate between different flavour of jet.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_1+_track_excl.pdf}
+        %\caption{sub}
+        %\label{fig:sub}
+    \end{subfigure}
+    \quad
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_2+_track_incl.pdf}
+        %\caption{sub}
+        %\label{fig:sub}
+    \end{subfigure}
+    \caption{
+        Vertex finding efficiency as a function of jet \pt for \ttbarljets using the exclusive (left) and inclusive (right) vertex finding approaches.
+        The exclusive vertexing approach includes single track vertices while the inclusive approach requires vertices to contain at least two tracks.
+        Efficient vertex finding requires the recall of at least $65\%$ of the tracks in the truth vertex, and allows no more than $50\%$ of the tacks to be included incorrectly.
+        Binomial error bands are denoted by the shaded regions.
+    }
+    \label{fig:ttbar_vert_leff}
+\end{figure}
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_1+_track_excl.pdf}
+        %\caption{sub}
+        %\label{fig:sub}
+    \end{subfigure}
+    \quad
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_2+_track_incl.pdf}
+        %\caption{sub}
+        %\label{fig:sub}
+    \end{subfigure}
+    \caption{
+        Vertex finding efficiency as a function of jet \pt for \Zprimeljets using the exclusive (left) and inclusive (right) vertex finding approaches.
+        The exclusive vertexing approach includes single track vertices while the inclusive approach requires vertices to contain at least two tracks.
+        Efficient vertex finding requires the recall of at least $65\%$ of the tracks in the truth vertex, and allows no more than $50\%$ of the tacks to be included incorrectly.
+        Binomial error bands are denoted by the shaded regions.
+        }
+    \label{fig:zprime_vert_leff}
+\end{figure}
+
+
+Collectively, the results in this section demonstrate that \GNN is able to accurately group tracks by their spatial origin in both \bjets and \ljets.
+The purity of the found vertices was also investigated and was found to be comparable or better than that of SV1 and JetFitter.
+Using a vertex fitting algorithm to compare the reconstructed vertex quantities with those from SV1 and JetFitter is left for future work.
+
 
 
 %\GNN also outperforms JetFitter in single track exclusive vertex finding as shown in \cref{fig:vert_eff_1track_excl}, except at $\pt > 3 ~\TeV$, where the efficiency of JetFitter starts to increase.
