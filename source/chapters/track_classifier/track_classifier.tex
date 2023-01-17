@@ -151,6 +151,69 @@ The above step must be performed simultaneously for each $\theta_j$ in $\theta$,
 
 
 
+\section{Graph Neural Network Theory}\label{sec:gnn_theory}
+
+Graph neural networks are a more sophisticated neural network model (see \cref{sec:neural_nets}) that are designed to operate on graph structured data.
+A brief introduction to GNNs is provided in this section following the formalism in \rcite{2018arXiv180601261B}.
+
+A graph $\mathcal{G}$ consists of a set of $N^n$ nodes $\mathcal{N} = \{h_i\}_{i=1:N^n}$, a set of $N^e$ edges $\mathcal{E} = \{e_i\}_{i=1:N^e}$, and a global represetnation $u$.
+Each node represents an individual object, and edges are directed connections between two nodes, called the \textit{sender} and \textit{receiver} nodes.
+The connectivity of the graph therefores encodes information about the relationships between objects that exist in the graph.
+
+A single graph network layer consists of three separate update functions $\phi^e$, $\phi^h$ and $\phi^u$ one for each of the nodes, edges, and global graph representation, and similarly three aggregation functions $\rho^{e \rightarrow h}$, $\rho^{e \rightarrow u}$ and $\rho^{h \rightarrow u}$.
+The aggregation functions combine information across different edges or nodes for their input into the update functions, which produce new representations for the nodes, edges and global objects based on the information in the previous layer and the aggregated information.
+The update functions are typically each implemented as a dense feedforward neural network (as described in \cref{sec:neural_nets}).
+The edges $e_i$ are updated by a edge network $\phi^e$ as in 
+%
+\begin{equation}
+    e'_i = \phi^e (e_i, h_s, h_r, u) , 
+\end{equation}
+%
+where $h_s$ and $h_r$ are the sender and receiver nodes respectively.
+The nodes are updated with a node network $\phi^h$ as in
+%
+\begin{equation}
+    h'_i = \phi^h (\overline{e}'_i, h_i, u) , 
+\end{equation}
+%
+where $\overline{e}'_i = \rho^{e \rightarrow h}(E'_i)$, and $E'_i$ is the set of sender nodes for receiver node $h_i$.
+$\rho^{e \rightarrow h}$ is referred to as the edge aggregation function.
+The global representation is updated using the global network $\phi^u$ as in
+%
+\begin{equation}
+    u' = \phi^u (\overline{e}', \overline{h}', u),
+\end{equation}
+%
+where $\overline{e}'$ is the aggregation $\rho^{e \rightarrow u}$ over all updated edges $e'_i$ and $\overline{h}'$ is the aggregation $\rho^{h \rightarrow u}$ over all updated nodes $h'_i$.
+
+The graph network layer performs a graph convolution, in an analogous way to a convolutional neural network operating on a grid of pixels.
+The above description is general, and not all concrete implementations of GNNs need implement every aspect.
+For example, the global graph representation need not be present, and it is also possible that no dedicated edge features are present.
+In such cases the corresponding update and aggregation functions are not needed.
+\cref{fig:gnn_net_diags} shows two possible graph network update layers.
+The layer used in the \GNN model is specified in more detail in \cref{sec:Architecture}.
+
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn_full.png}
+    \end{subfigure}
+    \quad
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn_deepset.png}
+    \end{subfigure}
+    \caption{
+        The flow of information through a graph neural network layer for (left) a full implementation of the layer and (right) a deep sets model \cite{zaheer2018deep}.
+        Reproduced from~\rcite{2018arXiv180601261B}.
+    }
+    \label{fig:gnn_net_diags}
+\end{figure}
+
+
+
 \section{Track Truth Origin Labelling}\label{sec:track_labelling}
 
 Crucial to supervised learning techniques are the ground truth class labels which the machine learning model is trained to predict.
