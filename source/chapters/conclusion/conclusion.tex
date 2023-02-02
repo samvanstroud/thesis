@@ -1,19 +1,42 @@
 \chapter{Conclusion}
 \label{chap:conclusion}
 
-Recap why flavour tagging at high pT is important.
+\section{Summary}\label{sec:conc-summary}
 
-Recap challenges
-\begin{itemize}
-    \item tracking suffers from several problems which might be improved by...
-    \item tracking might be improved by...
-\end{itemize}
+The current understanding of particle physics contains many unanswered questions, and improving our understanding of the Standard Model is a promising way to attempt to answer some of them.
+Key to this understanding is the Higgs Boson, which was first observed only a decade ago and remains under intense scrutiny at the \LHC.
+Given it's propensity to decay to heavy flavour \bquarks, reconstructing and identifying \bjets is of crucial importance to improving our understanding in this area.
+As discussed in \cref{chap:tracking}, this task becomes increasingly difficult at high transverse momenta.
+The work in this thesis demonstrates that even with suboptimal track reconstruction in this regime, it is possible to make algorithmic advancements to the flavour tagging pipeline to improve the identification of \bjets.
+This work has impacts for any analysis which relies on the identification of \bjets, including those which are sensitive to the Higgs Boson.
 
-algorithmic gains in flavour tagging can improve things. future work on that front:
-\begin{itemize}
-    \item use more info for flavour tagging (hits, calo info, leptons)
-    \item more aux tasks, energy, mass, lxy regression
-\end{itemize}
+Analysis of \VHbb events was also carried out with \intlumi of \runtwo \ATLAS at \come{13}.
+Various background modelling uncertainties were derived and investigations into the fit model were carried out.
+The analysis observed a signal strength of 
+$\muVH = 0.72 ^{+0.39}_{-0.36} = 0.72 ^{+0.29}_{-0.28} \mathrm{(stat.)} ^{+0.26}_{-0.22} \mathrm{(syst.)}$
+corresponding to an observed (expected) significance of $2.1\sigma$ ($2.7\sigma$).
+The result was validated using a simultaneous fit to the \VZbb process.
 
-ultimately analyses will benefit greatly, in particualr boosted xbb tagging and dihiggs analysis
 
+
+\section{Future Work}\label{sec:conc-future}
+
+Further algorithmic improvements are likely to yield further improved flavour tagging performance.
+Aside from these, large improvements to the flavour tagging performance will likely be possible if improvements are made to the \bhadron decay track reconstruction efficiency and accuracy.
+
+At the moment only the tracks from the Inner Detector and kinematic information about the jet are provided as inputs to the tagging algorithms.
+In \cref{chap:gnn_tagger} it was shown that the addition of a simple track-level variable corresponding to the ID of the reconstruction lepton to the model improved the performance.
+However there is still untapped potential in the form of additional information from the full parameters of the reconstructed leptons (making full use of the Calorimeters and Muon Spectrometer), the calorimeter clusters, and even the low level hits.
+Providing such additional inputs to the model is likely to complement the information provided by the tracks and further aid in the improvement of performane.
+
+On the output side, additional auxiliary training objectives may yield improved performance and also help to add to the explainability of the model.
+Regression of jet-level quantities such as the transverse momentum and mass, in addition to the truth \bhadron decay length are promising regression targets.
+
+The \GNN architecture can also be readily optimised for new use cases and topologies, as demonstreated by the studies described in \cref{sec:gnn_trig_upgrade}.
+For example, a model with only hit-level information provided as inputs could be used for a fast trigger preselection on jets without the need to run the computationally expensive tracking algorithms.
+The model could also be repurposed for primary vertexing, or a pile-up jet tagger.
+Finally, the tagging of \largeR jets would benefit those analysis that rely on it.
+
+Ultimately analysis which rely on the identification of heavy flavour jets will likely benefit immensely from the improved performance of the flavour tagging algorithms.
+For example, the $HH \rightarrow bbbb$ ... 
+\todo{make some claim about improved selection effifiency?}
