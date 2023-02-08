@@ -497,7 +497,7 @@ All diboson shape uncertainties are fully correlated in the fit.
     \label{fig:VV_PP8Fit_sub2}
   \end{subfigure}
   \caption{
-    The comparison of \mJ shapes between \SHERPA (black) and \POWHEG{}+\textsc{Pythia8} (red) samples from $WZ$ and $ZZ$ process in high and low purity signal regions, integrated over \pTV regions and the 0- and 1-lepton channels \cite{Dao:2688371}.
+    The comparison of the shapes of the \largeR jet mass \mJ between \SHERPA (black) and \POWHEG{}+\textsc{Pythia8} (red) samples from $WZ$ and $ZZ$ process in high and low purity signal regions, integrated over \pTV regions and the 0- and 1-lepton channels \cite{Dao:2688371}.
     The dashed green line shows the fitted third order polynomial function and the blue lines show the function after a protection is added in the high mass region.
   }
   \label{fig:VV_PP8Fit}
@@ -921,4 +921,5 @@ The observed (expected) significance for the diboson process is $5.4$ ($5.7$).
 The statistical and systematic sources of uncertainty contribute a similar amount to the overall uncertainty on the result.
 This analysis would therefore likely benefit greatly from the improved \btagging efficiency at \highpt enabled by \GNN as discussed in \cref{chap:gnn_tagger}, due to the associated reduction in statistical uncertainty provided by the increased number of events used in the analysis.
 
-\todo{Also mention something about the impact of the dominant systematics and how they could be reduced}
+The \largeR jet mass resolution is found to be the dominant source of systematic uncertainty on the \muVH measurement.
+An improved method of reconstructing the \largeR jet mass, for example by using a machine learning based regression approach, possibly as an additional auxiliary task to \GNN (see \cref{chap:gnn_tagger}), would therefore be expected to reduce the systematic uncertainty on the \muVH measurement.
