@@ -569,6 +569,10 @@ The second tool, JetFitter attempts to resolve each displaced vertex inside the 
 Jets are an aggregate reconstructed object corresponding to a collection of collimated stable particles which results from a decay chain of an quark or gluon progenitor.
 Jets are built by clustering constituent objects (e.g. tracks or calorimeter clusters) using a jet finding algorithm, for example the \antikt algorithm \cite{Cacciari:2008gp}, which is implemented in \textsc{FastJet}~\cite{Cacciari:2012:fastjet}.
 
+Objects can be associated to jets in one of two ways.
+The first is via a geometrical matching in $\DeltaR = \sqrt{(\Delta \eta)^2 + (\Delta \phi)^2}$, where $\Delta \eta$ and $\Delta \phi$ are the differences in pseudorapidity and azimuthal angle between the jet and the object.
+The second is via a ghost association \cite{Cacciari:2008gn}, where the object is assigned a negligible momentum and re-clustered into the jet after its formation.
+
 \subsubsection{EMTopo Jets}
 EMTopo jets are reconstructed from noise-suppressed topological clusters (topoclusters) of calorimeter energy depositions.
 The clustering uses the energy significance of each cell, defined as 
