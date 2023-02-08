@@ -165,7 +165,7 @@ The presence of displaced secondary vertices is not a completely clean signal of
 For the auxiliary object, \GNN predicts a binary label for each pair of tracks in the jet.
 The label has a value of 1 if the truth particles associated with the two tracks in the pair originated from the same spatial point, and 0 otherwise. 
 To derive the corresponding truth labels for training, truth production vertices within $0.1$ mm are merged.%, as these are assumed to be unresolvable given the granularity of the ID. 
-Track-pairs where one or both of the tracks in the pair have an origin label of either Pileup or Fake are given a label of 0.
+Track-pairs where one or both of the tracks in the pair have an origin label of either Pile-up or Fake are given a label of 0.
 Using the pairwise predictions from the model, groups of tracks that have common compatability can be formed, resulting in the finding of vertices.
 Two existing low-level tagging algorithms, SV1 and JetFitter (introduced in \cref{sec:vertex_reco}), are currently used to find and reconstruct vertices inside jets and are used as inputs to the existing jet flavour tagger \DLr.
 The addition of this auxiliary training objective removes the need for inputs from a dedicated secondary vertexing algorithm.
@@ -409,7 +409,7 @@ The relative increase in the \bjet tagging efficiency increases from \pct{4} to 
 For \Zprimejets, \GNN again outperforms \DLr across the entire jet \pt range studied.
 The largest relative improvement in performance is found at the highest transverse momenta of jet $\pt > \SI{2}{\TeV}$, and corresponds to an approximate factor of 2 improvement in efficiency with respect to \DLr.
 
-The performance of the model was also evaluated as a function of the average number of pileup interactions in the event. No significant dependence of the tagging performance was observed.
+The performance of the model was also evaluated as a function of the average number of pile-up interactions in the event. No significant dependence of the tagging performance was observed.
 
 
 \begin{figure}[!htbp]
@@ -549,14 +549,14 @@ In the figures, the tracks in the jet are indexed twice on each of the $x$- and 
 
 In \cref{fig:bjet_diag_1}, \GNN correctly groups the three primary tracks as having come from the primary vertex.
 The \bhadron and $b\rightarrow c$-hadron decay vertices are also correctly predicted, and the origin of the tracks in each is correct.
-There is a single OtherSecondary track which \GNN incorrectly predicts as having come pileup.
+There is a single OtherSecondary track which \GNN incorrectly predicts as having come pile-up.
 Meanwhile SV1 (by design) merges the two heavy flavour decay vertices, but incorrectly includes a track from the primnary vertex.
 JetFitter reconstructs two vertices, one which is a combination of two tracks from different truth vertices and two other single track vertices in each of the heavy flavour vertices.
 \GNN also predicts the flavour of the jet with a high degree of certainty.
 
 Similarly, \cref{fig:bjet_diag_1} shows that \GNN is able to relatively accurately predict the origin and vertex information of tracks inside a jet.
-The pileup tracks and primary vertex tracks are correctly identified, and the heavy flavour decay tracks are also correctly identified with the exception of one of the \bhadron decay tracks.
-Again, SV1 merges the two heavy flavour decay vertices along with a track from pileup, while JetFitter shows signs of being underconstrained by reconstructing two single track vertices, one with a pileup track and one with a track from a $b\rightarrow c$-hadron decay.
+The pile-up tracks and primary vertex tracks are correctly identified, and the heavy flavour decay tracks are also correctly identified with the exception of one of the \bhadron decay tracks.
+Again, SV1 merges the two heavy flavour decay vertices along with a track from pile-up, while JetFitter shows signs of being underconstrained by reconstructing two single track vertices, one with a pile-up track and one with a track from a $b\rightarrow c$-hadron decay.
 
 \begin{figure}[!p]
     \centering
@@ -567,7 +567,7 @@ Again, SV1 merges the two heavy flavour decay vertices along with a track from p
         The shaded black boxes show the groupings of tracks into different vertices.
         Vertices reconstructed by SV1 and JetFitter are also marked.
         Class probabilities $p_b$, $p_c$ and $p_u$ are rounded to three significant figures.
-        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatability of all the tracks in the jet with the exception of the truth OtherSecondary track, which is misidentified as pileup.
+        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatability of all the tracks in the jet with the exception of the truth OtherSecondary track, which is misidentified as pile-up.
     }
     \label{fig:bjet_diag_1}
  \end{figure}
@@ -860,7 +860,7 @@ Secondly, the jet classification and vertexing objectives may be complementary t
 \cref{fig:track_origin_roc} shows the track origin classification ROC curves for the different track origins for \ttbarZprimejets.
 In order to improve visual readability of the plot, the curves for the heavy flavour truth origins (FromB, FromBC and FromC) have been combined (weighted by their relative abundance), as have the Primary and OtherSecondary origins.
 In \ttbarZprimejets, the AUC of all the different origin groups exceeds $0.9$, representing strong overall classification performance.
-In both samples fake tracks are the easiest to classify, followed by pileup tracks.
+In both samples fake tracks are the easiest to classify, followed by pile-up tracks.
 The FromC tracks which are \chadron decay products, are the hardest to classify, possibly due to their similarity to both fragmentation tracks and \bhadron decay tracks, depending on the \chadron species in question.
 
 \begin{figure}[!htbp]
@@ -1024,7 +1024,7 @@ The addition of other auxiliary training objectives, such as the truth \bhadron 
 Additional future work includes the verification of the performance of \GNN on collision data, and the full calibration of the model so it can be used by analyses.
 The flexible nature of the model means it can also be readily applied to other related problems outside of standard $b$- and \ctagging applications, as demonstrated in \cref{sec:gnn_trig_upgrade}.
 Additional applications for the architecture include $X \rightarrow bb$ and $X \rightarrow cc$ tagging.
-The model could also be repurposed as a pileup jet tagger, or general primary and secondary vertexing tool.
+The model could also be repurposed as a pile-up jet tagger, or general primary and secondary vertexing tool.
 
 %\GNN outperforms the existing ATLAS flavour tagging algorithms as shown in \cref{sec:gnn_btag_perf,sec:gnn_ctag_perf}.
 %For a \bjet efficiency of \pct{70}, the light ($c$)-jet rejection is improved by a factor of \ttbllo (\ttbclo) for jets coming from \ttbar decays with transverse momentum \ttbarpt.
