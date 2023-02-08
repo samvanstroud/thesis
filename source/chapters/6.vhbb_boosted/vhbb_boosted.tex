@@ -32,7 +32,7 @@ In this regime, the Higgs candidate was reconstructed using a pair of jets with 
 However in the \highpt regime, the decay products of the Higgs boson become increasingly collimated and the \smallR jets may may not be individually resolved.
 In order to enhance the reconstruction of the Higgs boson candidate, this analysis uses a \largeR jet with radius parameter $R = 1.0$ to reconstruct the Higgs boson candidate (see \cref{sec:jet_reco}).
 The Higgs candidate is required to have exactly two ghost-assciated (see \cref{sec:jet_reco}) and \btagged variable-radius track-jets.
-The candidate \largeR jet is reconstructed using jet substructure techniques, in particular it is trimmed by removing soft and wide-angle components, which helps to remove particles from the underlying event and pileup collisions \cite{PERF-2012-02}.
+The candidate \largeR jet is reconstructed using jet substructure techniques, in particular it is trimmed by removing soft and wide-angle components, which helps to remove particles from the underlying event and pile-up collisions \cite{PERF-2012-02}.
 Refer to \cref{sec:jet_reco} for more details on jet reconstruction.
 
 On top of the binning in \ptv, selected events are further categorised into the 0-, 1- and 2-lepton channels depending on the number of charged leptons (electrons and muons) present in the reconstructed final state (also referred to as the 0L, 1L, and 2L channels respectively).
@@ -40,8 +40,8 @@ The 0-lepton channel targets the $\Zboson \higgs \rightarrow \nu\nu \bbbar$ proc
 Each channel has a dedicated set of selections which are listed in more detail in \cref{sec:vhbb_selections}.
 Events in the 0- and 1-lepton channels are further split depending on the number of additional \smallR jets
 not matched to the Higgs-jet candidate.
-The high-purity signal region (HP SR) has zero such jets, while the low-purity signal region (LP SR) has one or more.
-This is done so that \todo{explain why ttbar} 
+The high-purity signal region (HP SR) has zero such jets, while the low-purity signal region (LP SR) has one or more, and therefore absorbs a larger number of background \ttbar events.
+Maintaining a high purity signal region is important for the extraction of the signal yield.
 %The 0- and 1-lepton channels are split into high- and low-purity signal regions based on the number of additional untagged \smallR jets present in the event.
 The 0- and 1-lepton channels also make use of a dedicated \ttbar control region for jets with one or more additional \btagged \smallR jets, described described in \cref{sec:vhbb_control_region}.
 A complete overview of the different analysis regions is given in \cref{tab:SR_CR_definition}.
@@ -155,10 +155,10 @@ The CR is used to constrain the normalisation of the \ttbar background in the fi
   \centering
   \includegraphics[width=0.65\textwidth]{chapters/6.vhbb_boosted/figs/sr_cr_diagrams.pdf}
   \caption{
-    Diagrams of the signal process (top) and examples of the the 0-lepton and 1-lepton \ttbar backgrounds (middle, bottom).
+    Diagrams of the signal process (top) and \ttbar background (bottom).
     Object to the right of centre are reconstructed within the \largeR jet.
-    For the backgrounds, the \largeR jet contains a mis-tagged $c$- or \ljet.
-    Not shown is the 0-lepton background resulting from $\Wboson \rightarrow \ell \nu$, where the lepton is out of acceptance or not reconstructed.
+    For the \ttbar background, the \largeR jet contains a mis-tagged $c$-jet or (less often) a mis-tagged \ljet.
+    The contribution in the 0-lepton channel results from hadronically decaying $\tau$ lepton, or a electron or muon which is out of the analysis acceptance.
   }
   \label{fig:sr_cr_diagrams}
 \end{figure}
@@ -192,7 +192,7 @@ The multijet background is modelled using a data-driven technique.
 Systemic uncertainties are extensively employed to give the fit model enough flexibility to account for inaccuracies in the various inputs.
 Two main types of systematic uncertainty are considered: experimental and modelling.
 %Theoretical uncertainties arise due to imperfect precision used in e.g. QCD calculations.
-Experimental uncertainties arise due to the limited precision of the detector, imperfect reconstruction algorithms (in particular the \btagging algorithms), and due to the imperfect measurement of pile-up and integrated luminosity.
+Experimental uncertainties arise due to the imperfect reconstruction algorithms (in particular the jet reconstruction and \btagging algorithms), and due to the imperfect modelling of pile-up and other effects, as described in \cref{sec:sources_of_experimental_uncertainties}.
 Modelling uncertainties arise due to the imperfections in the Monte-Carlo simulations used to model the signal and background events.
 In order to observe a certain process, for example \VHbb, an increase in the number of observed events with respect to the background-only hypothesis is looked for.
 The excess is often relatively small against the total number of background events, and hence accurate modelling of the expected number of background and signal events is crucial for successfully performing the analysis.
@@ -233,7 +233,7 @@ The resulting uncertainties were studied and found to be negligible in compariso
 
 
 
-\subsection{Sources of Systematic Uncertainties}\label{sec:sources_of_uncertainties}
+\subsection{Sources of Systematic Modelling Uncertainties}\label{sec:sources_of_uncertainties}
 
 This section briefly describes the different sources of uncertainty in the analysis, and how each is implemented.
 For each source of uncertainty, acceptance and shape uncertainties are derived.
@@ -275,6 +275,20 @@ The choice of threshold, or \textit{merging scale} introduces some uncertainty i
 Resummation (QSF) and merging (CKKW) scale variations are available for a subset of the \textsc{Sherpa} samples.
 The number of available events is significantly lower than the number of events in the nominal sample, and no statistically significant discrepancy with respect to the nominal samples is observed.
 The corresponding uncertainties and therefore neglected.
+
+\subsection{Sources of Experimental Uncertainties}\label{sec:sources_of_experimental_uncertainties}
+
+The main experimental uncertainties in the analysis are due to the following sources:
+
+\begin{itemize}
+  \item The \smallR jet energy scale and resolution, which are informed by in situ\todo{what does in situ mean in this context} calibration studies and the dependence of the jet energy on the level of pile-up \cite{PERF-2016-04}.
+  \item The \largeR jet energy and mass scales and resolutions. The scales are calibrated as described in \rcite{JETM-2018-02}, and an uncertainty of \pct{2} and \pct{20} is applied for the jet energy and mass resolutions, respectively.
+  \item \btagging uncertainties, which are computed separately for \bcl flavour jets as described in the calibration studies in Refs.~\cite{PERF-2016-05,ATLAS-CONF-2018-006,ATLAS-CONF-2018-001}.An additional extrapolation uncertainty is added to account for jets with transverse momenta above that which is accessible in the calibration analyses.
+  \item Uncertainties associated with the lepton energy and momentum scales, and reconstruction and identification efficiencies.
+  \item Uncertainty on the pile-up models which are used in the simulated samples, described in \rcite{STDM-2015-05}.
+  \item Uncertainties associated with the reconstruction of the missing transverse energy \ETmiss, which have various sources as described in \rcite{PERF-2016-07}.
+\end{itemize}
+
 
 \subsection{Vector Boson + Jets Modelling}\label{sec:vjets_modelling}
 
@@ -431,12 +445,13 @@ The largest modification to the nominal acceptance results from the \textsc{Powh
 Since the diboson contribution to the \ttbar control region is negligible, no SR-to-CR relative acceptance uncertainty is necessary.
 
 For the $WZ$ contribution, uncertainties are derived using the 1-lepton channel and applied to all three channels.
-An additional \pct{8} channel migration uncertainty is applied on the 0-lepton channel.
+The 1-lepton channel was used as it has the largest amount of available statistics.
+As far as was possible given the limited statistics available in the other channels, compatability was checked between the derived uncertainties and the other channels.
+An additional \pct{8} channel migration uncertainty is applied on the $WZ$ 0-lepton channel.
 For the $ZZ$ contribution, the normalisation uncertainty is calculated using the 2-lepton channel and applied to all three channels.
-The 0- and 1-lepton channels have a similar HP-to-LP relative acceptance uncertainty of \pct{18}.
-The 1-lepton medium-to-high \ptv relative acceptance is based off the value obtained from the 2-lepton channel.
+The 0- and 1-lepton channels were found to have a similar HP-to-LP relative acceptance uncertainty of \pct{18}.
+The 1-lepton medium-to-high \ptv relative acceptance is based off the value obtained from the 2-lepton channel, since the 1-lepton channel had an insufficient number of events to estimate the uncertainty directly.
 \pct{30} and \pct{18} channel migration uncertainties are applied in the 0- and 1-lepton channels respectively.
-\todo{The relevance of this discussion isn't clear or why these choices were made. Needs more detail and discussion}
 
 Since the contribution from $WW$ is negligible, dedicated studies are not performed, but a \pct{25} normalisation uncertainty is applied in all the three channels which is based on the modelling studies performed for the previous analysis \cite{HIGG-2018-04}.
 
@@ -463,9 +478,10 @@ A hyperbolic tangent is fitted to the symmetrised ratio.
 
 The comparison between the nominal \textsc{Sherpa} and alternative \POWHEG{}+\textsc{Pythia8} samples is shown in \cref{fig:VV_PP8Fit} for the 0- and 1-lepton channels for both the $WZ$ and $ZZ$ processes.
 For these channels, the shape of \mJ varies in opposite directions in the LP and HP signal regions.
-Shapes are similar between \ptv bins, the 0- and 1-lepton channels and for $WZ$ and $ZZ$.\todo{More discussion is needed on the relevance of this comments, it isn't clear why this information is stated or what it means in the final implementation.A bit more detail is needed}
+Shapes are similar between \ptv bins, the 0- and 1-lepton channels and for $WZ$ and $ZZ$.
+In order to reduce the effects of statistical fluctuations on the fit, these regions are merged before deriving the shape uncertainty.
 A third order polynomial is fitted to the ratio, and this function transitions to a constant piecewise function in the high mass region to accurately represent the shape.
-Dependence on the event generator was found to be negligible within statistical uncertainty in the 2-lepton channel.
+Dependence on the event generator was found to be negligible within statistical uncertainty in the 2-lepton channel, and so no uncertainty was applied.
 All diboson shape uncertainties are fully correlated in the fit.
 
 \begin{figure}[!htbp]
@@ -481,14 +497,44 @@ All diboson shape uncertainties are fully correlated in the fit.
     \label{fig:VV_PP8Fit_sub2}
   \end{subfigure}
   \caption{
-    The comparison of \mJ shapes between \SHERP (black) and \POWPYTHIA~8 (red) samples from $WZ$ and $ZZ$ process in high and low purity signal regions, integrated over \pTV regions and the 0- and 1-lepton channels \cite{Dao:2688371}.
+    The comparison of the shapes of the \largeR jet mass \mJ between \SHERPA (black) and \POWHEG{}+\textsc{Pythia8} (red) samples from $WZ$ and $ZZ$ process in high and low purity signal regions, integrated over \pTV regions and the 0- and 1-lepton channels \cite{Dao:2688371}.
     The dashed green line shows the fitted third order polynomial function and the blue lines show the function after a protection is added in the high mass region.
   }
   \label{fig:VV_PP8Fit}
 \end{figure}
 
 
+\subsection{\texorpdfstring{\ttbar}{ttbar} and single-top Modelling}
 
+The main features of the systematic uncertainties on the remaining two modelled backgrounds, \ttbar and single-top, are described below.
+
+The modelling of the \ttbar background uses a \POWHEG{}+\textsc{Pythia8} nominal sample.
+Two alternate samples were considered: \POWHEG{}+\textsc{Herwig7} (providing a alternate parton shower model) and \textsc{MadGraph5+Pythia8.2} (providing an alternate hard scatter model).
+Effects of initial and final state radiation (ISR and FSR, respectively) were assessed using internal weight variations in the nominal sample.
+Acceptance and shape uncertainties were derived for each of the variations.
+Of the acceptance uncertainties, the largest contribution is due to the matrix element calculation, with the parton showering model being second.
+The ISR and FSR acceptance uncertainties were found to be subdominant.
+For the shape uncertainties, only the ISR and parton showering variations have non-negligible impacts on the \mJ shape.
+
+The dominant process contributing to the single-top background is $\Wboson t$ production, relevant for the 0- and 1-lepton channels.
+The same nominal and alternative samples are used as for the \ttbar background.
+Again, ISR and FSR variations are obtained from internal weight variations in the nominal sample.
+At higher orders in QCD, diagrams contributing to the $\Wboson t$ production process can also be found in leading-order \ttbar
+production processes.
+To account for the arising interference effects, the diagram removal (DR) scheme in \rcite{Frixione:2008yi} was employed for the nominal sample.
+The uncertainty on the DR scheme was assessed using an alternate sample using a diagram subtraction (DS) method which removes interference at the generator level.
+The largest sources of acceptance and shape uncertainties were due to this DS-DR variation.
+
+
+\subsection{Signal Modelling}
+
+The modelling of the systematic uncertainties affecting the signal processes follows the procedure described in Refs.~\cite{HIGG-2018-50,deFlorian:2016spz,HIGG-2016-29}.
+The $qq \rightarrow VH$ signal samples are generated with \POWHEGBOX[v2]+\textsc{GoSam} at next-to-leading order (NLO) accuracy in QCD. 
+An additional $gg \rightarrow ZH$ sample is generated using \POWHEGBOX[v2] at leading order (LO) in QCD.
+In both cases, the generated events are interfaced with \PYTHIAV{8} for the parton showering modelling.
+An alternate \textsc{Herwig7} sample is used to assess the uncertainty on the parton showering model.
+Recommended systematic uncertainties on the signal production cross-sections and \Hbb branching ratio from the LHC Higgs Cross Section Working Group are applied~\cite{Dittmaier:2012vm,Heinemeyer:2013tqa}.
+Acceptance and shape uncertainties arising from missing higher-order QCD and electroweak corrections, PDF uncertainties, renormalisation and factorisation scales, and alternate parton showering model are applied.
 
 \section{Statistical Treatment}\label{sec:vhbb_fit}
 
@@ -529,24 +575,50 @@ The combined effect of the NPs is then
   \mathcal{L}(\theta) = 
   \prod_{j = 1}^{N_\theta}
   \frac{1}{\sqrt{2 \pi \sigma_j}}
-  \exp\left[ \frac{- (\overline{\theta}_j - \theta_j)^2}{2 \sigma_j^2} \right] ,
+  \exp\left[ \frac{- (\theta_j - \hat{\theta}_j)^2}{2 \sigma_j^2} \right] ,
 \end{equation}
 %
-where $N_\theta$ is the number of NPs, $\overline{\theta}_j$ is the nominal value of the $j$th NP, $\theta_j$ is the fitted value, and $\sigma_j$ is the corresponding associated prior uncertainty on $\theta_j$.
-As the fitted value of the $\theta_j$ deviates from it's nominal value, a cost is introduced.
+where $N_\theta$ is the number of NPs, $\theta_j$ is the nominal value of the $j$th NP, $\hat{\theta}_j$ is the fitted value, and $\sigma_j$ is the corresponding associated prior uncertainty on the NP.
+As the fitted value $\hat{\theta}_j$ deviates from it's nominal value, a cost is introduced.
 The presence of NPs modifies the likelihood as 
 %
 \begin{equation}
     \mathcal{L}(\mu) \rightarrow \mathcal{L}(\mu, \theta) = \mathcal{L}(\mu) \mathcal{L}(\theta) .
 \end{equation}
 %
-The predicted signal and background yields are also modified by the presence of the NPs with\todo{introduce what a pull is and what a contraint is here}
+The predicted signal and background yields are also modified by the presence of the NPs with
 %
 \begin{equation}
   s_i \rightarrow s_i(\theta) , \quad b_i \rightarrow b_i(\theta) .
 \end{equation}
 %
 For NPs which are left freely floating in the fit, no corresponding Gaussian constraints are added to the likelihood.
+
+The pull of a NP is defined as the difference between the fitted value $\hat{\theta}_j$ and the nominal value $\theta_j$, divided by the uncertainty on the NP $\sigma_j$.
+To obtain the  uncertainty on the pull of a NP, the following procedure is used.
+The Hessian matrix $\mathbf{H}$ is calculated as
+
+
+\begin{equation}
+  \mathbf{H} =
+  \begin{bmatrix}
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{1}^{2}} &
+    \dfrac {\partial^{2}\mathcal{L}}{\partial \theta_{1} \partial \theta_{2}}& \cdots &
+    \dfrac{\partial ^{2}\mathcal{L}}{\partial \theta_{1} \partial \theta_{n}}\\[2ex]
+    %
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{2} \partial \theta_{1}}&
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{2}^{2}}&\cdots &
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{2} \partial \theta_{n}}\\[2ex]
+    %
+    \vdots &\vdots &\ddots &\vdots \\[2.2ex]
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{n} \partial \theta_{1}}&
+    \dfrac{\partial ^{2}\mathcal{L}}{\partial \theta_{n} \partial \theta_{2}}&\cdots &
+    \dfrac{\partial^{2}\mathcal{L}}{\partial \theta_{n}^{2}}
+  \end{bmatrix}   . 
+\end{equation}
+
+Taking the inverse of the Hessian matrix $\mathbf{H}^{-1}$ yields the covariance matrix, from which the post-fit uncertainties on the different NPs can be extracted.
+If the post-fit uncertainty is smaller than the nominal uncertainty, additional information about the NP has been extracted by the fit, and NP is said to be \textit{constrained}.
 
 The statistical uncertainty on the simulated events is implemented using a dedicated NP for each bin which can scale the background yield in that bin.
 Statistical NPs are also implemented using a Gaussian constraint.
@@ -624,7 +696,7 @@ The result of this fit can be used to calculate expected (median) significances 
 
 In the present analysis, the two signal strength parameters \muVH and \muVZ are extracted from a simultaneous maximisation of the likelihood described in \cref{sec:vhbb_fit}.
 The results of the analysis are summarised in this section.
-The corresponding postfit background normalisations are listed in \cref{tab:bkg_norms}.
+The corresponding post-fit background normalisations are listed in \cref{tab:bkg_norms}.
 Post-fit \mJ distributions are shown in \cref{sec:postfit_plots}.
 The observed signal strengths are given in \cref{sec:signal_strengh_sigs}, along with observed and expected significances.
 Finally in \cref{sec:sys_results} the impact of systematic uncertainties on the results is examined.
@@ -632,11 +704,11 @@ Finally in \cref{sec:sys_results} the impact of systematic uncertainties on the 
 \input{chapters/6.vhbb_boosted/tables/bkg_norms.tex}
 
 \subsection{Post-fit Distributions}\label{sec:postfit_plots}
-\todo{Add something in the previous section about howthe post-fit plots are produced?}
-In addition to the observed significance and signal strength, it is also useful to study the post-fit \mJ distributions to compare the agreement between the simulation and data using the best-fit values $\hat{\mu}$ and $\hat{\theta}$.
+
+In addition to the observed significance and signal strength, it is also necessary to study the post-fit \mJ distributions to compare level of the agreement between the simulation (using the best-fit values of the signal strength $\hat{\mu}$ and the NP $\hat{\theta}$) and the data.
+The best-fit values $\hat{\mu}$ and $\hat{\theta}$ are obtained from an unconditional fit to data over all analysis regions.
 Post-fit \mJ distributions are given for the signal regions in the 0-, 1- and 2-lepton channels in \cref{fig:vhbb_postfit_plots}.
-The signal regions are merged for the sake of simplicity.
-The LP and HP regions are merged for the 0- and 1-lepton channels.
+The LP and HP regions are merged for the 0- and 1-lepton channels for the sake of simplicity.
 %The plots show large falling backgrounds, predominantly made up of \Wjets and Z+jets events, and a signal distribution corresponding to the Standard Model Higgs boson peaking around $m_H = 125$ GeV.
 In general there is a good level of agreement between the simulation and data, indicating the fit model is performing as expected.
 \cref{fig:vhbb_postfit_plots_cr} shows the post-fit plots for the \ttbar control regions.
@@ -829,25 +901,6 @@ The biggest contribution to the overall uncertainty is the combined statistical 
 Out of the backgrounds, the \Wjets and \Zjets have the highest (0.06) and second-highest (0.05) impact respectively.
 
 \input{chapters/6.vhbb_boosted/tables/mu_systs_breakdown.tex}
-\todo{Make sure it is
-clear in the text
-what all these correspond
-to, you might need to
-add a few more
-paragraphs on the main
-experimental uncertainties
-(which you should also
-have for completeness)}
-
-\todo{Make sure it is
-clear in the text
-what all these correspond
-to, you might need to
-add a few more
-paragraphs on the model
-uncertainties for other backgrounds
-(which you should also
-have for completeness)}
 
 % The only point was, in the text where you explain the experimental uncertainties, make sure they are all described (1-2 lines) and have a heading that links back to this table. That way you make sure they have all been introduced and can be easily linked. A quick/easy way to do it is \begin{description} \item[b-tagging] etc.
 
@@ -868,4 +921,5 @@ The observed (expected) significance for the diboson process is $5.4$ ($5.7$).
 The statistical and systematic sources of uncertainty contribute a similar amount to the overall uncertainty on the result.
 This analysis would therefore likely benefit greatly from the improved \btagging efficiency at \highpt enabled by \GNN as discussed in \cref{chap:gnn_tagger}, due to the associated reduction in statistical uncertainty provided by the increased number of events used in the analysis.
 
-\todo{Also mention something about the impact of the dominant systematics and how they could be reduced}
+The \largeR jet mass resolution is found to be the dominant source of systematic uncertainty on the \muVH measurement.
+An improved method of reconstructing the \largeR jet mass, for example by using a machine learning based regression approach, possibly as an additional auxiliary task to \GNN (see \cref{chap:gnn_tagger}), would therefore be expected to reduce the systematic uncertainty on the \muVH measurement.
