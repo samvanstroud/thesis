@@ -4,9 +4,22 @@
 \section{Summary}\label{sec:conc-summary}
 
 The current understanding of particle physics contains many unanswered questions, and improving our understanding of the Standard Model is a promising way to attempt to answer some of them.
-Key to this understanding is the Higgs Boson, which was first observed only a decade ago and remains under intense scrutiny at the \LHC.
+One of the key objects which may enhance this understanding is the Higgs Boson, which was first observed only a decade ago and remains under intense scrutiny at the \LHC.
 Given it's propensity to decay to heavy flavour \bquarks, reconstructing and identifying \bjets is of crucial importance to improving our understanding in this area.
 As discussed in \cref{chap:tracking}, this task becomes increasingly difficult at high transverse momenta.
+
+One of the effects that hampered tracking and \btagging performance at \highpt was identified to be the increased rate of fake tracks.
+To address this issue, a tools was developed which was able to successfully identify fake tracks within jets \pct{45} of the time, with a minimal loss of signal tracks of \pct{1.2}.
+Removal of such tracks was found to improve the \ljet mistagging rate of the SV1 and JetFitter algorithms by up to \pct{20} at high transverse momentum.
+
+A novel approach to \btagging, \GNN was also developed using a Graph Neural Network (GNN) architecture.
+The model is encouraged to learn the topology of the jet through vertexing and track classification auxiliary tasks.
+As a single end-to-end trained model, \GNN simplifies the complexity of the flavour tagging pipeline and is able to achieve superior performance to the current state-of-the-art algorithms, which rely on a two-tiered approach.
+Compared with \DLr, \GNN improves the \lrej by a factor of \ttbllo for \ttbarjets with \ttbarpt at the \WP{70}{b} and by a factor of \zpbllo for \Zprimejets with \Zprimept for a corresponding \bjet efficiency of \pct{30}.
+\GNN also demonstrates a significant improvement in the discrimination between $b$- and \cjets. 
+%\GNN improves \clrej for \ttbarjets with \ttbarpt by factors of \ttbclo and \ttbllo respectively at a \bjet tagging efficiency of $70\%$ when compared with .
+%For \Zprimejets with \Zprimept, \GNN improves the \crej by a factor of \zpbclo and \lrej by a factor of \zpbllo for a .
+
 The work in this thesis demonstrates that even with suboptimal track reconstruction in this regime, it is possible to make algorithmic advancements to the flavour tagging pipeline to improve the identification of \bjets.
 This work has impacts for any analysis which relies on the identification of \bjets, including those which are sensitive to the Higgs Boson.
 
@@ -15,13 +28,14 @@ Various background modelling uncertainties were derived and investigations into 
 The analysis observed a signal strength of 
 $\muVH = 0.72 ^{+0.39}_{-0.36} = 0.72 ^{+0.29}_{-0.28} \mathrm{(stat.)} ^{+0.26}_{-0.22} \mathrm{(syst.)}$
 corresponding to an observed (expected) significance of $2.1\sigma$ ($2.7\sigma$).
-The result was validated using a simultaneous fit to the \VZbb process.
+The result was validated using a simultaneous fit to the \VZbb process, which acts as a cross check to validate the primary analysis.
 
+\todo{add a bit more detail about the importance of this result and why it is interesting due to its sensitivity to new physics}
 
 
 \section{Future Work}\label{sec:conc-future}
 
-Further algorithmic improvements are likely to yield further improved flavour tagging performance.
+Additional algorithmic improvements are likely to yield further improved flavour tagging performance.
 Aside from these, large improvements to the flavour tagging performance will likely be possible if improvements are made to the \bhadron decay track reconstruction efficiency and accuracy.
 
 At the moment only the tracks from the Inner Detector and kinematic information about the jet are provided as inputs to the tagging algorithms.
