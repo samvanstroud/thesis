@@ -281,7 +281,7 @@ The corresponding uncertainties and therefore neglected.
 The main experimental uncertainties in the analysis are due to the following sources:
 
 \begin{itemize}
-  \item The \smallR jet energy scale and resolution, which are informed by in situ\todo{what does in situ mean in this context} calibration studies and the dependence of the jet energy on the level of pile-up \cite{PERF-2016-04}.
+  \item The \smallR jet energy scale and resolution, which are informed by in situ calibration studies and the dependence of the jet energy on the level of pile-up \cite{PERF-2016-04}.
   \item The \largeR jet energy and mass scales and resolutions. The scales are calibrated as described in \rcite{JETM-2018-02}, and an uncertainty of \pct{2} and \pct{20} is applied for the jet energy and mass resolutions, respectively.
   \item \btagging uncertainties, which are computed separately for \bcl flavour jets as described in the calibration studies in Refs.~\cite{PERF-2016-05,ATLAS-CONF-2018-006,ATLAS-CONF-2018-001}.An additional extrapolation uncertainty is added to account for jets with transverse momenta above that which is accessible in the calibration analyses.
   \item Uncertainties associated with the lepton energy and momentum scales, and reconstruction and identification efficiencies.
@@ -289,6 +289,7 @@ The main experimental uncertainties in the analysis are due to the following sou
   \item Uncertainties associated with the reconstruction of the missing transverse energy \ETmiss, which have various sources as described in \rcite{PERF-2016-07}.
 \end{itemize}
 
+The impact of these uncertainties on the analysis can be found in \cref{tab:mu_syst_unc}.
 
 \subsection{Vector Boson + Jets Modelling}\label{sec:vjets_modelling}
 
@@ -788,6 +789,12 @@ Again, a good level of agreement is observed given the statistical uncertainties
 \end{figure}
 
 
+\subsection{Post-fit Yields}\label{sec:postfit_yields}
+
+The post-fit yields resulting from the unconditional fit to data are shown in \cref{postfityield0L}, \cref{postfityield1L}, and \cref{postfityield2L} for the 0-, 1- and 2-lepton channels, respectively.
+
+\input{chapters/6.vhbb_boosted/tables/postfit_yields.tex}
+
 \subsection{Observed Signal Strength \& Significance}\label{sec:signal_strengh_sigs}
 
 The measured signal strength is computed as the ratio between the measured signal yield to the prediction from the SM.
@@ -811,7 +818,7 @@ A clear signal excess is visible around the Higgs mass of $m_H = \SI{125}{\GeV}$
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.5\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_incFat1_Fat1_incJet1_Y6051_DSRnoaddbjetsr_T2_L3_distmBB_Higgsweighted_BkgSub_GlobalFit_unconditionnal_mu1.pdf}
+  \includegraphics[width=0.7\textwidth]{chapters/6.vhbb_boosted/figs/Region_BMin250_incFat1_Fat1_incJet1_Y6051_DSRnoaddbjetsr_T2_L3_distmBB_Higgsweighted_BkgSub_GlobalFit_unconditionnal_mu1.pdf}
   \caption{
     \mJ distribution in data after subtraction of all backgrounds except for the $WZ$ and $ZZ$ diboson processes. 
     The contributions from all lepton channels and signal regions are summed and weighted by their
@@ -902,10 +909,33 @@ Out of the backgrounds, the \Wjets and \Zjets have the highest (0.06) and second
 
 \input{chapters/6.vhbb_boosted/tables/mu_systs_breakdown.tex}
 
-% The only point was, in the text where you explain the experimental uncertainties, make sure they are all described (1-2 lines) and have a heading that links back to this table. That way you make sure they have all been introduced and can be easily linked. A quick/easy way to do it is \begin{description} \item[b-tagging] etc.
+\subsection{STXS Interpretation}\label{sec:stxs}
 
-\todo{Perhaps add the STXS measurment (figure and table), which is a key result from this week}
-\todo{I would also consider adding the post-fit yield tables from the auxillary results as well}
+The Simplified Template Cross Sections (STXS) framework provides a common categorisation of candidate Higgs boson events according to certain truth-level properties of the production mode under study \cite{deFlorian:2016spz,Badger:2016bpw}.
+The STXS framework is designed to be independent of the decay mode of the Higgs boson, and is therefore well suited to the combination of measurements between different decay channels and experiments.
+
+The STXS cross sections are independently measured for the $ZH$ and $WH$ production modes following the approach described in \cite{HIGG-2018-50}.
+For each production mode, two bins in the truth vector boson transverse momentum $p_\textrm{T}^{V,t}$ are considered, $\SI{250}{\GeV} < p_\textrm{T}^{V,t} < \SI{400}{\GeV}$ and $p_\textrm{T}^{V,t} \geq \SI{400}{\GeV}$, leading to four independent analysis regions.
+Events from the simulated signal samples are categorised into the regions and used to estimate the expected cross section times branching ratio $\sigma \times B$ in each region, where
+%
+\begin{equation}
+  B =  B(\Hbb) \times B(V \rightarrow \text{leptons}),
+\end{equation}
+%
+A simultaneous fit of the four cross section times branching ratios is performed.
+The uncertainties described in \cref{sec:vhbb_modelling} are reused for the STXS fit, with the exception of the theoretical uncertainties on the signal cross section and branching ratios.
+The result from the fit is shown in \cref{fig:STXSBinXSPlot} and compared with the expected prediction from the SM.
+The expected and observed results agree within the given uncertainties.
+
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{chapters/6.vhbb_boosted/figs/C_STXS_XS_Atlas.pdf}
+  \label{fig:STXSBinXSPlot}
+  \caption{
+    Measured $VH$ simplified template cross sections times the $H \rightarrow \bbbar$ and $V \rightarrow$~leptons branching fractions in the medium and high $p_\textrm{T}^{V,t}$ bins~\cite{HIGG-2018-52}.
+  }
+\end{figure}
 
 
 \section{Conclusion}
