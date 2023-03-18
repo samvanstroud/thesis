@@ -1,16 +1,48 @@
-\chapter{Tracking and flavour tagging}\label{chap:tracking}
+\chapter{Tracking and Flavour Tagging}\label{chap:tracking}
 
 Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy-flavour hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons.
 In particular, \btagging is the identification of jets originating only from \bhadrons (i.e. \bjets).
-The \bjet identification algorithms (also called \textit{taggers}) work by identifying the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
-The various \btagging algorithms ultimately take as input information about the reconstructed jet and its associated tracks.
+
+Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
+It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
+
+The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS are described in \cref{sec:btagging_algs}.
+These work by identifying the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
+Ultimately, the tagging algorithms use input information about the reconstructed jet and its associated tracks.
 Successful \btagging relies therefore on the efficient and accurate reconstruction of tracks, and especially those tracks corresponding to the products of \bhadron decays.
+A summary of the challenges facing tracking and \btagging at high transverse momentum is provided in \cref{sec:b_track_reco_challenges}.
+Some preliminary investigations into improving tracking in the \highpt regime are investigated in \cref{sec:b_track_reco_improvements}.
+In \cref{sec:trk_btag_conclusion} the conclusions of this chapter are given.
 
-%Historically a two tiered approach to \btagging has been taken, in which so called \textit{low-level} taggers take as inputs information about the jet and associated tracks, and attempt to reconstruct or identify some aspect of a \bjet, such as displaced tracks or secondary vertices.
-%The outputs of several low-level taggers are then fed into a , which uses a multivariate approach to discriminate between jet flavours.
 
+\section{\texorpdfstring{\btagging}{b-tagging} Algorithms}\label{sec:btagging_algs}
 
+% TODO: add vertexing section here??? or say something more like "the sec vert reco algs described in xx can be used to identify b-jets"....
 
+The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
+Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
+Each of these low-level algorithms reconstructs distinct features of the experimental signature of heavy flavour jets using the tracks associated to the jet.
+The low-level algorithms are a combination of manually optimised reconstruction algorithms for example the SV1 and JetFitter algorithms which reconstruct displaced decay vertices \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011}, and trained taggers such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+
+In addition to \DLr, another widely used high-level tagger is the MV2c10 algorithm \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
+This tagger is used in the analysis described in \cref{chap:vhbb_boosted}.
+Similar to \DLr the MV2c10 algorithm takes inputs from the outputs of a number of low-level algorithms (IPxD, SV1 and JetFitter).
+The outputs of the low-level algorithms are provided as inputs to a boosted decision tree.
+The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
+At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
+
+%As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high_low_taggers.pdf}
+  \caption{
+    An overview of different high and low level level taggers used in ATLAS.
+    The low level taggers are IPxD, SV1 and JetFitter, and RNNIP and DIPS \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+    The outputs of these taggers are fed into the high level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
+  }
+  \label{fig:high_low_taggers}
+\end{figure}
 
 
 \section{\texorpdfstring{\bhadron}{b-hadron} Reconstruction}
@@ -79,37 +111,18 @@ Reconstruction of these vertices from tracks with common points of spatial origi
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
 Since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
-The \borchadron also decays semileptonically in approximately \pct{23} of cases \cite{Workman:2022ynf}.
+The \borchadron also decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}.
 The presence of a reconstructed electron or muon inside a jet can also be a key indicator that the jet was instantiated by a \bhadron.
 
 These signatures are primarily identified using tracks associated to jets, or using reconstructed electrons or muons, which also rely on tracks as discussed in \cref{sec:lepton_reco}.
 As such, efficient and accurate track reconstruction is essential for high performance flavour tagging.
 
+% TODO integrate with above and make it smoother, it's a bit repeated
+In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
+As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
+Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
 
-
-\section{\texorpdfstring{\btagging}{b-tagging} Algorithms}
-
-% TODO: add vertexing section here
-
-The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}.
-Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
-Each of these low-level algorithms reconstructs distinct features of the experimental signature of heavy flavour jets using the tracks associated to the jet.
-The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example the SV1 and JetFitter algorithms reconstruct displaced decay vertices, and trained taggers such as RNNIP and DIPS use the IP and hit information from a variable number of tracks to identify the flavour of the jet \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
-
-In addition to \DLr, another widely used high-level tagger is the MV2c10 algorithm \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
-This tagger is used in the analysis described in \cref{chap:vhbb_boosted}.
-Similar to \DLr the MV2c10 algorithm takes inputs from the outputs of a number of low-level algorithms (IPxD, SV1 and JetFitter).
-The outputs of the low-level algorithms are provided as inputs to a boosted decision tree.
-The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
-At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
-
-As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
-This chapter summarises the challenges facing tracking and \btagging at high transverse momentum with an investigation into track reconstruction performance in \cref{sec:b_had_reco}.
-Some preliminary investigations into improving tracking in this regime are investigated in \cref{sec:b_track_reco_improvements}.
-
-
-
-\section{Challenges Facing \bhadron Reconstruction}\label{sec:b_track_reco_challenges}
+\subsection{Challenges}\label{sec:b_track_reco_challenges}
 
 As discsused, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
 For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combination of effects.
@@ -136,6 +149,7 @@ Successful reconstruction of such tracks requires the presence of shared hits to
 Furthermore, decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
 
 %Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
+
 
 
 
@@ -221,11 +235,6 @@ Furthermore, multiple tracks sharing an incorrect hit can lead to the creation o
 The combination of the effects described makes reconstructing tracks in the core of high \pT \bjets particularly challenging.
 The reduced reconstruction efficiency of \bhadron decay tracks and incorrectly assigned hits is thought to be the primary cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
 %\todo{include plot from sebs study showing they are approx similar impacts? or just mention result? Can do put need to remove ATLAS labels. Alternatively you can put an interal reference to his work and state what the outcome is}
-
-
-
-
-
 
 
 
@@ -439,7 +448,7 @@ The results demonstrate an improvement in hit assignment, unchanged reconstructi
 
 
 
-\section{Conclusion}
+\section{Conclusion}\label{sec:trk_btag_conclusion}
 
 In this section, the difficulties facing efficient and accurate  track reconstruction, and hence performant \btagging, have been outlined.
 The ambiguity solver, which attempts to clean or reject tracks which have an excessive number of shared hits, is shown to be overly aggressive in the removal of \bhadron decay product track candidates.
