@@ -1,15 +1,16 @@
 \chapter{Track Classification MVA}\label{chap:track_classification_mva}
 
-The chapter details work on implementing a multivariate algorithm (MVA) to predict the truth origin of reconstructed tracks.
+This chapter details work on implementing a multivariate algorithm (MVA) to predict the truth origin of reconstructed tracks.
 An introduction to formalisms of machine learning is given in \cref{sec:ml_background}.
 In \cref{sec:track_labelling}, the truth origin label is defined, and in \cref{sec:fake_track_mva} these labels are used to train a machine learning model that can effectively discriminate between good and fake tracks.
 Several studies motivated this work by demonstrating that at high \pt, \btagging performance was degraded by the presence of large numbers of poorly reconstructed or fake tracks.
 If an algorithm could be trained to detect fake tracks, these could be removed before their input to the \btagging algorithms with the aim of improving performance.
+In addition, other groups that are sensitive to the presence of fake tracks would also benefit from this work.
 
 
 \section{Machine Learning Background}\label{sec:ml_background}
 
-Over the past few decades, machine learning (ML) techniques have become increasingly popular in high energy physics experiments due the increased volumes of high-dimensional data and improvements in the techniques used (in particular deep learning).
+Over the past few decades, machine learning (ML) techniques have become increasingly popular in High Energy Physics experiments due the increased volumes of high-dimensional data and improvements in the techniques used (in particular deep learning).
 Machine learning is the process by which a computer program uses data to learn suitable parameters for a predictive model.
 This is opposed to explicitly providing instructions on how to perform a task.
 A subfield known as \textit{supervised learning} is used in this work, and consists of exposing a model to a large number of labelled examples in order to extract relationships between the input data and their labels.
@@ -66,10 +67,10 @@ This term plays the role of a trainable constant value that is independent of th
     \label{fig:neuron}
 \end{figure}
 
-The output of the dot product and bias term $z$ is fed into an activation function $g$.
+The output of the dot product and bias term $z$ is fed into an activation function $g(z)$.
 The activation function has several uses, most notably acting as a source of non-linearity and bounding the output of the neuron.
 Some common activation functions (sigmod, tanh, ReLU and SiLU) are shown in \cref{fig:activation_functions}.
-The choice of activation function can have implications for the performance and convergence of the network, since the gradient of $g$ is used to compute the weight updates during training.
+The choice of activation function can have implications for the performance and convergence of the network, since the gradient of $g(z)$ is used to compute the weight updates during training.
 This is also why input data is typically normalised to have zero mean and unity variance \cite{lecun2012efficient}.
 
 \begin{figure}[!htbp]
@@ -88,7 +89,7 @@ This is also why input data is typically normalised to have zero mean and unity 
 Several neurons are linked together in layers to form a neural network.
 The inputs are propagated layer-by-layer through the network until reaching the final output layer.
 The number of layers and neurons per layer are important hyperparameters (those parameters which are not optimised as part of the training process) which influence the performance of the model.
-In the case of binary classification, the final output layer consists of a single neuron with a sigmoid activation 
+In the case of binary classification, the final output layer generally consists of a single neuron with a sigmoid activation 
 %
 \begin{equation}\label{eq:sigmoid}
   g(z) = \frac{1}{1 + e^{-z}} ,
@@ -96,7 +97,7 @@ In the case of binary classification, the final output layer consists of a singl
 %
 where $z$ is the output from the dot product of the inputs and the weights, plus the bias term.
 This value is bounded between zero and one allowing the final output to be interpreted as the probability that the input sample belongs to the signal class.
-NNs have the crucial property of being differentiable functions, which facilitates training process described in the next section.
+NNs have the crucial property of being differentiable functions, which facilitates the training process described in the next section.
 
 %The activation $a_i^{(l)}$ is the output of the activation function $g(z)$ of the $i^{\text{th}}$ node in layer $l$. The tensor element $\Theta_{ji}^{(l)}$ is the weight connecting the $i^{\text{th}}$ node in layer $l - 1$ to the $j^{\text{th}}$ node in layer $l$. We can compute the outputs for each neuron in a layer simultaneously using ${a}_j^{(l)} = g(\Theta_{ji}^{(l)} a_i^{(l-1)})$, where the activation function is computed element wise on the vector. Computers can perform matrix operations in parallel, making a vectorised implementation such as this more efficient than calculating each output sequentially.
 
@@ -106,7 +107,7 @@ NNs have the crucial property of being differentiable functions, which facilitat
 
 \subsection{Training with Gradient Descent}\label{sec:training_sgd}
 
-A training algorithm is used to optimise the weights of a NN after exposure to the training data.
+A training algorithm is used to optimise the weights and biases of a NN after exposure to the training data.
 %The performance of the trained model depends on the amount and quality of the training data, and the efficacy of the training algorithm.
 The training algorithm works by minimising a loss function $L$, which quantifies the error in the model's predictions.
 NNs are commonly trained using backpropagation in combination with a variant of the stochastic gradient descent algorithm to iteratively update the model parameters.
@@ -116,7 +117,7 @@ In binary classification problems, the binary cross entropy given in \cref{eq:bc
   L(x_i, \theta) = y_i \ln[f_\theta(x_i)] + (1 - y_i) \ln[1 - f_\theta(x_i)]
 \end{equation}
 %
-Since the model $f$ is differentiable, the error for each parameter $\theta_i$ can be computed by taking the partial derivative of $L$ with respect to the parameter.
+Since the model $f$ is differentiable, a correction for each parameter $\theta_i$ can be computed by taking the partial derivative of $L$ with respect to the parameter.
 Updated parameters $\theta_i'$ are calculated by updating the original parameter in the direction which reduces the loss.
 %
 \begin{equation}\label{eq:weight_update}
@@ -125,7 +126,7 @@ Updated parameters $\theta_i'$ are calculated by updating the original parameter
 %
 The hyperparameter $\alpha$ is known as the \textit{learning rate} and dictates the size of the step taken in the direction of the slope. 
 The errors for each parameter are efficiently calculated using the backpropagation algorithm \cite{rumelhart1986learning}.
-The process of updating weights is repeated until the weights converge, which means the network is trained.
+The process of updating weights is repeated until the weights are judged to have converged, which means the network is trained.
 In practice, small batches of the input data are shown to the network at a time. For each batch the average loss is calculated and the network's weights are updated.
 There are many extensions and variations of the gradient descent algorithm.
 This work uses the Adam optimiser which adds momentum to the weight updates (dampening oscillations) and an adaptive per-parameter learning rate \cite{2014arXiv1412.6980K}.
@@ -161,7 +162,7 @@ Each node represents an individual object, and edges are directed connections be
 The connectivity of the graph therefores encodes information about the relationships between objects that exist in the graph.
 
 A single graph network layer consists of three separate update functions $\phi^e$, $\phi^h$ and $\phi^u$ one for each of the nodes, edges, and global graph representation, and similarly three aggregation functions $\rho^{e \rightarrow h}$, $\rho^{e \rightarrow u}$ and $\rho^{h \rightarrow u}$.
-The aggregation functions combine information across different edges or nodes for their input into the update functions, which produce new representations for the nodes, edges and global objects based on the information in the previous layer and the aggregated information.
+The aggregation functions combine information across different edges or nodes for input into the update functions, which produce new representations for the nodes, edges and global objects based on the information in the previous layer and the aggregated information.
 The update functions are typically each implemented as a dense feedforward neural network (as described in \cref{sec:neural_nets}).
 The edges $e_i$ are updated by a edge network $\phi^e$ as in 
 %
@@ -187,7 +188,7 @@ The global representation is updated using the global network $\phi^u$ as in
 where $\overline{e}'$ is the aggregation $\rho^{e \rightarrow u}$ over all updated edges $e'_i$ and $\overline{h}'$ is the aggregation $\rho^{h \rightarrow u}$ over all updated nodes $h'_i$.
 
 The graph network layer performs a graph convolution, in an analogous way to a convolutional neural network operating on a grid of pixels.
-The above description is general, and not all concrete implementations of GNNs need implement every aspect.
+The above description is general, and not all concrete implementations of GNNs need to implement every aspect.
 For example, the global graph representation need not be present, and it is also possible that no dedicated edge features are present.
 In such cases the corresponding update and aggregation functions are not needed.
 \cref{fig:gnn_net_diags} shows two possible graph network update layers.
@@ -219,31 +220,31 @@ The layer used in the \GNN model is specified in more detail in \cref{sec:Archit
 Crucial to supervised learning techniques are the ground truth class labels which the machine learning model is trained to predict.
 A set of track truth labels which a high degree of granularity have been implemented in the \ATLAS software stack, and are listed in \cref{tab:truth_origins}.
 The labelling scheme has been designed to be useful beyond the classification of good and fake tracks.
-The origins are determined by analysing the simulated record to determine the physicall process that led to the creation of the truth (i.e. simulated) particle which is  associated with each reconstructed track.
+The origins are determined by analysing the simulated record to determine the physical process that led to the creation of the truth (i.e. simulated) particle which is  associated with each reconstructed track.
 Tracks are associated with truth particles by selecting the particle with the highest \textit{truth-matching probability} (TMP), defined in \cref{eq:tmp_def}.
-This is a weighted sum of the number of hits on a reconstructed track which are from the same truth particle, versus the total number of hits on the track.
-The weights are subdetector-dependent and are designed to account for the varying importance of the different subdetectors (based upon their precision) in the reconstruction of a track.
+For a given truth particle, the TMP is a weighted sum of the number of hits on a reconstructed track which are matched to the truth particle $N^{\textnormal{match}}$, divided the total number of hits on the track $N^{\textnormal{total}}$.
+The weights are subdetector-dependent and are designed to account for the varying importance of the different ID subdetectors (based upon their precision) in the reconstruction of a track.
 %
 \begin{equation}\label{eq:tmp_def}
     \textnormal{TMP} = 
     \frac{
-        10 N_{\textnormal{Pix}}^{\textnormal{good}} + 
-        5  N_{\textnormal{SCT}}^{\textnormal{good}} + 
-           N_{\textnormal{TRT}}^{\textnormal{good}}
+        10 N_{\textnormal{Pix}}^{\textnormal{match}} + 
+        5  N_{\textnormal{SCT}}^{\textnormal{match}} + 
+           N_{\textnormal{TRT}}^{\textnormal{match}}
         }{
-        10 N_{\textnormal{Pix}}^{\textnormal{all}} + 
-        5  N_{\textnormal{SCT}}^{\textnormal{all}} + 
-            N_{\textnormal{TRT}}^{\textnormal{all}}
+        10 N_{\textnormal{Pix}}^{\textnormal{total}} + 
+        5  N_{\textnormal{SCT}}^{\textnormal{total}} + 
+            N_{\textnormal{TRT}}^{\textnormal{total}}
         }
 \end{equation}
 %
 For the fake track classification tool, the track truth origins in \cref{tab:truth_origins} are used to construct a binary label by assigning all fake tracks to the background category, and all other tracks as signal.
 The fake track classifier is then trained to distinguish between these two categories of tracks.
 Fake tracks are defined using the TMP, with a $\textnormal{TMP} < 0.75$
-\footnote{An alternative definition of a fake track as one with $\textnormal{TMP} < 0.5$ is also in use within ATLAS. Both values were investigated, but 0.75 was used for this study.} 
+\footnote{An alternative definition of a fake track as one with $\textnormal{TMP} < 0.5$ is also in use within ATLAS. Both values were investigated, but 0.75 was used for this study, whereas 0.5 was used in \cref{chap:gnn_tagger}.} 
 giving a track the label of fake.
-Fake tracks are made up of combinatorial fakes, which are tracks which do not correspond to the trajectory of any truth particle, and poorly reconstructed tracks, which may somewhat resemble the trajectory of a truth particle due to the presence of some wrong hits on the track, will not accurately reproduce a true trajectory.
-
+Fake tracks are made up of combinatorial fakes, which are tracks which do not correspond to the trajectory of any truth particle, and poorly reconstructed tracks, which may somewhat resemble the trajectory of a truth particle but due to the presence of some wrong hits on the track will not accurately reproduce the true trajectory.
+In such cases the fake track can still be identified as having an origin: it is for example possible to have a fake track which is from the decay of a \bhadron.
 
 
 \begin{table}[!htbp]
@@ -264,9 +265,9 @@ Fake tracks are made up of combinatorial fakes, which are tracks which do not co
         \hline\bottomrule
     \end{tabular}
     \caption{
-      Truth origins which are used to categorise the physics process that led to the production of a track.
+      Truth origins which are used to categorise the physical process that led to the production of a track.
       Tracks are matched to charged particles using the truth-matching probability~\cite{PERF-2015-08}.
-      A truth-matching probability of less than $0.5$ indicates that reconstructed track parameters are likely to be mismeasured and may not correspond to the trajectory of a single charged particle.
+      A truth-matching probability of less than $0.75$ indicates that reconstructed track parameters are likely to be mismeasured and may not correspond to the trajectory of a single charged particle.
       The ``OtherSecondary'' origin includes tracks from photon conversions, \Kshort and $\Lambda^0$ decays, and hadronic interactions.
     }
     \label{tab:truth_origins}
@@ -275,7 +276,7 @@ Fake tracks are made up of combinatorial fakes, which are tracks which do not co
 \section{Fake Track Identification Tool}\label{sec:fake_track_mva}
 
 The rate of fake tracks increases at high transverse momentum as shown in \cref{fig:fakerate_vs} due to the difficulties in track reconstruction outlined in \cref{sec:b_track_reco_challenges}.
-The performance of \btagging algorithms is reduced as a direct result of the presence of these tracks as shown for SV1 (see \cref{sec:vertex_reco}) in \cref{fig:sv1_perf_nofake}, where the \leff decreases by up to \pct{35} at a \beff of \pct{35}.
+The performance of \btagging algorithms is reduced as a direct result of the presence of these tracks as shown for SV1 (see \cref{sec:vertex_reco}) in \cref{fig:sv1_perf_nofake}, where the efficiency to mistag a \ljet decreases by up to \pct{35} at a \beff of \pct{35} if such tracks are removed.
 
 
 \begin{figure}[!htbp]
@@ -290,7 +291,7 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
       \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_vs_dr.pdf}
   \end{subfigure}
   \caption{
-    Rate of fake tracks as a function of jet transverse momentum (left) and $\DeltaR(\textnormal{track}, \textnormal{jet})$ (right).
+    Rate of fake tracks as a function of jet transverse momentum (left) and $\DeltaR(\textnormal{track}, \textnormal{jet})$ (right) for jets in the \Zprime sample.
     The rate of fake tracks increases significantly as a function of \pt, and also increases as the distance to the jet axis decreases.
   }
   \label{fig:fakerate_vs}
@@ -313,14 +314,14 @@ Inputs to the model are described in \cref{sec:fake_mva_model_inputs}, while fak
 
 \subsection{Datasets}\label{sec:track_classifier_datasets}
 
-To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ are used.
+To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ were used.
 The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
 The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
 
 \newcommand{\hdampFootnote}{%
 The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
 
-The \ttbar events are generated using the \textsc{PowhegBox} \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} \textsc{v2} generator at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
+The \ttbar events are generated using the \textsc{PowhegBox} \textsc{v2} generator  \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
 The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
 \Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
 The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
@@ -328,7 +329,7 @@ Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} b
 
 %Additionally, all jets are required not to overlap with a generator-level electron or muon from \Wboson boson decays.
 Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
-Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
+Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm (see \cref{sec:jet_reco}) at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
 
 
 \subsection{Model Inputs}\label{sec:fake_mva_model_inputs}
@@ -340,11 +341,7 @@ Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm a
 
 The fake track MVA is given two jet variables and 20 tracking related variables for each track fed into the network.
 The jet transverse momentum and signed pseudorapidity constitute the jet-level inputs, with the track-level inputs listed in \cref{tab:fake_mva_track_inputs}.
-The track parameters and hit pattern are key indicators of whether or not a track is fake.
-The FracRank variable is the ordered index of the tracks that pass the ambiguity solver's selection divided by the total number of successfully reconstructed tracks in the event.
-The ambiguity solver processes track candidates iteratively in order of an internal score (see \cref{sec:track_reco}), and the order in which tracks are accepted is preserved.
-Since tracks with shared hits have lower scores, tracks which do not require the removal of shared hits are likely to be processed and accepted earlier on, whereas tracks with shared hits will be processed later and potentially have their shared hits removed.
-Hence the FracRank variable gives an indication of the of how easy it was for the track to be reconstructed.
+
 
 \begin{table}[!htbp]
   \footnotesize\centering
@@ -385,45 +382,23 @@ Hence the FracRank variable gives an indication of the of how easy it was for th
   \label{tab:fake_mva_track_inputs}
 \end{table}
 
-Track selection follows the loose selection described in \rcite{ATL-PHYS-PUB-2020-014} and outlined in \cref{tab:fake_track_mva_selections}, which was found to improve the performance compared to previous tighter selections, whilst ensuring good resolution of tracks and a low fake rate \cite{PERF-2015-08}.
+The track parameters and hit pattern are key indicators of whether or not a track is fake.
+The FracRank variable is the ordered index of the tracks that pass the ambiguity solver's selection divided by the total number of successfully reconstructed tracks in the event.
+The ambiguity solver processes track candidates iteratively in order of an internal score (see \cref{sec:track_reco}), and the order in which tracks are accepted is preserved.
+Since tracks with shared hits have lower scores, tracks which do not require the removal of shared hits are likely to be processed and accepted earlier on, whereas tracks with shared hits will be processed later and potentially have their shared hits removed.
+Hence the FracRank variable gives an indication of the track quality and how likely it is that hits would have been removed (tracks processed later on are more likely to have hits removed).
+
+Track selection follows the loose selection described in \rcite{ATL-PHYS-PUB-2020-014} and outlined in \cref{tab:fake_track_mva_selections}, which was found to improve the performance compared to previous tighter selections, whilst ensuring good resolution of the track's parameters and a low fake rate \cite{PERF-2015-08}.
 Inputs are scaled to have a central value of zero and a variance of unity before training and evaluation.
-
-\begin{table}[!htbp]
-  \footnotesize\centering
-  \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \begin{tabular}{ll}
-    \toprule\hline
-    \textbf{Parameter} & \textbf{Selection} \\
-    \hline
-    $\pt$                & $> 500$ MeV \\
-    $|\dzero|$              & $< 3.5$ mm \\
-    $|\zzero\sin\theta|$   & $< 5$ mm \\
-    Silicon hits         & $\ge 8$ \\
-    Shared silicon hits  & $< 2$ \\
-    Silicon holes        & $< 3$ \\
-    Pixel holes          & $< 2$ \\
-    \hline\bottomrule
-  \end{tabular}
-  \caption{
-    Quality selections applied to tracks,
-    where \dzero is the transverse IP of the track, \zzero is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle (see \cref{sec:track_parameterisation} for the IP definitions).
-    Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
-    %Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
-    A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
-    }
-  \vspace{4mm}
-  \label{tab:fake_track_mva_selections}
-\end{table}
-
 
 
 \subsection{Model Hyperparameters}\label{sec:hyperparameters}
 
-Due to the imbalance between the two classes (with fake tracks being relatively uncommon), a weight was added to the loss function for the background class to account for this.
+Due to the imbalance between the two classes (with fake tracks being relatively uncommon), a weight was added to the loss function for the background class to balance their relative weights.
 The NN was made up of two hidden layers with 220 nodes per layer.
 The ReLU activation function was used in conjunction with the Adam optimiser with a learning rate of $1\text{e}{-3}$.
-Optimisation of the networks architecture was carried out to ensure optimal performance with a relatively small number of learnable parameters -- 54 thousand.
-The model was trained using \num{40} million tracks with a futher \num{1} million tracks each used for validation and testing.
+Optimisation of the networks architecture was carried out to ensure optimal performance with a relatively small number of learnable parameters -- 54,000.
+The model was trained using \num{40} million tracks with a futher \num{4} million tracks each used for validation and testing.
 A full list of the model hyperparameters is given in \cref{tab:fake_track_mva_hyperparams}.
 
 \begin{table}[!htbp]
@@ -453,7 +428,7 @@ A full list of the model hyperparameters is given in \cref{tab:fake_track_mva_hy
 \subsection{Results}\label{sec:fake_track_mva_results}
 
 
-In order to evaluate the fake track classification tool, a orthogonal test sample of $1$ million tracks in jets in the combined \ttbar and \Zprime samples is used.
+In order to evaluate the fake track classification tool, a orthogonal test sample of $4$ million tracks in jets in the combined \ttbar and \Zprime samples was used.
 The continuous scalar output from the NN model is interpreted as the probability that a given track is a signal track (i.e. not fake).
 \cref{fig:track_classifier_output_roc} shows the performance of the fake track classification MVA. The signal and background classes are well separated in the output of the tool.
 Also shown is a receiver operating characteristic (ROC) curve, which plots the rate of true positives against the rate of false positives over a scan of cut points on the NN output ranging from zero to one.
@@ -473,8 +448,9 @@ Considering only tracks from \bhadron decays, this value drops slightly to $0.92
       \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_id_roc.pdf}
   \end{subfigure}
   \caption{
-    (left) Normalised histogram of the model output separated for signal and fake tracks, and further separated by those tracks which are from the decay of a \bhadron.
+    (left) Normalised histograms of the fake track classification model output separated for signal and fake tracks, and further separated by those tracks which are from the decay of a \bhadron.
     (right) The ROC curve for all tracks (solid line) and tracks from the decay of a \bhadron (dashed line).
+    The plots show tracks in the combined \ttbar and \Zprime testing sample.
     The model is able to successfully discriminate between signal and fake tracks, and shows a very similar performance when looking specifically at tracks from the decay of a \bhadron.
   }
   \label{fig:track_classifier_output_roc}
@@ -500,20 +476,22 @@ This can happen because fake tracks with $\textnormal{TMP} < 0.75$ are still mat
   \caption{
     Good and fake track selection efficiencies for the combined \ttbar and \Zprime samples.
     Two working points are defined, cutting on the NN output at $0.06$ and $0.12$.
-    The continuous output of the model allows for the tuning of good and fake track identification efficiencies.
   }
   \label{tab:fake_track_mva_effs}
 \end{table}
 
 \section{\bhadron Track Identification}
 
-After initial tests and investigation, it was found that fake tracks which were the result of \bhadron decays actually aided \btagging performance.
+After initial tests and investigation, it was found that fake tracks which were the result of \bhadron decays actually aided \btagging performance, as demonstrated in \cref{fig:track_mva_sv1}.
 The application of a single tool which removed all fake tracks was therefore not optimal.
 A second tool was therefore trained in the same manner as the first, this one was designed to distinguish between those tracks which were from the decay of a \bhadron (FromB and FromBC in \cref{tab:truth_origins}) and those which were not (all other truth origins).
+Fake tracks which were from the decay of a \bhadron were included in the signal class.
 The \bhadron decay track MVA was trained using the same setup as described above, with the same tracks, input variables, and training procedure.
 The performance of the model to separate \bhadron decay tracks from other tracks is shown in \cref{fig:b_id_output_roc}.
 Using a selection WP of 0.1, the model can retain \pct{98.5} of \bhadron tracks and reject \pct{46.2} of tracks not from the decay of a \bhadron.
-In \cref{sec:mva_combined}, this model is used in conjunction with the fake track identification MVA described in \cref{sec:fake_track_mva_results} to identify and remove fake tracks which are not from the decay of a \bhadron.
+In \cref{sec:mva_combined}, this model is used in conjunction with the fake track identification MVA to identify and remove fake tracks which are not from the decay of a \bhadron.
+
+% TODO: ADD TABLE REQUEST 
 
 \begin{figure}[!htbp]
   \centering
@@ -527,9 +505,10 @@ In \cref{sec:mva_combined}, this model is used in conjunction with the fake trac
       \includegraphics[width=\textwidth]{chapters/track_classifier/figs/b_id_roc.pdf}
   \end{subfigure}
   \caption{
-    (left) Normalised histogram of the model output separated for tracks from the decay of a \bhadron and tracks from other sources.
+    (left) Normalised histogram of the \bhadron track identification model output separated for tracks from the decay of a \bhadron and tracks from other sources.
     The two groups are further separated into those tracks which are fake.
     (right) The ROC curve for all tracks (solid line).
+    The plots show tracks in the combined \ttbar and \Zprime testing sample.
   }
   \label{fig:b_id_output_roc}
 \end{figure}
@@ -539,13 +518,14 @@ In \cref{sec:mva_combined}, this model is used in conjunction with the fake trac
 
 
 A 2-dimensional cut was then used to only reject those tracks that had a high probability of being fake, and also a low probability of being a \bhadron decay track.
+The results of the combined approach are provided in \cref{tab:combined_va}, which shows that for the working point ``A'', \pct{98.6} of \bhadron decay tracks (both good and fake) are retained, while \pct{50.7} of fake tracks which are not from \bhadron decays are rejected.
 
 \begin{table}[!htbp]
   \footnotesize\centering
   \setlength{\tabcolsep}{0.5em} % for the horizontal padding
-  \begin{tabular}{lp{2cm}p{2cm}p{4cm}p{4cm}}
+  \begin{tabular}{l>{\raggedright}p{2cm}>{\raggedright}p{2cm}>{\raggedright}p{4cm}>{\raggedright\arraybackslash}p{4cm}}
       \toprule\hline
-      \textbf{WP} & \textbf{Fake MVA Cut} & \textbf{\bhadron Decay MVA Cut} & \textbf{Retained \bhadron Tracks} & \textbf{Fake \& Non \bhadron Tracks Rejected} \\
+      \textbf{WP} & \textbf{Fake MVA Cut} & \textbf{\bhadron Decay MVA Cut} & \textbf{Retained \bhadron Tracks} & \textbf{Fake non-\bhadron Tracks Rejected} \\
       \hline
       A & 0.5 & 0.4 & \pct{98.6} & \pct{50.7} \\
       B & 0.6 & 0.5 & \pct{97.5} & \pct{62.0} \\
@@ -563,10 +543,9 @@ A 2-dimensional cut was then used to only reject those tracks that had a high pr
 The \ljet efficiency of SV1 is successfully reduced when using the combined tools to remove fake tracks that are not from a \bhadron decay, as shown in \cref{fig:track_mva_sv1}.
 At a \beff of \pct{70}, the \ljet mistag rate for jets with $250 < \pt < \SI{400}{\GeV}$ is reduced from $0.054$ to $0.044$, a relative improvement of approximately \pct{20}.
 For jets with $400 < \pt < \SI{1000}{\GeV}$ the mistage rate drops from 0.1 to 0.08 for a similar relative improvement of \pct{20}.
-The performance of the fake track removal approach was also tested for the other low level vertexing algorithm: JetFitter.
-A similar level of improvement in the \ljet mistag rate was observed of up to a \pct{20} reduction for both low- and \highpt \Zprimejets.
-Together, these results demonstrate that by identifying and removing fake tracks which are not the result of the weak decay of a \bhadron, the performance of the low level tagging algorithms can be improved.
-
+The performance of the fake track removal approach was also tested for the other low level vertexing algorithm -- JetFitter.
+A similar level of improvement in the \ljet mistag rate was observed with a reduction of up to a \pct{20} reduction for both low- and \highpt \Zprimejets achieved.
+Together, these results demonstrate that by identifying and removing fake tracks which are not the result of the weak decay of a \bhadron, the performance of the low level tagging algorithms can be improved by an amount which is comparable to the improvement that would be observed if the tracks were selected at truth level1.
 
 \begin{figure}[!htbp]
   \centering
@@ -612,22 +591,24 @@ Together, these results demonstrate that by identifying and removing fake tracks
 
 Fake tracks, which are prevalent in the core of high \pt jets, have an adverse impact on \btagging performance.
 A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being input to the \btagging algorithms.
+An advantage of the approach is that the continuous output of the model allows for the tuning of good and fake track identification efficiencies.
 Since it was found that \bhadron decay tracks can also be poorly reconstructed and thus marked as fake, it was deemed necessary also to train a second algorithm to detect \bhadron decay tracks so that the removal of these tracks could be avoided.
 Removing fake and non-$b$ decay tracks in this way was found to improve the \ljet mistagging rate of SV1 and JetFitter by up to \pct{20} at high transverse momentum.
-The improved achieved using the classification tools was in general comparable with the improvement achieved when using the truth information to remove the fake tracks not from the decay of a \bhadron.
+The improvement achieved using the classification tools was in general comparable with that achieved when using the truth information to remove the fake tracks not from the decay of a \bhadron.
 
 \subsubsection{Future Work}
-While removing tracks prior to their input to the low level tagging algorithms is shown here to be beneficial, a more performant alternative might be to keep these tracks but label them as being fake (for example using the output of the classification tool), and allow the tagging algorithms to take this into consideration, potentially making use of this information.
+While removing tracks prior to their input to the low level tagging algorithms is shown here to be beneficial, a more performant alternative might be to keep these tracks but label them as being fake (for example using the output of the classification tool), and allow the tagging algorithms to take this into consideration.
 This is not straightforward with manually optimised taggers such as SV1 and JetFitter, but is possible with more advanced taggers as described in \cref{chap:gnn_tagger}.
 %A more advanced approach than detecting and removing fake tracks is to attempt to determine whether a track is good or fake, but allow any downstream tagging algorithms to use this information when coming to a descision about wether to tag a jet, rather than removing the track as an input.
 %These fake or poorly reconstructed tracks could also be remove in other places\todo{keep?}
 
 Tools which identify the origin of a given track have other potential uses.
 One application is to isolate a relatively pure sample of fake tracks which can be used to estimate the fake track rate in data, which would be useful for estimating the uncertainty on fake track modelling.
-Another application would be to use the \bhadron track identification tool to improve the track-to-jet association.
+Another application is to use the \bhadron track identification tool to improve the track-to-jet association.
 Both applications are currently under investigation.
 
-The approach here works on a track-by-track basis, but a more sophisticated approach would consider the correlations between the tracks inside a jet, as shown in \cref{chap:gnn_tagger}.
-
+The approach here works on a track-by-track basis, but a more sophisticated approach would consider the correlations between the tracks inside a jet.
 Also left for future work is to simultaneously train a single tool which discriminates between all the truth origins listed in \cref{tab:truth_origins}.
 Such a tool would be useful as a general purpose multiclass classifier.
+An algorithm which takes both these aspects into consideration
+is discussed in \cref{chap:gnn_tagger}.
