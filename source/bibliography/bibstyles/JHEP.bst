@@ -359,7 +359,7 @@ FUNCTION {format.editors}
   if$
 }
 
-%% TODO: change.case$ is probably not a good idea...
+%% TnoODO: change.case$ is probably not a good idea...
 %%       see typeset/scripts/tests/JHEP.bst/src/bibitem-3127.bib
 FUNCTION {format.title}
 { title empty$

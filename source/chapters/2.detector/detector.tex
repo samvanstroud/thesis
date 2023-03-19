@@ -589,7 +589,7 @@ The \textit{hard scatter vertex} of an event is chosen as the primary vertex who
 
 \subsubsection{Secondary Vertices}
 Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved from the primary vertex (see \cref{sec:b_decay_topology}).
-Two widely used secondary vertexing tools are used within \ATLAS: SV1 and JetFitter \cite{FTAG-2018-01}.
+Two widely used secondary vertexing tools are used within \ATLAS: SV1 and JetFitter \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011}.
 Each attempts to reconstruct secondary vertices inside a jet using the tracks associated to that jet (see \cref{sec:jet_reco} for more information about track association).
 SV1 by design attempts to reconstruct only a single inclusive vertex per jet.
 This inclusive vertex groups all \bhadron decay products, including tracks from the \bhadron decay itself and tracks from $b \rightarrow c$ decays.
@@ -604,8 +604,9 @@ Objects can be associated to jets in one of two ways.
 The first is via a geometrical matching in $\DeltaR$ (see) 
 The second is via a ghost association \cite{Cacciari:2008gn}, where the object is assigned a negligible momentum and re-clustered into the jet after its formation.
 
-Jets from pile-up interactions are suppressed using %%% TODO!!
-\cite{ATLAS-CONF-2014-018}
+Jets from pile-up interactions are suppressed using the Jet Vertex Tagger (JVT) algorithm, which uses the transverse momenta of tracks to identify jets from pile-up interactions \cite{ATL-PHYS-PUB-2015-006}.
+
+
 
 \subsubsection{EMTopo Jets}
 EMTopo jets are reconstructed from noise-suppressed topological clusters (topoclusters) of calorimeter energy depositions \cite{PERF-2014-07}.

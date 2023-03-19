@@ -245,26 +245,7 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
 
 To identify and remove fake tracks, a NN classification tool was trained with all non-fake tracks as the signal class and fake tracks as the background class.
 Inputs to the model are described in \cref{sec:fake_mva_model_inputs}, while fake track removal performance is given in \cref{sec:fake_track_mva_results}.
-
-
-\subsection{Datasets}\label{sec:track_classifier_datasets}
-
-To train and evaluate the model, simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$ were used.
-The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
-The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
-
-\newcommand{\hdampFootnote}{%
-The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
-
-The \ttbar events are generated using the \textsc{PowhegBox} \textsc{v2} generator  \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
-The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
-\Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
-The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
-Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
-
-%Additionally, all jets are required not to overlap with a generator-level electron or muon from \Wboson boson decays.
-Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
-Additionally, a standard selection using the Jet Vertex Tagger (JVT) algorithm (see \cref{sec:jet_reco}) at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
+Both models are trained and evaluated using jets from the \ttbar and \Zprime samples described in \cref{sec:track_classifier_datasets}
 
 
 \subsection{Model Inputs}\label{sec:fake_mva_model_inputs}
@@ -534,8 +515,6 @@ The improvement achieved using the classification tools was in general comparabl
 \subsubsection{Future Work}
 While removing tracks prior to their input to the low level tagging algorithms is shown here to be beneficial, a more performant alternative might be to keep these tracks but label them as being fake (for example using the output of the classification tool), and allow the tagging algorithms to take this into consideration.
 This is not straightforward with manually optimised taggers such as SV1 and JetFitter, but is possible with more advanced taggers as described in \cref{chap:gnn_tagger}.
-%A more advanced approach than detecting and removing fake tracks is to attempt to determine whether a track is good or fake, but allow any downstream tagging algorithms to use this information when coming to a descision about wether to tag a jet, rather than removing the track as an input.
-%These fake or poorly reconstructed tracks could also be remove in other places\todo{keep?}
 
 Tools which identify the origin of a given track have other potential uses.
 One application is to isolate a relatively pure sample of fake tracks which can be used to estimate the fake track rate in data, which would be useful for estimating the uncertainty on fake track modelling.

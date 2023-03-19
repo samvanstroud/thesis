@@ -6,6 +6,8 @@ In particular, \btagging is the identification of jets originating only from \bh
 Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
 It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
 
+This chapter is structured as follows.
+In \cref{sec:track_classifier_datasets} an introduction to the datasets used in this thesis is given.
 The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS are described in \cref{sec:btagging_algs}.
 These work by identifying the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
 Ultimately, the tagging algorithms use input information about the reconstructed jet and its associated tracks.
@@ -15,21 +17,75 @@ Some preliminary investigations into improving tracking in the \highpt regime ar
 In \cref{sec:trk_btag_conclusion} the conclusions of this chapter are given.
 
 
+\section{Datasets}\label{sec:track_classifier_datasets}
+
+This thesis makes extensive use of two simulated datasets which are described in this section.
+The datasets are made up of simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$.
+The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
+The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
+
+\newcommand{\hdampFootnote}{%
+The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
+
+The \ttbar events are generated using the \textsc{PowhegBox} \textsc{v2} generator  \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
+The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
+\Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
+The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
+Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
+
+%Additionally, all jets are required not to overlap with a generator-level electron or muon from \Wboson boson decays.
+Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
+Additionally, a standard selection using the JVT tagger (see \cref{sec:jet_reco}) at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
+
+
 \section{\texorpdfstring{\btagging}{b-tagging} Algorithms}\label{sec:btagging_algs}
 
+In this section some common definition used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the various \btagging algorithms used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
+
+\subsection{Common Definitions}\label{sec:ftag_defs}
+
+Each flavour tagging algorithm outputs a discriminant value that can be used to select jets of the signal flavour.
+The \text{efficiency} of a flavour tagging algorithm is defined as the fraction of signal jets which are correctly identified by the tagger.
+Given $N^{\text{signal}}$ signal jets, $N^{\text{signal}}_{\text{tagger}}$ of which have passed the algorithm's selection and $N^{\text{signal}}_{\text{untagger}}$ of which have not, the efficiency is given by
+
+\begin{equation}
+\varepsilon = \frac{N^{\text{signal}}_{\text{tagged}}}{N^{\text{signal}}_{\text{tagged}} + N^{\text{signal}}_{\text{untagged}}} .
+\end{equation}
+
+Meanwhile the \textit{fake rate} is defined as the efficiency for a background class to be selected, i.e.
+
+\begin{equation}
+\text{fake rate} = \frac{N^{\text{background}}_{\text{tagged}}}{N^{\text{background}}_{\text{tagged}} + N^{\text{background}}_{\text{untagged}}} .
+\end{equation}
+
+The \textit{rejection power} of the model is quantified for a given background as the reciprocal of the fake rate, i.e.
+
+\begin{equation}
+\text{rejection power} = \frac{1}{\text{fake rate}} .
+\end{equation}
+
+A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given efficiency on the inclusive \ttbar sample.
+
+
+\subsection{Low-level Algorithms}\label{sec:low_level_algs}
 % TODO: add vertexing section here??? or say something more like "the sec vert reco algs described in xx can be used to identify b-jets"....
 
-The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
-Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
-Each of these low-level algorithms reconstructs distinct features of the experimental signature of heavy flavour jets using the tracks associated to the jet.
-The low-level algorithms are a combination of manually optimised reconstruction algorithms for example the SV1 and JetFitter algorithms which reconstruct displaced decay vertices \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011}, and trained taggers such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+The low-level algorithms are the first step in the \btagging process.
+They take inputs information about the jet and its associated tracks and reconstruct distinct features of the experimental signature of heavy flavour jets.
+The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example SV1 and JetFitter which reconstruct displaced decay vertices (see \cref{sec:vertex_reco}) and IPxD which discriminates based on track IPs, and trained machine learning models such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
 
-In addition to \DLr, another widely used high-level tagger is the MV2c10 algorithm \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
-This tagger is used in the analysis described in \cref{chap:vhbb_boosted}.
-Similar to \DLr the MV2c10 algorithm takes inputs from the outputs of a number of low-level algorithms (IPxD, SV1 and JetFitter).
-The outputs of the low-level algorithms are provided as inputs to a boosted decision tree.
+\subsection{High-level Algorithms}\label{sec:high_level_algs}
+
+The high-level algorithms combine the outputs of the independently optimised low-level algorithms using a multivariate approach to produce a discriminant value for each jet.
+For example the MV2c10 algorithm, used in the analysis described in \cref{chap:vhbb_boosted}, consists of a boosted decision tree which combines the outputs of IPxD, SV1 and JetFitter \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
 The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
 At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
+
+The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
+The low-level algorithms used by the different high-lvel taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
+
+%is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
+%Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
 
 %As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
 
@@ -39,7 +95,7 @@ At this efficiency working point, rejection factors for \cjets and \ljets are ap
   \caption{
     An overview of different high and low level level taggers used in ATLAS.
     The low level taggers are IPxD, SV1 and JetFitter, and RNNIP and DIPS \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
-    The outputs of these taggers are fed into the high level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
+    The outputs of these taggers are fed into the high-level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
   }
   \label{fig:high_low_taggers}
 \end{figure}
@@ -76,7 +132,7 @@ before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = 
 For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
 Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure) 
 \cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
-This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices at the \bhadron decay point.
+This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
 
 \begin{figure}[!htbp]
   \centering
@@ -111,16 +167,16 @@ Reconstruction of these vertices from tracks with common points of spatial origi
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
 Since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
-The \borchadron also decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}.
-The presence of a reconstructed electron or muon inside a jet can also be a key indicator that the jet was instantiated by a \bhadron.
+Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}, the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
+%In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
+%As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
+%Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
 
 These signatures are primarily identified using tracks associated to jets, or using reconstructed electrons or muons, which also rely on tracks as discussed in \cref{sec:lepton_reco}.
 As such, efficient and accurate track reconstruction is essential for high performance flavour tagging.
 
 % TODO integrate with above and make it smoother, it's a bit repeated
-In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
-As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
-Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
+
 
 \subsection{Challenges}\label{sec:b_track_reco_challenges}
 
@@ -129,8 +185,8 @@ For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combina
 As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay is unaffected.
 The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become significantly outnumbered.
 Both fragmentation and \bhadron weak decay products also become increasingly collimated as their inherited transverse momentum increases.
-At high energies, the increased decay length of \bhadrons (and \chadrons) means that decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}).
-If the weak decay of the \bhadron takes place close enough to a detector layer, or if the particles are otherwise sufficiently collimated, charge deposits left by nearby particles may not be resolved individually, instead being reconstructed as merged clusters.
+This is compounded by the increased decay length of \bhadrons (and \chadrons) at \highpt, which means that the decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}).
+If the weak decay of the \bhadron takes place close enough to a detector layer, or if the particles are otherwise sufficiently collimated, charge deposits left by nearby particles may not be resolved individually, instead being reconstructed as merged clusters \cite{PERF-2015-08}.
 
 \begin{figure}[!htbp]
   \centering

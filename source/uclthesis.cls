@@ -133,7 +133,7 @@
 %% To allow typesetting of URLs when not using hyperref
 \ifx\@makeFinal\@empty\else%
   \RequirePackage{url}
-  %% TODO: renew href command using \url 
+  %% TnoODO: renew href command using \url 
 \fi
 
 

@@ -338,7 +338,7 @@
 \RequirePackage{rotating}
 
 %% Re-defines captions of figures and tables
-%% TODO: make configurable / optional?
+%% TnoODO: make configurable / optional?
 \RequirePackage[format=plain,labelfont=bf,labelsep=colon,font=small]{caption}%[2004/01/23]
 
 %% Avoid an error by explicity importing here
@@ -721,7 +721,7 @@
 
 
 %% Deprecated: combined command for defining the title and author in the preamble
-%% TODO Remove in 1.5
+%% TnoODO Remove in 1.5
 \DeclareRobustCommand{\definethesis}[2]{%
   \typeout{hepthesis: definethesis macro is deprecated. Use author and title macros instead.}
   \author{#1}%
