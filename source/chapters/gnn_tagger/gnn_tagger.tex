@@ -211,7 +211,7 @@ This task may also aid the jet flavour prediction by acting as a form of supervi
 
 The vertexing auxiliary objective makes use of the fact that displaced decays of \bchadrons lead to secondary and tertiary vertices inside the jet, as described in \cref{sec:b_decay_topology}.
 The presence of displaced secondary vertices is not a completely clean signal of a heavy flavour jet, as displaced secondary vertices can also occur in \ljets as a result of material interactions, conversions, and long-lived particle decays (e.g. \Kshort and $\Lambda^0$).
-For the auxiliary object, \GNN predicts a binary label for each pair of tracks in the jet.
+For this objective, \GNN predicts a binary label for each pair of tracks in the jet.
 The label has a value of 1 if the truth particles associated with the two tracks in the pair originated from the same spatial point, and 0 otherwise. 
 To derive the corresponding truth labels for training, truth production vertices within $0.1$ mm are merged.%, as these are assumed to be unresolvable given the granularity of the ID. 
 Track-pairs where one or both of the tracks in the pair have an origin label of either Pile-up or Fake are assigned a label of 0.
@@ -354,7 +354,6 @@ Typically the validation loss, calculated on \njetsval jets, became stable after
 The epoch that minimized the validation loss was used for evaluation.
 \GNN has been integrated into the ATLAS software~\cite{ATL-SOFT-PUB-2021-001} using ONNX~\cite{bai2019}.
 The test sample jet flavour predictions scores are computed using the ATLAS software stack as a verification of this process.
-%\todo{inlcude loss vs epoch? or save for paper}
 
 
 \section{Results}\label{sec:gnn_results}
@@ -377,7 +376,7 @@ where \fc is a free parameter that determines the relative weight of $p_c$ to $p
 The choice of \fc is arbitrary, and is optimised based upon the desired light- vs \cjet rejection performance.
 This parameter is set to a value of $\fc = 0.018$ for the \DLr model, obtained through an optimisation procedure described in \rcite{ATL-PHYS-PUB-2017-013}.
 Based on a similar optimisation procedure, a value of $\fc = 0.05$ is used for the \GNN models.
-A fixed-cut working point (WP) defines the corresponding selection applied to the tagging discriminant \Db in order to achieve a given efficiency on the inclusive \ttbar sample.
+%A fixed-cut working point (WP) defines the corresponding selection applied to the tagging discriminant \Db in order to achieve a given efficiency on the inclusive \ttbar sample.
 
 %The technical implementation of \GNN in the ATLAS software stack requires any jet with zero or one associated tracks to be classified as a \ljet.
 %The impact of this on the tagging performance of \GNN was found to be negligible, with \pct{0.12} of \ttbarbjets and \pct{0.02} of \Zprimebjets affected.
@@ -871,6 +870,7 @@ The performance of the model was found to be unsensitive to changes in the netwo
 To measure the track classification performance, the area under the curve (AUC) of the receiver operating characteristic (ROC) curve is computed for each origin class, using a one-versus-all classification approach\footnote{One class is taken to be signal and the rest are taken as background, subsequently a binary classification approach is used.}.
 The AUCs for the different truth origins are averaged using both an unweighted and a weighted mean.
 The unweighted mean treats the performance of each class equally, while the weighted mean uses as a weight the relative abundance of tracks of each class.
+The same approach is used to compute the precision, recall and F1 scores\footnote{The precision is the fraction of selected tracks from the signal class. The recall, similar to the efficiency, is the fraction of tracks from the signal class which are selected. The F1 score is the harmonic mean of the precision and recall.}.
 \cref{tab:track_classification_metrics} demonstrates clearly that \GNN outperforms the MLP both at \ttbarpt for \ttbarjets and at \Zprimept for \Zprimejets.
 For example, \GNN can reject \pct{65} of fake tracks in \ttbarjets, while retaining more than \pct{99} of good tracks (i.e. those tracks which are not fake).
 The \GNN model has two advantages over the MLP which can explain the performance improvement.
@@ -934,11 +934,14 @@ The FromC tracks which are \chadron decay products, are the hardest to classify,
 \end{figure}
 
 
+\section{Futher Studies}\label{sec:gnn_trig_upgrade}
+
+
 
 \subsection{Looser Track Selection}\label{sec:looser_track_selection}
 
 The track selections used to produce the main results are listed in \cref{tab:fake_track_mva_selections}.
-This selection includes a cut on the number of shared silicon modules used to reconstruct the track $N^{\textnormal{Si}}_{\textnormal{shared}}$.
+This includes a selection on the number of shared silicon modules used to reconstruct the track $N^{\textnormal{Si}}_{\textnormal{shared}}$.
 This value is calculated as 
 %
 \begin{equation}
@@ -947,16 +950,17 @@ This value is calculated as
 \end{equation}
 %
 where $N^{\textnormal{Pix}}_{\textnormal{shared}}$ is the number of shared pixel hits and $N^{\textnormal{SCT}}_{\textnormal{shared}}$ is the number of shared SCT modules on a track.
-The nominal cut used elsewhere in this thesis is $N^{\textnormal{Si}}_{\textnormal{shared}} < 2$.
-As the rate of shared hits is significantly higher for \bhadron decay tracks than for other tracks, especially at \highpt, this cut rejects a significant proportion of these tracks.
+The nominal selection used elsewhere in this thesis is $N^{\textnormal{Si}}_{\textnormal{shared}} < 2$.
+As the rate of shared hits is significantly higher for \bhadron decay tracks than for other tracks, especially at \highpt, this selection rejects a significant proportion of these tracks.
 
-\cref{fig:ttbar_gn1_loose,fig:zprime_gn1_loose} show the result of training the \GNN tagger with the full relaxation of this cut, i.e. allowing tracks with any number of shared hits.
+\cref{fig:ttbar_gn1_loose,fig:zprime_gn1_loose} show the result of training the \GNN tagger with the full relaxation of this selection, i.e. allowing tracks with any number of shared hits.
 The shared hit requirements applied by the ambiguity solver as part of track reconstruction (see \cref{sec:track_reco}) are still applied.
 In addition, the maximum allowed value of \dzero is increased from \SI{3.5}{\milli\meter} to \SI{5.0}{\milli\meter}.
 The results show that optimisation of the input track selection can lead to significant improvements in performance over the default selection.
 For the \ttbarjets shown in \cref{fig:ttbar_gn1_loose}, the effect of loosening the track selection is limited.
 This is expected due to the lower prevalence of shared hits at lower transverse momenta.
-However for \Zprimejets as shown in \cref{fig:zprime_gn1_loose}, the \lrej improves with respect to the baseline \GNN model by \pct{30}, while the \lrej improves by \pct{70} at the \WP{50}{b}.
+However for \Zprimejets as shown in \cref{fig:zprime_gn1_loose}, the \crej improves with respect to the baseline \GNN model by \pct{35}, while the \lrej improves by \pct{40} at the \WP{20}{b}.
+Relative improvements of a similar magnitude are also observed for \GNNLep.
 
 
 \begin{figure}[!p]
@@ -964,8 +968,8 @@ However for \Zprimejets as shown in \cref{fig:zprime_gn1_loose}, the \lrej impro
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_ttbar.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbar jets with \ttbarpt, for the looser track selection trainings of \GNN.
-        The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
-        A value of $\fc = 0.018$ is used in the calculation of \Db for DL1d and $\fc = 0.05$ is used for \GNN.
+        The ratio to the performance of the baseline \GNN model is shown in the bottom panels.
+        A value of $\fc = 0.05$ is used for all models.
         Binomial error bands are denoted by the shaded regions.
     }
     \label{fig:ttbar_gn1_loose}
@@ -976,15 +980,12 @@ However for \Zprimejets as shown in \cref{fig:zprime_gn1_loose}, the \lrej impro
     \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_zprime.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprime jets with \Zprimept, for the looser track selection trainings of \GNN.
-        The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
-        A value of $\fc = 0.018$ is used in the calculation of \Db for DL1d and $\fc = 0.05$ is used for \GNN.
+        The ratio to the performance of the baseline \GNN model is shown in the bottom panels.
+        A value of $\fc = 0.05$ is used for all models.
         Binomial error bands are denoted by the shaded regions.
     }
     \label{fig:zprime_gn1_loose}
 \end{figure}
-
-
-\section{Other Implementations of \GNN}\label{sec:gnn_trig_upgrade}
 
 
 \subsection{High Level Trigger}\label{sec:gnn_trig}
