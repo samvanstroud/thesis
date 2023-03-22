@@ -3,7 +3,7 @@
 %AB: The work presented in this thesis relies on data recorded by the ATLAS detector in high energy proton-proton collisions. This chapter provides an overview of the experimental apparatus and analysis techniques used throughout this thesis.
 
 Since the completion of its construction in 2008, the Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN has extended the frontiers of particle physics through significant increases in centre of mass energy and luminosity compared with previous collider experiments.
-The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than than the speed of light, at which point they are made to collide.
+The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than the speed of light, at which point they are made to collide.
 The proton bunches travel round the ring 11,000 times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
 The beams travel in opposite directions around the ring and are crossed at four locations so that collisisons between protons can take place.
 Around these collision points four specialised detectors, ALICE~\cite{AliceCollaboration_2008}, CMS~\cite{CMS-TDR-08-001}, LHCb~\cite{LHCbCollaboration_2008} and \ATLAS~\cite{PERF-2007-01}, are located to capture information about the products of the collisions.
@@ -20,7 +20,7 @@ Between runs there are periods of shutdown while the accelerator and detector ma
 \runone began in 2010 when the \LHC collided proton bunches, each containing more than $10^{11}$ particles, 20 million times per second, providing \SI{7}{\TeV} proton-proton collisions at instantaneous luminosities of up to \peakLumi.
 The centre-of-mass energy was increased to \SI{8}{\TeV} in 2012.
 Over the course of \runone, \intlumirunone of usable integrated luminosity was recorded.
-\runtwo, which spanned 2015--2018, further increased the the proton-proton collision energy to \SI{13}{\TeV}.
+\runtwo, which spanned 2015--2018, further increased the proton-proton collision energy to \SI{13}{\TeV}.
 During \runtwo the bunch spacing was reduced, leading to a collisison rate of \SI{40}{\mega\hertz}.
 Over the course of \runtwo a total usable integrated luminosity of \intlumi was recorded. % less good for physics
 2022 marked the beginning of \runthree which, with a higher center of mass energy and peak luminosity, is expected to culminate in an approximate tripling of the dataset size.
@@ -482,7 +482,7 @@ Objects relevant to this thesis are described below.
 % diagram at 
 % https://atlassoftwaredocs.web.cern.ch/trackingTutorial/idoverview/
 The reconstructed trajectories of charged particles are referred to as \textit{tracks}.
-Tracks are reconstructed from the energy depositions (called \textit{hits}) left by the particles as they traverse the the inner detector.
+Tracks are reconstructed from the energy depositions (called \textit{hits}) left by the particles as they traverse the inner detector.
 Tracks are used in the reconstruction of other objects, including vertices and jets, so their accurate reconstruction is a critical task.
 A comprehensive introduction to ATLAS tracking is available in \rcite{Cornelissen:2007vba}, while specific optimisations for dense environments are detailed in Refs.~\cite{ATL-PHYS-PUB-2015-006, PERF-2015-08}.
 An overview of track reconstruction is given below.
@@ -570,7 +570,7 @@ Pseudotracking uses Monte Carlo truth information to group together all the hits
 Each collection of hits which, as a unit, satisfies basic quality requirements is directly used in a full resolution track fit.
 If the track fit is successful, a ``pseudotrack'' track is created and stored.
 If the track fit fails, or the collection of hits does not pass the basic quality requirements (for example because of a lack of hits) then the particle is said to be un-reconstructable.
-In this way, pseudotracking performance represents the ideal reconstruction performance given the ATLAS detector, with perfect hit-to-track association and and track reconstruction efficiency.
+In this way, pseudotracking performance represents the ideal reconstruction performance given the ATLAS detector, with perfect hit-to-track association and track reconstruction efficiency.
 The approach was introduced in \rcite{Jansky:2013ryb} as a way to obtain a fast approximation of tracking reconstruction for simulated data, however the technique has become a useful tool for studying tracking performance in general \cite{ATL-PHYS-PUB-2015-006}.
 
 

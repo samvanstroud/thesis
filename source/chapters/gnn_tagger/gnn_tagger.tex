@@ -365,7 +365,7 @@ The performance of the model is compared to the \DLr tagger~\cite{ATL-PHYS-PUB-2
 The input RNNIP tagger~\cite{ATL-PHYS-PUB-2017-003} to \DLr has not been retrained.
 As discussed, each tagger predicts the probability that a jet belongs to the \bcl classes.
 To use the model for \btag, these probabilities are combined into a single score \Db, which is defined as
-%\DLr is a modification of the previous \DLr tagger \cite{ATL-PHYS-PUB-2017-013} which which replaces RNNIP with DIPS, a separately trained track-based algorithm based on deep sets. 
+%\DLr is a modification of the previous \DLr tagger \cite{ATL-PHYS-PUB-2017-013} which replaces RNNIP with DIPS, a separately trained track-based algorithm based on deep sets. 
 %The DIPS tagger uses the loose track selection defined in \cite{ATL-PHYS-PUB-2020-014}.
 
 \begin{equation}\label{eq:btag-disc}
@@ -1058,7 +1058,7 @@ The model has a graph neural network architecture and is trained with auxiliary 
 For \Zprimejets with \Zprimept, \GNN improves the \crej by a factor of \zpbclo and \lrej by a factor of \zpbllo for a comparative \bjet efficiency of $30\%$.
 
 Previous multivariate flavour tagging algorithms relied on inputs from low-level tagging algorithms, whereas \GNN needs no such inputs, making it more flexible. It can be easily fully optimised via a retraining for specific flavour tagging use cases, as demonstrated with \ctag and \highpt \btag, without the need for time-consuming retuning of the low-level tagging algorithms.
-The model is also simpler to maintain and study due to the reduction in the number of of constituent components.
+The model is also simpler to maintain and study due to the reduction in the number of constituent components.
 
 \GNN demonstrates improved track classification performance when compared with a simple per-track MLP.
 The model is also able to perform vertex finding, and preliminary studies suggest it outperforms previous manually optimised approaches.
