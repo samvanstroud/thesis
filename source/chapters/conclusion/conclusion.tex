@@ -45,12 +45,12 @@ Investigations into such improvements, for example loosening the track reconstru
 At the moment only the tracks from the Inner Detector and kinematic information about the jet are provided as inputs to the tagging algorithms.
 In \cref{chap:gnn_tagger} it was shown that the addition of a simple track-level variable corresponding to the ID of the reconstruction lepton to the model improved tagging performance.
 However there is still untapped potential in the form of additional information from the full parameters of the reconstructed leptons (making full use of the Calorimeters and Muon Spectrometer), the calorimeter clusters, and even the individual clusters which are used to reconstruct tracks.
-Providing such additional inputs to the model is likely to complement the information provided by the tracks and further improve performane.
+Providing such additional inputs to the model is likely to complement the information provided by the tracks and further improve performance.
 
 Additional auxiliary training objectives may yield improved performance and also help to add to the explainability of the model.
 Regression of jet-level quantities such as the transverse momentum and mass, in addition to the truth \bhadron decay length are promising targets.
 
-The \GNN architecture can be easily optimised for new use cases and topologies, as demonstreated by the studies described in \cref{sec:gnn_trig_upgrade}.
+The \GNN architecture can be easily optimised for new use cases and topologies, as demonstrated by the studies described in \cref{sec:gnn_trig_upgrade}.
 Other opportunities include a model with only cluster-based inputs, which could be used for a fast trigger preselection on jets without the need to run the computationally expensive tracking algorithms, or improved primary vertexing and pile-up jet tagging algorithms.
 
 For an improved analysis of the \VHbb process, the following considerations could be taken into account.

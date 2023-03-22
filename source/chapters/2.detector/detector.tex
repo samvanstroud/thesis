@@ -5,7 +5,7 @@
 Since the completion of its construction in 2008, the Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN has extended the frontiers of particle physics through significant increases in centre of mass energy and luminosity compared with previous collider experiments.
 The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than the speed of light, at which point they are made to collide.
 The proton bunches travel round the ring 11,000 times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
-The beams travel in opposite directions around the ring and are crossed at four locations so that collisisons between protons can take place.
+The beams travel in opposite directions around the ring and are crossed at four locations so that collisions between protons can take place.
 Around these collision points four specialised detectors, ALICE~\cite{AliceCollaboration_2008}, CMS~\cite{CMS-TDR-08-001}, LHCb~\cite{LHCbCollaboration_2008} and \ATLAS~\cite{PERF-2007-01}, are located to capture information about the products of the collisions.
 
 In this chapter, a brief overview of the \LHC and the accelerator complex at \CERN is given in \cref{sec:lhc}.
@@ -21,7 +21,7 @@ Between runs there are periods of shutdown while the accelerator and detector ma
 The centre-of-mass energy was increased to \SI{8}{\TeV} in 2012.
 Over the course of \runone, \intlumirunone of usable integrated luminosity was recorded.
 \runtwo, which spanned 2015--2018, further increased the proton-proton collision energy to \SI{13}{\TeV}.
-During \runtwo the bunch spacing was reduced, leading to a collisison rate of \SI{40}{\mega\hertz}.
+During \runtwo the bunch spacing was reduced, leading to a collision rate of \SI{40}{\mega\hertz}.
 Over the course of \runtwo a total usable integrated luminosity of \intlumi was recorded. % less good for physics
 2022 marked the beginning of \runthree which, with a higher center of mass energy and peak luminosity, is expected to culminate in an approximate tripling of the dataset size.
 %We will be focusing the proton beams at the interaction points to less than 10 micron beam size, to increase the collision rate. (nominal beam size (width) is 16 microns from around run1)
@@ -126,7 +126,7 @@ where $\Delta \eta$ and $\Delta \phi$ are the differences in pseudorapidity and 
 \subsection{Track Parameterisation}\label{sec:track_parameterisation}
 
 The trajectories of charged particle tracks are parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
-The transverse and longitudinal impact pararameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to an given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
+The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to an given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
 $\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
 \cref{fig:track_params} shows each of these parameters diagrammatically.
 
@@ -163,7 +163,7 @@ At hadron colliders such as the \LHC, the proton-proton cross section can be fac
 The partonic cross section can be calculated at high energies such as those found at the LHC, while the parton distribution functions (PDFs) have to be extracted from experimental results. 
 
 \subsubsection{Luminosity}
-The total number of proton-proton collisisons $N$ is related to the total $pp$ cross $\sigma$ section by the integrated luminosity $L$, as in
+The total number of proton-proton collisions $N$ is related to the total $pp$ cross $\sigma$ section by the integrated luminosity $L$, as in
 %
 \begin{equation}
   N = \sigma L = \sigma \int \mathcal{L} ~\mathrm{d}t .
@@ -209,7 +209,7 @@ The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF
 
 \subsubsection{Pile-up}
 
-At the centre of the ATLAS detector, bunches of more than $10^{11}$ protonsare collided.
+At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons are collided.
 Each bunch-crossing is called an \textit{event}.
 There is generally one hard proton-proton scatter per event.
 Additional interactions are typically relatively soft (\lowpt) and are known as \textit{pile-up}.
@@ -242,7 +242,7 @@ More complete information on the detector can be found in \rcite{PERF-2007-01}, 
   \includegraphics[width=0.9\textwidth]{chapters/2.detector/figs/atlas_detector.jpg}
   \caption{
     A 3D model of the entire \ATLAS detector \cite{Jon-And:1237407}.
-    Cutouts to the centre of the detector reveal the different subdetectors which are arranged in concentric layers around the nominal interaction point.
+    Cutouts to the centre of the detector reveal the different sub-detectors which are arranged in concentric layers around the nominal interaction point.
   }
   \label{fig:atlas_detector}
 \end{figure}
@@ -255,17 +255,17 @@ The ID is immersed in a \SI{2}{\tesla} axial magnetic field, produced by a super
 After \runthree, the ID will be replaced by the ITk \cite{ATLAS-TDR-30,ATLAS-TDR-25}.
 
 The inner detector is made up of several sub-systems, shown in \cref{fig:atlas_id_run1,fig:atlas_id_run2}.
-The high-granularity silicon pixel detector covers the innermost region and typically provides four spacepoint measurements per track.
-It is followed by the silicon microstrip tracker (SCT), which usually provides a further four spacepoint measurements (8 hits) per track.
+The high-granularity silicon pixel detector covers the innermost region and typically provides four space-point measurements per track.
+It is followed by the silicon microstrip tracker (SCT), which usually provides a further four space-point measurements (8 hits) per track.
 These silicon detectors are complemented by the Transition Radiation Tracker (TRT),
-which enables radially extended track reconstruction up to $|\eta| = 2.0$ and typically provides 33 (38) additional hits in the barrel (endcap). 
+which enables radially extended track reconstruction up to $|\eta| = 2.0$ and typically provides 33 (38) additional hits in the barrel (end-cap). 
 
 
 \begin{figure}[!htpb]
   \centering
   \includegraphics[width=0.75\textwidth]{chapters/2.detector/figs/atlas_id.jpg}
   \caption{
-    A 3D model of the \ATLAS ID showing the pixel, SCT and TRT subdetectors \cite{atlasid}.
+    A 3D model of the \ATLAS ID showing the pixel, SCT and TRT sub-detectors \cite{atlasid}.
   }
   \label{fig:atlas_id_run1}
 \end{figure}
@@ -325,7 +325,7 @@ Cluster positions have a resolution of approximately \SI{10}{\micro\meter} in $R
 \subsubsection{Semi-Conductor Tracker (SCT)}
 The SCT is made up of four concentric barrel layers in the central region, and nine disks in each end-cap.
 Each layer is itself made of a pair of silicon microstrip layers, with a small stereo angle (\SI{20}{\milli\radian}) between the two layers enabling the $z$\nobreakdash-coordinate to be measured from a pair of strip measurements.
-The SCT typically provides four precision spacepoint measurements (eight strip measurements) per track in the barrel region.
+The SCT typically provides four precision space-point measurements (eight strip measurements) per track in the barrel region.
 These have intrinsic uncertainties of \SI{17}{\micro\meter} in the transverse direction $R\phi$, and \SI{580}{\micro\meter} in the longitudinal direction $z$ \cite{IDET-2013-01}.
 The measurements provide a contribution to the measurement of charged particle momentum and impact parameter.
 %The high granularity enables good pattern recognition
@@ -338,7 +338,7 @@ The TRT is a straw-tube tracker which complements the higher-resolution silicon-
 It is made up of approximately \num{300000} drift tubes with a diameter of \SI{4}{\milli\meter} which are filled with an argon/xenon gas mixture.
 The walls of each tube are electrically charged, and a thin conducting wire runs along the center.
 When a charged particle traverses a tube, it ionises the gas and the resulting liberated electrons drift along the electric field to the wire, where an associated charge is registered.
-In the barrel the straws run parallel to the \axis{z} and therefore the TRT only provides tracking information in $R\phi$. Straws are arranged radially in the end-caps. The resulting two-dimensional spacepoints have a resolution of approximately \SI{120}{\micro\meter}.
+In the barrel the straws run parallel to the \axis{z} and therefore the TRT only provides tracking information in $R\phi$. Straws are arranged radially in the end-caps. The resulting two-dimensional space-points have a resolution of approximately \SI{120}{\micro\meter}.
 The spaces between the straws are filled with a polymer which encourages the emission of transition radiation, aiding electron identification.
 
 %It allows the ID to reconstruct $V_0$s which are especially interesting in CP-violating $B$ decays.
@@ -376,7 +376,7 @@ The two calorimeter sub-systems must provide strong containment of showering par
   \caption{
     The \ATLAS calorimeters \cite{atlascalo}.
     The ECal uses LAr-based detectors, while the HCal uses mainly scintillating tile detectors.
-    In the forward region the HCal also includes the LAr hadronic endcaps.
+    In the forward region the HCal also includes the LAr hadronic end-caps.
   }
   \label{fig:atlas_calos}
 \end{figure}
@@ -449,7 +449,7 @@ This is more than can be feasibly read out from the hardware, processed and stor
 The trigger system is comprised of two levels which aim to identify various signatures, such as electrons, muons, taus, photons, and jets (including \bjets), as well as events with large total or missing transverse energy.
 The hardware-based Level-1 (L1) trigger uses coarse information from the calorimeters and MS to accept events at an average rate of \SI{100}{\kilo\hertz} approximately \SI{2.5}{\micro\second} after the event.
 After the L1 trigger, the software-based High Level Trigger (HLT) makes use of \num{40000} CPU cores to make a final selection on surviving events in approximately a few hundred milliseconds. 
-The final event read-out rate is approximately \SI{1.2}{\kilo\hertz}, corresponding to \SI{1.2}{\giga\byte\per\second} of permenant data storage.
+The final event read-out rate is approximately \SI{1.2}{\kilo\hertz}, corresponding to \SI{1.2}{\giga\byte\per\second} of permanent data storage.
 More information is provided in \cite{TRIG-2016-01}.
 %Regions of Interest (ROIs) from the L1 trigger are used.
 
@@ -500,7 +500,7 @@ A combinatorial Kalman filter (KF) is used to build track candidates by extendin
 The filter can create multiple track candidates per seed, with bifurcations along the track occurring when more than one compatible space-point exists on a given layer.
 In this way, the KF creates an excess of \textit{track candidates}, which are only required to satisfy basic quality requirements. 
 Track candidates are allowed to reuse or \textit{share} hits freely (a single hit may be used by multiple track candidates).
-Typically, the presense of shared hits is a predictor of a bad track due to the high granularity of the ATLAS tracking detectors.
+Typically, the presence of shared hits is a predictor of a bad track due to the high granularity of the ATLAS tracking detectors.
 At this stage, there can also be a large number of incorrect hits assigned to otherwise good tracks, and additionally large numbers of \textit{fake} tracks, which are comprised of a majority of wrong hits and do not correspond to the trajectory of any one physical particle (fake tracks are defined as those where the majority of associated hits do not originate from one single truth particle, see \cref{eq:tmp_def}).
 The low quality of tracks at this stage necessitates an ambiguity solving step, in which candidates are cleaned, and the highest quality track are selected.
 

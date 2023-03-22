@@ -25,7 +25,7 @@ The use of GNNs offers a natural way to classify jets with variable numbers of u
 The current flavour tagging algorithms utilise a two-tired approach, with five low level algorithms feeding intermediate features into the high-level tagger \DLr, which outputs variables which discriminate between the different jet flavours.
 In contrast \GNN consists of only a single neural network, which takes the tracks as inputs along with some kinematic information about the jet.
 As a result, it does not depend on the outputs of any other flavour tagging algorithm.
-A simple training of the model fully optimises its parameters, represting a significant simplification with respect to the optimisation procedure for \DLr.
+A simple training of the model fully optimises its parameters, representing a significant simplification with respect to the optimisation procedure for \DLr.
 This is particularly important when optimising the tagger for new regions of phase space (e.g. \ctag or \highpt \btag), or when the detector is upgraded or the charged particle reconstruction or selection algorithms are re-optimised.
 
 \GNN is trained to learn about the internal structure of the jet through the use of two auxiliary training objectives: the prediction of the underlying physics process from which each track originated, and the grouping of tracks originating from a common spatial position (i.e. a common vertex).
@@ -50,9 +50,9 @@ A fake track is defined in this chapter as a track with a truth-matching probabi
 Graph neural networks are a more sophisticated neural network model (see \cref{sec:neural_nets}) that are designed to operate on graph structured data.
 A brief introduction to GNNs is provided in this section following the formalism in \rcite{2018arXiv180601261B}.
 
-A graph $\mathcal{G}$ consists of a set of $N^n$ nodes $\mathcal{N} = \{h_i\}_{i=1:N^n}$, a set of $N^e$ edges $\mathcal{E} = \{e_i\}_{i=1:N^e}$, and a global represetnation $u$.
+A graph $\mathcal{G}$ consists of a set of $N^n$ nodes $\mathcal{N} = \{h_i\}_{i=1:N^n}$, a set of $N^e$ edges $\mathcal{E} = \{e_i\}_{i=1:N^e}$, and a global representation $u$.
 Each node represents an individual object, and edges are directed connections between two nodes, called the \textit{sender} and \textit{receiver} nodes.
-The connectivity of the graph therefores encodes information about the relationships between objects that exist in the graph.
+The connectivity of the graph therefore encodes information about the relationships between objects that exist in the graph.
 
 A single graph network layer consists of three separate update functions $\phi^e$, $\phi^h$ and $\phi^u$ one for each of the nodes, edges, and global graph representation, and similarly three aggregation functions $\rho^{e \rightarrow h}$, $\rho^{e \rightarrow u}$ and $\rho^{h \rightarrow u}$.
 The aggregation functions combine information across different edges or nodes for input into the update functions, which produce new representations for the nodes, edges and global objects based on the information in the previous layer and the aggregated information.
@@ -108,7 +108,7 @@ The layer used in the \GNN model is specified in more detail in \cref{sec:Archit
 
 
 
-\section{Experiemental Setup}\label{sec:experimental_setup}
+\section{Experimental Setup}\label{sec:experimental_setup}
 
 \subsection{Datasets}\label{sec:datasets}
 
@@ -215,7 +215,7 @@ For this objective, \GNN predicts a binary label for each pair of tracks in the 
 The label has a value of 1 if the truth particles associated with the two tracks in the pair originated from the same spatial point, and 0 otherwise. 
 To derive the corresponding truth labels for training, truth production vertices within $0.1$ mm are merged.%, as these are assumed to be unresolvable given the granularity of the ID. 
 Track-pairs where one or both of the tracks in the pair have an origin label of either Pile-up or Fake are assigned a label of 0.
-Using the pairwise predictions from the model, groups of tracks that have common compatability can be formed, resulting in the identification of vertices.
+Using the pairwise predictions from the model, groups of tracks that have common compatibility can be formed, resulting in the identification of vertices.
 Two existing low-level tagging algorithms, SV1 and JetFitter (introduced in \cref{sec:vertex_reco}), are currently used to find and reconstruct vertices inside jets and are used as inputs to the existing jet flavour tagger \DLr.
 The addition of this auxiliary training objective removes the need for inputs from a dedicated secondary vertexing algorithm.
 
@@ -295,7 +295,7 @@ A summary of the different classification networks used for the various training
       \textbf{Network} & \textbf{Hidden layers} & \textbf{Output size} & \textbf{Label} \\
       \hline
       Node classification network    & 128, 64, 32 & 7 & Track origin \\
-      Edge classification network    & 128, 64, 32 & 1 & Track-pair compatability \\
+      Edge classification network    & 128, 64, 32 & 1 & Track-pair compatibility \\
       Graph classification network   & 128, 64, 32, 16 & 3 & Jet flavour \\
       \hline\bottomrule
   \end{tabular}
@@ -313,7 +313,7 @@ The node network has three hidden layers containing 128, 64 and 32 neurons respe
 
 The edge classification network is used to predict whether the tracks in the track-pair belong to a common vertex.
 This network takes as inputs the concatenated representations from each pair of tracks and the global jet representation.
-Similar to the node network, the edge network has three hidden layers containing 128, 64 and 32 neurons respectively, and a single output, which is used to perform binary classification of the track-pair compatability.
+Similar to the node network, the edge network has three hidden layers containing 128, 64 and 32 neurons respectively, and a single output, which is used to perform binary classification of the track-pair compatibility.
 The output predictions for the two auxiliary networks are used for the auxiliary training objectives discussed in \cref{sec:aux-train-objectives}.
 
 Finally, the graph classification network is used to predict the jet flavour.
@@ -330,7 +330,7 @@ The full \GNN training procedure minimises the total loss function $L_\text{tota
     L_\text{total} = L_\text{jet} + \alpha L_\text{vertex} + \beta L_\text{track}.
 \end{equation}
 
-This loss is composed of three terms: $L_\text{jet}$, the categorical cross entropy loss over the different jet flavours; $L_\text{vertex}$, the binary track-pair compatability cross entropy loss; and $L_\text{track}$, the categorical cross entropy loss for the track origin prediction.
+This loss is composed of three terms: $L_\text{jet}$, the categorical cross entropy loss over the different jet flavours; $L_\text{vertex}$, the binary track-pair compatibility cross entropy loss; and $L_\text{track}$, the categorical cross entropy loss for the track origin prediction.
 $L_\text{vertex}$ is computed via a weighted average over all intra-jet track-pairs in the batch, and $L_\text{track}$ is computed by a weighted average over all tracks in the batch, where the weights are described below.
 
 
@@ -478,7 +478,7 @@ The performance of the model was also evaluated as a function of the average num
              %For \ttbarjets, \GNN increases \beff by approximately \pct{5} with respect to \DLr in each \pt bin.
              %For \Zprimejets, \GNN increases \beff by up to a factor of 2 for jets with $\pt > \SI{2.5}{\TeV}$ with respect to \DLr.
              A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN and \GNNLep.
-             \GNN demonstrates improved performance with respect to \DLr accross the \pt range shown.
+             \GNN demonstrates improved performance with respect to \DLr across the \pt range shown.
              Binomial error bands are denoted by the shaded regions \cite{ATL-PHYS-PUB-2022-027}.
              }
     \label{fig:vs_pt_flat_leff}
@@ -595,13 +595,13 @@ In the figures, the tracks in the jet are indexed twice on each of the $x$- and 
 In \cref{fig:bjet_diag_1}, \GNN correctly groups the three primary tracks as having come from the primary vertex.
 The \bhadron and $b\rightarrow c$-hadron decay vertices are also correctly predicted, and the origin of the tracks in each is correct.
 There is a single OtherSecondary track which \GNN incorrectly predicts as having come from pile-up.
-Meanwhile SV1 (by design) merges the two heavy flavour decay vertices, but incorrectly includes a track from the primnary vertex.
+Meanwhile SV1 (by design) merges the two heavy flavour decay vertices, but incorrectly includes a track from the primary vertex.
 JetFitter reconstructs two vertices, one which is a combination of two tracks from different truth vertices and two other single track vertices in each of the heavy flavour vertices.
 \GNN also predicts the flavour of the jet with a high degree of certainty.
 
 Similarly \cref{fig:bjet_diag_1} shows that \GNN is also able to relatively accurately predict the origin and vertex information of tracks inside a jet.
 The pile-up tracks and primary vertex tracks are correctly identified, and the heavy flavour decay tracks are also correctly identified with the exception of one of the \bhadron decay tracks.
-Again, SV1 merges the two heavy flavour decay vertices along with a track from pile-up, while JetFitter shows signs of being underconstrained by reconstructing two single track vertices, one with a pile-up track and one with a track from a $b\rightarrow c$-hadron decay.
+Again, SV1 merges the two heavy flavour decay vertices along with a track from pile-up, while JetFitter shows signs of being under-constrained by reconstructing two single track vertices, one with a pile-up track and one with a track from a $b\rightarrow c$-hadron decay.
 While these examples do not give a complete picture of the performance of \GNN, they do show provide a powerful way to visualise and diagnose the behaviour of \GNN.
 
 \begin{figure}[!p]
@@ -614,7 +614,7 @@ While these examples do not give a complete picture of the performance of \GNN, 
         The shaded black boxes show the groupings of tracks into different vertices.
         Vertices reconstructed by SV1 and JetFitter are also marked.
         Class probabilities $p_b$, $p_c$ and $p_u$ are rounded to three significant figures.
-        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatability of all the tracks in the jet with the exception of the truth OtherSecondary track, which is misidentified as pile-up.
+        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatibility of all the tracks in the jet with the exception of the truth OtherSecondary track, which is misidentified as pile-up.
     }
     \label{fig:bjet_diag_1}
  \end{figure}
@@ -629,7 +629,7 @@ While these examples do not give a complete picture of the performance of \GNN, 
         The shaded black boxes show the groupings of tracks into different vertices.
         Vertices reconstructed by SV1 and JetFitter are also marked.
         Class probabilities $p_b$, $p_c$ and $p_u$ are rounded to three significant figures.
-        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatability of all but one tracks in the jet.
+        \GNN improves over SV1 and JetFitter by successfully determining the origins and vertex compatibility of all but one tracks in the jet.
     }
     \label{fig:bjet_diag_2}
  \end{figure}
@@ -638,7 +638,7 @@ While these examples do not give a complete picture of the performance of \GNN, 
 
 \subsection{Vertexing Performance}\label{sec:gnn_vert_perf}
 
-From the track-pair vertex prediction, tracks can be partitioned into compatible groups representing vertices through the use of a deterministed clustering algorithm (see \rcite{serviansky2020set2graph}).
+From the track-pair vertex prediction, tracks can be partitioned into compatible groups representing vertices through the use of a deterministic clustering algorithm (see \rcite{serviansky2020set2graph}).
 As such, \GNN can perform vertex ``finding'', but not vertex ``fitting'', i.e. the reconstruction of a vertex's properties, which currently still requires the use of a dedicated vertex fitter.
 In order to study the performance of the different vertexing tools, the truth vertex label of the tracks are used.
 
@@ -663,7 +663,7 @@ For the exclusive vertex finding case JetFitter and \GNN can be directly compare
 The inclusive vertex finding performance of all three tools can be compared using the procedure outlined below.
 
 The starting point for the secondary vertex finding efficiency in both the exclusive and inclusive cases is to select truth HF secondary vertices, defined as those containing only inclusive \bhadron decays.
-For exclusive HF vertex finding, these truth secondary HF vertices can be used directly as the demoninator for the efficiency calculation.
+For exclusive HF vertex finding, these truth secondary HF vertices can be used directly as the denominator for the efficiency calculation.
 Meanwhile for the inclusive efficiency all such truth HF secondary vertices in the jet are merged into a single inclusive target vertex.
 Correspondingly, for the inclusive HF vertex finding case, the vertices found by JetFitter are merged into a single vertex, and the vertices found by \GNN which contain at least one predicted \bhadron decay track, are also merged.
 SV1 does not require any vertex merging.
@@ -679,12 +679,12 @@ Additionally, for \GNN only, at least one track in the vertex is required to hav
 
 Vertex finding efficiencies for \ttbarbjets are displayed as a function of \pt separately for the inclusive and exclusive approaches in \cref{fig:ttbar_vert_eff}.
 For \ttbarbjets with \ttbarpt, the exclusive vertex finding efficiency of JetFitter and \GNN is relatively flat as a function of \pt.
-For the truth secondary vertices in this \pt region, JetFitter efficiently finds approximately \pct{40} and \GNN finds approimately \pct{55}.
+For the truth secondary vertices in this \pt region, JetFitter efficiently finds approximately \pct{40} and \GNN finds approximately \pct{55}.
 When finding vertices inclusively the vertex finding efficiency is generally higher.
 An increased dependence on \pt is also visible for JetFitter and SV1. As the jet \pt increases from \SI{20}{\GeV} to \SI{100}{\GeV}, the efficiency of JetFitter increases from \pct{60} to \pct{65}.
 In the same range, the efficiency of SV1 increases from \pct{60} to \pct{75}.
 \GNN displays less dependence on \pt than JetFitter and SV1, finding upwards of \pct{80} of vertices in \bjets in this \pt region. 
-For \bjets with $\pt > \SI{100}{\GeV}$, JetFitter finds approximately \pct{65} of vertices, SV1 finds approimately \pct{75} of vertices, and \GNN finds approximately \pct{80} of vertices.
+For \bjets with $\pt > \SI{100}{\GeV}$, JetFitter finds approximately \pct{65} of vertices, SV1 finds approximately \pct{75} of vertices, and \GNN finds approximately \pct{80} of vertices.
 
 \cref{fig:zprime_vert_eff} compares the exclusive and inclusive HF vertex finding efficiencies for \Zprimebjets.
 The inclusive vertex finding efficiency drops steeply with increasing \pt up until $\pt = \SI{3}{\TeV}$.
@@ -865,7 +865,7 @@ Since the equivalent information is not provided by any of the existing flavour 
 The benchmark model is trained on the same tracks used for the baseline \GNN training.
 The model uses precisely the same concatenated track-and-jet inputs as used by \GNN, but processes only a single track at a time, meaning it cannot take into account the correlations between tracks when determining the track origin.
 The model is made up of five densely connected linear layers with 200 neurons in each layer.
-The performance of the model was found to be unsensitive to changes in the network structure. 
+The performance of the model was found to be insensitive to changes in the network structure. 
 
 To measure the track classification performance, the area under the curve (AUC) of the receiver operating characteristic (ROC) curve is computed for each origin class, using a one-versus-all classification approach\footnote{One class is taken to be signal and the rest are taken as background, subsequently a binary classification approach is used.}.
 The AUCs for the different truth origins are averaged using both an unweighted and a weighted mean.
@@ -934,7 +934,7 @@ The FromC tracks which are \chadron decay products, are the hardest to classify,
 \end{figure}
 
 
-\section{Futher Studies}\label{sec:gnn_trig_upgrade}
+\section{Further Studies}\label{sec:gnn_trig_upgrade}
 
 
 

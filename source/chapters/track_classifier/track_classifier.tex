@@ -27,7 +27,7 @@ The two classes are often referred to as signal ($y_i = 1$) and background ($y_i
 Collecting sufficient and suitable data is one of the primary challenges of machine learning, as such data is not always readily available.
 Fortunately, sophisticated tools to simulate particle collisions have already been developed by the scientific community \cite{leshouchesaccords, leshouchesstandardisation}.
 These tools play a key role in generating a suitably large amount of labelled data which is used to train algorithms.
-More detail on the input datasts is given in \cref{sec:track_classifier_datasets}.
+More detail on the input datasets is given in \cref{sec:track_classifier_datasets}.
 
 After obtaining suitable training data, the next step is to define a model.
 Given an input domain $\mathbb{R}^{\textnormal{input}}$ and an output domain $(0, 1)$, the model
@@ -69,7 +69,7 @@ This term plays the role of a trainable constant value that is independent of th
 
 The output of the dot product and bias term $z$ is fed into an activation function $g(z)$.
 The activation function has several uses, most notably acting as a source of non-linearity and bounding the output of the neuron.
-Some common activation functions (sigmod, tanh, ReLU and SiLU) \cite{2018arXiv180308375A,2017arXiv170203118E} are shown in \cref{fig:activation_functions}.
+Some common activation functions (sigmoid, tanh, ReLU and SiLU) \cite{2018arXiv180308375A,2017arXiv170203118E} are shown in \cref{fig:activation_functions}.
 The choice of activation function can have implications for the performance and convergence of the network, since the gradient of $g(z)$ is used to compute the weight updates during training.
 This is also why input data is typically normalised to have zero mean and unity variance \cite{lecun2012efficient}.
 
@@ -158,7 +158,7 @@ The labelling scheme has been designed to be useful beyond the classification of
 The origins are determined by analysing the simulated record to determine the physical process that led to the creation of the truth (i.e. simulated) particle which is  associated with each reconstructed track.
 Tracks are associated with truth particles by selecting the particle with the highest \textit{truth-matching probability} (TMP), defined in \cref{eq:tmp_def}.
 For a given truth particle, the TMP is a weighted sum of the number of hits on a reconstructed track which are matched to the truth particle $N^{\textnormal{match}}$, divided the total number of hits on the track $N^{\textnormal{total}}$.
-The weights are subdetector-dependent and are designed to account for the varying importance of the different ID subdetectors (based upon their precision) in the reconstruction of a track.
+The weights are sub-detector-dependent and are designed to account for the varying importance of the different ID sub-detectors (based upon their precision) in the reconstruction of a track.
 %
 \begin{equation}\label{eq:tmp_def}
     \textnormal{TMP} = 
@@ -314,7 +314,7 @@ Due to the imbalance between the two classes (with fake tracks being relatively 
 The NN was made up of two hidden layers with 220 nodes per layer.
 The ReLU activation function was used in conjunction with the Adam optimiser with a learning rate of $1\text{e}{-3}$.
 Optimisation of the networks architecture was carried out to ensure optimal performance with a relatively small number of learnable parameters -- 54,000.
-The model was trained using \num{40} million tracks with a futher \num{4} million tracks each used for validation and testing.
+The model was trained using \num{40} million tracks with a further \num{4} million tracks each used for validation and testing.
 A full list of the model hyperparameters is given in \cref{tab:fake_track_mva_hyperparams}.
 
 \begin{table}[!htbp]

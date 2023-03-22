@@ -82,7 +82,7 @@ The working point is tuned to achieve an average \bjet efficiency of \pct{70} on
 At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
 
 The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
-The low-level algorithms used by the different high-lvel taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
+The low-level algorithms used by the different high-level taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
 
 %is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
 %Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
@@ -180,7 +180,7 @@ As such, efficient and accurate track reconstruction is essential for high perfo
 
 \subsection{Challenges}\label{sec:b_track_reco_challenges}
 
-As discsused, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
+As discussed, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
 For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combination of effects.
 As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay is unaffected.
 The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become significantly outnumbered.
@@ -237,7 +237,7 @@ The first part is a drop in track reconstruction efficiency.
 %As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
 %Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
 The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
-This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage and an overall descrease in the \bhadron decay track reconstruction efficiency.
+This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage and an overall decrease in the \bhadron decay track reconstruction efficiency.
 As shown in \cref{fig:b_track_eff}, this can result in a large drop in reconstruction efficiency for \bhadron decay products of up to \pct{50} for at $\pt = \SI{2}{\TeV}$.
 
 \begin{figure}[!htbp]
