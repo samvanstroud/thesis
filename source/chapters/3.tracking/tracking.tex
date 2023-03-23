@@ -22,7 +22,9 @@ The \Zprime sample is constructed in such a manner that it has a relatively flat
 The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
 
 \newcommand{\hdampFootnote}{%
-The $h_\text{damp}$ parameter is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the high-$p_T$ radiation against which the \ttbar system recoils.}
+The $h_\text{damp}$ parameter is used to limit the effect of resummed higher order corrections. It is used to suppress the transverse momentum of the radiation which the \ttbar system recoils against.}
+%effectively regulating the %
+%is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the %high-$p_T$ radiation against which the \ttbar system recoils.}
 
 The \ttbar events are generated using the \textsc{PowhegBox} \textsc{v2} generator  \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
 The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
@@ -66,7 +68,7 @@ In the rest frame of the detector, the typical \bhadron travels a distance
 before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
 
 For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
-Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure) 
+Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure).
 \cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
 This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
 
@@ -102,7 +104,7 @@ Reconstruction of these vertices from tracks with common points of spatial origi
 
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
-Since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
+Furthermore, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
 Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}, the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
 %In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
 %As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
@@ -117,8 +119,9 @@ As such, efficient and accurate track reconstruction is essential for high perfo
 \subsection{Challenges}\label{sec:b_track_reco_challenges}
 
 As discussed, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
-For high \pT jets (\pT $> 200$ GeV) this task becomes difficult due to a combination of effects.
-As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay is unaffected.
+For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to a combination of effects, which are described below.
+
+As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay remains fixed.
 The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become significantly outnumbered.
 Both fragmentation and \bhadron weak decay products also become increasingly collimated as their inherited transverse momentum increases.
 This is compounded by the increased decay length of \bhadrons (and \chadrons) at \highpt, which means that the decay products have less of an opportunity to diverge before reaching the first tracking layers of the detector (shown in \cref{fig:high_pt_b_decay}).
@@ -137,8 +140,8 @@ If the weak decay of the \bhadron takes place close enough to a detector layer, 
 
 As discussed in \cref{sec:track_reco}, merged clusters are generally rare, and so shared hits generally predict bad tracks and are correspondingly penalised during track reconstruction.
 However, in the core of high \pT \bjets the density of particles is high enough that the probability of cluster merging increases dramatically.
-Successful reconstruction of such tracks requires the presence of shared hits to be effectively dealt with but in the standard reconstruction the presence of these can end up impairing the successfully reconstruction of the track.
-Furthermore, decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
+Successful reconstruction of such tracks requires the presence of shared hits to be effectively dealt with, but in the standard reconstruction the presence of these can instead impair the successfully reconstruction of the track.
+Furthermore, HF decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
 
 %Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
 
@@ -168,13 +171,13 @@ Furthermore, decays may also take place inside the tracking detectors themselves
 \end{comment}
 
 
-The above effects create two related, but distinct problems for \btagging.
-The first part is a drop in track reconstruction efficiency.
+The above effects create two distinct but related  problems for \btagging.
+The first is a drop in track reconstruction efficiency.
 %As mentioned, tracks originating from high energy \bhadron decay products can have a high rate of shared hits due to the number of particles present in a high \pT \bjet and their relative collimation.
 %Additionally, tracks may be missing hits on the inner layers of the detector in the case of displaced decays.
-The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially worse, track candidates are processed first and take ownership of the hits.
+The presence of shared and missing hits reduces a track's score in the ambiguity solver meaning that higher ranking, but potentially less accurate, track candidates are processed first and take ownership of the hits.
 This can make it difficult for otherwise reasonable \bhadron decay tracks to meet the ambiguity solver's stringent track quality requirements, leading to their rejection at this stage and an overall decrease in the \bhadron decay track reconstruction efficiency.
-As shown in \cref{fig:b_track_eff}, this can result in a large drop in reconstruction efficiency for \bhadron decay products of up to \pct{50} for at $\pt = \SI{2}{\TeV}$.
+As shown in \cref{fig:b_track_eff}, this can result in a large drop in reconstruction efficiency for \bhadron decay products of up to \pct{50} for at $\pt > \SI{2}{\TeV}$.
 
 \begin{figure}[!htbp]
   \centering
@@ -226,7 +229,6 @@ Furthermore, multiple tracks sharing an incorrect hit can lead to the creation o
 
 The combination of the effects described makes reconstructing tracks in the core of high \pT \bjets particularly challenging.
 The reduced reconstruction efficiency of \bhadron decay tracks and incorrectly assigned hits is thought to be the primary cause of the observed drop in \btagging efficiency at high energies, however further study is required to determine which effect may dominate.
-%\todo{include plot from sebs study showing they are approx similar impacts? or just mention result? Can do put need to remove ATLAS labels. Alternatively you can put an interal reference to his work and state what the outcome is}
 
 
 
@@ -277,7 +279,6 @@ Meanwhile, it is clear that for the B-layer, the ambiguity solver is being overl
 \begin{comment}
 
 \subsection{Looser Track Cuts \& Track Refit Procedure}\label{sec:bcut and refit}
-\todo{discuss whether to keep this section}
 A solution for the problem of wrong inner-layer hits on $B$ tracks had previously been developed. This solution selects tracks which pass a $b$-jet Region of Interest (ROI) selection, and then removes the innermost hits on these tracks based on the result of a ``refit'' procedure. The refit procedure runs as follows. Each track is refitted without the innermost hit, and if there is a significant improvement in the fit quality (the $\chi^2$ of the track fit divided by the number of degrees of freedom on the track $n$), the innermost hit is rejected and the new track is replaces the old. If the fit quality does not improve by a certain amount, the initial track is kept. This procedure is recursively applied. The $b$-jet ROI selection selects tracks that are matched within $dR < 0.14$ ($|\eta| < 0.1$, $|\phi| < 0.1$) of a CaloCluster with $E_T > 150$ GeV. The track itself must also pass a transverse momentum cut with \pT$>15$ GeV. The refit procedure was previously shown to lead to a reduction in the rate of wrongly assigned IBL hits on $B$ decay tracks (see \cref{fig:refit optimisation results sub2}). However, this apparent improvement did not lead to an increase in $b$-tagging performance. It was found that the refit procedure also removed unacceptable numbers of good hits, degrading the quality of un-problematic tracks, shown in \cref{fig:refit optimisation results sub1}. This is likely the cause of the underwhelming $b$-tagging performance improvement. 
 
 The performance of both the ROI, and the hit removal using track fit information, is examined, and an attempt at improving the performance of the refit procedure is made. Results are discussed in the following two sections.
