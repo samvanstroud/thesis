@@ -57,7 +57,7 @@ This term plays the role of a trainable constant value that is independent of th
 
 \begin{figure}[!htbp]
     \centering
-    \input{chapters/track_classifier/figs/neuron.tex}
+    \input{chapters/4.track_classifier/figs/neuron.tex}
     \caption{
       A diagram displaying the logical flow of a single neuron with three inputs $x_i^j$.
       Each input is multiplied by a weight $\theta_j$, and the resulting values are summed.
@@ -75,7 +75,7 @@ This is also why input data is typically normalised to have zero mean and unity 
 
 \begin{figure}[!htbp]
   \centering
-  \input{chapters/track_classifier/figs/activations.tex}
+  \input{chapters/4.track_classifier/figs/activations.tex}
   \caption{
     The output of several common choices for the activation function $g(z)$ of an artificial neuron.
     The input $z$ is the output of the dot product between the activation and the weights, plus a bias term.
@@ -218,12 +218,12 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_vs_pt.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/fake_vs_pt.pdf}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_vs_dr.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/fake_vs_dr.pdf}
   \end{subfigure}
   \caption{
     Rate of fake tracks as a function of jet transverse momentum (left) and $\DeltaR(\textnormal{track}, \textnormal{jet})$ (right) for jets in the \Zprime sample.
@@ -234,7 +234,7 @@ The performance of \btagging algorithms is reduced as a direct result of the pre
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.7\textwidth]{chapters/track_classifier/figs/sv1_perf_nofake.pdf}
+    \includegraphics[width=0.7\textwidth]{chapters/4.track_classifier/figs/sv1_perf_nofake.pdf}
     \caption{
       The \ljet efficiency of the low level tagger SV1 for \Zprimejets with \Zprimept, as a function of \bjet efficiency.
       The nominal tracking setup (black) is shown alongside the case where fake tracks which are not from the decay of a \bhadron are removed.
@@ -356,12 +356,12 @@ Considering only tracks from \bhadron decays, this value drops slightly to $0.92
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_id_output.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/fake_id_output.pdf}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/fake_id_roc.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/fake_id_roc.pdf}
   \end{subfigure}
   \caption{
     (left) Normalised histograms of the fake track classification model output separated for signal and fake tracks, and further separated by those tracks which are from the decay of a \bhadron.
@@ -413,12 +413,12 @@ In \cref{sec:mva_combined}, this model is used in conjunction with the fake trac
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/b_id_output.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/b_id_output.pdf}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/b_id_roc.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/b_id_roc.pdf}
   \end{subfigure}
   \caption{
     (left) Normalised histogram of the \bhadron track identification model output separated for tracks from the decay of a \bhadron and tracks from other sources.
@@ -467,12 +467,12 @@ Together, these results demonstrate that by identifying and removing fake tracks
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/sv1_mva_lowpt.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/sv1_mva_lowpt.pdf}
   \end{subfigure}
   \quad
   \begin{subfigure}[b]{0.48\textwidth}
       \centering
-      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/sv1_mva_hipt.pdf}
+      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/sv1_mva_hipt.pdf}
   \end{subfigure}
   \caption{
     The effect of applying the fake track identification algorithm together with the \bhadron decay track identification on the jet tagging performance of SV1 for \Zprimejets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).
@@ -486,12 +486,12 @@ Together, these results demonstrate that by identifying and removing fake tracks
 %  \centering
 %  \begin{subfigure}[b]{0.48\textwidth}
 %      \centering
-%      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_lowpt.pdf}
+%      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/zprime_jf_lowpt.pdf}
 %  \end{subfigure}
 %  \quad
 %  \begin{subfigure}[b]{0.48\textwidth}
 %      \centering
-%      \includegraphics[width=\textwidth]{chapters/track_classifier/figs/zprime_jf_highpt.pdf}
+%      \includegraphics[width=\textwidth]{chapters/4.track_classifier/figs/zprime_jf_highpt.pdf}
 %  \end{subfigure}
 %  \caption{
     %The effect of applying the fake track identification algorithm alongside the \bhadron decay track identification on the jet tagging performance of JetFitter for jets with $\SI{250}{\GeV} < \pt < \SI{400}{\GeV}$ (left) and for jets with $\SI{400}{\GeV} < \pt < \SI{1}{\TeV}$ (right).

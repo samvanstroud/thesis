@@ -17,7 +17,7 @@ The use of GNNs offers a natural way to classify jets with variable numbers of u
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{chapters/gnn_tagger/figs/GNN_compare_contrast.pdf}
+    \includegraphics[width=0.9\textwidth]{chapters/5.gnn_tagger/figs/GNN_compare_contrast.pdf}
     \caption{Comparison of the existing flavour tagging scheme (left) and \GNN (right). The existing approach utilises low-level algorithms (shown in blue), the outputs of which are fed into a high-level algorithm (\DLr). Instead of being used to guide the design of the manually optimised algorithms, additional truth information from the simulation is now being used as auxiliary training targets for \GNN. The solid lines represent reconstructed information, whereas the dashed lines represent truth information \cite{ATL-PHYS-PUB-2022-027}.}
     \label{fig:oldvsnew}
 \end{figure}
@@ -92,12 +92,12 @@ The layer used in the \GNN model is specified in more detail in \cref{sec:Archit
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn_full.png}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn_full.png}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn_deepset.png}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn_deepset.png}
     \end{subfigure}
     \caption{
         The flow of information through a graph neural network layer for (left) a full implementation of the layer and (right) a deep sets model \cite{zaheer2018deep}.
@@ -242,14 +242,14 @@ The initialisation network allows for initial per-track input processing without
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{chapters/gnn_tagger/figs/inputs_diagram.png}
+    \includegraphics[width=0.6\textwidth]{chapters/5.gnn_tagger/figs/inputs_diagram.png}
     \caption{The inputs to \GNN are the two jet features ($n_\text{jf} = 2$), and an array of $n_{\text{tracks}}$, where each track is described by 21 track features ($n_\text{tf} = 21$). The jet features are copied for each of the tracks, and the combined jet-track vectors of length 23 form the inputs of \GNN \cite{ATL-PHYS-PUB-2022-027}.}
     \label{fig:model_input_array}
 \end{figure}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/full_arch.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/full_arch.pdf}
     \caption{The network architecture of \GNN. Inputs are fed into a per-track initialisation network, which outputs an initial latent representation of each track. These representations are then used to populate the node features of a fully connected graph network. After the graph network, the resulting node representations are used to predict the jet flavour, the track origins, and the track-pair vertex compatibility \cite{ATL-PHYS-PUB-2022-027}.}
     \label{fig:new_arch}
 \end{figure}
@@ -388,7 +388,7 @@ The \GNN \cjet distribution is also shifted to lower values of \Db when compared
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.8\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_score_DL1r_GN120220509_btag.pdf}
+    \includegraphics[width=0.8\textwidth]{chapters/5.gnn_tagger/figs/results/main/ttbar/ttbar_score_DL1r_GN120220509_btag.pdf}
     \caption{Comparison between the \DLr and \GNN \btag discriminant \Db for jets in the \ttbar sample.
     The \pct{85} WP and the \pct{60} WP are marked by the solid (dashed) lines for \GNN (\DLr), representing respectively the loosest and tightest WPs typically used by analyses.
     A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN. The distributions of the different jet flavours have been normalised to unity area \cite{ATL-PHYS-PUB-2022-027}.}
@@ -427,7 +427,7 @@ For \Zprimejets, the relative \crej (\lrej) performance with respect to \GNN imp
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_roc_btag.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/ttbar/ttbar_roc_btag.pdf}
     \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbarjets with \ttbarpt .
              The ratio with respect to the performance of the \DLr algorithm is shown in the bottom panels.
              A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN and \GNNLep.
@@ -438,7 +438,7 @@ For \Zprimejets, the relative \crej (\lrej) performance with respect to \GNN imp
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_roc_btag.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/zprime/zprime_roc_btag.pdf}
     \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprimejets with \Zprimept .
              The ratio with respect to the performance of the \DLr algorithm is shown in the bottom panels.
              A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN and \GNNLep.
@@ -463,14 +463,14 @@ The performance of the model was also evaluated as a function of the average num
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_flat_leff_by_pt_btag.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/ttbar/ttbar_flat_leff_by_pt_btag.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_flat_leff_by_pt_btag.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/zprime/zprime_flat_leff_by_pt_btag.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -512,7 +512,7 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/ttbar/ttbar_roc_ctag.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/ttbar/ttbar_roc_ctag.pdf}
     \caption{
         The \bjet (left) and \ljet (right) rejections as a function of the \cjet tagging efficiency for \ttbar jets with \ttbarpt.
         The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
@@ -524,7 +524,7 @@ Both \GNN and \GNNLep perform similarly, improving the \brej by \pct{60} and the
 
 \begin{figure}[!p]
    \centering
-   \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/main/zprime/zprime_roc_ctag.pdf}
+   \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/main/zprime/zprime_roc_ctag.pdf}
    \caption{
         The \bjet (left) and \ljet (right) rejections as a function of the \cjet tagging efficiency for \Zprime jets with \Zprimept.
         The ratio to the performance of the \DLr algorithm is shown in the bottom panels.
@@ -556,14 +556,14 @@ The overall best performing model is the full version of \GNN trained with both 
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/ablations/ttbar/ttbar_roc_btag.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/ablations/ttbar/ttbar_roc_btag.pdf}
     \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbar jets with \ttbarpt, for the nominal \GNN, in addition to configurations where no (\GNN No Aux), only the track classification (\GNN TC) or only the vertexing (\GNN Vert) auxiliary objectives are deployed. The ratio to the performance of the \DLr algorithm is shown in the bottom panels. A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN \cite{ATL-PHYS-PUB-2022-027}.}
     \label{fig:ttbar_btag_roc_ab}
 \end{figure}
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/ablations/zprime/zprime_roc_btag.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/ablations/zprime/zprime_roc_btag.pdf}
     \caption{The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprime jets with \Zprimept, for the nominal \GNN, in addition to configurations where no (\GNN No Aux), only the track classification (\GNN TC) or only the vertexing (\GNN Vert) auxiliary objectives are deployed. The ratio to the performance of the \DLr algorithm is shown in the bottom panels. A value of $\fc = 0.018$ is used in the calculation of \Db for \DLr and $\fc = 0.05$ is used for \GNN \cite{ATL-PHYS-PUB-2022-027}.}
     \label{fig:zprime_btag_roc_ab}
 \end{figure}
@@ -606,7 +606,7 @@ While these examples do not give a complete picture of the performance of \GNN, 
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=0.95\textwidth]{chapters/gnn_tagger/figs/bjet_vertex.pdf}
+    \includegraphics[width=0.95\textwidth]{chapters/5.gnn_tagger/figs/bjet_vertex.pdf}
     \caption{
         A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
         The diagrams show the truth (left) and predicted (right) structure of a \bjet.
@@ -621,7 +621,7 @@ While these examples do not give a complete picture of the performance of \GNN, 
 
  \begin{figure}[!p]
     \centering
-    \includegraphics[width=0.95\textwidth]{chapters/gnn_tagger/figs/bjet_vertex2.pdf}
+    \includegraphics[width=0.95\textwidth]{chapters/5.gnn_tagger/figs/bjet_vertex2.pdf}
     \caption{
         A schematic showing the truth track origin and vertex information (left) compared with the predictions from \GNN (right).
         The diagrams show the truth (left) and predicted (right) structure of a \bjet.
@@ -699,14 +699,14 @@ For the exclusive HF vertex finding efficiency, JetFitter finds $35\%$ of vertic
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_bjet_vert_eff_1+_track_excl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/ttbar/ttbar_bjet_vert_eff_1+_track_excl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_bjet_vert_eff_2+_track_incl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/ttbar/ttbar_bjet_vert_eff_2+_track_incl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -723,14 +723,14 @@ For the exclusive HF vertex finding efficiency, JetFitter finds $35\%$ of vertic
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_bjet_vert_eff_1+_track_excl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/zprime/zprime_bjet_vert_eff_1+_track_excl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_bjet_vert_eff_2+_track_incl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/zprime/zprime_bjet_vert_eff_2+_track_incl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -757,14 +757,14 @@ Since the properties of the displaced vertices in \ljets are likely to be signif
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_1+_track_excl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_1+_track_excl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_2+_track_incl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/ttbar/ttbar_ljet_vert_eff_2+_track_incl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -781,14 +781,14 @@ Since the properties of the displaced vertices in \ljets are likely to be signif
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_1+_track_excl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_1+_track_excl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_2+_track_incl.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/zprime/zprime_ljet_vert_eff_2+_track_incl.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -915,14 +915,14 @@ The FromC tracks which are \chadron decay products, are the hardest to classify,
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/ttbar/ttbar_origin_roc_GNNv11.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/ttbar/ttbar_origin_roc_GNNv11.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
     \quad
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/results/tracks/zprime/zprime_origin_roc_GNNv11.pdf}
+        \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/results/tracks/zprime/zprime_origin_roc_GNNv11.pdf}
         %\caption{sub}
         %\label{fig:sub}
     \end{subfigure}
@@ -965,7 +965,7 @@ Relative improvements of a similar magnitude are also observed for \GNNLep.
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_ttbar.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn1_loose_ttbar.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \ttbar jets with \ttbarpt, for the looser track selection trainings of \GNN.
         The ratio to the performance of the baseline \GNN model is shown in the bottom panels.
@@ -977,7 +977,7 @@ Relative improvements of a similar magnitude are also observed for \GNNLep.
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_loose_zprime.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn1_loose_zprime.pdf}
     \caption{
         The \cjet (left) and \ljet (right) rejections as a function of the \bjet tagging efficiency for \Zprime jets with \Zprimept, for the looser track selection trainings of \GNN.
         The ratio to the performance of the baseline \GNN model is shown in the bottom panels.
@@ -998,7 +998,7 @@ The trigger implementation of \GNN improves upon the \lrej of DL1d by \pct{50} a
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{chapters/gnn_tagger/figs/gn1_trigger.pdf}
+    \includegraphics[width=0.6\textwidth]{chapters/5.gnn_tagger/figs/gn1_trigger.pdf}
     \caption{
         The HLT \lrej as a function of the \beff \ttbarjets with \ttbarpt for events with a centre of mass energy \come{13.6} \cite{gn1-trigger}.
         The ratio to the performance of the DL1d algorithm \cite{ATLAS:2022qxm} is shown in the bottom panels.
@@ -1017,7 +1017,7 @@ Significant improvements in rejections are also observed for \Zprimejets.
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_hl_ttbar.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn1_hl_ttbar.pdf}
     \caption{
         The \crej (left) and \lrej (right) for the upgraded HL-LHC ATLAS detector with $\langle \mu \rangle = 200$ as a function of the \beff for \ttbarjets with \ttbarpt for events with a centre of mass energy \come{14} \cite{ATL-PHYS-PUB-2022-047}.
         The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
@@ -1029,7 +1029,7 @@ Significant improvements in rejections are also observed for \Zprimejets.
 
 \begin{figure}[!p]
     \centering
-    \includegraphics[width=\textwidth]{chapters/gnn_tagger/figs/gn1_hl_zprime.pdf}
+    \includegraphics[width=\textwidth]{chapters/5.gnn_tagger/figs/gn1_hl_zprime.pdf}
     \caption{
         The \crej (left) and \lrej (right) for the upgraded HL-LHC ATLAS detector with $\langle \mu \rangle = 200$ as a function of the \beff for \Zprimejets with \Zprimept for events with a centre of mass energy \come{14} \cite{ATL-PHYS-PUB-2022-047}.
         The ratio to the performance of the DL1d algorithm is shown in the bottom panels.
