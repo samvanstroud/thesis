@@ -2,18 +2,22 @@
 {
     // The following will hide files in the editor
     "files.exclude": {
-        "**/*.log"  : true,
-        "**/*.lot"  : true,
-        "**/*.lof"  : true,
-        "**/*.aux"  : true,
-        "**/*.make" : true,
-        "**/*.bbl"  : true,
-        "**/*.blg"  : true,
-        "**/*.d"    : true,
-        "**/*.out"  : true,
-        "**/*.cut"  : true,
-        "**/*.fls"  : true,
-        "**/*.toc"  : true,
-        "**/*.temp" : true
-    }
+        "**/*.log": true,
+        "**/*.lot": true,
+        "**/*.lof": true,
+        "**/*.aux": true,
+        "**/*.make": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.d": true,
+        "**/*.out": true,
+        "**/*.cut": true,
+        "**/*.fls": true,
+        "**/*.toc": true,
+        "**/*.temp": true
+    },
+    "cSpell.words": [
+        "topocluster",
+        "topoclusters"
+    ]
 }

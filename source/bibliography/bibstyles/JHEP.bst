@@ -359,7 +359,7 @@ FUNCTION {format.editors}
   if$
 }
 
-%% TODO: change.case$ is probably not a good idea...
+%% TnoODO: change.case$ is probably not a good idea...
 %%       see typeset/scripts/tests/JHEP.bst/src/bibitem-3127.bib
 FUNCTION {format.title}
 { title empty$
@@ -565,7 +565,7 @@ FUNCTION {format.pages.nopp}
 FUNCTION {format.volume}
 { volume empty$
     { "" }
-    { "{\bfseries " volume * "}" * }
+    { "{" volume * "}" * }
   if$
 }
 
@@ -744,9 +744,9 @@ FUNCTION {article}
   crossref missing$
     {
       journal missing$
-        { format.eprint output }
+        { format.eprint.paren output }
         { journal empty$
-            { format.eprint output }
+            { format.eprint.paren output }
             { format.doi * "{" * journal emphasize before.all 'output.state := "journal" output.check
               blank.sep
               format.volume output
@@ -1000,7 +1000,7 @@ FUNCTION {phdthesis}
 { output.bibitem
   format.authors "author" output.check
   format.btitle "title" output.check
-  "Ph.D. thesis" format.thesis.type output.nonnull
+  "Ph.D. Thesis" format.thesis.type output.nonnull
   school "school" output.check
   address output
   format.date "year" output.check
@@ -1008,7 +1008,7 @@ FUNCTION {phdthesis}
   format.eprint output
   new.block
   % note output
-  doi output
+  format.myurl output
   fin.entry
 }
 
@@ -1047,7 +1047,9 @@ FUNCTION {techreport}
   %format.date "year" output.check
   new.block
   % note output
-  doi output
+  format.myurl output
+  new.block
+  %doi output
   fin.entry
 }
 
