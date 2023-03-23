@@ -195,14 +195,14 @@ where $n_1$ and $n_2$ are the number of protons in the colliding bunches, $f$ is
 \end{comment}
 
 The total luminosity recorded over the course of \runtwo is shown in \cref{fig:run2_lumi}. In total, \intlumi of usable physics data was collected over the three-year run.
-The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF-2019-021}.
+The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF-2019-021} as obtained by the LUCID-2 detector \cite{Avoni:2633501}.
 %
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.6\textwidth]{chapters/2.detector/figs/intlumivstimeRun2DQall.pdf}
   \caption{
     Delivered, recorded, and usable integrated luminosity as a function of time over the course of \runtwo \cite{atlas-lumi-run2}.
-    A total of \intlumi of collision data is labelled as good for physics, meaning all sub-detector systems were operating nominally.}
+    A total of \intlumi of collision data is labelled as good for physics, meaning all sub-detector systems were operating nominally \cite{DAPR-2018-01}.}
   \label{fig:run2_lumi}
 \end{figure}
 %
@@ -586,7 +586,7 @@ Second, vertex fitting combines information from compatible tracks to reconstruc
 Each proton-proton interaction happens at a \textit{primary vertex} (PV).
 Primary vertices are iteratively reconstructed with tracks using the iterative vertex finder (IVF) \cite{PERF-2015-01}.
 %In \runthree, the IVF will be replaced with an adaptive multi-vertex finder (AMVF) \cite{ATL-PHYS-PUB-2019-015}.
-The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma(\pt^2)$.
+The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma(\pt^2)$ \cite{ATL-PHYS-PUB-2015-026}.
 
 \subsubsection{Secondary Vertices}
 Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved from the primary vertex (see \cref{sec:b_decay_topology}).
@@ -632,8 +632,8 @@ The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
 \subsubsection{\texorpdfstring{\LargeR}{Large-R} Jets}
 \LargeR jets have a radius parameter $R=1.0$ and are built by clustering topological calorimeter clusters using the \antikt algorithm \cite{Butterworth:2008iy}.
 The large radius parameter is especially useful for containing the decay products of a boosted Higgs boson, as discussed in \cref{chap:vhbb_boosted}. 
-Due to their large size, \largeR jets benefit from a grooming procedure called trimming which remove soft contaminants inside the jet \cite{ATLAS:2020jwz,ATLAS:2013bqs}.
-Trimming aims to remove jet constituents from pile-up and the underlying event, which helps to improve the jet mass resolution and its robustness to varying levels of pile-up.
+Due to their large size, \largeR jets benefit from a grooming procedure called trimming which remove soft contaminants inside the jet \cite{Krohn:2009th,PERF-2012-02}.
+Trimming aims to remove jet constituents from pile-up and the underlying event, which helps to improve the jet mass resolution and its robustness to varying levels of pile-up \cite{Ellis:1993tq}.
 The jet mass is computed using a combination of information from the calorimeters and ID, and a calibration to data is applied \cite{JETM-2018-02}.
 
 
@@ -670,7 +670,7 @@ If a match is found, a refit of the track is performed using the Gaussian Sum Fi
 Various identification criteria are then applied to the candidates using a likelihood-based (LH) method to improve purity.
 These include requirements on the track quality and cluster matching, the shape of electromagnetic shower in the ECal, leakage into the HCal, and the amount of transition radiation detected in the TRT.
 Isolation criteria with respect to other nearby ID tracks and calorimeter clusters may also be applied.
-A full description can be obtained from \rcite{ATLAS-CONF-2016-024}.
+A more complete description can be found in Refs. \cite{ATL-PHYS-PUB-2017-022,EGAM-2018-01}.
 %
 \begin{figure}[!htbp]
   \centering

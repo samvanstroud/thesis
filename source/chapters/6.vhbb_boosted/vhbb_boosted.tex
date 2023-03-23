@@ -28,7 +28,7 @@ Figures and tables from the published work are reproduced here.
 
 The boosted \VHbb analysis is focused on the high transverse momentum regime, which has the benefit of being more sensitive to physics beyond the Standard Model \cite{Mimasu:2015nqa}, but the disadvantage of being more challenging due to the increased difficulty in the accurate reconstruction of high transverse momentum physics objects (discussed in \cref{chap:tracking}).
 In order to focus on the \highpt regime, the reconstructed vector boson \ptv is required to be $\ptv > \SI{250}{\GeV}$ (see \cref{sec:vhbb_object_reco}).
-Events are also split into two \pt bins with the first bin covering $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and the second covering $\ptv > \SI{400}{\GeV}$, which allows the analysis to benefit from the improved signal-to-background in the \highpt regime.
+Events are also split into two \pt bins with the first bin covering $\SI{250}{\GeV} < \ptv < \SI{400}{\GeV}$ and the second covering $\ptv > \SI{400}{\GeV}$, which allows the analysis to benefit from the improved signal-to-background ratio in the \highpt regime \cite{ATL-PHYS-PUB-2009-088}.
 
 The previous \ATLAS analysis in \rcite{HIGG-2018-04} was primarily sensitive to vector bosons with a more modest \ptv boost in the region of 150--\SI{300}{\GeV} (for the 0- and 1-lepton channels) and 75--\SI{300}{\GeV} (for the 2-lepton channel).
 In this regime, the Higgs candidate was reconstructed using a pair of jets with radius parameter of $R = 0.4$, called \smallR jets.
@@ -186,14 +186,12 @@ The multijet background is modelled using a data-driven technique.
 
 \subsection{Data \& Simulated Samples}\label{sec:vhbb_samples}
 
-Data from centre-of-mass energy \come{13} proton-proton collisions at the \LHC recorded over the course of \runtwo (between 2015 and
-2018) were used for the analysis.
+Data from centre-of-mass energy \come{13} proton-proton collisions at the \LHC recorded over the course of \runtwo (between 2015 and 2018) were used for the analysis.
 The resulting dataset corresponds to a total integrated luminosity of \intlumi.
 
 An overview of the MC simulated samples used in the analysis is given in \cref{tab:vhbb_samples}.
 These samples are used to model the signal and background processes relevant to the analysis, with the exception of the multijet background which is modelled using a data-driven technique.
-Data and simulated events are reconstructed using the same algorithms, and a reweighting is applied to the simulated events in order to match the pile-up distribution
-observed in the data.
+Data and simulated events are reconstructed using the same algorithms, and a reweighting is applied to the simulated events in order to match the pile-up distribution observed in the data.
 %
 \input{chapters/6.vhbb_boosted/tables/mc_samples.tex}
 %
@@ -215,7 +213,7 @@ The main experimental uncertainties in the analysis are due to the modelling of 
 
 \begin{itemize}
   \item The \smallR jet energy scale and resolution, which are informed by in situ calibration studies \cite{PERF-2016-04}.
-  \item The \largeR jet energy and mass scales and resolutions. The scales are calibrated as described in \rcite{JETM-2018-02}, and an uncertainty of \pct{2} and \pct{20} is applied for the jet energy and mass resolutions, respectively.
+  \item The \largeR jet energy and mass scales and resolutions. The scales are calibrated as described in \rcite{JETM-2018-02}, and an uncertainty of \pct{2} and \pct{20} is applied for the jet energy and mass resolutions, respectively \cite{STDM-2011-19,ATLAS-CONF-2016-035}.
   \item \btagging uncertainties, which are computed separately for \bcl flavour jets as described in the data-based calibration studies in Refs.~\cite{PERF-2016-05,ATLAS-CONF-2018-006,ATLAS-CONF-2018-001}. An additional extrapolation uncertainty is added to account for jets with transverse momenta above that which is accessible in the calibration analyses.
   \item Uncertainties associated with the lepton energy and momentum scales, and reconstruction and identification efficiencies.
   \item Uncertainty on the pile-up models which are used in the simulated samples, described in \rcite{STDM-2015-05}.
@@ -554,7 +552,7 @@ Acceptance uncertainties for the single-top background are enumerated in \cref{t
 
 \subsection{Signal Modelling}
 
-The modelling of the systematic uncertainties affecting the signal processes follows the procedure described in Refs.~\cite{HIGG-2018-50,deFlorian:2016spz,HIGG-2016-29}.
+The modelling of the systematic uncertainties affecting the signal processes follows the procedure described in Refs.~\cite{HIGG-2018-50,deFlorian:2016spz,HIGG-2016-29,ATL-PHYS-PUB-2018-035,Proceedings:2018jsb}.
 The $qq \rightarrow VH$ signal samples are generated with \POWHEGBOX[v2]+\textsc{GoSam} at next-to-leading order (NLO) accuracy in QCD. 
 An additional $gg \rightarrow ZH$ sample is generated using \POWHEGBOX[v2] at leading order (LO) in QCD.
 In both cases, the generated events are interfaced with \PYTHIAV{8} for the parton showering modelling.
@@ -581,7 +579,7 @@ Freely floating background normalisations are implemented as NPs and are also ex
 
 \subsection{The Likelihood Function}
 
-The statistical setup treats each bin as a Poisson counting experiment and is based on the \textsc{RooStats} framework \cite{moneta2010roostats}.
+The statistical setup treats each bin as a Poisson counting experiment and is based on the \textsc{RooStats} framework \cite{moneta2010roostats,RooFit}.
 The combined likelihood over $N$ bins is constructed as the product of Poisson probabilities in each bin.
 Considering the simplified case of a single signal strength parameter $\mu$, and neglecting sources of systematic or statistical uncertainty, this is given by
 %
