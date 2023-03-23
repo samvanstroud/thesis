@@ -1,18 +1,19 @@
 \chapter{Introduction}\label{chap:intro}
 
 
-This thesis describes various efforts in improving the understanding of the Higgs boson and its coupling to heavy flavour quarks, primarily through the improvement of the algorithms used to reconstruct and analyse jets.
+This thesis describes various efforts in improving the understanding of the Higgs boson and its coupling to heavy flavour quarks, primarily through the improvement of the algorithms used to reconstruct and identify jets.
 The thesis is structured in the following manner:
 
 \cref{chap:theory} describes the theoretical foundations of the work presented in the rest of the thesis.
 
-\cref{chap:lhc_atlas} describes the \ATLAS detector and the \CERN accelerator complex. Details of reconstructed physics objects are also provided.
+\cref{chap:lhc_atlas} describes the \ATLAS detector and the \CERN accelerator complex. Details of reconstructed physics objects the \bjet identification algorithms are also provided.
 
-\cref{chap:tracking} provides an overview of the reconstruction of charged particle tracks (tracking) and identification of jets containing \bhadrons (\btagging) at \ATLAS, and studies into the challenges of high transverse momentum \btagging.
+\cref{chap:tracking} provides an overview of the challenges facing successful charged particle trajectory (track) reconstruction and correspondingly \bjet identification, with a particular focus on the high transverse momentum regime. Some preliminary investigations into improvements to the track reconstruction are detailed.
+% of charged particle tracks (tracking) and identification of jets containing \bhadrons (\btagging) at \ATLAS, and studies into the challenges of high transverse momentum \btagging.
 
-\cref{chap:track_classification_mva} describes the development of an algorithm to predict the origins of tracks. The tool is used to improve \btagging performance by the identification and removal of fake tracks before their input to the \btagging algorithms.
+\cref{chap:track_classification_mva} describes the development of an algorithm which predicts the origins of tracks. The tool is used to improve \btagging performance by the identification and removal of fake tracks before their input to the \btagging algorithms.
 
-\cref{chap:gnn_tagger} introduces a novel monolithic approach to \btagging using graph neural networks and auxiliary training objectives.
+\cref{chap:gnn_tagger} introduces a novel, monolithic \bjet identification algorithm which makes use of graph neural networks and auxiliary training objectives.
 
 \cref{chap:vhbb_boosted} describes the measurement of the associated production of a Higgs boson decaying into a pair of $b$-quarks at high transverse momentum.
 
@@ -27,16 +28,16 @@ The author's contribution to the work presented in this thesis is as follows.
 The author was an active member of the Cluster and Tracking in Dense Environments group throughout their PhD, starting with their qualification task on the understanding of tracking performance at high transverse momentum.
 The author played a key role in software r22 validation studies for the tracking group, including the validation of the quasi-stable particle interaction simulation and the radiation damage Monte-Carlo simulation. 
 The author helped design and improve several tracking software frameworks, and contributed to heavy flavour tracking efficiency studies in dense environments.
-The author developed a the tool to identify and reject fake-tracks, which is being investigated for use in the upcoming tracking paper.
+The author developed a tool to identify and reject fake-tracks, which is being investigated for use in the upcoming tracking paper.
 
 \textbf{$b$-tagging}:
-The author has been an active member of the Flavour Tagging group since September 2014. 
+The author has been an active member of the Flavour Tagging group since October 2020. 
 The author played a key role in investigating the performance of the low level taggers at high transverse momentum and led studies into the labelling and classification of track origins.
 Based on work by Jonathan Shlomi \cite{2020-gnn-for-sv}, the author helped develop a new flavour tagging algorithm which offers a large performance improvement with respect to the current state of the art.
 The author was the primary editor of a public note associated with this work \cite{ATL-PHYS-PUB-2022-027}, which will also be further developed in an upcoming paper.
 The author also contributed to the proliferation of the new algorithm to the trigger, High Luminosity LHC, and $X \rightarrow bb$ use cases.
 The author also played a key role in software r22 validation studies for the Flavour Tagging group, including the validation of the quasi-stable particle interaction simulation.
-The author maintains and contributes to various software frameworks used in the Flavour Tagging group, including as lead developer of three packages, to create training datasets, pre-process samples for algorithm studies and a framework for training graph neural networks, and contributes to group documentation.
+The author maintains and contributes to various software frameworks used in the Flavour Tagging group, including as lead developer of three packages, to create training datasets, pre-process samples for performance studies and a framework for training graph neural networks, and contributes to group documentation.
 
 \textbf{Higgs}:
 The author was an active member of the Boosted VHbb analysis group.
