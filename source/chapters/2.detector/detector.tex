@@ -431,7 +431,7 @@ The precision tracking system uses three layers of monitored drift tubes with a 
 The trigger system is comprised of resistive plate chambers in the barrel region covering $|\eta| < 1.0$ and thin gap chambers in the end-cap regions covering $1 < |\eta| < 2.4$.
 A set of three superconducting air-core toroidal magnets, each made up of eight coils, is used in each of the barrel and end-caps to deflect the muons as the pass through the MS, allowing their momentum and charge to be measured from the direction and magnitude of curvature.
 The toroidal magnets generate a field which is largely orthogonal to the muon trajectories which allows for maximum deflection.
-The transverse momentum resolution (measured for combined ID and muon tracks, see \cref{sec:lepton_reco}) has been measured to be approximately \pct{1.7} in the central region for \lowpt muons, increasing to \pct{4} for \highpt muons in the forward regions \cite{Artoni:1953654}.
+The transverse momentum resolution (measured for combined ID and muon tracks, see \cref{sec:lepton_reco}) has been measured to be approximately \pct{1.7} in the central region for muons from \Jpsi decays, increasing to \pct{2.3} for muons in the forward regions \cite{PERF-2015-10}.
 %
 \begin{figure}[!htpb]
   \centering
@@ -710,3 +710,74 @@ In order to calculate the missing transverse momentum, the negative vector sum o
 The momenta of tracks associated to the primary vertex are also taken into account.
 The magnitude of \vETmiss is written \ETmiss.
 More information about missing transverse momentum reconstruction is provided in \cite{PERF-2016-07}.
+
+
+
+
+\section{\texorpdfstring{\btagging}{b-tagging} Algorithms}\label{sec:btagging_algs}
+
+Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy flavour (HF) hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons.
+In particular, \btagging is the identification of jets originating only from \bhadrons (i.e. \bjets).
+Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
+It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
+
+In this section some common definitions used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
+
+
+\subsection{Common Definitions}\label{sec:ftag_defs}
+
+Each flavour tagging algorithm outputs a discriminant value that can be used to select jets of the signal flavour.
+The \text{efficiency} of a flavour tagging algorithm is defined as the fraction of signal jets which are correctly identified by the tagger.
+Given $N^{\text{signal}}$ signal jets, $N^{\text{signal}}_{\text{tagger}}$ of which have passed the algorithm's selection and $N^{\text{signal}}_{\text{untagger}}$ of which have not, the efficiency is given by
+
+\begin{equation}
+\varepsilon = \frac{N^{\text{signal}}_{\text{tagged}}}{N^{\text{signal}}_{\text{tagged}} + N^{\text{signal}}_{\text{untagged}}} .
+\end{equation}
+
+Meanwhile the \textit{fake rate} is defined as the efficiency for a background class to be selected, i.e.
+
+\begin{equation}
+\text{fake rate} = \frac{N^{\text{background}}_{\text{tagged}}}{N^{\text{background}}_{\text{tagged}} + N^{\text{background}}_{\text{untagged}}} .
+\end{equation}
+
+The \textit{rejection power} of the model is quantified for a given background as the reciprocal of the fake rate, i.e.
+
+\begin{equation}
+\text{rejection power} = \frac{1}{\text{fake rate}} .
+\end{equation}
+
+A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given efficiency on the inclusive \ttbar sample.
+
+
+\subsection{Low-level Algorithms}\label{sec:low_level_algs}
+% TODO: add vertexing section here??? or say something more like "the sec vert reco algs described in xx can be used to identify b-jets"....
+
+The low-level algorithms are the first step in the \btagging process.
+They take inputs information about the jet and its associated tracks and reconstruct distinct features of the experimental signature of heavy flavour jets.
+The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example SV1 and JetFitter which reconstruct displaced decay vertices (see \cref{sec:vertex_reco}) and IPxD which discriminates based on track IPs, and trained machine learning models such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+
+\subsection{High-level Algorithms}\label{sec:high_level_algs}
+
+The high-level algorithms combine the outputs of the independently optimised low-level algorithms using a multivariate approach to produce a discriminant value for each jet.
+For example the MV2c10 algorithm, used in the analysis described in \cref{chap:vhbb_boosted}, consists of a boosted decision tree which combines the outputs of IPxD, SV1 and JetFitter \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
+The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
+At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
+
+The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
+The low-level algorithms used by the different high-level taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
+
+%is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
+%Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
+
+%As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high_low_taggers.pdf}
+  \caption{
+    An overview of different high and low level taggers used in ATLAS.
+    The low level taggers are IPxD, SV1 and JetFitter, and RNNIP and DIPS \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+    The outputs of these taggers are fed into the high-level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
+  }
+  \label{fig:high_low_taggers}
+\end{figure}

@@ -1,17 +1,14 @@
-\chapter{Tracking and Flavour Tagging}\label{chap:tracking}
+\chapter{Tracking and Flavour Tagging at High $p_\textrm{T}$}\label{chap:tracking}
 
-Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy-flavour hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons.
-In particular, \btagging is the identification of jets originating only from \bhadrons (i.e. \bjets).
-
-Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
-It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
-
-This chapter is structured as follows.
-In \cref{sec:track_classifier_datasets} an introduction to the datasets used in this thesis is given.
-The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS are described in \cref{sec:btagging_algs}.
-These work by identifying the unique signatures of \bjets, which are outlined in \cref{sec:b_had_reco}.
+The various flavour tagging algorithms (introduced in \cref{sec:btagging_algs}) work by identifying the unique signatures of heavy flavour (HF) jets ($b$- and \cjets).
 Ultimately, the tagging algorithms use input information about the reconstructed jet and its associated tracks.
-Successful \btagging relies therefore on the efficient and accurate reconstruction of tracks, and especially those tracks corresponding to the products of \bhadron decays.
+Successful \btagging therefore relies on the efficient and accurate track reconstruction, especially for tracks corresponding to the products of HF decays.
+In this chapter studies investigating the challenges facing track reconstruction and flavour tagging at \highpt are discussed.
+
+
+The chapter is structured as follows.
+In \cref{sec:track_classifier_datasets} an introduction to the datasets used in this thesis is given.
+The unique signatures of \bjets are outlined in \cref{sec:b_had_reco}.
 A summary of the challenges facing tracking and \btagging at high transverse momentum is provided in \cref{sec:b_track_reco_challenges}.
 Some preliminary investigations into improving tracking in the \highpt regime are investigated in \cref{sec:b_track_reco_improvements}.
 In \cref{sec:trk_btag_conclusion} the conclusions of this chapter are given.
@@ -38,67 +35,6 @@ Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\Ge
 Additionally, a standard selection using the JVT tagger (see \cref{sec:jet_reco}) at the tight working point is applied to jets with $\pt < \SI{60}{\GeV}$ and $|\eta| < 2.4$ in order to suppress pile-up contamination \cite{ATLAS-CONF-2014-018}.
 
 
-\section{\texorpdfstring{\btagging}{b-tagging} Algorithms}\label{sec:btagging_algs}
-
-In this section some common definition used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the various \btagging algorithms used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
-
-\subsection{Common Definitions}\label{sec:ftag_defs}
-
-Each flavour tagging algorithm outputs a discriminant value that can be used to select jets of the signal flavour.
-The \text{efficiency} of a flavour tagging algorithm is defined as the fraction of signal jets which are correctly identified by the tagger.
-Given $N^{\text{signal}}$ signal jets, $N^{\text{signal}}_{\text{tagger}}$ of which have passed the algorithm's selection and $N^{\text{signal}}_{\text{untagger}}$ of which have not, the efficiency is given by
-
-\begin{equation}
-\varepsilon = \frac{N^{\text{signal}}_{\text{tagged}}}{N^{\text{signal}}_{\text{tagged}} + N^{\text{signal}}_{\text{untagged}}} .
-\end{equation}
-
-Meanwhile the \textit{fake rate} is defined as the efficiency for a background class to be selected, i.e.
-
-\begin{equation}
-\text{fake rate} = \frac{N^{\text{background}}_{\text{tagged}}}{N^{\text{background}}_{\text{tagged}} + N^{\text{background}}_{\text{untagged}}} .
-\end{equation}
-
-The \textit{rejection power} of the model is quantified for a given background as the reciprocal of the fake rate, i.e.
-
-\begin{equation}
-\text{rejection power} = \frac{1}{\text{fake rate}} .
-\end{equation}
-
-A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given efficiency on the inclusive \ttbar sample.
-
-
-\subsection{Low-level Algorithms}\label{sec:low_level_algs}
-% TODO: add vertexing section here??? or say something more like "the sec vert reco algs described in xx can be used to identify b-jets"....
-
-The low-level algorithms are the first step in the \btagging process.
-They take inputs information about the jet and its associated tracks and reconstruct distinct features of the experimental signature of heavy flavour jets.
-The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example SV1 and JetFitter which reconstruct displaced decay vertices (see \cref{sec:vertex_reco}) and IPxD which discriminates based on track IPs, and trained machine learning models such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
-
-\subsection{High-level Algorithms}\label{sec:high_level_algs}
-
-The high-level algorithms combine the outputs of the independently optimised low-level algorithms using a multivariate approach to produce a discriminant value for each jet.
-For example the MV2c10 algorithm, used in the analysis described in \cref{chap:vhbb_boosted}, consists of a boosted decision tree which combines the outputs of IPxD, SV1 and JetFitter \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
-The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
-At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
-
-The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
-The low-level algorithms used by the different high-level taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
-
-%is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
-%Correspondingly, \DLr is referred to as a \textit{high-level} tagger (i.e. one that uses a multivariate approach to combine outputs of the low-level taggers).
-
-%As the different \btagging algorithms ultimately rely on tracks, accurate and efficient track reconstruction is essential.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high_low_taggers.pdf}
-  \caption{
-    An overview of different high and low level taggers used in ATLAS.
-    The low level taggers are IPxD, SV1 and JetFitter, and RNNIP and DIPS \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
-    The outputs of these taggers are fed into the high-level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
-  }
-  \label{fig:high_low_taggers}
-\end{figure}
 
 
 \section{\texorpdfstring{\bhadron}{b-hadron} Reconstruction}
@@ -294,7 +230,7 @@ The reduced reconstruction efficiency of \bhadron decay tracks and incorrectly a
 
 
 
-\section{Investigations into High \texorpdfstring{\pT}{pT} \bhadron Tracking}\label{sec:b_track_reco_improvements}
+\section{Investigations into High \texorpdfstring{\pT}{pT} \bhadron Tracking Improvements}\label{sec:b_track_reco_improvements}
 
 In \cref{sec:sharedhits} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the shared hit requirements on tracks in the dense cores of \highpt \bjets.
 \cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
@@ -426,13 +362,13 @@ Alongside the refit procedure, a ``Bcut'' cut scheme was suggested in order to i
 
 \subsection{Global \texorpdfstring{$\chi^2$}{chi2} Fitter Outlier Removal}\label{sec:gx2f_opt}
 
+As part of the track fit an outlier removal procedure is run in which suspicious hits are identified and removed.
 This section documents ongoing studies into improving hit-to-track assignment by using the Global $\chi^2$ Fitter (GX2F) to identify and prevent incorrect hits from being assigned to tracks during the track fit.
 This is in contrast to a previously investigated approach \cite{AdorniBraccesiChiassi:2021irw} which attempted to identify and remove incorrect hits after the reconstruction of the track.
-As part of the track fit, an outlier removal procedure is run, in which suspicious hits are identified and removed.
 
 The GX2F code, as a relatively low-level component of track reconstruction, has not undergone significant modification for several years, and was originally only optimised in the context of prompt, isolated tracks.
-During this time, a new tracking sub-detector, the IBL, was installed.
-The motivation for looking at the GX2F is that these changes may require re-optimisation of the GX2F code, and in particular the outlier removal procedures.
+Since then, a new tracking sub-detector, the IBL, was installed.
+The motivation for looking at the GX2F is that this change may require the re-optimisation of the GX2F code, and in particular the outlier removal procedure.
 Further motivation for this approach comes from the low rate of labelled outliers in baseline tracking, in contrast to the relatively higher rate of tracks with an incorrect IBL hit.
 %For example, while approximately 15\% of \bhadron decay tracks have a wrong IBL hit (a value which only increases with the \pT of the \bhadron), less than 1\% of this tracks have had their IBL hit labelled and removed as an outlier.
 
