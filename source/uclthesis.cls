@@ -17,7 +17,7 @@
 %% -------------------------------------
 %% Option parsing
 %% -------------------------------------
-\def\@makeDraft{yes}
+\def\@makeDraft{}
 \def\@makeFinal{}
 \def\@makeWeb{}
 
@@ -61,7 +61,7 @@
 %% For websafe build we want hyperref and centred
 \ifx\@makeWeb\@empty\else%
   \PassOptionsToClass{oneside,hyperpdf}{hepthesis}%
-  \PassOptionsToPackage{running}{lineno}%
+  %\PassOptionsToPackage{running}{lineno}%
 \fi
 
 %% Load base class (options already passed)
@@ -201,7 +201,10 @@
 %%  - added linenumbers if in draft mode
 \let\@hepthesismainmatter\mainmatter
 \specialcomment{mainmatter}{%
-  \linenumbers
+  %% !!! draft override remove this manually to add/remove line numbering
+  %\linenumbers
+  %
+  % ignore this for now
   %\ifx\@makeDraft\@empty\else%  
   %\fi
   \@mainmattertrue

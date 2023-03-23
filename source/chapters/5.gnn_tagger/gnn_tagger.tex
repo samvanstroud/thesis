@@ -1,19 +1,19 @@
 \chapter{Graph Neural Network Flavour Tagger}\label{chap:gnn_tagger}
 
-This chapter introduces \GNN, a novel ML-based flavour tagging algorithm based on graph neural networks (GNNs).
-In \cref{sec:gnn_motvation}, an overview of the approach used for \GNN is given.
-An introduction to the theory of GNNs is provided in \cref{sec:gnn_theory}.
-Details of the experimental setup are provided in \cref{sec:experimental_setup}, while the architecture of \GNN is specified in \cref{sec:Architecture}.
-In \cref{sec:training}, the training procedure is described, and in \cref{sec:gnn_results} the results are shown.
+This chapter introduces \GNN, a novel flavour tagging algorithm based on graph neural networks (GNNs).
+In \cref{sec:gnn_motvation}, an overview of the proposed approach is given.
+An introduction to the formalism of GNNs is provided in \cref{sec:gnn_theory}.
+Details of the experimental setup are provided in \cref{sec:experimental_setup}, while a complete specification of the \GNN model is included in \cref{sec:gnn_specification}.
+In \cref{sec:training} the training procedure is described, and finally in \cref{sec:gnn_results} the results are shown.
 
 \section{Motivation}\label{sec:gnn_motvation}
 
 \GNN is a monolithic approach to flavour tagging as illustrated in~\cref{fig:oldvsnew}.
-As opposed to the existing approach to flavour tagging described in \cref{chap:tracking}, which relies on a two tiered approach requiring the use of both low- and high-level algorithms,
-\GNN takes as inputs information directly from an unordered variable number of tracks as input, and predicts the jet flavour without requiring outputs from the intermediate low-level algorithms.
+As opposed to the existing two-tiered approach to flavour tagging described in \cref{chap:tracking}, which relies on the use of both low- and high-level algorithms,
+\GNN takes as inputs information directly from an unordered variable number of tracks, and predicts the jet flavour without requiring outputs from intermediate algorithms.
 In addition to predicting the flavour of the jet, the model predicts which physical processes produced the various tracks, and groups the tracks into vertices.
 These auxiliary training objectives provide valuable additional information about the contents of the jet and enhance the performance of the primary flavour prediction task.
-The use of GNNs offers a natural way to classify jets with variable numbers of unordered associated tracks (see \cref{sec:gnn_theory}), while allowing for the inclusion of auxiliary training objectives~\cite{2020-gnn-for-sv,serviansky2020set2graph}.
+The GNN architecture offers a natural way to classify jets with variable numbers of unordered associated tracks (see \cref{sec:gnn_theory}), while allowing for the inclusion of auxiliary training objectives~\cite{2020-gnn-for-sv,serviansky2020set2graph}.
 
 \begin{figure}[!htbp]
     \centering
@@ -122,7 +122,7 @@ The jet flavour labels are assigned as described in \cref{sec:jet_reco}.
 Truth labelled \bcl jets are kinematically re-sampled in \pt and $\eta$ to ensure identical distributions in these variables.
 
 
-\section{Model Architecture}\label{sec:networks}
+\section{Model Specification}\label{sec:gnn_specification}
 
 \subsection{Model Inputs}\label{sec:model-inputs}
 
@@ -322,7 +322,7 @@ The graph classification network is comprised of four fully connected hidden lay
 To obtain probability outputs for each task, the outputs from each classification network are passed through a softmax function.
 
 
-\subsection{Training}\label{sec:training}
+\section{Training}\label{sec:training}
 
 The full \GNN training procedure minimises the total loss function $L_\text{total}$, defined as 
 

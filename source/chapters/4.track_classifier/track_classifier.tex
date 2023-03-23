@@ -1,16 +1,16 @@
 \chapter{Track Classification MVA}\label{chap:track_classification_mva}
 
 This chapter details work on implementing a multivariate algorithm (MVA) to predict the truth origin of reconstructed tracks.
-An introduction to formalisms of machine learning is given in \cref{sec:ml_background}.
+An introduction to the formalism of machine learning is given in \cref{sec:ml_background}.
 In \cref{sec:track_labelling}, the truth origin label is defined, and in \cref{sec:fake_track_mva} these labels are used to train a machine learning model that can effectively discriminate between good and fake tracks.
-Several studies motivated this work by demonstrating that at high \pt, \btagging performance was degraded by the presence of large numbers of poorly reconstructed or fake tracks.
-If an algorithm could be trained to detect fake tracks, these could be removed before their input to the \btagging algorithms with the aim of improving performance.
-In addition, other groups that are sensitive to the presence of fake tracks would also benefit from this work.
+Several studies motivated this work by demonstrating that at high \pt, the performance of the low-level \btagging algorithms was degraded by the presence of large numbers of poorly reconstructed or fake tracks.
+If an separate algorithm could be trained to detect fake tracks, these could be removed before their input to the \btagging algorithms with the aim of improving performance.
+In addition, other groups in \ATLAS that are sensitive to the presence of fake tracks would also benefit from this work.
 
 
 \section{Machine Learning Background}\label{sec:ml_background}
 
-Over the past few decades, machine learning (ML) techniques have become increasingly popular in High Energy Physics experiments due the increased volumes of high-dimensional data and improvements in the techniques used (in particular deep learning).
+Over the past few decades, machine learning (ML) techniques have become increasingly prevalent in High Energy Physics experiments due the increased volumes of high-dimensional data and improvements in the field of deep learning.
 Machine learning is the process by which a computer program uses data to learn suitable parameters for a predictive model.
 This is opposed to explicitly providing instructions on how to perform a task.
 A subfield known as \textit{supervised learning} is used in this work, and consists of exposing a model to a large number of labelled examples in order to extract relationships between the input data and their labels.
@@ -505,24 +505,24 @@ Together, these results demonstrate that by identifying and removing fake tracks
 
 \section{Conclusion}\label{sec:fake_track_mva_conclusion}
 
-Fake tracks, which are prevalent in the core of high \pt jets, have an adverse impact on \btagging performance.
-A ML tool to identify fake tracks has been developed, which can be used to limit the number of fake tracks being input to the \btagging algorithms.
+Fake tracks, which are prevalent in the core of high \pt jets, have an adverse impact on the performance of the low-level \btagging algorithms SV1 and JetFitter.
+A ML tool to identify fake tracks has been developed.
+The tool can be used to limit the number of fake tracks being input to the low-level tagging algorithms.
 An advantage of the approach is that the continuous output of the model allows for the tuning of good and fake track identification efficiencies.
 Since it was found that \bhadron decay tracks can also be poorly reconstructed and thus marked as fake, it was deemed necessary also to train a second algorithm to detect \bhadron decay tracks so that the removal of these tracks could be avoided.
 Removing fake and non-$b$ decay tracks in this way was found to improve the \ljet mistagging rate of SV1 and JetFitter by up to \pct{20} at high transverse momentum.
-The improvement achieved using the classification tools was in general comparable with that achieved when using the truth information to remove the fake tracks not from the decay of a \bhadron.
+The improvement achieved using the classification tools was generally comparable with that achieved when using the truth information to remove the fake tracks not from the decay of a \bhadron, demonstrating the efficacy of the approach.
 
 \subsubsection{Future Work}
 While removing tracks prior to their input to the low level tagging algorithms is shown here to be beneficial, a more performant alternative might be to keep these tracks but label them as being fake (for example using the output of the classification tool), and allow the tagging algorithms to take this into consideration.
-This is not straightforward with manually optimised taggers such as SV1 and JetFitter, but is possible with more advanced taggers as described in \cref{chap:gnn_tagger}.
+This is not straightforward with manually optimised low-level taggers such as SV1 and JetFitter, but is possible with more advanced taggers as described in \cref{chap:gnn_tagger}.
 
 Tools which identify the origin of a given track have other potential uses.
 One application is to isolate a relatively pure sample of fake tracks which can be used to estimate the fake track rate in data, which would be useful for estimating the uncertainty on fake track modelling.
 Another application is to use the \bhadron track identification tool to improve the track-to-jet association.
-Both applications are currently under investigation.
+Both applications are currently under investigation within \ATLAS.
 
 The approach here works on a track-by-track basis, but a more sophisticated approach would consider the correlations between the tracks inside a jet.
 Also left for future work is to simultaneously train a single tool which discriminates between all the truth origins listed in \cref{tab:truth_origins}.
-Such a tool would be useful as a general purpose multiclass classifier.
-An algorithm which takes both these aspects into consideration
-is discussed in \cref{chap:gnn_tagger}.
+Such a tool would be useful as a general purpose track origin classifier.
+An algorithm which takes both these aspects into consideration is discussed in \cref{chap:gnn_tagger}.

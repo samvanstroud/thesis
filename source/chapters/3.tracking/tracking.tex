@@ -1,16 +1,16 @@
 \chapter{Tracking and Flavour Tagging at High-\texorpdfstring{\pt}{pt}}\label{chap:tracking}
 
-The various flavour tagging algorithms (introduced in \cref{sec:btagging_algs}) work by identifying the unique signatures of heavy flavour (HF) jets ($b$- and \cjets).
+The various flavour tagging algorithms introduced in \cref{sec:btagging_algs} work by identifying the unique signatures of heavy flavour (HF) jets ($b$- and \cjets).
 Ultimately, the tagging algorithms use input information about the reconstructed jet and its associated tracks.
 Successful \btagging therefore relies on the efficient and accurate track reconstruction, especially for tracks corresponding to the products of HF decays.
-In this chapter studies investigating the challenges facing track reconstruction and flavour tagging at \highpt are discussed.
+In this chapter the challenges facing track reconstruction and flavour tagging at \highpt are discussed.
 
 
 The chapter is structured as follows.
 In \cref{sec:track_classifier_datasets} an introduction to the datasets used in this thesis is given.
 A summary of the challenges facing tracking and \btagging at high transverse momentum is provided in \cref{sec:b_had_reco_chall}.
 Some preliminary investigations into improving tracking in the \highpt regime are investigated in \cref{sec:b_track_reco_improvements}.
-In \cref{sec:trk_btag_conclusion} the conclusions of the chapter are given.
+Finally, in \cref{sec:trk_btag_conclusion} the conclusions of the chapter are given.
 
 
 \section{Datasets}\label{sec:track_classifier_datasets}
@@ -18,7 +18,7 @@ In \cref{sec:trk_btag_conclusion} the conclusions of the chapter are given.
 This thesis makes extensive use of two simulated datasets which are described in this section.
 The datasets are made up of simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$.
 The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
-The generation of the simulated event samples includes the effect of multiple $pp$ interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
+The generation of the simulated event samples includes the effect of multiple proton-proton interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
 
 \newcommand{\hdampFootnote}{%
 The $h_\text{damp}$ parameter is used to limit the effect of resummed higher order corrections. It is used to suppress the transverse momentum of the radiation which the \ttbar system recoils against.}
@@ -41,9 +41,9 @@ Additionally, a standard selection using the JVT tagger (see \cref{sec:jet_reco}
 \section{\texorpdfstring{\bhadron}{b-hadron} Reconstruction Challenges}
 \label{sec:b_had_reco_chall}
 
-This section some of the difficulties in the accurate reconstruction of the \bhadron decay at \highpt associated reconstruction difficulties in \cref{sec:b_had_reco_chall}.
+%This section some of the difficulties in the accurate reconstruction of the  associated reconstruction difficulties in \cref{sec:b_had_reco_chall}.
 As discussed in \cref{sec:b_decay_topology}, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
-For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to a combination of effects, which are described below.
+For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to a difficulties in the accurate reconstruction of tracks, as described below.
 
 As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay remains fixed.
 The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become significantly outnumbered.
@@ -156,16 +156,14 @@ The reduced reconstruction efficiency of \bhadron decay tracks and incorrectly a
 
 
 
-\section{Investigations into High \texorpdfstring{\pT}{pT} \texorpdfstring{\bhadron}{b-hadron} Tracking Improvements}\label{sec:b_track_reco_improvements}
+\section{High \texorpdfstring{\pT}{pT} \texorpdfstring{\bhadron}{b-hadron} Tracking Improvements}\label{sec:b_track_reco_improvements}
 
 In \cref{sec:sharedhits} pseudotracks, a key tool for studying the ideal tracking performance of the \ATLAS detector, are used to study the shared hit requirements on tracks in the dense cores of \highpt \bjets.
-\cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
+Meanwhile \cref{sec:gx2f_opt} details a study which investigated modifying the global track fitter to improve reconstruction performance in this regime.
 %Not detailed here is an investigation into the bcut + refit method. Shown not to be promising, as, even though an improvement in the \bhadron decay track efficiency was observed, the corresponding increase in the fake track was shown to be unacceptable.
 
 
 \subsection{Shared Hits}\label{sec:sharedhits}
-
-
 
 The ambiguity solver is not run for pseudotracks.
 However, if the standard track collection is produced alongside the pseudotracks, then cluster splitting neural networks will be run for the standard tracks, and the resulting classification of clusters will be propagated to hits on pseudotracks.
@@ -368,7 +366,7 @@ The results demonstrate an improvement in hit assignment, unchanged reconstructi
 \section{Conclusion}\label{sec:trk_btag_conclusion}
 
 In this section, the difficulties facing efficient and accurate  track reconstruction, and hence performant \btagging, have been outlined.
-The ambiguity solver, which attempts to clean or reject tracks which have an excessive number of shared hits, is shown to be overly aggressive in the removal of \bhadron decay product track candidates.
+The ambiguity solver, which attempts to clean or reject tracks which have an excess of shared hits, is shown to be overly aggressive in the rejection of \bhadron decay product track candidates.
 The ambiguity solving process relies on a complicated pre-defined selection which has not been optimised for high transverse momentum \bhadron track reconstruction.
 These conclusions have motivated further ongoing studies into the improvement of the track reconstruction in dense environments and the \highpt regime, such as those in \rcite{2022DonalTrackReco}.
 

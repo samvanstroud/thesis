@@ -2,7 +2,7 @@
 
 %AB: The work presented in this thesis relies on data recorded by the ATLAS detector in high energy proton-proton collisions. This chapter provides an overview of the experimental apparatus and analysis techniques used throughout this thesis.
 
-Since the completion of its construction in 2008, the Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN has extended the frontiers of particle physics through significant increases in centre of mass energy and luminosity compared with previous collider experiments.
+Since the completion of its construction in 2008, the Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN has extended the frontiers of particle physics through significant increases in centre of mass energy and instantaneous luminosity compared with previous collider experiments.
 The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than the speed of light, at which point they are made to collide.
 The proton bunches travel round the ring 11,000 times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
 The beams travel in opposite directions around the ring and are crossed at four locations so that collisions between protons can take place.
@@ -24,7 +24,7 @@ Over the course of \runone, \intlumirunone of usable integrated luminosity was r
 \runtwo, which spanned 2015--2018, further increased the proton-proton collision energy to \SI{13}{\TeV}.
 During \runtwo the bunch spacing was reduced, leading to a collision rate of \SI{40}{\mega\hertz}.
 Over the course of \runtwo a total usable integrated luminosity of \intlumi was recorded. % less good for physics
-2022 marked the beginning of \runthree which, with a higher center of mass energy and peak luminosity, is expected to culminate in an approximate tripling of the dataset size.
+2022 marked the beginning of \runthree which, with a higher center of mass energy and peak instantaneous luminosity, is expected to culminate in an approximate tripling of the dataset size.
 %We will be focusing the proton beams at the interaction points to less than 10 micron beam size, to increase the collision rate. (nominal beam size (width) is 16 microns from around run1)
 A summary of key information about each run is listed in \cref{tab:lhc_runs}.
 
@@ -45,7 +45,7 @@ A summary of key information about each run is listed in \cref{tab:lhc_runs}.
     Overview of the different LHC runs \cite{atlas-lumi-run1,atlas-lumi-run2}.
     The average number of interactions per bunch-crossing is denoted as \angles{\mu} (see \cref{sec:collider_defs}), and is here averaged over the entire run.
     The luminosity is the peak instantaneous luminosity. 
-    Numbers for Run 3 are preliminary and are only provided to give an indication of expected performance.
+    Numbers for Run 3 are preliminary and are only provided to give an indication of expected conditions.
     % run 1 run 2 trigger https://cds.cern.ch/record/2058218/
     %  2-3 × 1034 cm−2 s−1 and an average pile-up of ~80 collisions/bunch-crossing
     % https://cds.cern.ch/record/2732959/files/LHCP2020_094.pdf
@@ -56,7 +56,7 @@ A summary of key information about each run is listed in \cref{tab:lhc_runs}.
 An overview of the accelerator complex at CERN is shown in \cref{fig:accelerator_complex}.
 The LHC is at the final stage of a chain of accelerators which incrementally step-up the energy of incoming protons.
 The first accelerator is Linac2 (which has been replaced by Linac4 in 2020), a linear accelerator which accelerates negative hydrogen ions to an energy of \SI{160}{\MeV}.
-Upon leaving Linac4, the ions are stripped of both electrons and the resulting protons are fed into the Proton Synchrotron Booster (PSB), which increases the energy of the protons to \SI{2}{\GeV}.
+Upon leaving Linac4, the ions are stripped of both electrons and the bare protons are fed into the Proton Synchrotron Booster (PSB), which increases the energy of the protons to \SI{2}{\GeV}.
 The protons leaving the PSB are passed to the Proton Synchrotron (PS), which increases the energy to \SI{26}{\GeV}, and then from the PS to the Super Proton Synchrotron (SPS) which further increases the energy to \SI{450}{\GeV}.
 Finally, the proton beams are injected in the LHC where they are accelerated to their final energy of \SI{6.5}{\TeV} (for \runtwo).
 
@@ -121,19 +121,19 @@ Angular distance between two objects is measured in units of $\DeltaR$ and is de
   \DeltaR = \sqrt{(\Delta\eta)^{2} + (\Delta\phi)^{2}} ,
 \end{equation}
 %
-where $\Delta \eta$ and $\Delta \phi$ are the differences in pseudorapidity and azimuthal angle between the two objects.
+where $\Delta \eta$ and $\Delta \phi$ are the differences respectively in pseudorapidity and azimuthal angle between the two objects.
 
 
 \subsection{Track Parameterisation}\label{sec:track_parameterisation}
 
-The trajectories of charged particle tracks are parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
-The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to an given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
-$\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
+The trajectory of a charged particle track is parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
+The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to a given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
+The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
 \cref{fig:track_params} shows each of these parameters diagrammatically.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.75\textwidth]{chapters/2.detector/figs/track_params.pdf}
+  \includegraphics[width=0.65\textwidth]{chapters/2.detector/figs/track_params.pdf}
   \caption{
     The track parameterisation used at the \ATLAS detector.
     Five coordinates $(\dzero, \zzero, \phi, \theta, q/p)$ are specified, defined at the track's point of closest approach to the nominal interaction point at the origin of the coordinate system.
@@ -161,10 +161,10 @@ At hadron colliders such as the \LHC, the proton-proton cross section can be fac
   \sigma(pp \to X) \approx \textnormal{PDFs} \cdot \textnormal{partonic cross section} .
 \end{equation}
 %
-The partonic cross section can be calculated at high energies such as those found at the LHC, while the parton distribution functions (PDFs) have to be extracted from experimental results. 
+The partonic cross section can be calculated for the high energy interactions at the LHC, while the parton distribution functions (PDFs), used to describe lower energy phenomena, have to be extracted from experimental results. 
 
 \subsubsection{Luminosity}
-The total number of proton-proton collisions $N$ is related to the total $pp$ cross $\sigma$ section by the integrated luminosity $L$, as in
+The total number of proton-proton collisions $N$ is related to the total proton-proton cross section $\sigma$ by the integrated luminosity $L$, as in
 %
 \begin{equation}
   N = \sigma L = \sigma \int \mathcal{L} ~\mathrm{d}t .
@@ -177,7 +177,7 @@ For two colliding bunched proton beams, it is defined as
   \mathcal{L} = \frac{1}{\sigma} \der{N}{t} = \frac{f n_1 n_2}{4 \pi \sigma_x \sigma_y},
 \end{equation}
 %
-where $n_1$ and $n_2$ are the number of protons in the colliding bunches, $f$ is the bunch crossing frequency, and $\sigma_x$ and $\sigma_y$ are the RMS width of the beam in the horizontal and vertical directions.
+where $n_1$ and $n_2$ are the number of protons in the colliding bunches, $f$ is the bunch crossing frequency, and $\sigma_x$ and $\sigma_y$ are the RMS width of the beam in the horizontal and vertical directions respectively.
 %At the LHC, the beams collide with a crossing angle $\phi \approx \SI{285}{\micro\radian}$ to localise the interaction to a specific point in space.
 %This reduces the effective luminosity.  
 
@@ -212,7 +212,7 @@ The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF
 
 At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons are collided.
 Each bunch-crossing is called an \textit{event}.
-There is generally one hard proton-proton scatter per event.
+There is generally at most one hard proton-proton scatter per event.
 Additional interactions are typically relatively soft (\lowpt) and are known as \textit{pile-up}.
 %Pile-up complicates the reconstruction of the hard scatter event as results of the interactions of different proton-proton interactions have to be separated.
 Pile-up from interactions within the same bunch-crossing is known as \textit{in-time} pile-up while residual signatures from previous bunch-crossings is known as \textit{out-of-time} pile-up.
@@ -235,7 +235,8 @@ Histograms showing the number of pile-up interactions over the course of \runtwo
 The \ATLAS\footnote{\textbf{A} \textbf{T}oroidal \textbf{L}HC \textbf{A}pparatu\textbf{S}.} detector is made up of several specialised sub-detectors which are arranged concentrically around the nominal interaction point at the centre of the detector, as shown in \cref{fig:atlas_detector}.
 The detector is designed to cover nearly the entire solid angle around the collision point.
 In this section a brief overview of each sub-detector is given, in order of increasing radial distance from the point of collision.
-The inner tracking detector is described in \cref{sec:atlas_id}, the electromagnetic and hadronic calorimeters in \cref{sec:atlas_calorimeter}, the muon spectrometer in \cref{sec:muon_spectrometer}, and finally the trigger is described in \cref{sec:trigger}.
+The inner tracking detector is described in \cref{sec:atlas_id}, the electromagnetic and hadronic calorimeters in \cref{sec:atlas_calorimeter}, and finally the muon spectrometer in \cref{sec:muon_spectrometer}.
+Trigger system, used to select events for storage, is described in \cref{sec:trigger}.
 More complete information on the detector can be found in \rcite{PERF-2007-01}, while an overview of physics performance is given in \cite{ATLAS-TDR-14}.
 
 \begin{figure}[!htpb]
@@ -259,7 +260,7 @@ The inner detector is made up of several sub-systems, shown in \cref{fig:atlas_i
 The high-granularity silicon pixel detector covers the innermost region and typically provides four space-point measurements per track.
 It is followed by the silicon microstrip tracker (SCT), which usually provides a further four space-point measurements (8 hits) per track.
 These silicon detectors are complemented by the Transition Radiation Tracker (TRT),
-which enables radially extended track reconstruction up to $|\eta| = 2.0$ and typically provides 33 (38) additional hits in the barrel (end-cap). 
+which enables radially extended track reconstruction in the region $|\eta| < 2.0$ and typically provides 33 (38) additional hits in the barrel (end-cap). 
 
 
 \begin{figure}[!htpb]
@@ -292,23 +293,23 @@ The parameterisation is given by
 where $\oplus$ denotes a sum in quadrature.
 For \lowpt tracks (e.g. $\pt \approx \SI{500}{\MeV}$) in the central region this corresponds to a relative error of approximately \pct{0.01}.
 Meanwhile for \highpt tracks (e.g. $\pt \approx \SI{100}{\GeV}$) in the central region this corresponds to a relative error of approximately \pct{4}.
-The momentum resolution generally good enough to correctly identify the sign of the charge on particles up to the highest energies expected at the \LHC.
+The momentum resolution is generally good enough to correctly identify the sign of the charge on particles up to the highest energies observed at the \LHC.
 The transverse impact parameter resolution $\sigma(\dzero)$ is parameterised similarly as
 %
 \begin{equation}
   \sigma(\dzero) = 11 \oplus \frac{115}{\pt \sin\theta} \SI{}{\micro\meter} .
 \end{equation}
 %
-Typical uncertainties for the transverse IP resolution are \SI{230}{\micro\meter} and \SI{11}{\micro\meter} for low and \highpt tracks in the central region, respectively.
+Typical uncertainties for the transverse IP resolution of tracks in the central region of the detector are \SI{230}{\micro\meter} and \SI{11}{\micro\meter} for low and \highpt tracks respectively.
 
 \subsubsection{Pixel Detector}
 The silicon pixel detector is comprised of four cylindrical barrels at increasing radii from the beamline, and four disks on each side.
 The innermost barrel layer is the insertable B-layer (IBL), shown in \cref{fig:atlas_ibl}.
-The IBL was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001} and lies approximately just \SI{33}{\milli\meter} from the beam axis.
-The second-to-innermost layer is often referred to as the B-layer.
+The IBL was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001} and lies approximately just \SI{33}{\milli\meter} from the beam axis (the distance varies due to the interleaved structure).
+The second-to-innermost layer is referred to as the B-layer.
 %Radiation-hard electronics are used to read out the 140 million channels.
 The specification of the pixel detector determines the impact parameter resolution and the ability to reconstruct primary and secondary vertices.
-The detector is required to have a high granularity (i.e. resolution) to maintain the low occupancy required to resolve nearby particles. %(high sparsity to resolve different tracks).
+The detector is required to have a high granularity (i.e. resolution) to maintain the low occupancy required to resolve the trajectories of nearby particles. %(high sparsity to resolve different tracks).
 Individual pixels are \SI{50}{\micro\meter} in the transverse direction $R\phi$ and \SI{400}{\micro\meter} in the longitudinal $z$ direction (\SI{250}{\micro\meter} for the IBL).
 Cluster positions have a resolution of approximately \SI{10}{\micro\meter} in $R\phi$ and \SI{100}{\micro\meter} in $z$.
 
@@ -326,7 +327,7 @@ Cluster positions have a resolution of approximately \SI{10}{\micro\meter} in $R
 \subsubsection{Semi-Conductor Tracker (SCT)}
 The SCT is made up of four concentric barrel layers in the central region, and nine disks in each end-cap.
 Each layer is itself made of a pair of silicon microstrip layers, with a small stereo angle (\SI{20}{\milli\radian}) between the two layers enabling the $z$\nobreakdash-coordinate to be measured from a pair of strip measurements.
-The SCT typically provides four precision space-point measurements (eight strip measurements) per track in the barrel region.
+The SCT typically provides four space-point measurements (eight strip measurements, or hits) per track in the barrel region.
 These have intrinsic uncertainties of \SI{17}{\micro\meter} in the transverse direction $R\phi$, and \SI{580}{\micro\meter} in the longitudinal direction $z$ \cite{IDET-2013-01}.
 The measurements provide a contribution to the measurement of charged particle momentum and impact parameter.
 %The high granularity enables good pattern recognition
@@ -335,7 +336,7 @@ The measurements provide a contribution to the measurement of charged particle m
 
 
 \subsubsection{Transition Radiation Tracker (TRT)}
-The TRT is a straw-tube tracker which complements the higher-resolution silicon-based tracks by offering a larger number of hits per track (typically more than 30) and a long lever arm, which aids the accurate measurement of particle momentum. 
+The TRT is a straw-tube tracker which complements the higher-resolution silicon-based tracks by offering a larger number of hits per track and a long lever arm, which aids the accurate measurement of particle momentum. 
 It is made up of approximately \num{300000} drift tubes with a diameter of \SI{4}{\milli\meter} which are filled with an argon/xenon gas mixture.
 The walls of each tube are electrically charged, and a thin conducting wire runs along the center.
 When a charged particle traverses a tube, it ionises the gas and the resulting liberated electrons drift along the electric field to the wire, where an associated charge is registered.
@@ -359,7 +360,7 @@ The calorimeter system measures the energy of incident particles over the range 
 There are two main sub-systems: the electromagnetic calorimeter (ECal), which focuses on the measurement of electrons and photons, and the hadronic calorimeter (HCal), which measures the energy of hadrons.
 A schematic view of the calorimeter system is shown in \cref{fig:atlas_calos}.
 Upon entering the calorimeter, incident particles will interact with the detector material to produce a shower of secondary particles with reduced energies. 
-The charge deposited in this process is measured to reconstruct the energy of the initial incident particle.
+The charge deposited in this process is measured and used to reconstruct the energy of the initial incident particle.
 The two calorimeter sub-systems must provide strong containment of showering particles to prevent punch-through of EM and hadronic particles to the HCal and muon systems respectively.
 
 
@@ -472,7 +473,7 @@ More information is provided in \cite{TRIG-2016-01}.
 Event reconstruction is the process of analysing the output from the detector to determine the type and properties of particles present in an event. 
 The reconstructed event provides information about the underlying physics process that led to these observable final state particles.
 Events passing the trigger selection (described in \cref{sec:trigger}) undergo offline reconstruction, which makes use of the full information from the detector.
-Reconstruction and analysis of events relies on the extensive \ATLAS software stack, see \rcite{ATL-SOFT-PUB-2021-001} for more information.
+Reconstruction and analysis of events relies on the extensive \ATLAS software stack, see Refs. \cite{ATL-SOFT-PUB-2021-001,ATL-SOFT-PUB-2020-001} for more information.
 
 Several different reconstructed objects are used for physics analyses.
 Objects relevant to this thesis are described below.
@@ -497,17 +498,17 @@ Clusters (also called \textit{hits} or \textit{space-points}) are formed by clus
 
 \subsubsection{Track Finding}
 Space-points are used to build track seeds. These are groups of three hits which are geometrically compatible with being part of a track segment.
-A combinatorial Kalman filter (KF) is used to build track candidates by extending track seeds.
+A combinatorial Kalman filter (KF) is used to build \textit{track candidates} by extending track seeds.
 The filter can create multiple track candidates per seed, with bifurcations along the track occurring when more than one compatible space-point exists on a given layer.
-In this way, the KF creates an excess of \textit{track candidates}, which are only required to satisfy basic quality requirements. 
+In this way, the KF creates an excess of track candidates, which are only required to satisfy basic quality requirements. 
 Track candidates are allowed to reuse or \textit{share} hits freely (a single hit may be used by multiple track candidates).
 Typically, the presence of shared hits is a predictor of a bad track due to the high granularity of the ATLAS tracking detectors.
-At this stage, there can also be a large number of incorrect hits assigned to otherwise good tracks, and additionally large numbers of \textit{fake} tracks, which are comprised of a majority of wrong hits and do not correspond to the trajectory of any one physical particle (fake tracks are defined as those where the majority of associated hits do not originate from one single truth particle, see \cref{eq:tmp_def}).
-The low quality of tracks at this stage necessitates an ambiguity solving step, in which candidates are cleaned, and the highest quality track are selected.
+At this stage, there can also be a large number of incorrect hits assigned to otherwise good tracks, and additionally large numbers of \textit{fake} tracks, which are comprised of a majority of incorrect hits and do not correspond to the trajectory of any one physical particle (see \cref{eq:tmp_def}).
+The low quality of tracks at this stage necessitates an ambiguity solving step, in which candidates are cleaned, and the highest quality tracks are selected.
 
 \subsubsection{Ambiguity Solving}
 Ambiguity solving was introduced as part of the ATLAS New Tracking effort \cite{Cornelissen:2007vba}, which was intended to improve track reconstruction performance in dense environments.
-In the ambiguity solver, track candidates are processed individually in descending order of a track score. The track score quantifies the likelihood of the track corresponding to the trajectory of a real particle. Scoring uses a number of variables, including the number and positions of hits (preferring hits in more precise regions of the detector), the transverse momentum of the track and the track fit quality. The track fit quality describes the quality of the track as the $\chi^2$ divided by the number degrees of freedom on the track. A preference for high transverse momentum tracks promotes the successful reconstruction of the more physically interesting energetic particles, and suppresses the large number of wrong hits assigned to low momentum tracks.
+In the ambiguity solver, track candidates are processed individually in descending order of a track score. The track score quantifies the likelihood of the track corresponding to the trajectory of a real particle. Scoring uses a number of variables, including the number and positions of hits (preferring hits in more precise regions of the detector), the transverse momentum of the track and the track fit quality. The track fit quality is defined as the $\chi^2$ obtained from the track fit divided by the number degrees of freedom on the track. A preference for high transverse momentum tracks promotes the successful reconstruction of the more physically interesting energetic particles, and suppresses the large number of incorrect hits assigned to low momentum tracks.
 The ambiguity solver also penalises tracks with missing hits on the innermost detector layers. 
 
 During the processing of a track candidate, the track is cleaned (whereby problematic hits are removed), and, if the resulting track satisfies the quality selection criteria, a high precision fit of the track parameters using the surviving hits is performed.
@@ -549,7 +550,7 @@ This selection does allow for the possibility of a track having small number of 
 
 \subsubsection{Neural Network Cluster Splitting}
 As part of track cleaning, shared hits are classified by a NN to determine if they are compatible with the characteristic features of a merged cluster \cite{PERF-2012-05, ATL-PHYS-PUB-2015-006}.
-A merged cluster is one made up of a combination of energy deposits from more than one particle, which have become merged due to the closeness of the associated particles and the limited resolution of the detector.
+A merged cluster is one made up of a combination of energy deposits from more than one particle which have become merged due to the closeness of the particles and the limited resolution of the detector.
 It is common for clusters to become merged in dense environments, as discussed in \cref{sec:b_had_reco_chall}.
 If the cluster is predicted to be merged it is labelled as being freely shareable, or \textit{split}.
 Hits not compatible with the merged hypothesis can still be shared by a limited number of tracks, but come with a penalty for the track which may hinder its acceptance into the final track collection.
@@ -558,7 +559,7 @@ Hits not compatible with the merged hypothesis can still be shared by a limited 
     \centering
     \includegraphics[width=0.8\textwidth]{chapters/2.detector/figs/merged-cluster.png}
     \caption{
-      Particles (left) which have enough separation will leave charge depositions which are resolved into separate clusters.
+      (left) Particles which have enough separation will leave charge depositions which are resolved into separate clusters.
       Sufficiently close particles (right) can lead to merged clusters.
       Their combined energy deposits are reconstructed as a single merged cluster \cite{PERF-2015-08}.}
     \label{fig:resolved/merged clusters}
@@ -706,7 +707,7 @@ More information on muon reconstruction, identification and isolation can be fou
 
 An imbalance in the final state transverse momentum can occur as a result of incomplete measurement of the final state particles.
 In particular, neutrinos are not measured by the detector and contribute to the missing transverse momentum \vETmiss.
-Incomplete detector acceptance and inaccuracies in the reconstruction of the final state can also contribute to the missing transverse momentum of an event.
+Incomplete detector acceptance and inaccuracies in the reconstruction of the final state can also contribute to the missing transverse momentum in an event.
 In order to calculate the missing transverse momentum, the negative vector sum of the momentum of all photons, leptons and \smallR jets with $\pt > \SI{20}{\GeV}$ is taken.
 The momenta of tracks associated to the primary vertex are also taken into account.
 The magnitude of \vETmiss is written \ETmiss.
@@ -727,14 +728,14 @@ Flavour tagging is a critical component of the physics programme of the ATLAS ex
 It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
 
 In this section some common definitions used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the characteristic properties of \bjets in \cref{sec:b_decay_topology}.
-The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
+The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS are introduced in \cref{sec:low_level_algs,sec:high_level_algs}.
 
 
 \subsection{Common Definitions}\label{sec:ftag_defs}
 
 Each flavour tagging algorithm outputs a discriminant value that can be used to select jets of the signal flavour.
 The \text{efficiency} of a flavour tagging algorithm is defined as the fraction of signal jets which are correctly identified by the tagger.
-Given $N^{\text{signal}}$ signal jets, $N^{\text{signal}}_{\text{tagger}}$ of which have passed the algorithm's selection and $N^{\text{signal}}_{\text{untagger}}$ of which have not, the efficiency is given by
+Given $N^{\text{signal}}$ signal jets, $N^{\text{signal}}_{\text{tagged}}$ of which have passed the algorithm's selection and $N^{\text{signal}}_{\text{untagged}}$ of which have not, the efficiency is given by
 
 \begin{equation}
 \varepsilon = \frac{N^{\text{signal}}_{\text{tagged}}}{N^{\text{signal}}_{\text{tagged}} + N^{\text{signal}}_{\text{untagged}}} .
@@ -752,7 +753,7 @@ The \textit{rejection power} of the model is quantified for a given background a
 \text{rejection power} = \frac{1}{\text{fake rate}} .
 \end{equation}
 
-A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given efficiency on the inclusive \ttbar sample.
+A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given signal identification efficiency.
 
 
 \subsection{Decay Topology}
@@ -778,7 +779,7 @@ In the rest frame of the detector, the typical \bhadron travels a distance
 before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
 
 For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
-Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure).
+Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector.
 \cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
 This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
 
@@ -835,11 +836,12 @@ The low-level algorithms are a combination of manually optimised reconstruction 
 \subsection{High-level Algorithms}\label{sec:high_level_algs}
 
 The high-level algorithms combine the outputs of the independently optimised low-level algorithms using a multivariate approach to produce a discriminant value for each jet.
-For example the MV2c10 algorithm, used in the analysis described in \cref{chap:vhbb_boosted}, consists of a boosted decision tree which combines the outputs of IPxD, SV1 and JetFitter \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}.
+For example the MV2c10 algorithm \cite{ATL-PHYS-PUB-2015-022,FTAG-2018-01,ATL-PHYS-PUB-2017-013}, used in the analysis described in \cref{chap:vhbb_boosted}, consists of a boosted decision tree which combines the outputs of IPxD, SV1 and JetFitter.
 The working point is tuned to achieve an average \bjet efficiency of \pct{70} on simulated \ttbar events.
 At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
 
 The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
+AT the \pct{70} efficiency working point, \DLr achieves a \crej of approximately 12 and a \lrej of approximately 625.
 The low-level algorithms used by the different high-level taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
 
 %is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
