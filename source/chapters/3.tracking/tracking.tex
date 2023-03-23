@@ -8,10 +8,9 @@ In this chapter studies investigating the challenges facing track reconstruction
 
 The chapter is structured as follows.
 In \cref{sec:track_classifier_datasets} an introduction to the datasets used in this thesis is given.
-The unique signatures of \bjets are outlined in \cref{sec:b_had_reco}.
-A summary of the challenges facing tracking and \btagging at high transverse momentum is provided in \cref{sec:b_track_reco_challenges}.
+A summary of the challenges facing tracking and \btagging at high transverse momentum is provided in \cref{sec:b_had_reco_chall}.
 Some preliminary investigations into improving tracking in the \highpt regime are investigated in \cref{sec:b_track_reco_improvements}.
-In \cref{sec:trk_btag_conclusion} the conclusions of this chapter are given.
+In \cref{sec:trk_btag_conclusion} the conclusions of the chapter are given.
 
 
 \section{Datasets}\label{sec:track_classifier_datasets}
@@ -39,86 +38,11 @@ Additionally, a standard selection using the JVT tagger (see \cref{sec:jet_reco}
 
 
 
-\section{\texorpdfstring{\bhadron}{b-hadron} Reconstruction}
-\label{sec:b_had_reco}
+\section{\texorpdfstring{\bhadron}{b-hadron} Reconstruction Challenges}
+\label{sec:b_had_reco_chall}
 
-This section outlines the typical detector signature of a \bhadron in \cref{sec:b_decay_topology} and discusses some associated reconstruction difficulties in \cref{sec:b_track_reco_challenges}.
-
-
-\subsection{Decay Topology}
-\label{sec:b_decay_topology}
-
-\bhadrons are quasi-stable bound states of a bottom quark and one or more lighter quarks.
-Collectively, these are the \bmesons (e.g. $\PBplus = u \overline{b}$, $\PBzero = d \overline{b}$) and baryons (e.g. $\Lambda_b^0 = udb$).
-After a \bquark is produced as the result of a proton-proton collision, they quickly hadronise.
-The hadronisation process is hard -- around 70-80\% of the \bquark's momentum is passed to the \bhadron, with the rest being radiated as prompt hadronisation or fragmentation particles.
-See \rcite{Webber:1999ui} for a more in depth discussion on hadronisation and the closely related process of fragmentation.
-Henceforth the combined hadronisation and fragmentation products will be referred to collectively as fragmentation.
-
-\bhadrons are interesting objects of study due to their relatively long proper lifetimes $\tau \approx \SI{1.5}{\pico\second}$~\cite{PhysRevD.98.030001}.
-This lifetime corresponds to a proper decay length $c \tau \approx \SI{450}{\micro\meter}$.
-%Experiment has shown that \bhadrons do not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
-%The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
-In the rest frame of the detector, the typical \bhadron travels a distance 
-%
-\begin{equation}
-  d = \gamma \beta c \tau \approx \gamma c \tau
-\end{equation}
-%
-before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
-
-For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
-Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure).
-\cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
-This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=0.6\textwidth]{chapters/3.tracking/figs/b_pt_lxy.pdf}
-  \caption{
-    The truth \bhadron decay radius \Lxy as a function of truth transverse momentum \pt for reconstructed \bjets in \Zprime events.
-    Error bars show the standard deviation.
-    The pixel layers are shown in dashed horizontal lines.
-  }
-  \label{fig:b_lxy_vs_pt}
-\end{figure}
-
-\bhadrons decay weakly to on average four or five collimated stable particles \cite{ATL-PHYS-PUB-2014-008}.
-These particles, along with any other fragmentation particles, are reconstructed in the detector as a jet.
-A \bjet has several characteristic features which differentiate it from \ljets.
-%These features stem from the significant displacement of the \bhadron that can occurs due to it's lifetime.
-The primary feature is the presence of a high mass secondary vertex that is significantly displaced from the primary vertex.
-Reconstruction of these vertices from tracks with common points of spatial origin is a common approach used in the identification of \bjets.
-
-
-\begin{figure}[!tbp]
-  \centering
-  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
-  \caption{
-    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey)~\cite{bjetdiagram}.
-    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
-    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
-  \label{fig:bjet_diagram}
-\end{figure}
-
-
-Additional signatures of \bhadrons are as follows.
-Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
-Furthermore, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
-Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}, the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
-%In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
-%As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
-%Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
-
-These signatures are primarily identified using tracks associated to jets, or using reconstructed electrons or muons, which also rely on tracks as discussed in \cref{sec:lepton_reco}.
-As such, efficient and accurate track reconstruction is essential for high performance flavour tagging.
-
-% TODO integrate with above and make it smoother, it's a bit repeated
-
-
-\subsection{Challenges}\label{sec:b_track_reco_challenges}
-
-As discussed, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
+This section some of the difficulties in the accurate reconstruction of the \bhadron decay at \highpt associated reconstruction difficulties in \cref{sec:b_had_reco_chall}.
+As discussed in \cref{sec:b_decay_topology}, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
 For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to a combination of effects, which are described below.
 
 As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay remains fixed.

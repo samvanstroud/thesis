@@ -10,7 +10,8 @@ Around these collision points four specialised detectors, ALICE~\cite{AliceColla
 
 In this chapter, a brief overview of the \LHC and the accelerator complex at \CERN is given in \cref{sec:lhc}.
 The coordinate system used at the \ATLAS detector and other common definitions are introduced in \cref{sec:atlas_coords}.
-An overview of the different detector systems is provided in \cref{sec:atlas_detector}, and finally descriptions of various commonly used reconstructed objects is given in \cref{sec:physics-objects}.
+In \cref{sec:atlas_detector} the different \ATLAS detector systems are described, and in \cref{sec:physics-objects} information about various commonly used reconstructed objects is given.
+Finally, \cref{sec:btagging_algs} provides an introduction to flavour tagging at \ATLAS.
 
 
 \section{The Large Hadron Collider}\label{sec:lhc}
@@ -549,7 +550,7 @@ This selection does allow for the possibility of a track having small number of 
 \subsubsection{Neural Network Cluster Splitting}
 As part of track cleaning, shared hits are classified by a NN to determine if they are compatible with the characteristic features of a merged cluster \cite{PERF-2012-05, ATL-PHYS-PUB-2015-006}.
 A merged cluster is one made up of a combination of energy deposits from more than one particle, which have become merged due to the closeness of the associated particles and the limited resolution of the detector.
-It is common for clusters to become merged in dense environments, as discussed in \cref{sec:b_had_reco}.
+It is common for clusters to become merged in dense environments, as discussed in \cref{sec:b_had_reco_chall}.
 If the cluster is predicted to be merged it is labelled as being freely shareable, or \textit{split}.
 Hits not compatible with the merged hypothesis can still be shared by a limited number of tracks, but come with a penalty for the track which may hinder its acceptance into the final track collection.
 %
@@ -714,6 +715,10 @@ More information about missing transverse momentum reconstruction is provided in
 
 
 
+
+
+
+
 \section{Flavour Tagging Algorithms}\label{sec:btagging_algs}
 
 Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy flavour (HF) hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons (collectively referred to as \ljets).
@@ -721,7 +726,8 @@ In particular, \btagging is the identification of jets originating only from \bh
 Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
 It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
 
-In this section some common definitions used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
+In this section some common definitions used in flavour tagging are given in \cref{sec:ftag_defs}, followed by a description of the characteristic properties of \bjets in \cref{sec:b_decay_topology}.
+The various \bjet identification algorithms (also called \textit{taggers}) used in ATLAS in \cref{sec:low_level_algs,sec:high_level_algs}.
 
 
 \subsection{Common Definitions}\label{sec:ftag_defs}
@@ -747,6 +753,77 @@ The \textit{rejection power} of the model is quantified for a given background a
 \end{equation}
 
 A \textit{fixed-cut working point} (WP) defines the corresponding selection applied to the tagging discriminant in order to achieve a given efficiency on the inclusive \ttbar sample.
+
+
+\subsection{Decay Topology}
+\label{sec:b_decay_topology}
+
+\bhadrons are quasi-stable bound states of a bottom quark and one or more lighter quarks.
+Collectively, these are the \bmesons (e.g. $\PBplus = u \overline{b}$, $\PBzero = d \overline{b}$) and baryons (e.g. $\Lambda_b^0 = udb$).
+After a \bquark is produced as the result of a proton-proton collision, they quickly hadronise.
+The hadronisation process is hard -- around 70-80\% of the \bquark's momentum is passed to the \bhadron, with the rest being radiated as prompt hadronisation or fragmentation particles.
+See \rcite{Webber:1999ui} for a more in depth discussion on hadronisation and the closely related process of fragmentation.
+Henceforth the combined hadronisation and fragmentation products will be referred to collectively as fragmentation.
+
+\bhadrons are interesting objects of study due to their relatively long proper lifetimes $\tau \approx \SI{1.5}{\pico\second}$~\cite{PhysRevD.98.030001}.
+This lifetime corresponds to a proper decay length $c \tau \approx \SI{450}{\micro\meter}$.
+%Experiment has shown that \bhadrons do not couple strongly to \lquarks \cite{PhysRevLett.52.1084}.
+%The lifetime of \bhadrons is therefore approximately determined only by a single CKM matrix element $V_{cb}$ (see \cref{sec:ew_sector}).
+In the rest frame of the detector, the typical \bhadron travels a distance 
+%
+\begin{equation}
+  d = \gamma \beta c \tau \approx \gamma c \tau
+\end{equation}
+%
+before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
+
+For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
+Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector (the distance varies due to the interleaved structure).
+\cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
+This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
+
+\begin{figure}[!htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{chapters/3.tracking/figs/b_pt_lxy.pdf}
+  \caption{
+    The truth \bhadron decay radius \Lxy as a function of truth transverse momentum \pt for reconstructed \bjets in \Zprime events.
+    Error bars show the standard deviation.
+    The pixel layers are shown in dashed horizontal lines.
+  }
+  \label{fig:b_lxy_vs_pt}
+\end{figure}
+
+\bhadrons decay weakly to on average four or five collimated stable particles \cite{ATL-PHYS-PUB-2014-008}.
+These particles, along with any other fragmentation particles, are reconstructed in the detector as a jet.
+A \bjet has several characteristic features which differentiate it from \ljets.
+%These features stem from the significant displacement of the \bhadron that can occurs due to it's lifetime.
+The primary feature is the presence of a high mass secondary vertex that is significantly displaced from the primary vertex.
+Reconstruction of these vertices from tracks with common points of spatial origin is a common approach used in the identification of \bjets.
+
+
+\begin{figure}[!tbp]
+  \centering
+  \includegraphics[width=0.5\textwidth]{chapters/3.tracking/figs/b-jet-diagram.png}
+  \caption{
+    Diagram of a typical \bjet (blue) which has been produced in an event alongside two light jets (grey)~\cite{bjetdiagram}.
+    The \bhadron has travelled a significant distance (pink dashed line) from the primary interaction point (pink dot) before its decay.
+    The large transverse impact parameter \dzero is a characteristic property of the trajectories of \bhadron decay products.}
+  \label{fig:bjet_diagram}
+\end{figure}
+
+
+Additional signatures of \bhadrons are as follows.
+Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
+Furthermore, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
+Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}, the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
+%In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
+%As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
+%Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
+
+These signatures are primarily identified using tracks associated to jets, or using reconstructed electrons or muons, which also rely on tracks as discussed in \cref{sec:lepton_reco}.
+As such, efficient and accurate track reconstruction is essential for high performance flavour tagging.
+
+% TODO integrate with above and make it smoother, it's a bit repeated
 
 
 \subsection{Low-level Algorithms}\label{sec:low_level_algs}
