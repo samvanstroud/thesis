@@ -126,7 +126,7 @@ where $\Delta \eta$ and $\Delta \phi$ are the differences respectively in pseudo
 
 \subsection{Track Parameterisation}\label{sec:track_parameterisation}
 
-The reconstructed trajectory of a charged particle (track) is parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
+The reconstructed trajectory of a charged particle (called a \textit{track}) is parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
 The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to a given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
 The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
 \cref{fig:track_params} shows each of these parameters diagrammatically.
@@ -146,7 +146,7 @@ The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respective
 
 Impact parameter significances are defined as the IP divided by its corresponding uncertainty $\sigma$, as in $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
 When used in flavour tagging (see \cref{chap:tracking}), track IP significances are lifetime signed according to the track's direction with respect to the jet axis and the primary vertex \cite{PERF-2012-04}.
-The signed IP significances are positive if the track crosses the jet axis in front of the primary vertex and negative if the crossing is behind the primary vertex.
+The signed IP significances are positive if the track crosses the jet axis in front of the primary vertex and negative if the track crosses behind the primary vertex.
 
 %\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
 
@@ -253,7 +253,7 @@ More complete information on the detector can be found in \rcite{PERF-2007-01}, 
 \subsection{Inner Detector}\label{sec:atlas_id}
 
 The inner-detector system (ID) provides high-resolution charged particle trajectory tracking in the range $|\eta| < 2.5$.
-Tracks are reconstructed from space-points obtained from charge depositions (clusters or hits) in the ID subsystems.
+Tracks are reconstructed from space-points obtained from clusters of charge depositions in the ID subsystems.
 The ID is immersed in a \SI{2}{\tesla} axial magnetic field, produced by a superconducting solenoidal magnet, which enables the measurement of particle momentum and charge.
 After \runthree, the ID will be replaced by the ITk \cite{ATLAS-TDR-30,ATLAS-TDR-25}.
 
@@ -503,7 +503,7 @@ An overview of track reconstruction is given below.
 \subsubsection{Space-point Formation (Clustering)}
 When a charged particle traverses a silicon layer, charge can be collected in more than one pixel or strip.
 This is due to the incident angle of the particles with respect to the sensor, and also the drift of electrons between sensors caused by the magnetic field.
-Groups of neighbouring pixels or strips are clustered together and space-point locations are estimated using the shape and energy distribution of the clusters.
+Groups of neighbouring pixels or strips are clustered together and space-point coordinates are estimated using the shape and energy distribution of the clusters.
 
 \subsubsection{Track Finding}
 Space-points are used to build track seeds. These are groups of three hits which are geometrically compatible with being part of a track segment.
@@ -658,7 +658,7 @@ The narrower cone is better suited to clustering highly collimated jet constitue
 Track-jets are used in the analysis described in \cref{chap:vhbb_boosted}.
 
 \subsubsection{Jet Flavour Labels}
-In simulated events, jet flavour labels are assigned to \smallR jets according to the presence of a generator level hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
+In simulation, jet flavour labels are assigned to \smallR jets according to the presence of a generator level hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet.
 Otherwise, the jet is labelled as a \ljet.
 %Jet flavour labels are assigned according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
@@ -705,7 +705,7 @@ Finally, a global $\chi^2$ fit is performed, taking into account possible intera
 A reconstructed muon is called \textit{combined} if it can be matched successfully to an to an ID track.
 Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
 
-After reconstruction, muon candidates undergo an identification processes which helps to efficiently identify prompt muons whilst rejecting background signals (e.g. non-prompt muons from pion, kaon, and semi-leptonic heavy flavour hadron decays, and the punch-through of a hadron from the calorimeter).
+After reconstruction, muon candidates undergo an identification processes which helps to efficiently identify prompt muons whilst rejecting background signals (e.g. non-prompt muons from pion, kaon, semi-leptonic heavy flavour hadron decays, and the punch-through of a hadron from the calorimeter).
 Combined muon identification takes into account discrepancies in the \pt and charge measurements between the MS and ID and the $\chi^2$ of the combined track fit.
 Selections on the number of hits in the ID and MS are also applied.
 At the medium identification working point, approximately \pct{96} of prompt muons with $\SI{20}{\GeV} < \pt < \SI{100}{\GeV}$ are successfully identified.
@@ -823,7 +823,7 @@ Reconstruction of these vertices from tracks with common points of spatial origi
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
 Furthermore, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
-Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf} the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
+Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf} the presence of a reconstructed electron or muon inside a jet provides information about the jet flavour.
 %In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
 %As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
 %Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.

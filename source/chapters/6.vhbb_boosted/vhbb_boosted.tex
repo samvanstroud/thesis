@@ -105,7 +105,7 @@ The 1- and 2-lepton channels require one signal lepton to be present.
 
 The analysis makes use of \largeR and \smallR EMTopo jets, and also variable-radius track-jets.
 The different types of jets are outlined in \cref{sec:jet_reco}.
-The \largeR jets are required to satisfy $\pt > \SI{250}{\GeV}$ and $|\eta| < 2.0$, and are used to reconstruct the Higgs boson candidate, while \smallR jets are used in the selection of the analysis region and in the construction of the \ETmiss as discussed in the following section.
+The \largeR jets are required to satisfy $\pt > \SI{250}{\GeV}$ and $|\eta| < 2.0$, and are used to reconstruct the Higgs boson candidate, while \smallR jets are used in the selection of the analysis region and in the construction of \ETmiss.
 The track-jets are used for \btagging and are required to have at least two constituent tracks with $\pt > \SI{500}{\MeV}$ and $|\eta| < 2.5$, and must themselves satisfy $\pt > \SI{10}{\GeV}$ and $|\eta| < 2.5$.
 The track-jets matched to the Higgs candidate are \btagged using the MV2c10 \btagging algorithm (see \cref{chap:tracking}).
 The efficiency of the tagging algorithm is calibrated to events in data \cite{PERF-2016-05,ATLAS-CONF-2018-006,ATLAS-CONF-2018-001}.
@@ -713,9 +713,9 @@ The normalisations and shapes of all other backgrounds, with the exception of th
 \subsection{Asimov Dataset \& Expected Results}\label{sec:fit_expected}
 
 The Asimov dataset is constructed by replacing the data with the sum of the signal and background predictions $n_i = s_i + b_i$.
-A fit to this dataset using the nominal values of the NPs from the simulation will recover the input values and is useful for studying the expected result, in addition to constraints on and correlations between the NPs.
+A fit to this dataset using the nominal values of the NPs from the simulation will recover the input values and is useful for studying the expected constraints on and correlations between the NPs.
 
-Alternatively, a conditional fit to the Asimov dataset can be performed using values of the background NPs which are determined from an unconditional fit to data.
+Furthermore, a conditional fit to the Asimov dataset can be performed using values of the background NPs which are determined from an unconditional fit to data.
 The signal NPs and POIs are fixed at their nominal values from the SM simulation.
 The result of this fit can be used to calculate expected (median) significances given a more realistic background model, which can be compared to their observed values, as is done in \cref{sec:signal_strengh_sigs}.
 %The fit is conditional on the signal strength parameter, which is fixed at its nominal value.
@@ -985,7 +985,7 @@ The observed (expected) significance for the diboson process is $5.4$ ($5.7$).
 
 The results are interpreted in the context of the STXS framework.
 The cross sections for the $WH$ and $ZH$ processes are measured in two \ptv bins, and are found to agree with the SM prediction within the given uncertainties.
-At the time of publication, the results are the most precise measurements of the $WH$ and $ZH$, \Hbb cross sections in the high \ptv regime.
+At the time of writing, the results are the most precise measurements of the $WH$ and $ZH$, \Hbb cross sections in the high \ptv regime.
 
 The statistical and systematic sources of uncertainty contribute a similar amount to the overall uncertainty on the result.
 This analysis would therefore likely benefit greatly from the improved \btagging efficiency at \highpt enabled by \GNN as discussed in \cref{chap:gnn_tagger}, due to the associated reduction in statistical uncertainty provided by the increased number of events used in the analysis.
