@@ -19,7 +19,8 @@ This chapter will focus on the latter analysis, which is referred to as the boos
 
 In this chapter, the boosted \VHbb analysis is outlined in \cref{sec:vhbb_overview}.
 An introduction to the systematic uncertainties used in the analysis is provided in \cref{sec:systematic_uncertainties}.
-Detailed information about the modelling studies performed for the analysis are described in \cref{sec:vhbb_modelling}.
+Section \cref{sec:experimental_uncertainties} briefly outlines the experiemntal uncertainties impacting the analysis.
+Detailed modelling studies performed for the analysis are described in \cref{sec:vhbb_modelling}.
 The statistical treatment is detailed in \cref{sec:vhbb_fit}, and the results of the analysis are presented in \cref{sec:vhbb_results}.
 This analysis has been published in \rcite{HIGG-2018-52}.
 Figures and tables from the published work are reproduced here.
@@ -34,10 +35,11 @@ The previous \ATLAS analysis in \rcite{HIGG-2018-04} was primarily sensitive to 
 In this regime, the Higgs candidate was reconstructed using a pair of jets with radius parameter of $R = 0.4$, called \smallR jets.
 However in the \highpt regime, the decay products of the Higgs boson become increasingly collimated and the \smallR jets may not be individually resolved.
 In order to enhance the reconstruction of the Higgs boson candidate, this analysis uses a \largeR jet with radius parameter $R = 1.0$ to reconstruct the Higgs boson candidate.
-The Higgs candidate is required to have exactly two ghost-associated and \btagged variable-radius track-jets ($b$-track-jets).
+The Higgs candidate is required to have exactly two ghost-associated (see \cref{sec:jet_reco}) and \btagged variable-radius track-jets ($b$-track-jets).
 The candidate \largeR jet is reconstructed using jet substructure techniques, in particular it is trimmed by removing soft and wide-angle components, which helps to remove particles from the underlying event and pile-up collisions \cite{PERF-2012-02}.
 Refer to \cref{sec:jet_reco} for more details on jet reconstruction.
 
+A complete overview of the different analysis regions is given in \cref{tab:SR_CR_definition}.
 On top of the binning in \ptv, selected events are further categorised into the 0-, 1- and 2-lepton channels depending on the number of charged leptons (electrons and muons) present in the reconstructed final state (also referred to as the 0L, 1L, and 2L channels respectively).
 The 0-lepton channel targets the $\Zboson \higgs \rightarrow \nu\nu \bbbar$ process, the 1-lepton channel targets $\Wboson \higgs \rightarrow \ell\nu \bbbar$, and the 2-lepton channel targets $\Zboson \higgs \rightarrow \ell\ell \bbbar$, where $\ell$ is an electron or muon and $\nu$ is a neutrino.
 Each channel has a dedicated set of selections which are listed in more detail in \cref{sec:vhbb_selections}.
@@ -46,17 +48,16 @@ not matched to the Higgs candidate.
 The high-purity signal region (HP SR) has zero such jets, while the low-purity signal region (LP SR) has one or more, and therefore absorbs a larger number of background \ttbar events.
 Maintaining a high purity signal region is important for the extraction of the signal yield.
 %The 0- and 1-lepton channels are split into high- and low-purity signal regions based on the number of additional untagged \smallR jets present in the event.
-The 0- and 1-lepton channels also make use of a dedicated \ttbar control region for jets with one or more additional \btagged \smallR jets, described in \cref{sec:vhbb_control_region}.
-A complete overview of the different analysis regions is given in \cref{tab:SR_CR_definition}.
+The 0- and 1-lepton channels also make use of a dedicated \ttbar control region for events with one or more additional \btagged \smallR jets outside the \largeR jet, as described in \cref{sec:vhbb_control_region}.
 
 %
 \input{chapters/6.vhbb_boosted/tables/regions.tex}
 %
 
 The \largeR jet mass is used as the main discriminant in the analysis.
-The signal \VHbb yields is extracted from a profile likelihood fit to the \largeR jet mass over several signal and control analysis regions, which are described in \cref{sec:vhbb_selections,sec:vhbb_control_region}.
-The diboson background \VZbb yield is simultaneously extracted from the fit, and provides a cross check on the signal extraction.
-The fit model (described henceforth only as ``the fit'') is described in more detail in described in \cref{sec:vhbb_fit}.
+The \VHbb signal yield is extracted from a profile likelihood fit to the \largeR jet mass over several signal and control analysis regions, which are described in \cref{sec:vhbb_selections,sec:vhbb_control_region} respectively.
+The diboson background \VZbb yield is simultaneously extracted from the fit, and provides a cross check on the $VH$ signal extraction.
+The statistical fit model (described henceforth only as ``the fit'') is described in more detail in described in \cref{sec:vhbb_fit}.
 
 
 
@@ -66,7 +67,8 @@ The fit model (described henceforth only as ``the fit'') is described in more de
 
 \subsection{Object Reconstruction}\label{sec:vhbb_object_reco}
 
-The presence of neutrinos in the $\Wboson \higgs \rightarrow \ell\nu \bbbar$ and $\Zboson \higgs \rightarrow \ell\ell \bbbar$ signatures can be inferred from a momentum imbalance in the transverse plane (see \cref{sec:missing_Et}).
+The 0- and 1-lepton channels make use of reconstructed missing transverse energy (see \cref{sec:missing_Et}).
+The presence of neutrinos in the $\Zboson \higgs \rightarrow \nu\nu \bbbar$ and $\Wboson \higgs \rightarrow \ell\nu \bbbar$ signatures can be inferred from a momentum imbalance in the transverse plane.
 The vector boson transverse momentum \ptv is reconstructed as the missing transverse energy \ETmiss in the 0-lepton channel, as the magnitude of the summed \vETmiss and charged-lepton momentum in the 1-lepton channel, and as the transverse momentum of the 2-lepton system in the 2-lepton channel.
 
 %Leptons are used for the channel classification and to select relevant events as outlined in \cref{sec:vhbb_selections}.
@@ -77,7 +79,7 @@ whilst \textit{Signal} electrons are required to satisfy a tighter likelihood id
 \textit{Baseline} muons are required to pass the `loose' identification described in \rcite{PERF-2015-10}, while \textit{signal} muons are required to pass the `medium' identification working point.
 All signal leptons are required to additionally satisfy a $\pt > \SI{27}{\GeV}$ selection criteria, except for muons in the 1-lepton channel where a cut of \SI{25}{\GeV} is used.
 The number of baseline leptons is used to categorise the event into the 0-, 1- or 2-lepton channels.
-The 1- and 2-lepton channels additionally require one signal lepton to be present.
+The 1- and 2-lepton channels require one signal lepton to be present.
 
 \begin{table}[!htbp]\small
 	\footnotesize\centering
@@ -101,9 +103,10 @@ The 1- and 2-lepton channels additionally require one signal lepton to be presen
 	\label{tab:lepton_defs}
 \end{table}
 
-The analysis makes use of \largeR and variable-radius \smallR track-jets, which are described in \cref{sec:jet_reco}.
-The \largeR jets are required to satisfy $\pt > \SI{250}{\GeV}$ and $|\eta| < 2.0$, and are used to reconstruct the Higgs boson candidate, while \smallR jets are used for \btagging and for selection of the analysis region.
-These track-jets are required to have at least two constituent tracks with $\pt > \SI{500}{\MeV}$ and $|\eta| < 2.5$, and must themselves satisfy $\pt > \SI{10}{\GeV}$ and $|\eta| < 2.5$.
+The analysis makes use of \largeR and \smallR EMTopo jets, and also variable-radius track-jets.
+The different types of jets are outlined in \cref{sec:jet_reco}.
+The \largeR jets are required to satisfy $\pt > \SI{250}{\GeV}$ and $|\eta| < 2.0$, and are used to reconstruct the Higgs boson candidate, while \smallR jets are used in the selection of the analysis region and in the construction of \ETmiss.
+The track-jets are used for \btagging and are required to have at least two constituent tracks with $\pt > \SI{500}{\MeV}$ and $|\eta| < 2.5$, and must themselves satisfy $\pt > \SI{10}{\GeV}$ and $|\eta| < 2.5$.
 The track-jets matched to the Higgs candidate are \btagged using the MV2c10 \btagging algorithm (see \cref{chap:tracking}).
 The efficiency of the tagging algorithm is calibrated to events in data \cite{PERF-2016-05,ATLAS-CONF-2018-006,ATLAS-CONF-2018-001}.
 The jet tagging strategy relies on extensive studies into track-jet \btagging in boosted topologies \cite{ATL-PHYS-PUB-2014-013, PERF-2017-04}.
@@ -174,10 +177,10 @@ In the 2-lepton channel, \Zjets ($\Zboson \to \ell\ell$) is again dominant follo
 
 The diboson background $VV$ consists primarily of $WZ$ and $ZZ$ events in which the \Zboson decays to a pair of \bquarks.
 This process very closely matches the signal, with a resonant peak occurring at $m_Z = \SI{91}{\GeV}$.
-As it is a well understood process, the diboson background can be used as a cross-check on the Higgs results.
+As it is a well understood process, the diboson background can be used as a cross-check on the main \Hbb results.
 
 The $t\overline{t} V$, $t\overline{t} H$ and multijet backgrounds are negligible in the analysis phase space after the selections have been applied, with the exception of the 1-lepton electron sub-channel, in which multijet background is not negligible.
-The multijet background in this region is generally made up of events where the isolated leptonic signature has been mimicked by either a jet or electron from a semi-leptonic heavy flavour decay, where the electron has escaped the jet.
+The multijet background in this region is generally made up of events with mismeasured jets and events where the isolated leptonic signature has been mimicked by either a jet or electron from a semi-leptonic heavy flavour decay, where the electron has escaped the jet.
 %jets with semileptonic heavy-flavour-hadron decays (e.g. $b \to c \ell \nu$) and jets which are mistagged by the flavour tagging algorithm MV2c10.
 
 The contributions from the different backgrounds are modelled using Monte Carlo event generators and the uncertainties associated with these samples are studied in \cref{sec:vhbb_modelling}.
@@ -202,7 +205,7 @@ Systemic uncertainties are extensively employed to reflect assumptions and inacc
 Two main types of systematic uncertainty are considered: experimental and modelling.
 %Theoretical uncertainties arise due to imperfect precision used in e.g. QCD calculations.
 Experimental uncertainties arise due to the imperfect modelling of the reconstruction algorithms (in particular the jet reconstruction and \btagging algorithms), and due to the imperfect modelling of pile-up and other effects, as described in \cref{sec:experimental_uncertainties}.
-Modelling uncertainties arise due to the imperfections in the Monte-Carlo generators used to model the signal and background events.
+Modelling uncertainties are described in \cref{sec:vhbb_modelling} and arise due to the imperfections in the Monte-Carlo generators used to model the signal and background events.
 In order to observe a certain process, for example \VHbb, an increase in the number of observed events with respect to the background-only hypothesis is looked for.
 The excess is often relatively small against the total number of background events, and hence accurate modelling of the expected number of background and signal events is crucial for successfully performing the analysis.
 
@@ -225,10 +228,10 @@ The impact of these uncertainties on the analysis can be found in \cref{tab:mu_s
 
 
 
-\section{Background Modelling Uncertainties}\label{sec:vhbb_modelling}
+\section{Modelling Uncertainties}\label{sec:vhbb_modelling}
 % modelling note \cite{Bell:2316951}
 
-Particular care is paid to the uncertainties on the modelling predictions as discussed in the following sections.
+Particular care is paid to the uncertainties on the modelling predictions as discussed in this section.
 The \textit{Nominal} MC samples are used as a reference to which different variations can be compared.
 The nominal samples are chosen as the best possible representation of the underlying physical process.
 \textit{Alternative} samples are used to understand inaccuracies that may be present in the nominal samples.
@@ -246,6 +249,7 @@ They are measured for the shape of the \largeR jet mass distribution, since this
 In this section, truth tagging, the method used to ensure sufficient numbers of jets are available to calculate uncertainties, is described in \cref{sec:truth_tagging}.
 The different sources of background modelling uncertainty which have been assessed are described in \cref{sec:sources_of_uncertainties}, and details of their implementations are found in \cref{sec:implementation_of_variations}.
 Full descriptions of the modelling uncertainties applied for the \Vjets and diboson backgrounds are given in \cref{sec:vjets_modelling} and \cref{sec:diboson_modelling}, respectively.
+Finally, brief descriptions of the modelling uncertainties applied for the \ttbar and single-top backgrounds are given in \cref{sec:ttbar_modelling}, while the signal modelling uncertainties are outlined in \cref{sec:signal_modelling}.
 
 
 \subsection{Truth Tagging}\label{sec:truth_tagging}
@@ -254,7 +258,7 @@ Modelling studies involving $c$- and \ljets is hampered by the low number of eve
 For modelling studies, truth tagging (TT) is therefore employed to ensure sufficient numbers of jets are available to calculate uncertainties.
 TT works by computing a 2-dimensional efficiency map using the jet \pt and $\eta$.
 The two leading track-jets associated to the \largeR jet are weighted based on their probability to pass the \btagging selection, rather than being required to explicitly pass the \btagging requirement.
-The probability to pass the \btagging selection is parameterised by the jet \pt and $\eta$, and is extracted using a pre-calculated efficiency map.
+%The probability to pass the \btagging selection is parameterised by the jet \pt and $\eta$, and is extracted using a pre-calculated efficiency map.
 
 \subsection{Sources of Systematic Modelling Uncertainties}\label{sec:sources_of_uncertainties}
 
@@ -269,14 +273,14 @@ by convention varied usually by a factor 2 in both directions
 \end{comment}
 The \Vjets matrix element calculations contains infrared and ultraviolet divergences.
 These are handled by introducing arbitrary parameters corresponding to the renomalisation scale ($\mu_R$) and factorisation scale ($\mu_F$).
-Physical observables are not dependent on these parameters when using the infinite perturbation series expansion, however at some fixed order in QCD a limited is present.
+Physical observables are not dependent on these parameters when using the infinite perturbation series expansion, however at some fixed order in QCD a limited dependence is present.
 To assess the impact of this, both $\mu_R$ and $\mu_F$ are independently varied from their nominal values by factors of $0.5$ and $2$ to account for higher order corrections to the calculation of the matrix element used to simulate the process.
 
 \subsubsection{PDF Sets}
 
 Parton distribution functions (PDFs) specify the probability of finding a parton with a given momentum inside a hadron (in this case, colliding protons).
-PDFs have to be derived from data and are a significant source of uncertainty in analyses of hadronic collision data.
-There are three sources of PDF uncertainties: the statistical and systematic errors on the underlying data used to derive the PDFs, the theory which is used to describe them (which is based on some fixed order perturbative QCD expansion), and finally the procedure which is used to extract the PDFs from the data. 
+PDFs have to be derived from data and are a significant source of uncertainty in analyses of hadronic collisions.
+There are three components to the PDF uncertainties: the statistical and systematic errors on the underlying data used to derive the PDFs, the theory which is used to describe them (which is based on some fixed order perturbative QCD expansion), and finally the procedure which is used to extract the PDFs from the data. 
 PDF-related uncertainties were derived following \rcite{Butterworth:2015oua}.
 This involves considering 100 PDF replicas which, when combined, form a central value and associated uncertainty, and also in parallel direct changes to the central values of PDFs using the MMHT2014 \cite{Harland-Lang:2014zoa} and CT14NLO \cite{Dulat:2015mca} PDF sets.
 
@@ -322,7 +326,7 @@ The resulting uncertainties were studied and found to be negligible in compariso
 After event selection, the \Vjets background is a dominant background in all three analysis channels as described in \cref{sec:vebb_background_composition}.
 The \Vjets samples are split into categories depending on the truth flavour of the track-jets which are ghost-associated to the \largeR jet Higgs candidate.
 The categories are $V$+$bb$, $V$+$bc$, $V$+$bl$, $V$+$cc$, $V$+$cl$, $V$+$ll$, and $V$+hf refers collectively to the $bb$, $bc$, $bl$, and $cc$ categories.
-$V$+$bb$ is dominant generally accounting for \pct{80} of the events, while $V$+hf accounts for around \pct{90} of the events.
+$V$+$bb$ is dominant generally accounting for \pct{80} of the events, while the combined $V$+hf accounts for around \pct{90} of the events.
 The full flavour composition breakdown for each channel and analysis region are given in \cref{tab:Wjets_0L_flavcomp,tab:Wjets_0L_flavcomp,tab:Zjets_0L_flavcomp,tab:Zjets_2L_flavcomp}.
 
 The nominal MC event generator used for \Vjets events is \textsc{Sherpa 2.2.1}, while \textsc{MadGraph5\_aMC@NLO+Pythia8} (which uses a different parton showering model) is used as an alternative generator.
@@ -367,12 +371,12 @@ An effort has been made, wherever possible, to harmonise similar uncertainties a
 \subsubsection{\Vjets Shape Uncertainties}
 
 In order to derive shape uncertainties for a given background or signal process, normalised distributions of the reconstructed \largeR Higgs candidate jet mass \mJ are compared for the nominal sample and variations.
-For each variation, the ratio of the variation to nominal is calculated, the up and down variations are symmetrised, and an analytic function is used to parameterise the ratio.
+For each variation, the ratio of the variation to nominal is calculated, the up and down variations (if present) are symmetrised, and an analytic function is used to parameterise the ratio.
 If different analysis regions or channels show the same pattern of variation, a common uncertainty is assigned.
 
-An example of a significant source of uncertainty, arising from the choice of factorisation scale $\mu_R$ is shown in \cref{fig:Vjets_SysMUR}.
+An example of a significant source of uncertainty, arising from the choice of factorisation scale $\mu_R$, is shown in \cref{fig:Vjets_SysMUR}.
 The HP SRs in the medium and high \pTV bins are shown for the 0-lepton channel for the \Whf and \Zhf jet backgrounds.
-The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zjets contribution were found to have compatible shapes in \mJ, and so were jointly measured.
+The 0- and 1-lepton channels for the \Whf contribution and the 0- and 2-lepton channels for the \Zhf contribution were found to have compatible shapes in \mJ, and so were jointly measured.
 An exponential function $e^{p_0+p_1x}+p_2$ has been fitted to the ratio of the normalised distributions.
 The magnitude of the variation is \ptv dependent, and so separate uncertainties are implemented in the fit for each \pTV region. 
 
@@ -450,9 +454,8 @@ The impacts of variations in the factorisation scale $\mu_{F}$ and the choice of
 \subsection{Diboson Modelling}\label{sec:diboson_modelling}
 
 The procedure to derive the uncertainties for the diboson background generally follows that of \Vjets.
-
 The nominal diboson samples are generated using \textsc{Sherpa} 2.2.1 (except for $gg\rightarrow VV$ which uses \textsc{Sherpa} 2.2.2) with the NNPDF3.0NNLO tune.
-alternate samples were generated using \textsc{Powheg} interfaced with \textsc{Pythia8}, using the AZNLO shower tune with the CTEQ6L1 PDFs \cite{Pumplin:2002:CTEQ6L1}.
+Alternate samples were generated using \textsc{Powheg} interfaced with \textsc{Pythia8}, using the AZNLO shower tune with the CTEQ6L1 PDFs \cite{Pumplin:2002:CTEQ6L1}.
 Unlike \textsc{Sherpa}, \textsc{Powheg} models the off-shell $Z$ contribution at NLO.
 
 Acceptance and shape uncertainties are derived in an analogous fashion to \Vjets as described below.
@@ -468,9 +471,9 @@ For the $WZ$ contribution, uncertainties are derived using the 1-lepton channel 
 The 1-lepton channel was used as it has the largest amount of available statistics, with the compatibility checked between the derived uncertainties and the other channels.
 An additional \pct{8} channel migration uncertainty is applied on the $WZ$ 0-lepton channel.
 For the $ZZ$ contribution, the normalisation uncertainty is calculated using the 2-lepton channel and applied to all three channels.
+\pct{30} and \pct{18} channel migration uncertainties are applied in the 0- and 1-lepton channels respectively.
 The 0- and 1-lepton channels were found to have a similar HP-to-LP relative acceptance uncertainty of \pct{18}.
 The 1-lepton medium-to-high \ptv relative acceptance is estimated using the 2-lepton channel, since the 1-lepton channel had an insufficient number of events to estimate the uncertainty directly.
-\pct{30} and \pct{18} channel migration uncertainties are applied in the 0- and 1-lepton channels respectively.
 
 Since the contribution from $WW$ is negligible, dedicated studies are not performed, but a \pct{25} normalisation uncertainty is applied in all the three channels which is based on the modelling studies performed for the previous analysis \cite{HIGG-2018-04}.
 
@@ -523,7 +526,7 @@ All diboson shape uncertainties are fully correlated in the fit.
 \end{figure}
 
 
-\subsection{\texorpdfstring{\ttbar}{ttbar} and single-top Modelling}
+\subsection{\texorpdfstring{\ttbar}{ttbar} and single-top Modelling}\label{sec:ttbar_modelling}
 
 The main features of the systematic uncertainties on the remaining two modelled backgrounds, \ttbar and single-top, are described below.
 
@@ -550,7 +553,7 @@ Acceptance uncertainties for the single-top background are enumerated in \cref{t
 
 \input{chapters/6.vhbb_boosted/tables/stop_accept_uncert.tex}
 
-\subsection{Signal Modelling}
+\subsection{Signal Modelling}\label{sec:signal_modelling}
 
 The modelling of the systematic uncertainties affecting the signal processes follows the procedure described in Refs.~\cite{HIGG-2018-50,deFlorian:2016spz,HIGG-2016-29,ATL-PHYS-PUB-2018-035,Proceedings:2018jsb}.
 The $qq \rightarrow VH$ signal samples are generated with \POWHEGBOX[v2]+\textsc{GoSam} at next-to-leading order (NLO) accuracy in QCD. 
@@ -710,9 +713,9 @@ The normalisations and shapes of all other backgrounds, with the exception of th
 \subsection{Asimov Dataset \& Expected Results}\label{sec:fit_expected}
 
 The Asimov dataset is constructed by replacing the data with the sum of the signal and background predictions $n_i = s_i + b_i$.
-A fit to this dataset using the nominal values of the NPs from the simulation will recover the input values and is useful for studying the expected result, in addition to constraints on and correlations between the NPs.
+A fit to this dataset using the nominal values of the NPs from the simulation will recover the input values and is useful for studying the expected constraints on and correlations between the NPs.
 
-Alternatively, a conditional fit to the Asimov dataset can be performed using values of the background NPs which are determined from an unconditional fit to data.
+Furthermore, a conditional fit to the Asimov dataset can be performed using values of the background NPs which are determined from an unconditional fit to data.
 The signal NPs and POIs are fixed at their nominal values from the SM simulation.
 The result of this fit can be used to calculate expected (median) significances given a more realistic background model, which can be compared to their observed values, as is done in \cref{sec:signal_strengh_sigs}.
 %The fit is conditional on the signal strength parameter, which is fixed at its nominal value.
@@ -732,6 +735,7 @@ Finally in \cref{sec:sys_results} the impact of systematic uncertainties on the 
 In addition to the observed significance and signal strength, it is also necessary to study the post-fit \mJ yields and  distributions to compare the level of the agreement between the simulation (using the best-fit values of the signal strength $\hat{\mu}$ and the NP $\hat{\theta}$) and the data.
 The best-fit values $\hat{\mu}$ and $\hat{\theta}$ are obtained from an unconditional fit to data over all analysis regions.
 The post-fit background normalisation factors extracted from the unconditional fit to data fit are shown in \cref{tab:bkg_norms}, and the post-fit yields are presented in \cref{tab:postfityield0L}, \cref{tab:postfityield1L}, and \cref{tab:postfityield2L} for the 0-, 1- and 2-lepton channels, respectively.
+The uncertainty on the overall background may be less than the sum of the individual uncertainties due to the correlations between the different background components.
 
 \input{chapters/6.vhbb_boosted/tables/bkg_norms.tex}
 
@@ -745,6 +749,7 @@ The LP and HP regions are merged for the 0- and 1-lepton channels for the sake o
 In general there is a good level of agreement between the simulation and data, indicating the fit model is performing as expected.
 \cref{fig:vhbb_postfit_plots_cr} shows the post-fit plots for the \ttbar control regions.
 Again, a good level of agreement is observed given the statistical uncertainties on the distributions.
+The binning shown in \cref{fig:vhbb_postfit_plots,fig:vhbb_postfit_plots_cr} is the same as that used in the fit.
 
 \begin{figure}[!htbp]
   \centering
@@ -973,17 +978,18 @@ The Higgs candidate is reconstructed as a \largeR jet in order to improve sensit
 The analysis is performed using \intlumi of proton--proton collision data at \come{13} collected throughout the duration of \runtwo of the \LHC.
 
 In comparison with the null hypothesis, the Standard Model (SM) \VHbb process is found to have an observed significance of $2.1$ standard deviations, whereas the corresponding expected significance is $2.7$ standard deviations.
+This is in contrast to the resolved analysis, which rejected the background-only hypothesis with an observed (expected) significance of 6.7 (6.7) \cite{HIGG-2018-51}.
 The \VHbb process is measured simultaneously with the diboson \VZbb process, which provide a cross-check for the main analysis. 
 The observed (expected) significance for the diboson process is $5.4$ ($5.7$).
 
+
 The results are interpreted in the context of the STXS framework.
 The cross sections for the $WH$ and $ZH$ processes are measured in two \ptv bins, and are found to agree with the SM prediction within the given uncertainties.
-At the time of publication, the results are the most precise measurements of the $WH$ and $ZH$, \Hbb cross sections in the high \ptv regime.
+At the time of writing, the results are the most precise measurements of the $WH$ and $ZH$, \Hbb cross sections in the high \ptv regime.
 
 The statistical and systematic sources of uncertainty contribute a similar amount to the overall uncertainty on the result.
 This analysis would therefore likely benefit greatly from the improved \btagging efficiency at \highpt enabled by \GNN as discussed in \cref{chap:gnn_tagger}, due to the associated reduction in statistical uncertainty provided by the increased number of events used in the analysis.
 
 The \largeR jet mass resolution is found to be the dominant source of systematic uncertainty on the \muVH measurement.
-An improved method of reconstructing the \largeR jet mass, for example by using a machine learning based regression approach, possibly as an 
-additional auxiliary task to \GNN (see \cref{chap:gnn_tagger}), could reduce the systematic uncertainty on the \muVH measurement.
+An improved method of reconstructing the \largeR jet mass, for example by using a machine learning based regression approach, possibly as an additional auxiliary task to \GNN, could reduce the systematic uncertainty on the \muVH measurement.
 Statistical uncertainty could be reduced by increasing the integrated luminosity used to perform the analysis by combining with \runthree data.
