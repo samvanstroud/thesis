@@ -1,8 +1,8 @@
 \chapter{Tracking and Flavour Tagging at High-\texorpdfstring{\pt}{pt}}\label{chap:tracking}
 
-The various flavour tagging algorithms introduced in \cref{sec:btagging_algs} work by identifying the unique signatures of heavy flavour (HF) jets ($b$- and \cjets).
+The various flavour tagging algorithms introduced in \cref{sec:btagging_algs} work by identifying the unique signatures of heavy flavour jets ($b$- and \cjets).
 Ultimately, the tagging algorithms use input information about the reconstructed jet and its associated tracks.
-Successful \btagging therefore relies on the efficient and accurate track reconstruction, especially for tracks corresponding to the products of HF decays.
+Successful \btagging therefore relies on the efficient and accurate track reconstruction, especially for tracks corresponding to the products of heavy flavour decays.
 In this chapter the challenges facing track reconstruction and flavour tagging at \highpt are discussed.
 
 
@@ -15,21 +15,28 @@ Finally, in \cref{sec:trk_btag_conclusion} the conclusions of the chapter are gi
 
 \section{Datasets}\label{sec:track_classifier_datasets}
 
-This thesis makes extensive use of two simulated datasets which are described in this section.
-The datasets are made up of simulated SM \ttbar and BSM \Zprime events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$.
-The \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
-The generation of the simulated event samples includes the effect of multiple proton-proton interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
 
 \newcommand{\hdampFootnote}{%
-The $h_\text{damp}$ parameter is used to limit the effect of resummed higher order corrections. It is used to suppress the transverse momentum of the radiation which the \ttbar system recoils against.}
+The $h_\text{damp}$ parameter of the \textsc{PowhegBox} generator is used to limit the effect of resummed higher order corrections.%
+It is used to suppress the transverse momentum of the radiation which the \ttbar system recoils against.%
+}
+
+This thesis makes extensive use of two simulated datasets which are described in this section.
+The datasets are made up of simulated SM \ttbar and BSM \Zprime\footnote{The \Zprime boson used in this thesis is a modified SM \Zboson with an increased mass} events initiated by proton-proton collisions at a center of mass energy $\sqrt{s} = \SI{13}{\TeV}$.
+While the \ttbar sample populates the \lowpt phase space, the \Zprime sample is constructed in such a manner that it has a relatively flat jet \pt spectrum up to \SI{5}{\TeV} and decays democratically to equal numbers of \bcl jets.
+As such the \Zprime sample is well suited to the study of \btagging at \highpt.
+The generation of the simulated event samples includes the effect of multiple proton-proton interactions per bunch crossing with an average pile-up of $\langle \mu \rangle = 40$, which includes the effect on the detector response due to interactions from bunch crossings before or after the one containing the hard interaction.
+
 %effectively regulating the %
 %is a resummation damping factor and one of the parameters that controls the matching of \textsc{Powheg} matrix elements to the parton shower and thus effectively regulates the %high-$p_T$ radiation against which the \ttbar system recoils.}
 
-The \ttbar events are generated using the \textsc{PowhegBox} \textsc{v2} generator  \cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs). The $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$. 
-The events are interfaced to \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to model the parton shower, hadronisation, and underlying event, with parameters set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}. 
-\Zprime events are generated with \textsc{Pythia} 8.2.12 with the same tune and PDF set.
-The decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
-Particles are passed through the ATLAS detector simulation \cite{SOFT-2010-01} based on GEANT4 \cite{Agostinelli:2002hh}.
+For the \ttbar sample, events are generated using the \textsc{PowhegBox}~\textsc{v2} generator~\cite{powheg2004, powheg2007, powheg2007_2, powheg2010} at next-to-leading order with the NNPDF3.0NLO \cite{Ball:2014uwa} set of parton distribution functions (PDFs).
+For the \ttbar simulation, the $h_\text{damp}$ parameter\footnote{\hdampFootnote} is set to 1.5 times the mass of the top-quark ($m_\text{top}$)~\cite{ATL-PHYS-PUB-2016-020}, with $m_\text{top} = \SI{172.5}{\GeV}$.
+The events are interfaced with \textsc{Pythia}~8.230~\cite{Sjostrand:2014zea} to handle the modelling of the parton shower, hadronisation, and underlying event.
+Meanwhile for the \Zprime sample, full events are generated with \textsc{Pythia}~8.2.12.
+For both samples, \textsc{Pythia} parameters are set according to the A14 tune \cite{ATL-PHYS-PUB-2014-021} and using the NNPDF2.3LO set of PDFs \cite{Ball:2012cx}, and the decays of \bchadrons are performed by \textsc{EvtGen} v1.6.0 \cite{Lange:2001uf}.
+After event generation, simulated particles are passed through the full ATLAS detector simulation \cite{SOFT-2010-01} which is based on GEANT4 \cite{Agostinelli:2002hh}.
+The interaction between the long-flying heavy flavour hadrons and the detector material is included in the simulation.
 
 %Additionally, all jets are required not to overlap with a generator-level electron or muon from \Wboson boson decays.
 Jets are required to have a pseudorapidity $|\eta| < 2.5$ and $\pt > \SI{20}{\GeV}$.
@@ -43,7 +50,7 @@ Additionally, a standard selection using the JVT tagger (see \cref{sec:jet_reco}
 
 %This section some of the difficulties in the accurate reconstruction of the  associated reconstruction difficulties in \cref{sec:b_had_reco_chall}.
 As discussed in \cref{sec:b_decay_topology}, a necessary requirement for successful \btagging is the efficient and accurate reconstruction of the charged particle trajectories in the jet.
-For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to a difficulties in the accurate reconstruction of tracks, as described below.
+For high \pT jets (\pT $> 250$ GeV) this task becomes difficult due to difficulties in the accurate reconstruction of tracks, as described below.
 
 As the \bjet energy increases, the multiplicity of the fragmentation products inside the jet increases, while the multiplicity of the products of the weak decay remains fixed.
 The ``signal'' tracks (those from the weak decay of the \bhadron) therefore become significantly outnumbered.
@@ -65,7 +72,7 @@ If the weak decay of the \bhadron takes place close enough to a detector layer, 
 As discussed in \cref{sec:track_reco}, merged clusters are generally rare, and so shared hits generally predict bad tracks and are correspondingly penalised during track reconstruction.
 However, in the core of high \pT \bjets the density of particles is high enough that the probability of cluster merging increases dramatically.
 Successful reconstruction of such tracks requires the presence of shared hits to be effectively dealt with, but in the standard reconstruction the presence of these can instead impair the successfully reconstruction of the track.
-Furthermore, HF decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
+Furthermore, heavy flavour decays may also take place inside the tracking detectors themselves, which at best leads to missing measurements on the most sensitive detector layers, and at worst can lead to wrong inner layer hits being added to displaced tracks, since the reconstruction process penalises tracks without inner layer hits.
 
 %Together, these two effects lead to a high density of charged particles in the jet core, which, given the finite resolution of the detector, makes reconstruction difficult.
 
@@ -107,7 +114,7 @@ As shown in \cref{fig:b_track_eff}, this can result in a large drop in reconstru
   \centering
   \includegraphics[width=0.6\textwidth]{chapters/3.tracking/figs/b_track_reco_eff.png}
   \caption{
-    \bhadron decay track reconstruction efficiency as a function of truth \bhadron \pt \cite{2022DonalTrackReco}.
+    \bhadron decay track reconstruction efficiency as a function of truth \bhadron \pt for \Zprimejets \cite{2022DonalTrackReco}.
     Nominal track reconstruction is shown in black, while the track reconstruction efficiency for track candidates (i.e. the pre-ambiguity solver efficiency) is shown in green.
     For \highpt \bhadrons, the ambiguity solver is overly aggressive in its removal of \bhadron decay tracks.
     Suggestions for the improvement of the track reconstruction efficiency in this regime by the loosening of cuts in the ambiguity solver are shown in blue and red.
@@ -121,7 +128,7 @@ The second part of the problem is that, due to the high multiplicity of clusters
 This is only a problem for those decay products which were produced within the pixel detector as a result of a significantly displaced \bhadron decay, and so do not have a correct hit available for assignment.
 \cref{fig:pseudo_pix_hits} shows the number of hits as a function of the reconstructed track \pt for fragmentation tracks and tracks from the weak decay of the \bhadron.
 The baseline tracks represent the standard reconstruction setup, while the pseudotracks represent the ideal tracking setup as outlined in \cref{sec:pseudotracks}.
-Hit multiplicities on the pseudotracks decrease at high \pt due to the flight of the \bhadron before its decay. 
+Hit multiplicities on the pseudotracks decrease with increasing \pt due to the flight of the \bhadron before its decay. 
 The baseline tracks have more hits than the pseudotracks, indicating that they are being incorrectly assigned additional hits on the inner layers of the detector.
 
 \begin{figure}[!htbp]
@@ -139,7 +146,7 @@ The baseline tracks have more hits than the pseudotracks, indicating that they a
     %\label{fig:n hits on pix}
   \end{subfigure}
   \caption{
-    Hit multiplicities on the IBL (left) and the pixel layers (right) as a function of the \pT of the reconstructed track for tracks in jets in a \Zprime sample at \come{13}.
+    Average hit multiplicities on the IBL (left) and the pixel layers (right) as a function of the \pT of the reconstructed track for tracks in jets in a \Zprime sample at \come{13}.
     Tracks from the weak decay of the \bhadron are shown in red, while fragmentation tracks (which are prompt) are in blue.
     Baseline tracks are those produced in the standard reconstruction described in \cref{sec:track_reco}, while pseudotracks represent the ideal performance of the ATLAS detector and are described in \cref{sec:pseudotracks}.
   }
@@ -168,12 +175,13 @@ Meanwhile \cref{sec:gx2f_opt} details a study which investigated modifying the g
 The ambiguity solver is not run for pseudotracks.
 However, if the standard track collection is produced alongside the pseudotracks, then cluster splitting neural networks will be run for the standard tracks, and the resulting classification of clusters will be propagated to hits on pseudotracks.
 This quirk allows one to study the inefficiencies of the cluster splitting process, and relatedly to determine whether shared hit cuts in the ambiguity solver are too loose or too tight.
+
 The fraction of hits that are shared for the IBL and the B-layer is shown in \cref{fig:shared_hits_pseudo}.
 The shared hits on pseudotracks represent correctly assigned hits from merged clusters that were not able to be classified as split by the cluster splitting neural networks.
 As such, these represent the number of shared hits the ambiguity solver should aim to allow given the current performance of the cluster splitting algorithm.
 For shared hits on the IBL for particles produced before the IBL, the baseline selection appears to be successful in disallowing excessive numbers of shared hits.
 However, the ambiguity solver fails to limit shared hits for those particles produced after the IBL, reflecting the previously discussed problem of displaced tracks picking up incorrect hits.
-Meanwhile, it is clear that for the B-layer, the ambiguity solver is being overly aggressive in its rejection of shared hits.
+In contrast, it is clear that for the B-layer, the ambiguity solver is being overly aggressive in its rejection of shared hits, motivating further study in this area.
 
 \begin{figure}[!htbp]
     \centering
@@ -311,15 +319,15 @@ The results of varying the outlier selection and $\chi^2/n$ thresholds are descr
 
 A systematic variation of the outlier selection and $\chi^2/n$ thresholds has been carried out.
 Both thresholds were reduced in fixed step sizes of 0.25 for the outlier selection threshold and 1 for the $\chi^2/n$ threshold.
-The results for the best performing selections are discussed below.
 The value of the outlier selection threshold was reduced from 4 down to 1.75, a change which affects the silicon layers (the TRT has separate outlier removal logic).
 Furthermore, a specific cut for the IBL was introduced, and after optimisation is set to 1.25.
 The second threshold on the track $\chi^2/n$ was also reduced from 7 to 4.
 Finally, instead of taking the maximum of the pulls in the longitudinal and transverse directions, a quadrature sum is taken of these two values and used.
 This variation is labelled ``Mod GX2F'' and was found to improve performance.
+The results for the best performing selections are discussed below.
 
-The results are shown in \cref{fig:gx2f_opt_hits} and demonstrate a reduction in wrong hit assignment whist also improving slightly the rate at which good hits are assigned to tracks.
-For a \SI{1}{\TeV} track, the rate to assign good hits to the track increases by approximately \pct{10}, while the rate to assign incorrect hits decreases by approximately \pct{16}.
+The results shown in \cref{fig:gx2f_opt_hits} demonstrate a reduction in wrong hit assignment whilst also improving slightly the rate at which good hits are assigned to tracks.
+For a \SI{1}{\TeV} \bhadron, the rate to assign good hits to the corresponding decay tracks increases by approximately \pct{10}, while the rate to assign incorrect hits decreases by approximately \pct{16}.
 The improvements are also observed when looking inclusively in all tracks, which avoids the need for a specific \bjet region-of-interest selection.
 
 \begin{figure}[!htbp]
@@ -333,14 +341,17 @@ The improvements are also observed when looking inclusively in all tracks, which
       \includegraphics[width=\textwidth]{chapters/3.tracking/figs/p_nWrongHitsIBL_pTB_From_B.pdf}
     \end{subfigure}
     \caption{
-      The average number of good (left) and wrong (right) IBL hits as a function of \bhadron \pt for tracks using baseline tracking (black) and the modified version of the outlier removal procedure (red).
+      The average number of good (left) and wrong (right) IBL hits as a function of \bhadron \pt for tracks in the \Zprime sample.
+      The baseline tracking performance (black) and the modified version of the outlier removal procedure (red) are shown.
     }
     \label{fig:gx2f_opt_hits}
 \end{figure}
 
-An improvement, though modest, of all track parameter resolutions and pulls is observed.
+Additionally, a modest improvement of all track parameter resolutions and pulls is observed.
 The improvement for the transverse impact parameter pull is shown in \cref{fig:gx2f_opt_pulls}.
-The results demonstrate an improvement in hit assignment, unchanged reconstruction efficiency, and modest improvement in track parameter resolutions and pulls. In addition, the truth match probability of tracks is unchanged, suggesting that there is no increase in fake track rates. The changes are expected to have a negligible impact on computational resources.
+Note also that the large pulls for \highpt tracks indicates that the uncertainties are not well modelled.
+The results demonstrate an improvement in hit assignment, unchanged reconstruction efficiency, and modest improvement in track parameter resolutions and pulls.
+In addition, the inclsuive truth-matching probability of tracks is unchanged (see \cref{sec:track_labelling}), suggesting that there is no significant increase in fake track rates. The changes are expected to have a negligible impact on computational resources.
 
 \begin{figure}[!htbp]
     \centering
@@ -356,7 +367,10 @@ The results demonstrate an improvement in hit assignment, unchanged reconstructi
       %\caption{}
       %\label{fig:z0 pull}
     \end{subfigure}
-    \caption{(left) \bhadron decay track \dzero pulls (\dzero/\dzerosig) for baseline and modified GX2F tracks. (right) The absolute value of the \dzero pull as a function of the truth \bhadron transverse momentum.}
+    \caption{
+      (left) \bhadron decay track \dzero pulls (\dzero/\dzerosig) for baseline and modified GX2F tracks in the \Zprime sample. 
+      (right) The absolute value of the \dzero pull as a function of the truth \bhadron transverse momentum.
+    }
     \label{fig:gx2f_opt_pulls}
 \end{figure}
 

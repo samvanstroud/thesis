@@ -1,13 +1,13 @@
 \chapter{The Large Hadron Collider and the \ATLAS Detector}\label{chap:lhc_atlas}
 
-%AB: The work presented in this thesis relies on data recorded by the ATLAS detector in high energy proton-proton collisions. This chapter provides an overview of the experimental apparatus and analysis techniques used throughout this thesis.
-
-Since the completion of its construction in 2008, the Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN has extended the frontiers of particle physics through significant increases in centre of mass energy and instantaneous luminosity compared with previous collider experiments.
+The Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN is the world's largest and most powerful particle accelerator.
+Since the completion of its construction in 2008, the LHC has extended the frontiers of particle physics through significant increases in centre of mass energy and collison rates as compared with previous collider experiments.
 The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than the speed of light, at which point they are made to collide.
 The proton bunches travel round the ring 11,000 times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
 The beams travel in opposite directions around the ring and are crossed at four locations so that collisions between protons can take place.
 Around these collision points four specialised detectors, ALICE~\cite{AliceCollaboration_2008}, CMS~\cite{CMS-TDR-08-001}, LHCb~\cite{LHCbCollaboration_2008} and \ATLAS~\cite{PERF-2007-01}, are located to capture information about the products of the collisions.
 
+The work in this thesis is based on simulated and observed proton-proton collision data from the \ATLAS detector.
 In this chapter, a brief overview of the \LHC and the accelerator complex at \CERN is given in \cref{sec:lhc}.
 The coordinate system used at the \ATLAS detector and other common definitions are introduced in \cref{sec:atlas_coords}.
 In \cref{sec:atlas_detector} the different \ATLAS detector systems are described, and in \cref{sec:physics-objects} information about various commonly used reconstructed objects is given.
@@ -18,7 +18,7 @@ Finally, \cref{sec:btagging_algs} provides an introduction to flavour tagging at
 
 The \LHC is operated in multi-year \textit{runs} during which beams of protons are circulated and collided.
 Between runs there are periods of shutdown while the accelerator and detector machinery is maintained and upgraded.
-\runone began in 2010 when the \LHC collided proton bunches, each containing more than $10^{11}$ particles, 20 million times per second, providing \SI{7}{\TeV} proton-proton collisions at instantaneous luminosities of up to \peakLumi.
+\runone began in 2010 when the \LHC collided proton bunches, each containing more than $10^{11}$ particles, 20 million times per second, providing \SI{7}{\TeV} proton-proton collisions at instantaneous luminosities of up to \peakLumi (see \cref{sec:collider_defs}).
 The centre-of-mass energy was increased to \SI{8}{\TeV} in 2012.
 Over the course of \runone, \intlumirunone of usable integrated luminosity was recorded.
 \runtwo, which spanned 2015--2018, further increased the proton-proton collision energy to \SI{13}{\TeV}.
@@ -106,7 +106,7 @@ The polar angle $\theta$ is commonly specified in terms of the pseudorapidity $\
   \eta = - \ln \left[ \tan \left( \frac{\theta}{2} \right) \right] .
 \end{equation}
 %
-The pseudorapidity is a convenient quantity to work with as differences in $\eta$ are invariant under Lorentz boosts.
+%The pseudorapidity is a convenient quantity to work with as differences in $\eta$ are invariant under Lorentz boosts.
 %In addition, particle production is constant as a function of $\eta$.
 
 The transverse momentum \pt of an object is the sum in quadrature of the momenta in the transverse plane
@@ -126,7 +126,7 @@ where $\Delta \eta$ and $\Delta \phi$ are the differences respectively in pseudo
 
 \subsection{Track Parameterisation}\label{sec:track_parameterisation}
 
-The trajectory of a charged particle track is parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
+The reconstructed trajectory of a charged particle (track) is parameterised as a helix which is fully specified using five parameters: $(\dzero, \zzero, \phi, \theta, q/p)$.
 The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify the closest approach of the trajectory of a particle to a given origin, where the hard scatter primary vertex (see \cref{sec:vertex_reco}) is used in this thesis.
 The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
 \cref{fig:track_params} shows each of these parameters diagrammatically.
@@ -144,16 +144,16 @@ The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respective
   \label{fig:track_params}
 \end{figure}
 
-Impact parameter significances are defined as the IP divided by its corresponding uncertainty, $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
+Impact parameter significances are defined as the IP divided by its corresponding uncertainty $\sigma$ as in $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
 When used in flavour tagging (see \cref{chap:tracking}), track IP significances are lifetime signed according to the track's direction with respect to the jet axis and the primary vertex \cite{PERF-2012-04}.
-The signed IP significances is positive if the track crosses the jet axis in front of the primary vertex and negative if the crossing is behind the primary vertex.
+The signed IP significances are positive if the track crosses the jet axis in front of the primary vertex and negative if the crossing is behind the primary vertex.
 
 %\textbf{Lorentz angle}. The Lorentz angle $\theta_L$ is the angle between the electric field and the direction of the drift of the electron and holes in a silicon strip or pixel detector, when submerged in a magnetic field.
 
 \subsection{Hadron Collider Definitions}\label{sec:collider_defs}
 
 \subsubsection{Cross Section}
-The cross section $\sigma$ is closely related to the probability of an interaction between two colliding particles, and is analogous to an effective cross-sectional area of the particles.
+The cross section $\sigma$ is a measure of the probability of an interaction between two colliding particles, and is analogous to an effective cross-sectional area of the particles.
 The cross section of a process depends on the transition matrix element and a phase space integral.
 At hadron colliders such as the \LHC, the proton-proton cross section can be factorised as 
 %
@@ -212,7 +212,7 @@ The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF
 
 At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons are collided.
 Each bunch-crossing is called an \textit{event}.
-There is generally at most one hard proton-proton scatter per event.
+There is generally at most one hard (\highpt) proton-proton scatter per event.
 Additional interactions are typically relatively soft (\lowpt) and are known as \textit{pile-up}.
 %Pile-up complicates the reconstruction of the hard scatter event as results of the interactions of different proton-proton interactions have to be separated.
 Pile-up from interactions within the same bunch-crossing is known as \textit{in-time} pile-up while residual signatures from previous bunch-crossings is known as \textit{out-of-time} pile-up.
@@ -236,7 +236,7 @@ The \ATLAS\footnote{\textbf{A} \textbf{T}oroidal \textbf{L}HC \textbf{A}pparatu\
 The detector is designed to cover nearly the entire solid angle around the collision point.
 In this section a brief overview of each sub-detector is given, in order of increasing radial distance from the point of collision.
 The inner tracking detector is described in \cref{sec:atlas_id}, the electromagnetic and hadronic calorimeters in \cref{sec:atlas_calorimeter}, and finally the muon spectrometer in \cref{sec:muon_spectrometer}.
-Trigger system, used to select events for storage, is described in \cref{sec:trigger}.
+The trigger system, used to select events for storage, is described in \cref{sec:trigger}.
 More complete information on the detector can be found in \rcite{PERF-2007-01}, while an overview of physics performance is given in \cite{ATLAS-TDR-14}.
 
 \begin{figure}[!htpb]
@@ -253,6 +253,7 @@ More complete information on the detector can be found in \rcite{PERF-2007-01}, 
 \subsection{Inner Detector}\label{sec:atlas_id}
 
 The inner-detector system (ID) provides high-resolution charged particle trajectory tracking in the range $|\eta| < 2.5$.
+Tracks are reconstructed from space-points obtained from charge depositions (clusters or hits) in the ID subsystems.
 The ID is immersed in a \SI{2}{\tesla} axial magnetic field, produced by a superconducting solenoidal magnet, which enables the measurement of particle momentum and charge.
 After \runthree, the ID will be replaced by the ITk \cite{ATLAS-TDR-30,ATLAS-TDR-25}.
 
@@ -260,7 +261,7 @@ The inner detector is made up of several sub-systems, shown in \cref{fig:atlas_i
 The high-granularity silicon pixel detector covers the innermost region and typically provides four space-point measurements per track.
 It is followed by the silicon microstrip tracker (SCT), which usually provides a further four space-point measurements (8 hits) per track.
 These silicon detectors are complemented by the Transition Radiation Tracker (TRT),
-which enables radially extended track reconstruction in the region $|\eta| < 2.0$ and typically provides 33 (38) additional hits in the barrel (end-cap). 
+which enables radially extended track reconstruction in the region $|\eta| < 2.0$ and typically provides 33 (38) additional space-points in the barrel (end-cap). 
 
 
 \begin{figure}[!htpb]
@@ -305,7 +306,7 @@ Typical uncertainties for the transverse IP resolution of tracks in the central 
 \subsubsection{Pixel Detector}
 The silicon pixel detector is comprised of four cylindrical barrels at increasing radii from the beamline, and four disks on each side.
 The innermost barrel layer is the insertable B-layer (IBL), shown in \cref{fig:atlas_ibl}.
-The IBL was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001} and lies approximately just \SI{33}{\milli\meter} from the beam axis (the distance varies due to the interleaved structure).
+The IBL was installed before \runtwo \cite{ATLAS-TDR-19,PIX-2018-001} and lies approximately \SI{33}{\milli\meter} from the beam axis (the distance varies due to the interleaved structure).
 The second-to-innermost layer is referred to as the B-layer.
 %Radiation-hard electronics are used to read out the 140 million channels.
 The specification of the pixel detector determines the impact parameter resolution and the ability to reconstruct primary and secondary vertices.
@@ -357,7 +358,8 @@ The spaces between the straws are filled with a polymer which encourages the emi
 \subsection{Calorimeters}\label{sec:atlas_calorimeter}
 
 The calorimeter system measures the energy of incident particles over the range $|\eta| < 4.9$.
-There are two main sub-systems: the electromagnetic calorimeter (ECal), which focuses on the measurement of electrons and photons, and the hadronic calorimeter (HCal), which measures the energy of hadrons.
+There are three main sub-systems: the electromagnetic calorimeter (ECal), which focuses on the measurement of electrons and photons, and the hadronic calorimeter (HCal), which measures the energy of hadrons, both of which instrument the region $|\eta|< 3.2$.
+In addition, a dedicated forward calorimeter subsystem (not described below) is used to measure the energy of particles in the range $3.2 < |\eta| < 4.9$.
 A schematic view of the calorimeter system is shown in \cref{fig:atlas_calos}.
 Upon entering the calorimeter, incident particles will interact with the detector material to produce a shower of secondary particles with reduced energies. 
 The charge deposited in this process is measured and used to reconstruct the energy of the initial incident particle.
@@ -392,36 +394,41 @@ The EM calorimeter uses lead absorber plates to initiate EM showers, resulting i
 The charge is collected on copper electrodes and read out.
 The accordion geometry of the ECal allows for a full coverage in $\phi$ without any azimuthal cracks.
 
-The energy resolution of the LAr calorimeter is made up of a sampling and a constant term, which are summed in quadrature to produce the overall energy resolution.
-The sampling term contributes approximately $\pct{10} / \sqrt{E}$, while the constant term adds an additional \pct{0.7}.
-Photons with moderate transverse energy $\ET \approx \SI{50}{\GeV}$ have an overall energy resolution of at most \pct{1.6} over most of the pseudorapidity range.
-At lower $\ET \approx \SI{10}{\GeV}$, the resolution is degraded to approximately \pct{5}.
-The resolution measurements are obtained from test beam data \cite{ATLAS-TDR-14}.
+The energy resolution of the LAr calorimeter is made up of a sampling, noise and a constant term, which are summed in quadrature to produce the overall energy resolution, as in
+%
+\begin{equation}\label{eq:ecal_resolution}
+  \frac{\sigma(E)}{E} = \frac{\pct{2.8}}{\sqrt{E}} \oplus \frac{\SI{120}{\MeV}}{E} \oplus \pct{0.3} .
+\end{equation}
+%
+The sampling term contributes approximately $\pct{2.8} / \sqrt{E}$, the noise term contributes $\SI{120}{\MeV} / {E}$, while the constant term contributes an additional \pct{0.3} and is dominant at \highpt.
+The resolution measurements are obtained from test beam data \cite{Cavallari:2011zza} and exceed the design specification \cite{ATLAS-TDR-14}.
+The energy resolution for electrons with $\pt = \SI{10}{\GeV}$ varies between \pct{0.3} and \pct{0.8} over the pseudorapidity range.
+Meanwhile for photons with $\pt = \SI{60}{\GeV}$ the energy resolution varies between \pct{0.25} and \pct{1} \cite{PERF-2017-03}.
 
-%it initiates an electromagnetic cascade,
-%The fine granularity of the EM calorimeter
-%Additionally, multiple samplings of the shower are used to resolve its pointing vector.
 
 \subsubsection{Hadronic Tile Calorimeter}
 In the central barrel region with $|\eta| < 1.7$, the HCal uses a tile calorimeter with steel as an absorbing material, and scintillating tiles as the active material.
-Two copper/liquid-argon calorimeter end-caps are also used.
+Two copper/liquid-argon calorimeter end-caps are also used which extend the coverage up to $|\eta| = 3.2$.
 Incident hadrons interact via the strong and electromagnetic forces with the absorber material, mainly loosing energy due to multiple inelastic nuclear collisions.
 The active material captures the resulting electrons and photons to measure the energy of the incident hadron.
 
-The hadronic energy resolution of the HCal is parameterised as a function of the hadron's transverse energy
+The granularity of the HCal is $\Delta \eta \times \Delta \phi = 0.1 \times 0.1$ in the region $|\eta| < 2.5$, and $\Delta \eta \times \Delta \phi = 0.2 \times 0.2$ in the region $2.5 < |\eta| < 3.2$.
+The hadronic energy resolution of the HCal is parameterised in the same way as the ECal (see \cref{eq:calo_resolution}).
+In a fit to test beam data \cite{ATLAS-TDR-14}, the energy resolution of single hadrons in the barrel is given by
 %
-\begin{equation}
-  \sigma(\ET) / \ET = \pct{50} / \sqrt{\ET} \oplus \pct{3} ,
+\begin{equation}\label{eq:ecal_resolution}
+  \frac{\sigma(E)}{E} = \frac{\pct{52}}{\sqrt{E}} \oplus \frac{\SI{1.6}{\GeV}}{E} \oplus \pct{3} .
 \end{equation}
 %
-corresponding to a energy resolution of \pct{11} (\pct{6.5}) for a hadron with \ET of approximately \SI{10}{\GeV} (\SI{50}{\GeV}) \cite{ATLAS-TDR-03}.
+This corresponds to an energy resolution of approximately \pct{17} (\pct{6}) for a hadron with \ET of approximately \SI{10}{\GeV} (\SI{100}{\GeV}).
 
-%Hadrons are relatively massive and cannot radiate much of their energy through bremsstrahlung, and they lose their energy mainly through multiple nuclear collisions.  Hadrons passing through matter also initiate cascades through inelastic hadron-nuclei interactions.
 
-%The tile calorimeter is placed directly outside the EM calorimeter envelope.o 
-%The barrel covers the region -1.0<η<1.0, and the extended barrels cover the region 0.8<|η|<1.7.
+%The jet energy resolution is approximately \pct{10} (\pct{3.5}) for a jet with $\SI{100}{\GeV}$ (\SI{1}{\TeV}) of transverse momentum \cite{Klimek:2020onx}.
+%
+%%%corresponding to a energy resolution of \pct{11} (\pct{6.5}) for a hadron with \ET of approximately \SI{10}{\GeV} (\SI{50}{\GeV}) \cite{ATLAS-TDR-03}.
+% insert run 2 resoltuions here
 
-%LAr hadronic end-cap calorimeter (HEC). Located directly behind (in $z$) the end-cap electromagnetic calorimeter and sharing the same LAr cryostats. The high level of radiation in the forward regions would cause severe damage to plastic scintillators. In the end-caps, parallel copper plates are submerged in liquid argon, which is preferred as the active medium because of its inherent radiation hardness.
+
 
 
 \subsection{Muon Spectrometer}\label{sec:muon_spectrometer}
@@ -447,7 +454,7 @@ The transverse momentum resolution (measured for combined ID and muon tracks, se
 \subsection{The Trigger}\label{sec:trigger}
 The \SI{25}{\nano\second} bunch spacing used over the course of \runtwo corresponds to a bunch-crossing or event rate of \SI{40}{\mega\hertz} (see \cref{tab:lhc_runs}).
 If the full information for the detector was written out for each event, this would correspond to the generation of \SI{60}{\tera\byte} of data each second.
-This is more than can be feasibly read out from the hardware, processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is potentially interesting and should be kept for further analysis.
+This is more than can be feasibly processed and stored, requiring the use of a trigger system which quickly makes a decision about whether or not an event is potentially interesting and should be kept for further analysis.
 The trigger system is comprised of two levels which aim to identify various signatures, such as electrons, muons, taus, photons, and jets (including \bjets), as well as events with large total or missing transverse energy.
 The hardware-based Level-1 (L1) trigger uses coarse information from the calorimeters and MS to accept events at an average rate of \SI{100}{\kilo\hertz} approximately \SI{2.5}{\micro\second} after the event.
 After the L1 trigger, the software-based High Level Trigger (HLT) makes use of \num{40000} CPU cores to make a final selection on surviving events in approximately a few hundred milliseconds. 
@@ -494,7 +501,7 @@ An overview of track reconstruction is given below.
 \subsubsection{Space-point Formation (Clustering)}
 When a charged particle traverses a silicon layer, charge can be collected in more than one pixel or strip.
 This is due to the incident angle of the particles with respect to the sensor, and also the drift of electrons between sensors caused by the magnetic field.
-Clusters (also called \textit{hits} or \textit{space-points}) are formed by clustering neighbouring pixels or strips and estimating locations of space-points using the shape and energy distribution of the clusters.
+Groups of neighbouring pixels or strips are clustered together and space-point locations are estimated using the shape and energy distribution of the clusters.
 
 \subsubsection{Track Finding}
 Space-points are used to build track seeds. These are groups of three hits which are geometrically compatible with being part of a track segment.
@@ -537,7 +544,7 @@ This selection does allow for the possibility of a track having small number of 
   \end{tabular}
   \caption{
     Quality selections applied to tracks,
-    where \dzero is the transverse IP of the track, \zzero is the longitudinal IP with respect to the PV and $\theta$ is the track polar angle (see \cref{sec:track_parameterisation} for the IP definitions).
+    where \dzero is the transverse IP of the track, \zzero is the longitudinal IP with respect to the primary vertex and $\theta$ is the track polar angle (see \cref{sec:track_parameterisation} for the IP definitions).
     Silicon hits are hits on the pixel and SCT layers.
     Shared hits are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}.
     %Shared hits on pixel layers are given a weight of 1, while shared hits in the SCT are given a weight of 0.5.
@@ -568,7 +575,7 @@ Hits not compatible with the merged hypothesis can still be shared by a limited 
 
 \subsubsection{Pseudotracking}\label{sec:pseudotracks}
 
-Pseudotracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
+In simulation, pseudotracking uses Monte Carlo truth information to group together all the hits left by each truth particle.
 Each collection of hits which, as a unit, satisfies basic quality requirements is directly used in a full resolution track fit.
 If the track fit is successful, a ``pseudotrack'' track is created and stored.
 If the track fit fails, or the collection of hits does not pass the basic quality requirements (for example because of a lack of hits) then the particle is said to be un-reconstructable.
@@ -584,15 +591,15 @@ First, vertex finding takes place, which is the process of grouping tracks into 
 Second, vertex fitting combines information from compatible tracks to reconstruct the physical properties of the vertex, such as mass and position.
 
 \subsubsection{Primary Vertices}
-Each proton-proton interaction happens at a \textit{primary vertex} (PV).
+Each proton-proton interaction happens at a \textit{primary vertex}.
 Primary vertices are iteratively reconstructed with tracks using the iterative vertex finder (IVF) \cite{PERF-2015-01}.
-%In \runthree, the IVF will be replaced with an adaptive multi-vertex finder (AMVF) \cite{ATL-PHYS-PUB-2019-015}.
-The \textit{hard scatter vertex} of an event is chosen as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma(\pt^2)$ \cite{ATL-PHYS-PUB-2015-026}.
+The \textit{hard scatter primary vertex} is defined as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma(\pt^2)$ \cite{ATL-PHYS-PUB-2015-026}.
+In the following, the ``primary vertex'' always refers to the hard scatter primary vertex.
 
 \subsubsection{Secondary Vertices}
 Secondary vertices (SV) occur when a particle radiates or decays at a sufficient distance from the primary vertex to be resolved from the primary vertex (see \cref{sec:b_decay_topology}).
 Two widely used secondary vertexing tools are used within \ATLAS: SV1 and JetFitter \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011}.
-Each attempts to reconstruct secondary vertices inside a jet using the tracks associated to that jet (see \cref{sec:jet_reco} for more information about track association).
+Each attempts to reconstruct secondary vertices inside a jet using the tracks associated to that jet (see \cref{sec:jet_reco} for more information about jet reconstruction and track association).
 SV1 by design attempts to reconstruct only a single inclusive vertex per jet.
 This inclusive vertex groups all \bhadron decay products, including tracks from the \bhadron decay itself and tracks from $b \rightarrow c$ decays.
 The second tool, JetFitter attempts to resolve each displaced vertex inside the jet, such that secondary vertices from \bhadron decays are reconstructed separately to tertiary vertices from $b \rightarrow c$ decay chains.
@@ -603,12 +610,12 @@ Jets are an aggregate reconstructed object corresponding to a collection of coll
 Jets are built by clustering constituent objects (e.g. tracks or calorimeter clusters) using a jet finding algorithm, for example the \antikt algorithm \cite{Cacciari:2008gp}, which is implemented in \textsc{FastJet}~\cite{Cacciari:2012:fastjet}.
 
 Objects can be associated to jets in one of two ways.
-The first is via a geometrical matching in $\DeltaR$ (see) 
+The first is via a geometrical matching in $\DeltaR$ (see \cref{eq:delta_r}). 
 The second is via a ghost association \cite{Cacciari:2008gn}, where the object is assigned a negligible momentum and re-clustered into the jet after its formation.
 
 Jets from pile-up interactions are suppressed using the Jet Vertex Tagger (JVT) algorithm, which uses the transverse momenta of tracks to identify jets from pile-up interactions \cite{ATLAS-CONF-2014-018}.
 
-
+Different types of jets used in this thesis are described below.
 
 \subsubsection{EMTopo Jets}
 EMTopo jets are reconstructed from noise-suppressed topological clusters (topoclusters) of calorimeter energy depositions \cite{PERF-2014-07}.
@@ -623,12 +630,7 @@ Topoclusters are formed from a seed cell with a large $S_\textnormal{cell}$, and
 Collections of topoclusters are then clustered into a jet 
 using the \antikt algorithm with a radius parameter of $0.4$ (\smallR jets) or $1.0$ (\largeR jets).
 More information, including information on the calibration of the topocluster jet energy scale, is available in \rcite{PERF-2014-07}.
-
-
-\subsubsection{Particle Flow Jets}
-Particle-flow (PFlow) jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the \antikt algorithm with a radius parameter of $0.4$.
-Particle-flow objects integrate information from both the ID and the calorimeters, improving the energy resolution at high transverse momenta and reducing pile-up contamination.
-The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
+EMTopo jets are used in the analysis described in \cref{chap:vhbb_boosted}.
 
 \subsubsection{\texorpdfstring{\LargeR}{Large-R} Jets}
 \LargeR jets have a radius parameter $R=1.0$ and are built by clustering topological calorimeter clusters using the \antikt algorithm \cite{Butterworth:2008iy}.
@@ -636,24 +638,31 @@ The large radius parameter is especially useful for containing the decay product
 Due to their large size, \largeR jets benefit from a grooming procedure called trimming which remove soft contaminants inside the jet \cite{Krohn:2009th,PERF-2012-02}.
 Trimming aims to remove jet constituents from pile-up and the underlying event, which helps to improve the jet mass resolution and its robustness to varying levels of pile-up \cite{Ellis:1993tq}.
 The jet mass is computed using a combination of information from the calorimeters and ID, and a calibration to data is applied \cite{JETM-2018-02}.
-
+\LargeR jets are used in the analysis described in \cref{chap:vhbb_boosted}.
 
 \subsubsection{Track-jets}
-Track-jets are built by clustering tracks using the \antikt clustering algorithm.
+Variable-radius track-jets are built by clustering tracks using the \antikt clustering algorithm.
 They are associated to \largeR jets as sub-jets and used to identify \largeR jets containing \bhadrons.
 The radius parameter is allowed to vary with transverse momentum such that a broader cone (up to $R=0.4$) is used for \lowpt track-jets and a narrower cone (down to $R=0.02$) for \highpt track-jets \cite{Krohn:2009zg,ATL-PHYS-PUB-2017-010}.
 The narrower cone is better suited to clustering highly collimated jet constituents at \highpt.
+Track-jets are used in the analysis described in \cref{chap:vhbb_boosted}.
+
+\subsubsection{Particle Flow Jets}
+Particle-flow (PFlow) jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the \antikt algorithm with a radius parameter of $0.4$.
+Particle-flow objects integrate information from both the ID and the calorimeters.
+The addition of tracking information from the ID results in improvements to the energy resolution at low transverse momenta and improvements to the position resultion at high transverse momenta.
+Additionally tracking information can be used to reduce pile-up contamination.
+The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
+PFlow jets are used to train the algorithms discussed in \cref{chap:track_classification_mva} and \cref{chap:gnn_tagger}.
 
 \subsubsection{Jet Flavour Labels}
-Jet flavour labels are assigned to \smallR jets according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
+In simulated events, jet flavour labels are assigned to \smallR jets according to the presence of a generator level hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
 %Jet flavour labels are assigned according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 %If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
 
-PFlow jets are used to train the algorithms discussed in \cref{chap:track_classification_mva} and \cref{chap:gnn_tagger}.
-
-\subsubsection{Jet Track Association}
-Tracks are associated to \smallR jets using a \DeltaR association cone, the width of which decreases as a function of jet \pt, with a maximum cone size of $\DeltaR \approx 0.45$ for jets with $\pt = \SI{20}{\GeV}$ and minimum cone size of $\DeltaR \approx 0.25$ for jets with $\pt > \SI{200}{\GeV}$. 
+\subsubsection{Jet-to-Track Association}
+For the purposes of flavour tagging (see \cref{sec:btagging_algs}), tracks are associated to \smallR jets using a \DeltaR association cone, the width of which decreases as a function of jet \pt, with a maximum cone size of $\DeltaR \approx 0.45$ for jets with $\pt = \SI{20}{\GeV}$ and minimum cone size of $\DeltaR \approx 0.25$ for jets with $\pt > \SI{200}{\GeV}$. 
 If a track is within the association cones of more than one jet, it is assigned to the jet which has a smaller $\DeltaR(\text{track}, \text{jet})$.
 
 
@@ -665,7 +674,7 @@ The reconstruction of both types of charged lepton is briefly outlined below.
 \subsubsection{Electrons}
 
 A diagrammatic view of electron reconstruction is shown in \cref{fig:electron_Reco}.
-Electrons candidates are reconstructed by matching PV-compatible\footnote{The ID track associated with the electron is required to satisfy $\dzero / \dzerosig < 5$ and $\zzero\sin\theta < \SI{0.5}{\milli\meter}$.} inner detector tracks to topological calorimeter clusters.
+Electron candidates are reconstructed by matching primary vertex-compatible\footnote{The ID track associated with the electron is required to satisfy $\dzero / \dzerosig < 5$ and $\zzero\sin\theta < \SI{0.5}{\milli\meter}$.} inner detector tracks to topological calorimeter clusters.
 The track-cluster matching criteria takes into account the significant energy loss of the electron due to bremsstrahlung.
 If a match is found, a refit of the track is performed using the Gaussian Sum Filter (GSF) \cite{ATLAS-CONF-2012-047}, which better handles trajectory reconstruction in the presence of bremsstrahlung.
 Various identification criteria are then applied to the candidates using a likelihood-based (LH) method to improve purity.
@@ -688,12 +697,12 @@ A more complete description can be found in Refs. \cite{ATL-PHYS-PUB-2017-022,EG
 
 \subsubsection{Muons}
 Muon reconstruction makes use of the dedicated MS (see \cref{sec:muon_spectrometer}), the tracks from the ID, and the presence of characteristic signatures in the calorimeters.
-Muon tracks (i.e. a track reconstructed in the MS) are reconstructed by connecting straight-line track segments, which are identified via a Hough transform, and combined into a approximately parabolic trajectory.
+Muon tracks (i.e. tracks reconstructed in the MS) are reconstructed by connecting straight-line track segments, which are identified via a Hough transform, and combined into an approximately parabolic trajectory.
 Finally, a global $\chi^2$ fit is performed, taking into account possible interactions between the muon and the detector material.
 A reconstructed muon is called \textit{combined} if it can be matched successfully to an to an ID track.
 Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
 
-After reconstruction, candidate undergo an identification processes which helps to efficiently identify prompt muons whilst rejecting background signals (e.g. non-prompt muons from pion and kaon decays, the punch-through of a hadron from the calorimeter, or the semi-leptonic decay of a heavy flavour hadron).
+After reconstruction, muon candidates undergo an identification processes which helps to efficiently identify prompt muons whilst rejecting background signals (e.g. non-prompt muons from pion, kaon, and semi-leptonic heavy flavour hadron decays, and the punch-through of a hadron from the calorimeter).
 Combined muon identification takes into account discrepancies in the \pt and charge measurements in the MS and ID, and the $\chi^2$ of the combined track fit.
 Selections on the number of hits in the ID and MS are also applied.
 At the medium identification working point, approximately \pct{96} of prompt muons with $\SI{20}{\GeV} < \pt < \SI{100}{\GeV}$ are successfully identified.
@@ -716,13 +725,9 @@ More information about missing transverse momentum reconstruction is provided in
 
 
 
-
-
-
-
 \section{Flavour Tagging Algorithms}\label{sec:btagging_algs}
 
-Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy flavour (HF) hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons (collectively referred to as \ljets).
+Many ATLAS analyses rely on flavour tagging, which is the identification of jets containing heavy flavour hadrons (\bhadrons and \chadrons) as opposed to those containing only light-flavour hadrons or gluons (collectively referred to as \ljets).
 In particular, \btagging is the identification of jets originating only from \bhadrons (i.e. \bjets).
 Flavour tagging is a critical component of the physics programme of the ATLAS experiment. 
 It is of crucial importance for the study of the Standard Model (SM) Higgs boson and the top quark, which decay preferentially to \bquarks \cite{HIGG-2018-04,HIGG-2018-13}, and additionally for several Beyond the Standard Model (BSM) resonances that readily decay to heavy flavour quarks \cite{EXOT-2019-03}.
@@ -777,9 +782,8 @@ In the rest frame of the detector, the typical \bhadron travels a distance
 \end{equation}
 %
 before decaying, where in the high energy limit $\gamma = E_b/m_b$ and $\beta = v/c = 1$.
-
 For a \SI{50}{\GeV} \bhadron, this gives $d \approx \SI{4.5}{\milli\meter}$, which is displaced enough to be resolved from the primary vertex.
-Meanwhile for a \SI{1}{\TeV} \bhadron, $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector.
+Meanwhile for a \SI{1}{\TeV} \bhadron $d \approx \SI{90}{\milli\meter}$ -- well beyond the radius of the first pixel layer (the IBL) which is situated at a radius of approximately \SI{33}{\milli\meter} from the center of the detector.
 \cref{fig:b_lxy_vs_pt} shows how the mean decay radius varies as a function of \bhadron \pt.
 This significant displacement is characteristic of \bjets and makes it possible to reconstruct secondary vertices (SV) at the \bhadron decay point.
 
@@ -787,8 +791,8 @@ This significant displacement is characteristic of \bjets and makes it possible 
   \centering
   \includegraphics[width=0.6\textwidth]{chapters/3.tracking/figs/b_pt_lxy.pdf}
   \caption{
-    The truth \bhadron decay radius \Lxy as a function of truth transverse momentum \pt for reconstructed \bjets in \Zprime events.
-    Error bars show the standard deviation.
+    The truth \bhadron decay radius \Lxy as a function of truth transverse momentum \pt for reconstructed \bjets in \Zprime events (see \cref{sec:track_classifier_datasets}).
+    Error bars show the standard deviation of the \Lxy distribution in each \pt bin.
     The pixel layers are shown in dashed horizontal lines.
   }
   \label{fig:b_lxy_vs_pt}
@@ -816,7 +820,7 @@ Reconstruction of these vertices from tracks with common points of spatial origi
 Additional signatures of \bhadrons are as follows.
 Associated tracks and SVs can have a large transverse impact parameter \dzero as a result of the \bhadron displacement (as shown in \cref{fig:bjet_diagram}).
 Furthermore, since it is common for the \bhadron to decay to a \chadron with non-negligible lifetime, tertiary vertices can be found within \bjets resulting from $b \rightarrow c$ decay chains.
-Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf}, the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
+Additionally, as the \borchadron decays semileptonically in approximately \pct{40} of cases \cite{Workman:2022ynf} the presence of a reconstructed electron or muon inside a jet gives information about the jet flavour.
 %In cores of \highpt jets, track density is high due to the increased multiplicity and collimation of tracks (see \cref{chap:tracking}).
 %As a result, the separation between tracks can be of the same order as the active sensor dimensions, resulting in an increase in merged clusters and tracks which share hits \cite{PERF-2015-08}.
 %Due to the relatively long lifetimes of \bhadrons and \chadrons, which can traverse several layers of the ID before decaying and have highly collimated decay products, the presence of shared or missing hits is a critical signature of heavy flavour jets.
@@ -830,8 +834,8 @@ As such, efficient and accurate track reconstruction is essential for high perfo
 \subsection{Low-level Algorithms}\label{sec:low_level_algs}
 
 The low-level algorithms are the first step in the \btagging process.
-They take inputs information about the jet and its associated tracks and reconstruct distinct features of the experimental signature of heavy flavour jets.
-The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example SV1 and JetFitter which reconstruct displaced decay vertices (see \cref{sec:vertex_reco}) and IPxD which discriminates based on track IPs, and trained machine learning models such as RNNIP and DIPS which use IP and hit information from a variable number of tracks \cite{ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
+They take inputs information about the jet and its associated tracks (see \cref{sec:jet_reco}) and reconstruct distinct features of the experimental signature of heavy flavour jets.
+The low-level algorithms are a combination of manually optimised reconstruction algorithms, for example SV1 and JetFitter which reconstruct displaced decay vertices (see \cref{sec:vertex_reco}) and IPxD which discriminates based on track IPs, and trained machine learning models such as RNNIP \cite{ATL-PHYS-PUB-2017-003} and DIPS \cite{ATL-PHYS-PUB-2020-014} which use IP and hit information from a variable number of tracks to predict the jet flavour.
 
 \subsection{High-level Algorithms}\label{sec:high_level_algs}
 
@@ -841,7 +845,7 @@ The working point is tuned to achieve an average \bjet efficiency of \pct{70} on
 At this efficiency working point, rejection factors for \cjets and \ljets are approximately 9 and 304 respectively.
 
 The current ATLAS flavour tagger, \DLr \cite{ATL-PHYS-PUB-2017-013}, is part of a series of taggers that use a deep neural network to combine the outputs of the low-level algorithms.
-AT the \pct{70} efficiency working point, \DLr achieves a \crej of approximately 12 and a \lrej of approximately 625.
+At the \pct{70} efficiency working point, \DLr achieves a \crej of approximately 12 and a \lrej of approximately 625.
 The low-level algorithms used by the different high-level taggers DL1, DL1r and DL1d is shown in \cref{fig:high_low_taggers}.
 
 %is a deep neural network which accepts as inputs the outputs of a number of independently optimised \textit{low-level} algorithms \cite{FTAG-2018-01}, as shown in \cref{fig:high_low_taggers}.
@@ -853,7 +857,7 @@ The low-level algorithms used by the different high-level taggers DL1, DL1r and 
   \centering
   \includegraphics[width=0.8\textwidth]{chapters/3.tracking/figs/high_low_taggers.pdf}
   \caption{
-    An overview of different high and low level taggers used in ATLAS.
+    An overview of different low and high level taggers used in ATLAS.
     The low level taggers are IPxD, SV1 and JetFitter, and RNNIP and DIPS \cite{FTAG-2018-01,ATL-PHYS-PUB-2017-011,ATL-PHYS-PUB-2017-003,ATL-PHYS-PUB-2020-014}.
     The outputs of these taggers are fed into the high-level taggers DL1, DL1r and DL1d \cite{ATL-PHYS-PUB-2017-013,ATLAS:2022qxm}.
   }

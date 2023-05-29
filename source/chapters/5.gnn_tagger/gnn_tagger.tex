@@ -40,7 +40,7 @@ A fake track is defined in this chapter as a track with a truth-matching probabi
 \begin{enumerate}
     \item \GNN boasts improved performance with respect to the current ATLAS flavour tagging algorithms, with significantly larger background rejection rates for a given signal efficiency. Alternatively the rejection rates can be kept fixed for a substantial increase in signal efficiency, in particular at \highpt.
     \item The same network architecture can be easily optimised for a wider variety of use cases (e.g. \cjet tagging and \highpt jet tagging) since there are no low-level algorithms to retune.
-    \item There are fewer algorithms to maintain.
+    \item Optimal performance is achieved via the training of a single algorithm, rather than the optimisaiton of multiple low and high level algorithms.
     \item Alongside the network's prediction of the jet flavour, the auxiliary vertex and track origin predictions provide more information on why a jet was (mis)tagged or not. This information can also have uses in other applications, for instance to explicitly reconstruct displaced decay vertices or to remove fake tracks.\footnote{\fakesfootnote}
 \end{enumerate}
 
@@ -191,11 +191,12 @@ The muons are required to be combined \cite{ATL-PHYS-PUB-2015-037}, and the elec
     Shared hits, are hits used on multiple tracks which have not been classified as split by the cluster-splitting neural networks~\cite{PERF-2015-08}, while split hits are hits used on multiple tracks which have been identified as merged.
     A hole is a missing hit, where one is expected, on a layer between two other hits on a track.
     The track leptonID is an additional input to the \GNNLep model \cite{ATL-PHYS-PUB-2022-027}.
+    ``Primary vertex'' (defined in \cref{sec:vertex_reco}) is abbreviated as PV.
   }
   \label{tab:track_inputs}
 \end{table}
 
-The selections applied to the tracks, outlined in \cref{tab:fake_track_mva_selections}, is the same as that used for the fake track classification MVA described in \cref{chap:track_classification_mva}.
+The selections applied to the tracks, outlined in \cref{tab:fake_track_mva_selections}, is the same as that used for the fake track classification NN described in \cref{chap:track_classification_mva}.
 However, \cref{sec:looser_track_selection} demonstrates that further relaxation of the track selection requirements may be warranted. 
 
 \subsection{Auxiliary Training Objectives}\label{sec:aux-train-objectives}
@@ -662,10 +663,10 @@ In order to fairly compare the performance of the different tools, both the excl
 For the exclusive vertex finding case JetFitter and \GNN can be directly compared, while a comparison with SV1 is not possible due to the aforementioned design constraints.
 The inclusive vertex finding performance of all three tools can be compared using the procedure outlined below.
 
-The starting point for the secondary vertex finding efficiency in both the exclusive and inclusive cases is to select truth HF secondary vertices, defined as those containing only inclusive \bhadron decays.
+The starting point for the secondary vertex finding efficiency in both the exclusive and inclusive cases is to select truth heavy flavour (HF) secondary vertices, defined as those containing only inclusive \bhadron decays.
 For exclusive HF vertex finding, these truth secondary HF vertices can be used directly as the denominator for the efficiency calculation.
 Meanwhile for the inclusive efficiency all such truth HF secondary vertices in the jet are merged into a single inclusive target vertex.
-Correspondingly, for the inclusive HF vertex finding case, the vertices found by JetFitter are merged into a single vertex, and the vertices found by \GNN which contain at least one predicted \bhadron decay track, are also merged.
+Correspondingly, for the inclusive HF vertex finding case, the vertices found by JetFitter are merged into a single vertex, and the vertices found by \GNN which contain at least one predicted \bhadron decay track are also merged.
 SV1 does not require any vertex merging.
 Only jets containing a single \bhadron at truth level are considered.
 
