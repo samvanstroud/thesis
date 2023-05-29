@@ -1,3 +1,5 @@
+See also [https://github.com/mariomorvan/ucl-latex-thesis-templates](https://github.com/mariomorvan/ucl-latex-thesis-templates).
+
 # Compile
 
 Using [Chris Monson's](https://github.com/shiblon/latex-makefile) Makefile (requires `cvmfs`)
