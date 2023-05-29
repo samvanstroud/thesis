@@ -1,6 +1,6 @@
 \chapter{The Large Hadron Collider and the \ATLAS Detector}\label{chap:lhc_atlas}
 
-The Large Hadron Collider (\LHC)~\cite{Evans:2008zzb} at \CERN is the world's largest and most powerful particle accelerator.
+The Large Hadron Collider (\LHC) at \CERN is the world's largest and most powerful particle accelerator~\cite{Evans:2008zzb}.
 Since the completion of its construction in 2008, the LHC has extended the frontiers of particle physics through significant increases in centre of mass energy and collison rates as compared with previous collider experiments.
 The \LHC accelerates bunches of protons around a \SI{27}{\km} ring until they are travelling just \SI{3}{\m\per\s} slower than the speed of light, at which point they are made to collide.
 The proton bunches travel round the ring 11,000 times per second in two concentric beams, which are guided by superconducting magnets cooled using liquid helium to \SI{-271.3}{\degreeCelsius} (\SI{1.9}{\kelvin}).
@@ -131,7 +131,7 @@ The transverse and longitudinal impact parameters (IP) \dzero and \zzero specify
 The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respectively, and $q/p$ is the measured charge on the track\footnote{Reconstructed charged particles are assumed to have a charge of $\pm 1$.} divided by the scalar 3-momentum.
 \cref{fig:track_params} shows each of these parameters diagrammatically.
 
-\begin{figure}[!htbp]
+\begin{figure}[p]
   \centering
   \includegraphics[width=0.65\textwidth]{chapters/2.detector/figs/track_params.pdf}
   \caption{
@@ -144,7 +144,7 @@ The parameters $\phi$ and $\theta$ are the azimuthal and polar angles respective
   \label{fig:track_params}
 \end{figure}
 
-Impact parameter significances are defined as the IP divided by its corresponding uncertainty $\sigma$ as in $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
+Impact parameter significances are defined as the IP divided by its corresponding uncertainty $\sigma$, as in $\dzerosig = d_0 / \dzerouncert$ and $\zzerosig = z_0 / \zzerouncert$.
 When used in flavour tagging (see \cref{chap:tracking}), track IP significances are lifetime signed according to the track's direction with respect to the jet axis and the primary vertex \cite{PERF-2012-04}.
 The signed IP significances are positive if the track crosses the jet axis in front of the primary vertex and negative if the crossing is behind the primary vertex.
 
@@ -212,7 +212,7 @@ The uncertainty on the total integrated luminosity is \pct{1.7} \cite{ATLAS-CONF
 
 At the centre of the ATLAS detector, bunches of more than $10^{11}$ protons are collided.
 Each bunch-crossing is called an \textit{event}.
-There is generally at most one hard (\highpt) proton-proton scatter per event.
+There is generally at most one hard (i.e. \highpt) proton-proton scatter per event.
 Additional interactions are typically relatively soft (\lowpt) and are known as \textit{pile-up}.
 %Pile-up complicates the reconstruction of the hard scatter event as results of the interactions of different proton-proton interactions have to be separated.
 Pile-up from interactions within the same bunch-crossing is known as \textit{in-time} pile-up while residual signatures from previous bunch-crossings is known as \textit{out-of-time} pile-up.
@@ -357,13 +357,15 @@ The spaces between the straws are filled with a polymer which encourages the emi
 
 \subsection{Calorimeters}\label{sec:atlas_calorimeter}
 
-The calorimeter system measures the energy of incident particles over the range $|\eta| < 4.9$.
-There are three main sub-systems: the electromagnetic calorimeter (ECal), which focuses on the measurement of electrons and photons, and the hadronic calorimeter (HCal), which measures the energy of hadrons, both of which instrument the region $|\eta|< 3.2$.
+The calorimeter system measures the energy of incident particles in the range $|\eta| < 4.9$.
+There are three main sub-systems: the electromagnetic calorimeter (ECal), which focuses on the measurement of electrons and photons, and the hadronic calorimeter (HCal), which measures the energy of hadrons.
+The ECal and the HCal both instrument the region $|\eta|< 3.2$.
 In addition, a dedicated forward calorimeter subsystem (not described below) is used to measure the energy of particles in the range $3.2 < |\eta| < 4.9$.
+
 A schematic view of the calorimeter system is shown in \cref{fig:atlas_calos}.
 Upon entering the calorimeter, incident particles will interact with the detector material to produce a shower of secondary particles with reduced energies. 
 The charge deposited in this process is measured and used to reconstruct the energy of the initial incident particle.
-The two calorimeter sub-systems must provide strong containment of showering particles to prevent punch-through of EM and hadronic particles to the HCal and muon systems respectively.
+The calorimeters must provide strong containment of showering particles to prevent punch-through of EM and hadronic particles to the HCal and muon systems respectively.
 
 
 %the fine granularity of the EM calorimeter is ideally suited for precision measurements of electrons and photons. The coarser granularity of the rest of the calorimeter is sufficient to satisfy the physics requirements for jet reconstruction and $E_T^{\textrm{miss}}$ measurements.     
@@ -394,7 +396,7 @@ The EM calorimeter uses lead absorber plates to initiate EM showers, resulting i
 The charge is collected on copper electrodes and read out.
 The accordion geometry of the ECal allows for a full coverage in $\phi$ without any azimuthal cracks.
 
-The energy resolution of the LAr calorimeter is made up of a sampling, noise and a constant term, which are summed in quadrature to produce the overall energy resolution, as in
+The energy resolution of the LAr calorimeter is made up of a sampling, noise and constant term, which are summed in quadrature to produce the overall energy resolution, as in
 %
 \begin{equation}\label{eq:ecal_resolution}
   \frac{\sigma(E)}{E} = \frac{\pct{2.8}}{\sqrt{E}} \oplus \frac{\SI{120}{\MeV}}{E} \oplus \pct{0.3} .
@@ -413,10 +415,10 @@ Incident hadrons interact via the strong and electromagnetic forces with the abs
 The active material captures the resulting electrons and photons to measure the energy of the incident hadron.
 
 The granularity of the HCal is $\Delta \eta \times \Delta \phi = 0.1 \times 0.1$ in the region $|\eta| < 2.5$, and $\Delta \eta \times \Delta \phi = 0.2 \times 0.2$ in the region $2.5 < |\eta| < 3.2$.
-The hadronic energy resolution of the HCal is parameterised in the same way as the ECal (see \cref{eq:calo_resolution}).
+The hadronic energy resolution of the HCal is parameterised in the same way as the ECal.
 In a fit to test beam data \cite{ATLAS-TDR-14}, the energy resolution of single hadrons in the barrel is given by
 %
-\begin{equation}\label{eq:ecal_resolution}
+\begin{equation}
   \frac{\sigma(E)}{E} = \frac{\pct{52}}{\sqrt{E}} \oplus \frac{\SI{1.6}{\GeV}}{E} \oplus \pct{3} .
 \end{equation}
 %
@@ -592,7 +594,7 @@ Second, vertex fitting combines information from compatible tracks to reconstruc
 
 \subsubsection{Primary Vertices}
 Each proton-proton interaction happens at a \textit{primary vertex}.
-Primary vertices are iteratively reconstructed with tracks using the iterative vertex finder (IVF) \cite{PERF-2015-01}.
+Primary vertices are iteratively reconstructed with tracks using the iterative vertex finder \cite{PERF-2015-01}.
 The \textit{hard scatter primary vertex} is defined as the primary vertex whose associated tracks have the largest sum of transverse momentum squared, $\Sigma(\pt^2)$ \cite{ATL-PHYS-PUB-2015-026}.
 In the following, the ``primary vertex'' always refers to the hard scatter primary vertex.
 
@@ -616,6 +618,14 @@ The second is via a ghost association \cite{Cacciari:2008gn}, where the object i
 Jets from pile-up interactions are suppressed using the Jet Vertex Tagger (JVT) algorithm, which uses the transverse momenta of tracks to identify jets from pile-up interactions \cite{ATLAS-CONF-2014-018}.
 
 Different types of jets used in this thesis are described below.
+
+\subsubsection{Particle Flow Jets}
+Particle-flow (PFlow) jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the \antikt algorithm with a radius parameter of $0.4$.
+Particle-flow objects integrate information from both the ID and the calorimeters.
+The addition of tracking information from the ID results in improvements to the energy resolution at low transverse momenta and improvements to the position resultion at high transverse momenta.
+Additionally tracking information can be used to reduce pile-up contamination.
+The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
+PFlow jets are used to train the algorithms discussed in \cref{chap:track_classification_mva} and \cref{chap:gnn_tagger}.
 
 \subsubsection{EMTopo Jets}
 EMTopo jets are reconstructed from noise-suppressed topological clusters (topoclusters) of calorimeter energy depositions \cite{PERF-2014-07}.
@@ -647,17 +657,10 @@ The radius parameter is allowed to vary with transverse momentum such that a bro
 The narrower cone is better suited to clustering highly collimated jet constituents at \highpt.
 Track-jets are used in the analysis described in \cref{chap:vhbb_boosted}.
 
-\subsubsection{Particle Flow Jets}
-Particle-flow (PFlow) jets are reconstructed from particle-flow objects \cite{PERF-2015-09} using the \antikt algorithm with a radius parameter of $0.4$.
-Particle-flow objects integrate information from both the ID and the calorimeters.
-The addition of tracking information from the ID results in improvements to the energy resolution at low transverse momenta and improvements to the position resultion at high transverse momenta.
-Additionally tracking information can be used to reduce pile-up contamination.
-The PFlow jet energy scale is calibrated according to \rcite{PERF-2016-04}.
-PFlow jets are used to train the algorithms discussed in \cref{chap:track_classification_mva} and \cref{chap:gnn_tagger}.
-
 \subsubsection{Jet Flavour Labels}
 In simulated events, jet flavour labels are assigned to \smallR jets according to the presence of a generator level hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
-If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
+If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet.
+Otherwise, the jet is labelled as a \ljet.
 %Jet flavour labels are assigned according to the presence of a truth hadron within ${\DeltaR(\text{hadron},\text{jet})<0.3}$ of the jet axis. If a \bhadron is found the jet is labelled a \bjet. In the absence of a \bhadron, if a \chadron is found the jet is called a \cjet.
 %If no \borchadrons are found, but a $\tau$ is found in the jet, it is labelled as a $\tau$-jet, else it is labelled as a \ljet.
 
@@ -674,7 +677,7 @@ The reconstruction of both types of charged lepton is briefly outlined below.
 \subsubsection{Electrons}
 
 A diagrammatic view of electron reconstruction is shown in \cref{fig:electron_Reco}.
-Electron candidates are reconstructed by matching primary vertex-compatible\footnote{The ID track associated with the electron is required to satisfy $\dzero / \dzerosig < 5$ and $\zzero\sin\theta < \SI{0.5}{\milli\meter}$.} inner detector tracks to topological calorimeter clusters.
+Electron candidates are reconstructed by matching primary vertex compatible\footnote{The ID track associated with the electron is required to satisfy $\dzero / \dzerosig < 5$ and $\zzero\sin\theta < \SI{0.5}{\milli\meter}$.} inner detector tracks to topological calorimeter clusters.
 The track-cluster matching criteria takes into account the significant energy loss of the electron due to bremsstrahlung.
 If a match is found, a refit of the track is performed using the Gaussian Sum Filter (GSF) \cite{ATLAS-CONF-2012-047}, which better handles trajectory reconstruction in the presence of bremsstrahlung.
 Various identification criteria are then applied to the candidates using a likelihood-based (LH) method to improve purity.
@@ -703,7 +706,7 @@ A reconstructed muon is called \textit{combined} if it can be matched successful
 Combined muons undergo a further fit with the combined ID and MS hits, with the energy loss due to the traversal of the calorimeters being taking into account.
 
 After reconstruction, muon candidates undergo an identification processes which helps to efficiently identify prompt muons whilst rejecting background signals (e.g. non-prompt muons from pion, kaon, and semi-leptonic heavy flavour hadron decays, and the punch-through of a hadron from the calorimeter).
-Combined muon identification takes into account discrepancies in the \pt and charge measurements in the MS and ID, and the $\chi^2$ of the combined track fit.
+Combined muon identification takes into account discrepancies in the \pt and charge measurements between the MS and ID and the $\chi^2$ of the combined track fit.
 Selections on the number of hits in the ID and MS are also applied.
 At the medium identification working point, approximately \pct{96} of prompt muons with $\SI{20}{\GeV} < \pt < \SI{100}{\GeV}$ are successfully identified.
 On top of the identification requirements, a number of isolation requirements can also be applied to further suppress background signals.
