@@ -1,4 +1,4 @@
-See also [https://github.com/mariomorvan/ucl-latex-thesis-templates](https://github.com/mariomorvan/ucl-latex-thesis-templates).
+See also [https://github.com/UCL/ucl-latex-thesis-templates](https://github.com/UCL/ucl-latex-thesis-templates).
 
 # Compile
 
